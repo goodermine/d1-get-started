@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<!--
+  FREE AUDIO — email-capture landing page (The Magnetic Series)
+  ----------------------------------------------------------------------------
+  • Open in a browser to PREVIEW.
+  • Live deploy is handled by build-payload.mjs (base64-wraps the JS so WordPress
+    can't corrupt it, injects the page-id shell, wraps in one wp:html block).
+  • Mailchimp: in-page JSONP submit to post-json, with a no-JS new-tab fallback.
+-->
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Free Hypnosis Audio — Magnetic Personal Power</title>
+<style>html,body{margin:0;background:#061b1f;}</style>
+</head>
+<body>
+
+<!-- =========================  PASTE FROM HERE INTO WORDPRESS  ========================= -->
+<div class="mpp" id="mpp-free-audio" data-mpp>
+  <script>var _mppR=document.getElementById('mpp-free-audio');if(_mppR){_mppR.classList.add('is-armed');}</script>
+  <div class="mpp-wrap">
+    <header class="mpp-brand mpp-reveal">
+      <span class="mpp-wordmark">Aaron Ellis</span>
+      <span class="mpp-house">Hypnosis &amp; Personal Development</span>
+    </header>
+
+    <main class="mpp-card mpp-reveal">
+      <p class="mpp-kicker">The Magnetic Series</p>
+      <h1 class="mpp-title">A free hypnosis audio to feel your own magnetic personal power.</h1>
+      <p class="mpp-lede">The companion session to <em>Magnetic Personal Power</em> — yours free. Drop your email and I&rsquo;ll send it straight to you.</p>
+
+      <form class="mpp-form" data-mpp-form action="https://network.us3.list-manage.com/subscribe/post?u=68d2622231e0ac80868e46a98&amp;id=cb8076a58b&amp;f_id=001a2fe2f0" method="post" target="_blank" novalidate>
+        <label class="mpp-vh" for="mpp-email">Your email address</label>
+        <input class="mpp-email" id="mpp-email" type="email" name="EMAIL" required autocomplete="email" inputmode="email" placeholder="Your email address">
+        <div class="mpp-hp" aria-hidden="true"><input type="text" name="b_68d2622231e0ac80868e46a98_cb8076a58b" tabindex="-1" value="" autocomplete="off"></div>
+        <button class="mpp-btn" type="submit" data-mpp-btn>Send me the audio</button>
+        <p class="mpp-reassure">One email, the audio, and the occasional note when there&rsquo;s something worth your time. Unsubscribe anytime.</p>
+        <p class="mpp-msg" data-mpp-msg role="alert" aria-live="assertive"></p>
+      </form>
+
+      <div class="mpp-done" data-mpp-done hidden>
+        <p class="mpp-done-head">Check your inbox</p>
+        <p class="mpp-done-body">The audio is on its way. (Peek in spam/promotions if it&rsquo;s hiding.)</p>
+      </div>
+
+      <p class="mpp-signoff">Aaron Ellis — <em>Aaron Ellis Hypnosis &amp; Personal Development</em></p>
+    </main>
+
+    <footer class="mpp-legal mpp-reveal">
+      <p>&copy; <span data-mpp-year>2026</span> Aaron Ellis Hypnosis &amp; Personal Development &middot; aaronellis.co.network</p>
+      <p>Contact: <a href="mailto:completestrength@gmail.com">completestrength@gmail.com</a></p>
+      <!-- POSTAL ADDRESS SLOT — add a mailing address here for full email-marketing compliance -->
+    </footer>
+  </div>
+
+  <style>
+  /* The Magnetic Series — email capture. Scoped under .mpp; matches the books/series
+     palette (deep teal + cream + gold, Georgia serif display). UK English copy. */
+  .mpp{--mpp-bg1:#07343a;--mpp-bg2:#061b1f;--mpp-cream:#f7ead2;--mpp-paper:#fff4dc;--mpp-sand:#e9d5a2;--mpp-gold:#d99a22;--mpp-gold2:#f2bd45;--mpp-ink:#04161a;--mpp-line:rgba(247,234,210,.16);--mpp-serif:Georgia,"Times New Roman",Times,serif;--mpp-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;position:relative;margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:clamp(1.6rem,5vw,3rem) clamp(1.1rem,5vw,2rem);color:var(--mpp-cream);font-family:var(--mpp-sans);line-height:1.6;-webkit-font-smoothing:antialiased;background:radial-gradient(1200px 700px at 50% -10%,rgba(217,154,34,.14),transparent 60%),linear-gradient(180deg,var(--mpp-bg1),var(--mpp-bg2) 70%);}
+  .mpp *,.mpp *::before,.mpp *::after{box-sizing:border-box;}
+  .mpp .mpp-wrap{width:100%;max-width:600px;margin:0 auto;text-align:center;}
+  .mpp .mpp-reveal{opacity:1;}
+  .mpp.is-armed .mpp-reveal{opacity:0;transform:translateY(16px);transition:opacity .8s ease,transform .8s ease;}
+  .mpp.is-armed .mpp-reveal.is-in{opacity:1;transform:none;}
+  .mpp .mpp-reveal:nth-child(2){transition-delay:.08s;}
+  .mpp .mpp-brand{margin-bottom:clamp(1.4rem,4vw,2.2rem);}
+  .mpp .mpp-wordmark{display:block;font-family:var(--mpp-serif);font-size:1.35rem;letter-spacing:.02em;color:var(--mpp-paper);}
+  .mpp .mpp-house{display:block;margin-top:.25rem;font-size:.66rem;letter-spacing:.26em;text-transform:uppercase;color:var(--mpp-gold);}
+  .mpp .mpp-card{position:relative;border:1px solid var(--mpp-line);border-radius:20px;background:rgba(8,30,34,.5);padding:clamp(1.6rem,5vw,2.8rem);box-shadow:0 30px 70px rgba(0,0,0,.4);}
+  .mpp .mpp-card::before{content:"";position:absolute;left:50%;top:0;transform:translateX(-50%);width:64px;height:3px;border-radius:0 0 4px 4px;background:linear-gradient(90deg,var(--mpp-gold),var(--mpp-gold2));}
+  .mpp .mpp-kicker{margin:.2rem 0 1rem;font-size:.7rem;letter-spacing:.28em;text-transform:uppercase;color:var(--mpp-gold);}
+  .mpp .mpp-title{margin:0 0 1rem;font-family:var(--mpp-serif);font-weight:600;font-size:clamp(1.7rem,5.5vw,2.5rem);line-height:1.18;color:var(--mpp-paper);text-wrap:balance;}
+  .mpp .mpp-lede{margin:0 auto 1.7rem;max-width:46ch;font-size:clamp(1rem,2.4vw,1.1rem);color:rgba(247,234,210,.86);}
+  .mpp .mpp-lede em{color:var(--mpp-sand);font-style:italic;}
+  .mpp .mpp-form{margin:0;}
+  .mpp .mpp-vh{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;}
+  .mpp .mpp-hp{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;}
+  .mpp .mpp-email{display:block;width:100%;padding:1rem 1.1rem;font-size:1.05rem;font-family:inherit;color:var(--mpp-ink);background:var(--mpp-paper);border:1px solid transparent;border-radius:12px;outline:none;transition:box-shadow .2s,border-color .2s;}
+  .mpp .mpp-email::placeholder{color:#7a6a4a;}
+  .mpp .mpp-email:focus{border-color:var(--mpp-gold);box-shadow:0 0 0 4px rgba(217,154,34,.28);}
+  .mpp .mpp-btn{display:block;width:100%;margin-top:.7rem;padding:1rem 1.2rem;font-size:1.05rem;font-weight:700;font-family:inherit;color:var(--mpp-ink);cursor:pointer;border:0;border-radius:12px;background:linear-gradient(180deg,var(--mpp-gold2),var(--mpp-gold));box-shadow:0 12px 28px rgba(217,154,34,.32);transition:transform .16s ease,box-shadow .25s,filter .2s;}
+  .mpp .mpp-btn:hover{transform:translateY(-2px);box-shadow:0 18px 38px rgba(217,154,34,.42);}
+  .mpp .mpp-btn:active{transform:translateY(0);}
+  .mpp .mpp-btn[disabled]{filter:saturate(.6) brightness(.9);cursor:default;transform:none;}
+  .mpp .mpp-reassure{margin:1rem auto 0;max-width:42ch;font-size:.82rem;color:rgba(247,234,210,.62);}
+  .mpp .mpp-msg{margin:.9rem 0 0;min-height:1.2em;font-size:.9rem;color:#ffd9a8;}
+  .mpp .mpp-msg.is-error{color:#ffb1a0;}
+  .mpp .mpp-done{padding:.5rem 0 .2rem;}
+  .mpp .mpp-done-head{margin:0 0 .5rem;font-family:var(--mpp-serif);font-size:1.6rem;color:var(--mpp-gold2);}
+  .mpp .mpp-done-body{margin:0 auto;max-width:42ch;color:rgba(247,234,210,.9);}
+  .mpp .mpp-signoff{margin:1.7rem 0 0;font-family:var(--mpp-serif);font-size:.95rem;color:rgba(247,234,210,.74);}
+  .mpp .mpp-signoff em{color:var(--mpp-sand);}
+  .mpp .mpp-legal{margin-top:clamp(1.6rem,4vw,2.4rem);font-size:.74rem;line-height:1.7;color:rgba(247,234,210,.5);}
+  .mpp .mpp-legal a{color:rgba(247,234,210,.7);text-decoration:underline;}
+  .mpp .mpp-legal a:hover{color:var(--mpp-gold2);}
+  @media (prefers-reduced-motion:reduce){.mpp.is-armed .mpp-reveal{opacity:1;transform:none;transition:none;}}
+  </style>
+
+  <script>
+  /* Email capture submit — in-page JSONP to Mailchimp, no-JS new-tab fallback.
+     Delivered base64-wrapped at build time so WordPress's sanitiser can't mangle
+     operators like && (it HTML-encodes bare & in saved content). */
+  (function(){
+    var root=document.getElementById('mpp-free-audio');
+    if(!root||root.dataset.mppReady) return;
+    root.dataset.mppReady='1';
+    var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+    var $=function(s){return root.querySelector(s);};
+
+    var yr=$('[data-mpp-year]'); if(yr) yr.textContent=String(new Date().getFullYear());
+
+    /* gentle reveal */
+    var revs=Array.prototype.slice.call(root.querySelectorAll('.mpp-reveal'));
+    if(reduce){ revs.forEach(function(el){el.classList.add('is-in');}); }
+    else if('IntersectionObserver' in window){
+      var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('is-in');io.unobserve(e.target);}});},{threshold:.12});
+      revs.forEach(function(el){io.observe(el);});
+    } else { revs.forEach(function(el){el.classList.add('is-in');}); }
+
+    var form=$('[data-mpp-form]'), email=$('#mpp-email'), btn=$('[data-mpp-btn]'),
+        msg=$('[data-mpp-msg]'), done=$('[data-mpp-done]');
+    if(!form) return;
+    var U='68d2622231e0ac80868e46a98', ID='cb8076a58b', FID='001a2fe2f0',
+        DC='network.us3', sending=false;
+
+    function setMsg(text,isErr){ if(!msg) return; msg.textContent=text||''; msg.className='mpp-msg'+(isErr?' is-error':''); }
+    function showDone(){ form.setAttribute('hidden',''); if(done) done.removeAttribute('hidden'); }
+    function valid(v){ return /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v); }
+    function reset(){ sending=false; if(btn){btn.removeAttribute('disabled'); btn.textContent='Send me the audio';} }
+    function fallback(){ try{ form.removeAttribute('target'); }catch(e){} form.submit(); }
+
+    function jsonp(addr){
+      var cb='mppcb'+Date.now();
+      var done2=false, timer;
+      var s=document.createElement('script');
+      function clean(){ if(timer)clearTimeout(timer); try{delete window[cb];}catch(e){window[cb]=undefined;} if(s.parentNode)s.parentNode.removeChild(s); }
+      window[cb]=function(res){ if(done2)return; done2=true; clean();
+        if(res&&res.result==='success'){ showDone(); }
+        else { reset(); setMsg(res&&res.msg?String(res.msg).replace(/<[^>]*>/g,''):'Something went wrong. Please try again.',true); }
+      };
+      s.onerror=function(){ if(done2)return; done2=true; clean(); fallback(); };
+      timer=setTimeout(function(){ if(done2)return; done2=true; clean(); fallback(); },9000);
+      var hp='b_'+U+'_'+ID;
+      s.src='https://'+DC+'.list-manage.com/subscribe/post-json?u='+U+'&id='+ID+'&f_id='+FID+'&EMAIL='+encodeURIComponent(addr)+'&'+hp+'=&c='+cb;
+      document.body.appendChild(s);
+    }
+
+    form.addEventListener('submit',function(e){
+      e.preventDefault();
+      if(sending) return;
+      var v=(email&&email.value||'').trim();
+      if(!valid(v)){ setMsg('Please enter a valid email address.',true); if(email)email.focus(); return; }
+      sending=true; setMsg('');
+      if(btn){ btn.setAttribute('disabled',''); btn.textContent='Sending…'; }
+      jsonp(v);
+    });
+  })();
+  </script>
+</div>
+<!-- =========================  PASTE TO HERE  ========================= -->
+
+</body>
+</html>
