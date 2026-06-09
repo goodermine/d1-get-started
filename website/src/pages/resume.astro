@@ -1,0 +1,121 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHeader from "../components/PageHeader.astro";
+import { site } from "../data/site.ts";
+
+const skills = [
+  { h: "AI Product & Prompt Systems", items: ["Prompt engineering & harnesses", "Agent-ready workflows", "AI product design"] },
+  { h: "Android & Product Workflow", items: ["Mobile-first product flows", "Workflow automation", "Tooling & integration"] },
+  { h: "IT Support & Hardware", items: ["Hardware diagnostics & repair", "Computer refurbishment", "End-user support"] },
+  { h: "Documentation & Communication", items: ["Technical writing", "Process documentation", "Training & handover"] },
+];
+
+const experience = [
+  {
+    role: "Independent Support Worker",
+    period: "Feb 2025 – Present",
+    points: ["Person-centred support, coordination, and documentation."],
+  },
+  {
+    role: "IT Support · Refurbishment · Business Owner",
+    period: "2005 – 2025",
+    points: [
+      "IT support and computer refurbishment.",
+      "Owned and ran a business.",
+      "Information operations and systems work.",
+    ],
+  },
+];
+
+// Portfolio folded into the resume as a Projects section.
+const projects = [
+  { h: "Real Estate Buddy", p: "Done-with-you ChatGPT setup for real estate agents.", href: "/real-estate-buddy/" },
+  { h: "Extreme Build", p: "AI-agent-driven page building with hard constraints.", href: "/extreme-build/" },
+  { h: "The Magnetic Series", p: "Six-book series on confidence and communication.", href: "/books/" },
+];
+---
+
+<BaseLayout
+  title="Resume"
+  description="Aaron Ellis — AI product developer, prompt-systems specialist, and IT support professional. Background, skills, and selected projects."
+>
+  <PageHeader
+    eyebrow="Background"
+    title="Aaron Ellis"
+    lead="AI product developer and prompt-systems specialist with a long background in IT support and hands-on problem solving."
+  />
+
+  <section class="section">
+    <div class="container">
+      <h2>Core skills</h2>
+      <div class="grid-skills">
+        {skills.map((s) => (
+          <div class="card">
+            <h3>{s.h}</h3>
+            <ul class="muted">{s.items.map((i) => <li>{i}</li>)}</ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container narrow">
+      <h2>Experience</h2>
+      {experience.map((e) => (
+        <div class="exp">
+          <div class="exp-head">
+            <h3>{e.role}</h3>
+            <span class="muted period">{e.period}</span>
+          </div>
+          <ul class="muted">{e.points.map((p) => <li>{p}</li>)}</ul>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>Selected projects</h2>
+      <div class="grid-3">
+        {projects.map((p) => (
+          <a href={p.href} class="card project">
+            <h3>{p.h}</h3>
+            <p class="muted">{p.p}</p>
+            <span class="more">View →</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container narrow">
+      <h2>Education & certifications</h2>
+      <ul class="muted edu">
+        <li>Diploma in digital technology</li>
+        <li>Networking academy coursework</li>
+      </ul>
+      <div class="cta-row">
+        <a href={`mailto:${site.email}`} class="btn btn-ghost">Contact me</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .narrow { max-width: var(--maxw-prose); }
+  .grid-skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); gap: var(--space-4); }
+  .grid-skills h3 { font-size: var(--fs-lg); }
+  .grid-skills ul, .edu { padding-left: 1.1rem; margin: 0; font-size: var(--fs-sm); }
+  .exp { padding-block: var(--space-3); border-bottom: 1px solid var(--color-border); }
+  .exp-head { display: flex; justify-content: space-between; align-items: baseline; gap: var(--space-3); flex-wrap: wrap; }
+  .exp-head h3 { font-size: var(--fs-lg); margin: 0; }
+  .period { font-size: var(--fs-sm); white-space: nowrap; }
+  .exp ul { margin: var(--space-2) 0 0; padding-left: 1.1rem; font-size: var(--fs-sm); }
+  .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr)); gap: var(--space-4); }
+  .project { display: flex; flex-direction: column; }
+  .project h3 { font-size: var(--fs-lg); }
+  .project .more { margin-top: auto; padding-top: var(--space-2); color: var(--color-accent); font-weight: var(--weight-bold); font-size: var(--fs-sm); }
+  .cta-row { margin-top: var(--space-4); }
+</style>

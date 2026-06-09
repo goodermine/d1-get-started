@@ -1,0 +1,39 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHeader from "../components/PageHeader.astro";
+import { site } from "../data/site.ts";
+// NOTE: simple mailto for now. Swap in the Mailchimp form when ready —
+// only this file changes.
+---
+
+<BaseLayout
+  title="Contact"
+  description="Get in touch with Aaron Ellis."
+>
+  <PageHeader
+    eyebrow="Say hello"
+    title="Contact"
+    lead="Questions about a build, a book, or working together? Send me a note."
+  />
+
+  <section class="section">
+    <div class="container narrow">
+      <div class="card contact-card">
+        <p>The quickest way to reach me is by email:</p>
+        <a href={`mailto:${site.email}`} class="email">{site.email}</a>
+        <div class="cta-row">
+          <a href={`mailto:${site.email}?subject=Hello%20Aaron`} class="btn btn-primary">Email me</a>
+        </div>
+        <p class="muted small">A proper contact form is coming soon.</p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .narrow { max-width: var(--maxw-prose); }
+  .contact-card { text-align: center; padding-block: var(--space-6); }
+  .email { display: inline-block; font-family: var(--font-heading); font-size: var(--fs-xl); color: var(--color-accent); margin: var(--space-2) 0 var(--space-4); }
+  .cta-row { margin-bottom: var(--space-3); }
+  .small { font-size: var(--fs-sm); }
+</style>

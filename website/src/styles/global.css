@@ -109,6 +109,17 @@ img { max-width: 100%; height: auto; display: block; }
 }
 .card:hover { border-color: var(--color-accent); transform: translateY(-3px); }
 
+/* Cover fallback (AE monogram) — global so JS-injected fallbacks are styled too */
+.cover-mono {
+  display: grid;
+  place-items: center;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 2.4rem;
+  color: var(--color-accent);
+  opacity: 0.5;
+}
+
 /* Accessibility */
 :focus-visible {
   outline: 2px solid var(--color-accent);

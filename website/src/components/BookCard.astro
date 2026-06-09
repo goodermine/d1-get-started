@@ -1,0 +1,62 @@
+---
+import type { Book } from "../data/books.ts";
+import { statusLabel } from "../data/books.ts";
+interface Props { book: Book; }
+const { book } = Astro.props;
+const href = book.detailUrl ?? book.buyUrl;
+const cta = book.status === "available" ? "Read more" : statusLabel[book.status];
+---
+
+<article class="card book-card">
+  <div class={`cover status-${book.status}`}>
+    {book.cover
+      ? <img src={book.cover} alt={`${book.title} cover`} loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'cover-mono',textContent:'AE'}))" />
+      : <span class="cover-mono">AE</span>}
+  </div>
+  <div class="book-body">
+    <span class={`badge badge-${book.status}`}>{statusLabel[book.status]}</span>
+    <h3>{book.title}</h3>
+    {book.releaseDate && <p class="muted release">{book.releaseDate}</p>}
+    <p class="muted blurb">{book.blurb}</p>
+    {href && (
+      <a href={href} class="book-link">{cta} →</a>
+    )}
+  </div>
+</article>
+
+<style>
+  .book-card { display: flex; flex-direction: column; padding: 0; overflow: hidden; }
+  .cover {
+    aspect-ratio: 3 / 2;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(135deg, var(--color-surface-2), var(--color-surface));
+    border-bottom: 1px solid var(--color-border);
+  }
+  .cover img { width: 100%; height: 100%; object-fit: cover; }
+  .cover-mono {
+    font-family: var(--font-heading);
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    opacity: 0.5;
+  }
+  .book-body { padding: var(--space-4); display: flex; flex-direction: column; gap: 0.4rem; flex: 1; }
+  .book-body h3 { margin: 0.2rem 0 0; font-size: var(--fs-lg); }
+  .release { font-size: var(--fs-xs); margin: 0; }
+  .blurb { font-size: var(--fs-sm); margin: 0.3rem 0 0; }
+  .book-link { margin-top: auto; padding-top: var(--space-3); font-weight: var(--weight-bold); font-size: var(--fs-sm); color: var(--color-accent); }
+  .badge {
+    align-self: flex-start;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-weight: var(--weight-bold);
+    padding: 0.25em 0.7em;
+    border-radius: 999px;
+    border: 1px solid var(--color-border);
+  }
+  .badge-available { color: var(--color-on-accent); background: var(--color-accent); border-color: transparent; }
+  .badge-preorder { color: var(--color-accent-2); }
+  .badge-coming { color: var(--color-muted); }
+</style>
