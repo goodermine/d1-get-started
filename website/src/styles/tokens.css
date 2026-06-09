@@ -1,0 +1,50 @@
+/* ============================================================
+   DESIGN TOKENS — THE SINGLE SOURCE OF TRUTH FOR THE LOOK
+   Change a value here and it updates across the whole site.
+   Nothing else in the codebase should use a raw hex colour.
+   ============================================================ */
+:root {
+  /* --- Brand palette (gold on near-black) --- */
+  --color-bg:        #0c0c0e;   /* page background */
+  --color-surface:   #161619;   /* cards / panels */
+  --color-surface-2: #1f1f24;   /* hover / raised */
+  --color-border:    #2a2a30;   /* hairlines */
+  --color-text:      #ececef;   /* body text */
+  --color-muted:     #9b9ba4;   /* secondary text */
+  --color-accent:    #c9a24b;   /* the gold */
+  --color-accent-2:  #e7c97a;   /* lighter gold (gradients/hover) */
+  --color-on-accent: #0c0c0e;   /* text on gold buttons */
+
+  /* --- Typography --- */
+  --font-heading: "Cormorant Garamond", Georgia, serif;
+  --font-body: "Inter Variable", "Inter", system-ui, -apple-system, sans-serif;
+  --weight-body: 400;
+  --weight-bold: 600;
+
+  /* Fluid type scale */
+  --fs-xs:  0.8rem;
+  --fs-sm:  0.9rem;
+  --fs-base: 1rem;
+  --fs-lg:  1.15rem;
+  --fs-xl:  clamp(1.4rem, 1.1rem + 1.2vw, 2rem);
+  --fs-2xl: clamp(2rem, 1.4rem + 2.6vw, 3.2rem);
+  --fs-3xl: clamp(2.6rem, 1.6rem + 4.4vw, 5rem);
+
+  /* --- Spacing & layout --- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 1rem;
+  --space-4: 1.5rem;
+  --space-5: 2.5rem;
+  --space-6: 4rem;
+  --space-7: 6rem;
+  --radius: 14px;
+  --radius-sm: 8px;
+  --maxw: 72rem;
+  --maxw-prose: 44rem;
+
+  /* --- Effects --- */
+  --shadow: 0 10px 40px rgba(0, 0, 0, 0.45);
+  --ring: 0 0 0 1px var(--color-border);
+  --transition: 180ms ease;
+}
