@@ -34,7 +34,20 @@ function replaceTag(html, tag, fn) {
   return html.replace(re, (_, a, body, c) => a + fn(body) + c);
 }
 block = replaceTag(block, 'style', minCss);
-block = replaceTag(block, 'script', minJs);
+
+// Process every <script>. WordPress's content sanitiser HTML-encodes bare '&'
+// (so '&&' -> '&#038;&#038;', which breaks JS). base64-wrap the main logic
+// script — base64 has no & < > — and leave the tiny &-free arm script plain.
+let mainCode = '';
+block = block.replace(/<script\b[^>]*>([\s\S]*?)<\/script>/g, (_, body) => {
+  const code = minJs(body);
+  if (/IntersectionObserver/.test(code)) {
+    mainCode = code;
+    const b64 = Buffer.from(code, 'utf8').toString('base64');
+    return '<script>(new Function(atob("' + b64 + '")))()</script>';
+  }
+  return '<script>' + code + '</script>';
+});
 
 // pack HTML whitespace OUTSIDE style/script (split so we never touch their interiors)
 function packHtml(b) {
@@ -45,9 +58,8 @@ function packHtml(b) {
 }
 block = packHtml(block).trim();
 
-// ---- validate the minified JS parses ----
-const scriptBody = block.match(/<script[^>]*>([\s\S]*?)<\/script>/)[1];
-fs.writeFileSync('/tmp/xb-script-check.js', scriptBody);
+// ---- validate the (pre-encode) main JS parses ----
+fs.writeFileSync('/tmp/xb-script-check.js', mainCode);
 
 // ---- pull the structural chrome blocks to KEEP from the original ----
 const keepStyle = id => {
@@ -87,7 +99,7 @@ out = out.replace(/\n\s*\n+/g, '\n');  // belt-and-braces: kill any blank lines
 
 fs.writeFileSync('wordpress/extreme-build/page-201.payload.html', out);
 console.log('payload bytes:', out.length, '(was', ORIG.length, ')');
-console.log('script bytes :', scriptBody.length);
+console.log('main JS bytes:', mainCode.length, '(base64-wrapped)');
 console.log('keep-blocks  : shell, mobile-nav-strip, remove-theme-mobile-menu, vintage-shared-chrome, header-polish, mobile-menu-layer-fix-201');
 console.log('contains .xb-extreme:', /class="xb-extreme"/.test(out));
 console.log('contains nav strip  :', /eb-mobile-nav-strip/.test(out));

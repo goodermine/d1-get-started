@@ -36,5 +36,15 @@ node wordpress/extreme-build/build-payload.mjs          # regenerate payload
 ## Rollback
 POST the contents of `backup/page-201.original.html` back to page 201's `content`.
 
+## Gotchas (important for re-deploys)
+- The `azonixx` REST user lacks `unfiltered_html`, so WordPress HTML-encodes bare
+  `&` in saved content (`&&` → `&#038;&#038;`), which **breaks inline JS** and left
+  the page blank. Fix: `build-payload.mjs` **base64-wraps the main script**
+  (`(new Function(atob("…")))()`) — base64 has no `& < >`, so it survives the
+  sanitiser. Keep any new logic in that script (don't add raw `&&` elsewhere).
+- Reveal animations are gated on `.xb-extreme.is-armed`, added by a tiny `&`-free
+  inline script. If JS ever fails to run, the page degrades to fully visible
+  rather than blank.
+
 > Note: the site's CDN/origin (StackCDN → nginx) returned intermittent 502/500s during
 > deploy; retries with backoff succeed. The REST API and rendered output were verified.
