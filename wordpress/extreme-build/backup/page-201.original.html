@@ -1,0 +1,2966 @@
+
+<!-- wp:html -->
+<style id="extreme-build-page-shell">
+body.page-id-201 .page-header,
+body.page-id-201 .entry-title,
+body.page-id-201 .post-thumbnail {
+  display: none !important;
+}
+
+body.page-id-201 .site-main,
+body.page-id-201 .page-content,
+body.page-id-201 .entry-content {
+  max-width: none !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+body.page-id-201 .site-header {
+  background: rgba(15, 17, 21, 0.96) !important;
+  border-bottom: 1px solid rgba(93, 205, 255, 0.14) !important;
+  position: relative !important;
+  z-index: 50 !important;
+}
+
+body.page-id-201 .header-inner {
+  min-height: 74px !important;
+  max-width: 1180px !important;
+  padding: 14px 18px !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) auto !important;
+  gap: 16px !important;
+  align-items: center !important;
+}
+
+body.page-id-201 .site-title a {
+  color: #f7fbff !important;
+  font-size: 1rem !important;
+  line-height: 1.15 !important;
+}
+
+body.page-id-201 .site-description {
+  color: #a9b8ca !important;
+  font-size: 0.72rem !important;
+  line-height: 1.35 !important;
+  margin: 0.25rem 0 0 !important;
+}
+
+body.page-id-201 .site-navigation-toggle {
+  width: 46px !important;
+  height: 46px !important;
+  border: 1px solid rgba(93, 205, 255, 0.24) !important;
+  border-radius: 14px !important;
+  background: rgba(7, 14, 25, 0.88) !important;
+}
+
+body.page-id-201 .site-navigation-dropdown {
+  left: 12px !important;
+  right: 12px !important;
+  top: calc(100% + 8px) !important;
+  width: auto !important;
+  max-height: min(70vh, 430px) !important;
+  overflow-y: auto !important;
+  padding: 10px !important;
+  border: 1px solid rgba(93, 205, 255, 0.18) !important;
+  border-radius: 18px !important;
+  background: rgba(11, 17, 28, 0.98) !important;
+  box-shadow: 0 18px 46px rgba(0, 0, 0, 0.38) !important;
+}
+
+body.page-id-201 .site-navigation-dropdown .menu {
+  display: grid !important;
+  gap: 6px !important;
+}
+
+body.page-id-201 .site-navigation-dropdown .menu a {
+  display: block !important;
+  padding: 10px 12px !important;
+  border: 1px solid rgba(93, 205, 255, 0.1) !important;
+  border-radius: 12px !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+  color: #f4f8ff !important;
+  font-size: 0.94rem !important;
+  line-height: 1.25 !important;
+}
+
+body.page-id-201 .site-navigation-toggle-holder:not(.elementor-active) + .site-navigation-dropdown {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transform: translateY(-8px) scale(0.98) !important;
+  visibility: hidden !important;
+}
+
+body.page-id-201 .site-navigation-toggle-holder.elementor-active + .site-navigation-dropdown,
+body.page-id-201 .site-navigation-dropdown.menu-open {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  transform: translateY(0) scale(1) !important;
+  visibility: visible !important;
+}
+
+@media (min-width: 769px) {
+  body.page-id-201 .site-navigation.show {
+    display: block !important;
+  }
+
+  body.page-id-201 .site-navigation-toggle-holder,
+  body.page-id-201 .site-navigation-dropdown {
+    display: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  body.page-id-201 .site-navigation.show {
+    display: none !important;
+  }
+
+  body.page-id-201 .site-navigation-toggle-holder {
+    display: flex !important;
+    justify-content: flex-end !important;
+  }
+}
+</style>
+
+<style id="extreme-build-page-styles">
+.extreme-build-page {
+  --eb-bg: #03060d;
+  --eb-bg-2: #07111f;
+  --eb-panel: rgba(10, 18, 33, 0.88);
+  --eb-panel-2: rgba(11, 24, 43, 0.9);
+  --eb-panel-3: rgba(8, 14, 26, 0.96);
+  --eb-text: #f5f8ff;
+  --eb-soft: #dfeaf8;
+  --eb-muted: #a8b8cb;
+  --eb-cyan: #58dfff;
+  --eb-blue: #3097ff;
+  --eb-green: #86ff9e;
+  --eb-amber: #ffcf73;
+  --eb-magenta: #ca68ff;
+  --eb-border: rgba(93, 205, 255, 0.2);
+  --eb-border-strong: rgba(93, 205, 255, 0.38);
+  --eb-shadow: 0 24px 80px rgba(0, 0, 0, 0.42);
+  --eb-glow: 0 0 30px rgba(88, 223, 255, 0.12);
+  --eb-radius-lg: 26px;
+  --eb-radius-md: 18px;
+  --eb-radius-sm: 12px;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  position: relative;
+  overflow-x: hidden;
+  color: var(--eb-text);
+  background:
+    radial-gradient(circle at 14% 10%, rgba(48, 151, 255, 0.2), transparent 24rem),
+    radial-gradient(circle at 86% 4%, rgba(202, 104, 255, 0.12), transparent 20rem),
+    radial-gradient(circle at 50% 100%, rgba(88, 223, 255, 0.08), transparent 22rem),
+    linear-gradient(180deg, #03060d 0%, #07111f 44%, #040913 100%);
+  font-family: Inter, Sora, Manrope, "IBM Plex Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.extreme-build-page *,
+.extreme-build-page *::before,
+.extreme-build-page *::after {
+  box-sizing: border-box;
+}
+
+.extreme-build-page::before,
+.extreme-build-page::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.extreme-build-page::before {
+  background-image:
+    linear-gradient(rgba(98, 215, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(98, 215, 255, 0.04) 1px, transparent 1px);
+  background-size: 52px 52px;
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.2));
+  opacity: 0.45;
+}
+
+.extreme-build-page::after {
+  background:
+    repeating-linear-gradient(180deg, rgba(255, 255, 255, 0.025) 0 1px, transparent 1px 6px),
+    linear-gradient(115deg, transparent 0%, rgba(88, 223, 255, 0.06) 36%, transparent 56%),
+    linear-gradient(290deg, transparent 0%, rgba(255, 207, 115, 0.045) 44%, transparent 62%);
+  animation: ebSweep 18s linear infinite;
+  opacity: 0.24;
+}
+
+.extreme-build-page a {
+  color: inherit;
+}
+
+.extreme-build-page .eb-section {
+  position: relative;
+  padding: 6rem 1.25rem;
+}
+
+.extreme-build-page .eb-container {
+  position: relative;
+  z-index: 1;
+  width: min(1220px, calc(100vw - 2.5rem));
+  margin: 0 auto;
+}
+
+.extreme-build-page .eb-kicker,
+.extreme-build-page .eb-module-kicker,
+.extreme-build-page .eb-status-chip,
+.extreme-build-page .eb-proof-state,
+.extreme-build-page .eb-card-state,
+.extreme-build-page .eb-mini-state {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 2rem;
+  padding: 0.4rem 0.78rem;
+  border: 1px solid rgba(93, 205, 255, 0.28);
+  border-radius: 999px;
+  background: rgba(10, 18, 33, 0.86);
+  color: #e8fbff;
+  font-size: 0.74rem;
+  line-height: 1;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.extreme-build-page .eb-kicker::before,
+.extreme-build-page .eb-status-chip::before,
+.extreme-build-page .eb-proof-state::before,
+.extreme-build-page .eb-card-state::before,
+.extreme-build-page .eb-mini-state::before {
+  content: "";
+  width: 0.46rem;
+  height: 0.46rem;
+  border-radius: 50%;
+  background: var(--eb-cyan);
+  box-shadow: 0 0 10px rgba(88, 223, 255, 0.8);
+  animation: ebPulse 2.1s ease-in-out infinite;
+}
+
+.extreme-build-page .eb-kicker {
+  margin-bottom: 1rem;
+}
+
+.extreme-build-page .eb-module-bar {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 0.85rem;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  color: #bceeff;
+}
+
+.extreme-build-page .eb-module-label {
+  font-size: 0.76rem;
+  font-weight: 850;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.extreme-build-page .eb-module-line {
+  height: 1px;
+  background:
+    linear-gradient(90deg, rgba(88, 223, 255, 0.6), rgba(88, 223, 255, 0.18) 55%, transparent 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.extreme-build-page .eb-module-line::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.65), transparent);
+  transform: translateX(-100%);
+  animation: ebLinePass 6s linear infinite;
+}
+
+.extreme-build-page .eb-module-meta {
+  color: #7dcaff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.extreme-build-page .eb-title {
+  margin: 0.4rem 0 0;
+  font-size: 5.7rem;
+  line-height: 0.92;
+  font-weight: 800;
+  background: linear-gradient(115deg, #ffffff 0%, #d8ecff 26%, #67e7ff 72%, #a672ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 34px rgba(48, 151, 255, 0.2);
+}
+
+.extreme-build-page .eb-section-title {
+  margin: 0.6rem 0 0;
+  font-size: 3rem;
+  line-height: 1.05;
+  font-weight: 800;
+  text-wrap: balance;
+}
+
+.extreme-build-page .eb-lede {
+  margin: 1.25rem 0 0;
+  color: var(--eb-soft);
+  font-size: 1.34rem;
+  line-height: 1.56;
+  font-weight: 650;
+}
+
+.extreme-build-page .eb-copy {
+  color: var(--eb-muted);
+  font-size: 1rem;
+  line-height: 1.82;
+}
+
+.extreme-build-page .eb-copy-strong {
+  color: #d6f3ff;
+}
+
+.extreme-build-page .eb-command-line {
+  margin-top: 1rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid rgba(134, 255, 158, 0.22);
+  border-radius: 14px;
+  background: rgba(5, 12, 19, 0.92);
+  color: #a9ffb7;
+  font-family: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+}
+
+.extreme-build-page .eb-command-line .prompt {
+  color: #7ef2ab;
+}
+
+.extreme-build-page .eb-hero-status-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.7rem;
+  margin-top: 1rem;
+}
+
+.extreme-build-page .eb-hero-status {
+  padding: 0.72rem 0.85rem;
+  border: 1px solid rgba(93, 205, 255, 0.14);
+  border-radius: 14px;
+  background: rgba(7, 14, 25, 0.88);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+}
+
+.extreme-build-page .eb-hero-status span {
+  display: block;
+  color: #8eb8cf;
+  font-size: 0.68rem;
+  font-weight: 760;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.extreme-build-page .eb-hero-status strong {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.42rem;
+  margin-top: 0.45rem;
+  color: #f4fbff;
+  font-size: 0.84rem;
+  font-weight: 790;
+}
+
+.extreme-build-page .eb-hero-status strong::before {
+  content: "";
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: var(--eb-cyan);
+  box-shadow: 0 0 10px rgba(88, 223, 255, 0.7);
+  animation: ebPulse 2.2s ease-in-out infinite;
+}
+
+.extreme-build-page .eb-hero {
+  min-height: 94vh;
+  display: flex;
+  align-items: center;
+  padding-top: 6.5rem;
+  padding-bottom: 5.5rem;
+}
+
+.extreme-build-page .eb-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(400px, 0.98fr);
+  gap: 3rem;
+  align-items: start;
+}
+
+.extreme-build-page .eb-hero-copy {
+  padding-top: 0.9rem;
+}
+
+.extreme-build-page .eb-badges,
+.extreme-build-page .eb-actions,
+.extreme-build-page .eb-mini-grid,
+.extreme-build-page .eb-proof-grid,
+.extreme-build-page .eb-tags,
+.extreme-build-page .eb-signal-bars {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+
+.extreme-build-page .eb-badges {
+  margin-top: 1.6rem;
+}
+
+.extreme-build-page .eb-badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.1rem;
+  padding: 0.42rem 0.7rem;
+  border: 1px solid rgba(93, 205, 255, 0.18);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  color: #e8f5ff;
+  font-size: 0.8rem;
+  font-weight: 760;
+}
+
+.extreme-build-page .eb-actions {
+  margin-top: 1.8rem;
+}
+
+.extreme-build-page .eb-button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 3.45rem;
+  padding: 0.95rem 1.25rem;
+  border-radius: 999px;
+  border: 1px solid rgba(93, 205, 255, 0.3);
+  text-decoration: none;
+  font-weight: 850;
+  font-size: 0.96rem;
+  line-height: 1.2;
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
+}
+
+.extreme-build-page .eb-button-primary {
+  background: linear-gradient(135deg, var(--eb-cyan), var(--eb-blue) 58%, var(--eb-magenta));
+  color: #02111e;
+  box-shadow: 0 16px 34px rgba(48, 151, 255, 0.26);
+}
+
+.extreme-build-page .eb-button-secondary {
+  background: linear-gradient(180deg, rgba(18, 41, 71, 0.86), rgba(9, 19, 36, 0.96));
+  color: var(--eb-text);
+}
+
+.extreme-build-page .eb-button:hover,
+.extreme-build-page .eb-button:focus-visible {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 18px 46px rgba(48, 151, 255, 0.22);
+  outline: none;
+}
+
+.extreme-build-page .eb-micro {
+  margin-top: 1rem;
+  color: #c3d0df;
+  font-size: 0.93rem;
+}
+
+.extreme-build-page .eb-cockpit {
+  position: relative;
+  border: 1px solid rgba(93, 205, 255, 0.26);
+  border-radius: var(--eb-radius-lg);
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02)),
+    linear-gradient(180deg, rgba(8, 18, 34, 0.95), rgba(6, 12, 23, 0.98));
+  box-shadow: var(--eb-shadow), var(--eb-glow);
+  overflow: hidden;
+}
+
+.extreme-build-page .eb-cockpit::after {
+  content: "";
+  position: absolute;
+  top: 1rem;
+  bottom: 1rem;
+  right: 1rem;
+  width: 84px;
+  border-left: 1px solid rgba(93, 205, 255, 0.08);
+  background:
+    repeating-linear-gradient(180deg, rgba(88, 223, 255, 0.12) 0 1px, transparent 1px 22px);
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.extreme-build-page .eb-cockpit::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 18% 16%, rgba(88, 223, 255, 0.14), transparent 18rem),
+    radial-gradient(circle at 80% 14%, rgba(202, 104, 255, 0.12), transparent 16rem),
+    repeating-linear-gradient(180deg, rgba(255, 255, 255, 0.028) 0 1px, transparent 1px 7px);
+  pointer-events: none;
+}
+
+.extreme-build-page .eb-cockpit-inner {
+  position: relative;
+  z-index: 1;
+  padding: 1.2rem;
+}
+
+.extreme-build-page .eb-cockpit-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(93, 205, 255, 0.12);
+}
+
+.extreme-build-page .eb-cockpit-head strong {
+  display: block;
+  color: #f3fbff;
+  font-size: 0.94rem;
+  font-weight: 850;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.extreme-build-page .eb-cockpit-head span {
+  display: block;
+  margin-top: 0.28rem;
+  color: #8ecde8;
+  font-size: 0.78rem;
+}
+
+.extreme-build-page .eb-cockpit-band {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.65rem;
+  margin-top: 0.9rem;
+}
+
+.extreme-build-page .eb-band-chip {
+  padding: 0.72rem 0.8rem;
+  border: 1px solid rgba(93, 205, 255, 0.14);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.extreme-build-page .eb-band-chip span {
+  display: block;
+  color: #87b0c8;
+  font-size: 0.64rem;
+  font-weight: 760;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.extreme-build-page .eb-band-chip strong {
+  display: block;
+  margin-top: 0.45rem;
+  color: #eefaff;
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.extreme-build-page .eb-head-dots {
+  display: inline-flex;
+  gap: 0.38rem;
+}
+
+.extreme-build-page .eb-head-dots span {
+  width: 0.55rem;
+  height: 0.55rem;
+  margin: 0;
+  border-radius: 50%;
+  background: var(--eb-cyan);
+  box-shadow: 0 0 10px rgba(88, 223, 255, 0.75);
+  animation: ebPulse 2.4s ease-in-out infinite;
+}
+
+.extreme-build-page .eb-cockpit-body {
+  display: grid;
+  gap: 0.8rem;
+  margin-top: 1rem;
+}
+
+.extreme-build-page .eb-telemetry-row {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 0.8rem;
+  align-items: center;
+  padding: 0.95rem 1rem;
+  border: 1px solid rgba(93, 205, 255, 0.12);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.035);
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.extreme-build-page .eb-telemetry-row.eb-active {
+  transform: translateX(3px);
+  border-color: rgba(88, 223, 255, 0.36);
+  box-shadow: 0 0 0 1px rgba(88, 223, 255, 0.08), 0 0 18px rgba(88, 223, 255, 0.08);
+}
+
+.extreme-build-page .eb-status-dot {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  background: var(--eb-cyan);
+  box-shadow: 0 0 12px rgba(88, 223, 255, 0.85);
+  animation: ebPulse 2s ease-in-out infinite;
+}
+
+.extreme-build-page .eb-telemetry-copy strong {
+  display: block;
+  color: #f8fbff;
+  font-size: 0.97rem;
+  font-weight: 780;
+}
+
+.extreme-build-page .eb-telemetry-copy span {
+  display: block;
+  margin-top: 0.25rem;
+  color: #9ec2d7;
+  font-size: 0.8rem;
+}
+
+.extreme-build-page .eb-meter {
+  margin-top: 0.52rem;
+  height: 0.34rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+  position: relative;
+}
+
+.extreme-build-page .eb-meter span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--eb-cyan), var(--eb-blue), var(--eb-green));
+  position: relative;
+  overflow: hidden;
+}
+
+.extreme-build-page .eb-meter span::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.82), transparent);
+  transform: translateX(-100%);
+  animation: ebLinePass 3.2s linear infinite;
+}
+
+.extreme-build-page .eb-status-chip,
+.extreme-build-page .eb-proof-state,
+.extreme-build-page .eb-card-state,
+.extreme-build-page .eb-mini-state {
+  justify-content: center;
+  white-space: nowrap;
+}
+
+.extreme-build-page .eb-mini-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.7rem;
+  margin-top: 1rem;
+}
+
+.extreme-build-page .eb-mini-panel {
+  padding: 0.8rem;
+  border: 1px solid rgba(93, 205, 255, 0.14);
+  border-radius: 14px;
+  background: rgba(6, 12, 23, 0.88);
+  min-height: 100%;
+}
+
+.extreme-build-page .eb-mini-label {
+  display: block;
+  color: #9dc5dc;
+  font-size: 0.68rem;
+  font-weight: 780;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.extreme-build-page .eb-mini-state {
+  margin-top: 0.55rem;
+}
+
+.extreme-build-page .eb-cockpit-orbit {
+  position: absolute;
+  inset: auto auto 1.2rem 1.2rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.7rem;
+  width: min(280px, calc(100% - 2.4rem));
+  pointer-events: none;
+}
+
+.extreme-build-page .eb-float-module {
+  padding: 0.72rem 0.82rem;
+  border: 1px solid rgba(93, 205, 255, 0.16);
+  border-radius: 14px;
+  background: rgba(5, 12, 22, 0.82);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.22);
+  backdrop-filter: blur(10px);
+}
+
+.extreme-build-page .eb-float-module span {
+  display: block;
+  color: #8eb3c8;
+  font-size: 0.62rem;
+  font-weight: 760;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.extreme-build-page .eb-float-module strong {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.38rem;
+  margin-top: 0.4rem;
+  color: #f5fbff;
+  font-size: 0.8rem;
+  font-weight: 790;
+}
+
+.extreme-build-page .eb-float-module strong::before {
+  content: "";
+  width: 0.38rem;
+  height: 0.38rem;
+  border-radius: 50%;
+  background: var(--eb-green);
+  box-shadow: 0 0 8px rgba(134, 255, 158, 0.7);
+  animation: ebPulse 2.1s ease-in-out infinite;
+}
+
+.extreme-build-page .eb-proof-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 0.85rem;
+}
+
+.extreme-build-page .eb-proof-card,
+.extreme-build-page .eb-feed-panel,
+.extreme-build-page .eb-video-frame,
+.extreme-build-page .eb-card,
+.extreme-build-page .eb-pipeline-node,
+.extreme-build-page .eb-proof-console,
+.extreme-build-page .eb-launch-bay {
+  border: 1px solid rgba(93, 205, 255, 0.18);
+  border-radius: var(--eb-radius-md);
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02)),
+    rgba(8, 14, 26, 0.92);
+  box-shadow: 0 20px 54px rgba(0, 0, 0, 0.22);
+}
+
+.extreme-build-page .eb-proof-card {
+  padding: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.extreme-build-page .eb-proof-card::after,
+.extreme-build-page .eb-card .eb-card-head::after {
+  content: "";
+  position: absolute;
+  inset: 1rem auto auto 1rem;
+  width: 22px;
+  height: 22px;
+  border-top: 1px solid rgba(93, 205, 255, 0.28);
+  border-left: 1px solid rgba(93, 205, 255, 0.28);
+  opacity: 0.85;
+}
+
+.extreme-build-page .eb-proof-card::before,
+.extreme-build-page .eb-card::before,
+.extreme-build-page .eb-pipeline-node::before {
+  content: "";
+  position: absolute;
+  left: 1rem;
+  right: 1rem;
+  top: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--eb-cyan), rgba(88, 223, 255, 0), rgba(202, 104, 255, 0.5));
+}
+
+.extreme-build-page .eb-proof-card strong {
+  display: block;
+  color: #ffffff;
+  font-size: 0.96rem;
+  line-height: 1.3;
+}
+
+.extreme-build-page .eb-proof-label {
+  display: block;
+  margin-bottom: 0.72rem;
+  color: #8ab7cf;
+  font-size: 0.66rem;
+  font-weight: 760;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.extreme-build-page .eb-proof-card .eb-proof-state {
+  margin-top: 0.8rem;
+}
+
+.extreme-build-page .eb-signal-bars {
+  margin-top: 0.65rem;
+  align-items: end;
+  gap: 0.16rem;
+}
+
+.extreme-build-page .eb-signal-bars span {
+  width: 0.22rem;
+  border-radius: 999px;
+  background: linear-gradient(180deg, var(--eb-green), var(--eb-cyan));
+  animation: ebBars 1.6s ease-in-out infinite;
+}
+
+.extreme-build-page .eb-signal-bars span:nth-child(1) { height: 0.55rem; animation-delay: 0s; }
+.extreme-build-page .eb-signal-bars span:nth-child(2) { height: 0.85rem; animation-delay: 0.15s; }
+.extreme-build-page .eb-signal-bars span:nth-child(3) { height: 1.15rem; animation-delay: 0.3s; }
+.extreme-build-page .eb-signal-bars span:nth-child(4) { height: 0.75rem; animation-delay: 0.45s; }
+.extreme-build-page .eb-signal-bars span:nth-child(5) { height: 0.95rem; animation-delay: 0.6s; }
+
+.extreme-build-page .eb-section-head {
+  max-width: 840px;
+  margin-bottom: 2.2rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid rgba(93, 205, 255, 0.1);
+  border-radius: 18px;
+  background:
+    linear-gradient(145deg, rgba(10, 18, 33, 0.82), rgba(10, 18, 33, 0.48)),
+    rgba(6, 11, 20, 0.42);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+}
+
+.extreme-build-page .eb-section-head.center {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.extreme-build-page .eb-feed-panel {
+  padding: 1.1rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.extreme-build-page .eb-feed-panel::before {
+  content: "";
+  position: absolute;
+  left: 1rem;
+  top: 4.9rem;
+  bottom: 1rem;
+  width: 1px;
+  background: linear-gradient(180deg, rgba(88, 223, 255, 0.42), rgba(88, 223, 255, 0.02));
+  opacity: 0.55;
+}
+
+.extreme-build-page .eb-feed-panel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 88% 14%, rgba(88, 223, 255, 0.1), transparent 14rem);
+  pointer-events: none;
+}
+
+.extreme-build-page .eb-feed-top {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 1rem;
+  align-items: center;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid rgba(93, 205, 255, 0.1);
+}
+
+.extreme-build-page .eb-terminal-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: #adffbd;
+  font-family: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+  font-size: 0.78rem;
+}
+
+.extreme-build-page .eb-feed-title {
+  color: #d9f7ff;
+  font-size: 0.84rem;
+  font-weight: 820;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.extreme-build-page .eb-feed-status {
+  justify-self: end;
+}
+
+.extreme-build-page .eb-feed-list {
+  list-style: none;
+  margin: 1rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.65rem;
+}
+
+.extreme-build-page .eb-feed-item {
+  display: grid;
+  grid-template-columns: auto auto minmax(0, 1fr) auto;
+  gap: 0.85rem;
+  align-items: center;
+  padding: 0.9rem;
+  border: 1px solid rgba(93, 205, 255, 0.1);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.03);
+  transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+}
+
+.extreme-build-page .eb-feed-item .eb-status-dot {
+  width: 0.58rem;
+  height: 0.58rem;
+}
+
+.extreme-build-page .eb-feed-item.eb-feed-active {
+  border-color: rgba(88, 223, 255, 0.32);
+  box-shadow: 0 0 0 1px rgba(88, 223, 255, 0.08), 0 0 20px rgba(88, 223, 255, 0.08);
+  transform: translateX(3px);
+}
+
+.extreme-build-page .eb-feed-time {
+  color: #89cbe7;
+  font-family: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+  font-size: 0.8rem;
+}
+
+.extreme-build-page .eb-feed-copy strong {
+  display: block;
+  color: #ffffff;
+  font-size: 0.92rem;
+  font-weight: 780;
+  letter-spacing: 0.04em;
+}
+
+.extreme-build-page .eb-feed-copy span {
+  display: block;
+  margin-top: 0.28rem;
+  color: #9cb0c4;
+  font-size: 0.8rem;
+}
+
+.extreme-build-page .eb-video-frame {
+  position: relative;
+  overflow: hidden;
+  min-height: 430px;
+  padding: 1.1rem;
+}
+
+.extreme-build-page .eb-video-shell {
+  min-height: 408px;
+  border: 1px solid rgba(93, 205, 255, 0.14);
+  border-radius: 18px;
+  background:
+    radial-gradient(circle at 22% 24%, rgba(48, 151, 255, 0.22), transparent 18rem),
+    radial-gradient(circle at 84% 72%, rgba(202, 104, 255, 0.14), transparent 14rem),
+    linear-gradient(135deg, rgba(13, 31, 57, 0.96), rgba(6, 10, 19, 0.98));
+  display: grid;
+  place-items: center;
+  padding: 2rem;
+  text-align: center;
+  position: relative;
+}
+
+.extreme-build-page .eb-video-shell::after {
+  content: "";
+  position: absolute;
+  inset: 1rem;
+  border: 1px solid rgba(93, 205, 255, 0.08);
+  border-radius: 14px;
+  pointer-events: none;
+}
+
+.extreme-build-page .eb-play {
+  display: grid;
+  place-items: center;
+  width: 5.3rem;
+  height: 5.3rem;
+  margin: 0 auto 1rem;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--eb-cyan), var(--eb-blue), var(--eb-magenta));
+  color: #03101d;
+  font-size: 1.6rem;
+  font-weight: 900;
+  box-shadow: 0 0 30px rgba(48, 151, 255, 0.24);
+}
+
+.extreme-build-page .eb-grid {
+  display: grid;
+  gap: 0.95rem;
+}
+
+.extreme-build-page .eb-grid-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.extreme-build-page .eb-grid-4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.extreme-build-page .eb-card {
+  position: relative;
+  padding: 1.2rem;
+  min-height: 100%;
+  overflow: hidden;
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.extreme-build-page .eb-card::after {
+  content: "";
+  position: absolute;
+  inset: auto 1rem 1rem auto;
+  width: 2.8rem;
+  height: 2.8rem;
+  border-right: 1px solid rgba(93, 205, 255, 0.22);
+  border-bottom: 1px solid rgba(93, 205, 255, 0.22);
+  border-radius: 0 0 10px 0;
+}
+
+.extreme-build-page .eb-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(93, 205, 255, 0.28);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.3), 0 0 18px rgba(88, 223, 255, 0.06);
+}
+
+.extreme-build-page .eb-card-head {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  gap: 0.8rem;
+  align-items: flex-start;
+}
+
+.extreme-build-page .eb-card-icon {
+  display: grid;
+  place-items: center;
+  width: 2.7rem;
+  height: 2.7rem;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(88, 223, 255, 0.18), rgba(202, 104, 255, 0.16));
+  color: #eaffff;
+  font-size: 0.86rem;
+  font-weight: 850;
+}
+
+.extreme-build-page .eb-card-state {
+  margin-top: 1rem;
+}
+
+.extreme-build-page .eb-card-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.45rem;
+  min-width: 0;
+}
+
+.extreme-build-page .eb-card-meta span {
+  color: #88b3ca;
+  font-size: 0.64rem;
+  font-weight: 760;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.extreme-build-page .eb-card h3 {
+  margin: 1rem 0 0;
+  font-size: 1.16rem;
+  line-height: 1.3;
+  font-weight: 780;
+}
+
+.extreme-build-page .eb-card p {
+  margin: 0.75rem 0 0;
+  color: var(--eb-muted);
+  font-size: 0.95rem;
+  line-height: 1.72;
+}
+
+.extreme-build-page .eb-pipeline {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.extreme-build-page .eb-pipeline::before {
+  content: "";
+  position: absolute;
+  top: 2.15rem;
+  left: 8%;
+  right: 8%;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(88, 223, 255, 0.2), rgba(88, 223, 255, 0.92), rgba(202, 104, 255, 0.3));
+}
+
+.extreme-build-page .eb-pipeline::after {
+  content: "";
+  position: absolute;
+  top: 1.82rem;
+  left: 8%;
+  width: 5rem;
+  height: 0.7rem;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(88, 223, 255, 0), rgba(88, 223, 255, 0.9), rgba(88, 223, 255, 0));
+  filter: blur(2px);
+  animation: ebTravel 6s linear infinite;
+}
+
+.extreme-build-page .eb-pipeline-node {
+  position: relative;
+  padding: 1.2rem;
+}
+
+.extreme-build-page .eb-pipeline-node::after {
+  content: "";
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  width: 18px;
+  height: 18px;
+  border-top: 1px solid rgba(93, 205, 255, 0.24);
+  border-right: 1px solid rgba(93, 205, 255, 0.24);
+}
+
+.extreme-build-page .eb-pipeline-dot {
+  display: grid;
+  place-items: center;
+  width: 4.1rem;
+  height: 4.1rem;
+  margin-bottom: 1rem;
+  border-radius: 18px;
+  background: linear-gradient(135deg, rgba(88, 223, 255, 0.2), rgba(202, 104, 255, 0.18));
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 900;
+  position: relative;
+  z-index: 1;
+}
+
+.extreme-build-page .eb-pipeline-node h3 {
+  margin: 0.3rem 0 0;
+  font-size: 1.36rem;
+  line-height: 1.2;
+}
+
+.extreme-build-page .eb-pipeline-node p {
+  margin: 0.8rem 0 0;
+}
+
+.extreme-build-page .eb-proof-console {
+  padding: 1.1rem;
+}
+
+.extreme-build-page .eb-console-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(360px, 1.05fr);
+  gap: 1rem;
+}
+
+.extreme-build-page .eb-console-copy,
+.extreme-build-page .eb-console-verify {
+  padding: 1rem;
+}
+
+.extreme-build-page .eb-review-note {
+  display: inline-flex;
+  margin-top: 1rem;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid rgba(255, 207, 115, 0.34);
+  border-radius: 999px;
+  background: rgba(255, 207, 115, 0.08);
+  color: #ffe1a2;
+  font-size: 0.9rem;
+  font-weight: 820;
+}
+
+.extreme-build-page .eb-verify-list {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.extreme-build-page .eb-verify-row {
+  display: grid;
+  grid-template-columns: minmax(150px, 0.85fr) minmax(0, 1fr) auto;
+  gap: 0.75rem;
+  align-items: center;
+  padding: 0.9rem;
+  border: 1px solid rgba(93, 205, 255, 0.12);
+  border-radius: 14px;
+  background: rgba(5, 11, 21, 0.86);
+}
+
+.extreme-build-page .eb-verify-label {
+  color: #9fd8ee;
+  font-size: 0.76rem;
+  font-weight: 820;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.extreme-build-page .eb-verify-value {
+  color: #ffffff;
+  font-size: 0.94rem;
+  font-weight: 760;
+}
+
+.extreme-build-page .eb-verify-scan {
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(90deg, rgba(88, 223, 255, 0.04), rgba(88, 223, 255, 0.55), rgba(88, 223, 255, 0.04));
+  position: relative;
+  overflow: hidden;
+}
+
+.extreme-build-page .eb-verify-scan::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.72), transparent);
+  transform: translateX(-100%);
+  animation: ebLinePass 5.6s linear infinite;
+}
+
+.extreme-build-page .eb-launch-bay {
+  padding: 1.2rem;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(202, 104, 255, 0.12), transparent 18rem),
+    radial-gradient(circle at 16% 86%, rgba(88, 223, 255, 0.1), transparent 18rem),
+    linear-gradient(180deg, rgba(10, 18, 33, 0.96), rgba(7, 14, 25, 0.98));
+}
+
+.extreme-build-page .eb-launch-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 0.72fr);
+  gap: 1rem;
+  align-items: center;
+  padding: 1.7rem;
+  border: 1px solid rgba(93, 205, 255, 0.14);
+  border-radius: 18px;
+  background: rgba(7, 14, 25, 0.82);
+}
+
+.extreme-build-page .eb-launch-panel {
+  padding: 1rem;
+  border: 1px solid rgba(93, 205, 255, 0.12);
+  border-radius: 16px;
+  background: rgba(4, 10, 18, 0.82);
+}
+
+.extreme-build-page .eb-launch-panel strong {
+  display: block;
+  color: #ffffff;
+  font-size: 0.84rem;
+  font-weight: 840;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.extreme-build-page .eb-launch-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1rem;
+}
+
+.extreme-build-page .eb-launch-list {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.extreme-build-page .eb-launch-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+  color: #d9e6f4;
+  font-size: 0.92rem;
+}
+
+.extreme-build-page .eb-reveal {
+  opacity: 1;
+  transform: none;
+}
+
+.extreme-build-page .eb-flow {
+  animation: ebFloat 9s ease-in-out infinite;
+}
+
+@keyframes ebSweep {
+  0% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(0, 18px, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+
+@keyframes ebPulse {
+  0%, 100% { opacity: 0.55; transform: scale(0.92); }
+  50% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes ebBars {
+  0%, 100% { opacity: 0.45; transform: scaleY(0.82); }
+  50% { opacity: 1; transform: scaleY(1); }
+}
+
+@keyframes ebLinePass {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes ebTravel {
+  0% { transform: translateX(0); opacity: 0.3; }
+  12% { opacity: 1; }
+  100% { transform: translateX(calc(84vw - 14rem)); opacity: 0.2; }
+}
+
+@keyframes ebFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@media (max-width: 1120px) {
+  .extreme-build-page .eb-hero-grid,
+  .extreme-build-page .eb-console-grid,
+  .extreme-build-page .eb-launch-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .extreme-build-page .eb-cockpit-band {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .extreme-build-page .eb-title {
+    font-size: 4.8rem;
+  }
+
+  .extreme-build-page .eb-proof-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .extreme-build-page .eb-grid-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .extreme-build-page .eb-grid-3,
+  .extreme-build-page .eb-pipeline {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .extreme-build-page .eb-pipeline::before,
+  .extreme-build-page .eb-pipeline::after {
+    display: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .extreme-build-page .eb-section {
+    padding: 4.4rem 1rem;
+  }
+
+  body.page-id-201 .header-inner {
+    min-height: 68px !important;
+    padding: 11px 14px !important;
+  }
+
+  body.page-id-201 .site-description {
+    display: none !important;
+  }
+
+  body.page-id-201 .site-navigation-dropdown {
+    position: absolute !important;
+  }
+
+  .extreme-build-page {
+    --eb-shadow: 0 12px 30px rgba(0, 0, 0, 0.28);
+  }
+
+  .extreme-build-page::after {
+    display: none;
+  }
+
+  .extreme-build-page::before {
+    opacity: 0.22;
+  }
+
+  .extreme-build-page .eb-container {
+    width: min(100%, calc(100vw - 2rem));
+  }
+
+  .extreme-build-page .eb-title {
+    font-size: 3.5rem;
+    line-height: 0.96;
+  }
+
+  .extreme-build-page .eb-section-title {
+    font-size: 2.2rem;
+    line-height: 1.1;
+  }
+
+  .extreme-build-page .eb-lede {
+    font-size: 1.12rem;
+  }
+
+  .extreme-build-page .eb-proof-grid,
+  .extreme-build-page .eb-mini-grid,
+  .extreme-build-page .eb-grid-3,
+  .extreme-build-page .eb-grid-4,
+  .extreme-build-page .eb-pipeline {
+    grid-template-columns: 1fr;
+  }
+
+  .extreme-build-page .eb-hero-status-grid,
+  .extreme-build-page .eb-cockpit-band,
+  .extreme-build-page .eb-cockpit-orbit {
+    grid-template-columns: 1fr;
+  }
+
+  .extreme-build-page .eb-actions,
+  .extreme-build-page .eb-button {
+    width: 100%;
+  }
+
+  .extreme-build-page .eb-telemetry-row,
+  .extreme-build-page .eb-feed-item,
+  .extreme-build-page .eb-verify-row,
+  .extreme-build-page .eb-module-bar {
+    grid-template-columns: 1fr;
+  }
+
+  .extreme-build-page .eb-feed-status {
+    justify-self: start;
+  }
+
+  .extreme-build-page .eb-feed-top {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.72rem;
+  }
+
+  .extreme-build-page .eb-feed-panel::before,
+  .extreme-build-page .eb-cockpit::after,
+  .extreme-build-page .eb-cockpit-orbit {
+    display: none;
+  }
+
+  .extreme-build-page .eb-feed-top,
+  .extreme-build-page .eb-feed-item,
+  .extreme-build-page .eb-telemetry-row,
+  .extreme-build-page .eb-verify-row {
+    min-width: 0;
+  }
+
+  .extreme-build-page .eb-terminal-pill,
+  .extreme-build-page .eb-status-chip,
+  .extreme-build-page .eb-proof-state,
+  .extreme-build-page .eb-card-state,
+  .extreme-build-page .eb-mini-state {
+    max-width: 100%;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .extreme-build-page .eb-feed-title {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    line-height: 1.35;
+    white-space: normal;
+    overflow-wrap: normal;
+    word-break: normal;
+  }
+
+  .extreme-build-page .eb-feed-item {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .extreme-build-page .eb-feed-item .eb-status-chip {
+    justify-self: start;
+  }
+
+  .extreme-build-page .eb-cockpit,
+  .extreme-build-page .eb-proof-card,
+  .extreme-build-page .eb-feed-panel,
+  .extreme-build-page .eb-video-frame,
+  .extreme-build-page .eb-card,
+  .extreme-build-page .eb-pipeline-node,
+  .extreme-build-page .eb-proof-console,
+  .extreme-build-page .eb-launch-bay {
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.22);
+  }
+
+  .extreme-build-page .eb-video-frame {
+    min-height: 360px;
+  }
+
+  .extreme-build-page .eb-video-shell {
+    min-height: 330px;
+  }
+
+  .extreme-build-page .eb-head-dots span,
+  .extreme-build-page .eb-status-dot,
+  .extreme-build-page .eb-kicker::before,
+  .extreme-build-page .eb-status-chip::before,
+  .extreme-build-page .eb-proof-state::before,
+  .extreme-build-page .eb-card-state::before,
+  .extreme-build-page .eb-mini-state::before,
+  .extreme-build-page .eb-signal-bars span,
+  .extreme-build-page .eb-meter span::after,
+  .extreme-build-page .eb-module-line::after,
+  .extreme-build-page .eb-verify-scan::after,
+  .extreme-build-page .eb-flow {
+    animation: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .extreme-build-page *,
+  .extreme-build-page *::before,
+  .extreme-build-page *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+</style>
+
+<style id="extreme-build-mobile-performance-overrides">
+@media (max-width: 900px), (pointer: coarse) {
+  .extreme-build-page {
+    --eb-shadow: 0 8px 20px rgba(0, 0, 0, 0.24);
+    --eb-glow: none;
+    background:
+      linear-gradient(180deg, rgba(3, 6, 13, 0.98), rgba(7, 17, 31, 0.98) 46%, rgba(4, 9, 19, 1));
+  }
+
+  .extreme-build-page *,
+  .extreme-build-page *::before,
+  .extreme-build-page *::after {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .extreme-build-page::before,
+  .extreme-build-page::after {
+    opacity: 0.16;
+  }
+
+  .extreme-build-page .eb-cockpit::before,
+  .extreme-build-page .eb-cockpit::after,
+  .extreme-build-page .eb-proof-card::before,
+  .extreme-build-page .eb-proof-card::after,
+  .extreme-build-page .eb-card::before,
+  .extreme-build-page .eb-card::after,
+  .extreme-build-page .eb-pipeline::before,
+  .extreme-build-page .eb-pipeline::after,
+  .extreme-build-page .eb-flow,
+  .extreme-build-page .eb-module-line::after,
+  .extreme-build-page .eb-meter span::after,
+  .extreme-build-page .eb-verify-scan::after,
+  .extreme-build-page .eb-cockpit-orbit,
+  .extreme-build-page .eb-signal-bars {
+    display: none !important;
+  }
+
+  .extreme-build-page .eb-cockpit,
+  .extreme-build-page .eb-proof-card,
+  .extreme-build-page .eb-feed-panel,
+  .extreme-build-page .eb-video-frame,
+  .extreme-build-page .eb-card,
+  .extreme-build-page .eb-pipeline-node,
+  .extreme-build-page .eb-proof-console,
+  .extreme-build-page .eb-launch-bay,
+  .extreme-build-page .eb-mini-panel,
+  .extreme-build-page .eb-band-chip,
+  .extreme-build-page .eb-hero-status {
+    box-shadow: var(--eb-shadow) !important;
+    backdrop-filter: none !important;
+    filter: none !important;
+  }
+
+  .extreme-build-page .eb-feed-item {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-areas:
+      "dot time"
+      "copy copy"
+      "chip chip";
+    gap: 0.65rem 0.75rem;
+    padding: 0.95rem;
+  }
+
+  .extreme-build-page .eb-feed-item .eb-status-dot {
+    grid-area: dot;
+    margin-top: 0.25rem;
+  }
+
+  .extreme-build-page .eb-feed-time {
+    grid-area: time;
+    min-width: 0;
+    white-space: nowrap;
+  }
+
+  .extreme-build-page .eb-feed-copy {
+    grid-area: copy;
+    min-width: 0;
+  }
+
+  .extreme-build-page .eb-feed-item .eb-status-chip {
+    grid-area: chip;
+    justify-self: start;
+    width: auto;
+  }
+
+  .extreme-build-page .eb-telemetry-row {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-areas:
+      "dot copy"
+      "chip chip";
+    gap: 0.65rem 0.75rem;
+    padding: 0.95rem;
+  }
+
+  .extreme-build-page .eb-telemetry-row .eb-status-dot {
+    grid-area: dot;
+    margin-top: 0.35rem;
+  }
+
+  .extreme-build-page .eb-telemetry-copy {
+    grid-area: copy;
+    min-width: 0;
+  }
+
+  .extreme-build-page .eb-telemetry-row .eb-status-chip {
+    grid-area: chip;
+    justify-self: start;
+    width: auto;
+  }
+
+  .extreme-build-page .eb-status-chip,
+  .extreme-build-page .eb-proof-state,
+  .extreme-build-page .eb-card-state,
+  .extreme-build-page .eb-mini-state {
+    overflow-wrap: normal;
+    white-space: nowrap;
+  }
+
+  .extreme-build-page .eb-launch-strip .eb-status-chip {
+    white-space: normal;
+  }
+
+}
+</style>
+
+
+
+<style id="extreme-build-touch-scroll-fix">
+@media (max-width: 1024px), (pointer: coarse) {
+  html {
+    scroll-behavior: auto !important;
+  }
+
+  body.page-id-201 .site-header,
+  body.page-id-201 .header-inner {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    filter: none !important;
+  }
+
+  .extreme-build-page {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    overflow-x: clip !important;
+    touch-action: pan-y !important;
+    contain: paint;
+  }
+
+  .extreme-build-page::before,
+  .extreme-build-page::after,
+  .extreme-build-page .eb-feed-panel::before,
+  .extreme-build-page .eb-feed-panel::after,
+  .extreme-build-page .eb-video-shell::after {
+    display: none !important;
+  }
+
+  .extreme-build-page .eb-section,
+  .extreme-build-page .eb-container,
+  .extreme-build-page .eb-hero,
+  .extreme-build-page .eb-feed-panel,
+  .extreme-build-page .eb-cockpit,
+  .extreme-build-page .eb-video-shell,
+  .extreme-build-page .eb-launch-bay {
+    max-width: 100% !important;
+    overflow-x: clip !important;
+  }
+
+  .extreme-build-page .eb-mobile-nav-strip {
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    flex-wrap: wrap !important;
+    overflow-x: visible !important;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-x pan-y !important;
+    contain: paint;
+  }
+
+  .extreme-build-page .eb-status-chip,
+  .extreme-build-page .eb-proof-state,
+  .extreme-build-page .eb-card-state,
+  .extreme-build-page .eb-mini-state,
+  .extreme-build-page .eb-band-chip {
+    max-width: 100% !important;
+    overflow-wrap: anywhere !important;
+    white-space: normal !important;
+  }
+
+  .extreme-build-page .eb-video-shell {
+    background: linear-gradient(135deg, rgba(13, 31, 57, 0.92), rgba(6, 10, 19, 0.98)) !important;
+    min-height: 300px !important;
+  }
+
+  .extreme-build-page .eb-cockpit,
+  .extreme-build-page .eb-proof-card,
+  .extreme-build-page .eb-feed-panel,
+  .extreme-build-page .eb-video-frame,
+  .extreme-build-page .eb-card,
+  .extreme-build-page .eb-pipeline-node,
+  .extreme-build-page .eb-proof-console,
+  .extreme-build-page .eb-launch-bay,
+  .extreme-build-page .eb-mini-panel,
+  .extreme-build-page .eb-band-chip,
+  .extreme-build-page .eb-hero-status {
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.22) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    filter: none !important;
+  }
+}
+</style>
+
+<style id="extreme-build-mobile-nav-strip">
+.extreme-build-page .eb-mobile-nav-strip {
+  display: none;
+}
+
+@media (max-width: 1024px) {
+  .extreme-build-page .eb-mobile-nav-strip {
+    background: rgba(7, 14, 25, 0.96);
+    border-bottom: 1px solid rgba(93, 205, 255, 0.14);
+    display: flex;
+    gap: 8px;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    overflow-x: auto;
+    padding: 10px 16px 12px;
+    position: relative;
+    scrollbar-width: none;
+    top: auto;
+    width: 100vw;
+    z-index: 30;
+  }
+
+  .extreme-build-page .eb-mobile-nav-strip::-webkit-scrollbar {
+    display: none;
+  }
+
+  .extreme-build-page .eb-mobile-nav-strip a {
+    background: rgba(255, 255, 255, 0.045);
+    border: 1px solid rgba(93, 205, 255, 0.16);
+    border-radius: 999px;
+    color: #f4f8ff !important;
+    flex: 0 0 auto;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    line-height: 1;
+    min-height: 34px;
+    padding: 11px 13px;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  .extreme-build-page .eb-mobile-nav-strip a[aria-current="page"] {
+    background: rgba(88, 223, 255, 0.14);
+    border-color: rgba(88, 223, 255, 0.34);
+  }
+}
+
+</style>
+
+<style id="extreme-remove-theme-mobile-menu">
+@media (max-width: 1024px) {
+  body.page-id-201 .site-navigation,
+  body.page-id-201 .site-navigation-toggle-holder,
+  body.page-id-201 .site-navigation-toggle,
+  body.page-id-201 .site-navigation-dropdown {
+    display: none !important;
+  }
+}
+</style>
+
+<main class="extreme-build-page" id="extreme-build">
+  <nav class="eb-mobile-nav-strip" aria-label="Mobile quick navigation">
+    <a href="https://aaronellis.co.network/">Home</a>
+    <a href="https://aaronellis.co.network/#portfolio">Portfolio</a>
+    <a href="https://aaronellis.co.network/real-estate-buddy/">Real Estate Buddy</a>
+    <a href="https://aaronellis.co.network/extreme-build/" aria-current="page">Extreme Build</a>
+    <a href="https://aaronellis.co.network/articles/">Articles</a>
+    <a href="https://aaronellis.co.network/resume/">Resume</a>
+    <a href="https://aaronellis.co.network/#contact">Contact</a>
+  </nav>
+  <section class="eb-section eb-hero" aria-labelledby="extreme-build-title">
+    <div class="eb-container eb-hero-grid">
+      <div class="eb-hero-copy eb-reveal">
+        <span class="eb-kicker">EXTREME_BUILD :: LIVE_AGENT_WORDPRESS_DEPLOYMENT</span>
+        <h1 class="eb-title" id="extreme-build-title">Extreme Build</h1>
+        <p class="eb-lede">A cinematic WordPress page built by an AI agent - designed, structured, styled, animated, and deployed without a human manually touching the code.</p>
+        <p class="eb-copy">This is not a mock-up. This is a live WordPress page built to demonstrate what becomes possible when clear strategy, strong prompting, and agent execution work together.</p>
+        <div class="eb-command-line" aria-label="Decorative command prompt">
+          <span class="prompt">agent@wordpress:~$</span> initialise extreme build
+        </div>
+        <div class="eb-hero-status-grid" aria-label="Command centre system states">
+          <div class="eb-hero-status">
+            <span>Status</span>
+            <strong>SIGNAL VERIFIED</strong>
+          </div>
+          <div class="eb-hero-status">
+            <span>REST channel</span>
+            <strong>LOCKED</strong>
+          </div>
+          <div class="eb-hero-status">
+            <span>CSS scope</span>
+            <strong>ACTIVE</strong>
+          </div>
+          <div class="eb-hero-status">
+            <span>Human review</span>
+            <strong>READY</strong>
+          </div>
+        </div>
+        <div class="eb-badges" aria-label="Core proof points">
+          <span class="eb-badge">Human-directed</span>
+          <span class="eb-badge">Agent-built</span>
+          <span class="eb-badge">WordPress-rendered</span>
+          <span class="eb-badge">No manual code editing</span>
+        </div>
+        <div class="eb-actions">
+          <a class="eb-button eb-button-primary" href="mailto:aiwizard@aaronellis.au?subject=Extreme%20Build%20Application">Apply for an Extreme Build</a>
+          <a class="eb-button eb-button-secondary" href="mailto:aiwizard@aaronellis.au?subject=Extreme%20Build%20Application">Join the Waitlist</a>
+        </div>
+        <p class="eb-micro">This page is the proof. Human-directed. Agent-built. WordPress-rendered.</p>
+      </div>
+
+      <aside class="eb-cockpit eb-flow eb-reveal" aria-labelledby="agent-build-telemetry-title">
+        <div class="eb-cockpit-inner">
+          <div class="eb-cockpit-head">
+            <div>
+              <strong id="agent-build-telemetry-title">AGENT BUILD TELEMETRY</strong>
+              <span>Simulated workflow display</span>
+            </div>
+            <div class="eb-head-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+          </div>
+          <div class="eb-cockpit-band" aria-label="Telemetry overview">
+            <div class="eb-band-chip">
+              <span>EXTREME_BUILD</span>
+              <strong>LIVE_AGENT_WORDPRESS_DEPLOYMENT</strong>
+            </div>
+            <div class="eb-band-chip">
+              <span>Status</span>
+              <strong>SIGNAL VERIFIED</strong>
+            </div>
+            <div class="eb-band-chip">
+              <span>REST CHANNEL</span>
+              <strong>LOCKED</strong>
+            </div>
+            <div class="eb-band-chip">
+              <span>HUMAN REVIEW</span>
+              <strong>READY</strong>
+            </div>
+          </div>
+
+          <div class="eb-cockpit-body" id="eb-telemetry-list">
+            <div class="eb-telemetry-row eb-active">
+              <span class="eb-status-dot" aria-hidden="true"></span>
+              <div class="eb-telemetry-copy">
+                <strong>Prompt parsed</strong>
+                <span>Creative objective normalised into a page build brief.</span>
+                <div class="eb-meter" aria-hidden="true"><span style="width: 96%"></span></div>
+              </div>
+              <span class="eb-status-chip">READY</span>
+            </div>
+            <div class="eb-telemetry-row">
+              <span class="eb-status-dot" aria-hidden="true"></span>
+              <div class="eb-telemetry-copy">
+                <strong>Layout system generated</strong>
+                <span>Section order, command-centre split, and proof flow mapped.</span>
+                <div class="eb-meter" aria-hidden="true"><span style="width: 92%"></span></div>
+              </div>
+              <span class="eb-status-chip">SYNCED</span>
+            </div>
+            <div class="eb-telemetry-row">
+              <span class="eb-status-dot" aria-hidden="true"></span>
+              <div class="eb-telemetry-copy">
+                <strong>Motion layer compiling</strong>
+                <span>Scanlines, signal bars, beam passes, and reduced-motion fallback applied.</span>
+                <div class="eb-meter" aria-hidden="true"><span style="width: 88%"></span></div>
+              </div>
+              <span class="eb-status-chip">ACTIVE</span>
+            </div>
+            <div class="eb-telemetry-row">
+              <span class="eb-status-dot" aria-hidden="true"></span>
+              <div class="eb-telemetry-copy">
+                <strong>REST payload prepared</strong>
+                <span>Scoped HTML, CSS, and lightweight enhancement layer assembled.</span>
+                <div class="eb-meter" aria-hidden="true"><span style="width: 94%"></span></div>
+              </div>
+              <span class="eb-status-chip">LOCKED</span>
+            </div>
+            <div class="eb-telemetry-row">
+              <span class="eb-status-dot" aria-hidden="true"></span>
+              <div class="eb-telemetry-copy">
+                <strong>Responsive checks running</strong>
+                <span>Desktop and mobile layouts validated against theme constraints.</span>
+                <div class="eb-meter" aria-hidden="true"><span style="width: 90%"></span></div>
+              </div>
+              <span class="eb-status-chip">PASSING</span>
+            </div>
+            <div class="eb-telemetry-row">
+              <span class="eb-status-dot" aria-hidden="true"></span>
+              <div class="eb-telemetry-copy">
+                <strong>Human review ready</strong>
+                <span>Final live page delivered for Aaron approval and iteration.</span>
+                <div class="eb-meter" aria-hidden="true"><span style="width: 98%"></span></div>
+              </div>
+              <span class="eb-status-chip">VERIFIED</span>
+            </div>
+          </div>
+
+          <div class="eb-mini-grid" aria-label="Build guardrails">
+            <div class="eb-mini-panel">
+              <span class="eb-mini-label">REST API</span>
+              <span class="eb-mini-state">ONLINE</span>
+            </div>
+            <div class="eb-mini-panel">
+              <span class="eb-mini-label">CSS Scope</span>
+              <span class="eb-mini-state">LOCKED</span>
+            </div>
+            <div class="eb-mini-panel">
+              <span class="eb-mini-label">Plugins</span>
+              <span class="eb-mini-state">UNCHANGED</span>
+            </div>
+            <div class="eb-mini-panel">
+              <span class="eb-mini-label">Theme files</span>
+              <span class="eb-mini-state">UNTOUCHED</span>
+            </div>
+            <div class="eb-mini-panel">
+              <span class="eb-mini-label">Mobile</span>
+              <span class="eb-mini-state">PASSING</span>
+            </div>
+            <div class="eb-mini-panel">
+              <span class="eb-mini-label">Human review</span>
+              <span class="eb-mini-state">READY</span>
+            </div>
+          </div>
+          <div class="eb-cockpit-orbit" aria-hidden="true">
+            <div class="eb-float-module">
+              <span>STATUS</span>
+              <strong>BUILD ACTIVE</strong>
+            </div>
+            <div class="eb-float-module">
+              <span>REST CHANNEL</span>
+              <strong>LOCKED</strong>
+            </div>
+            <div class="eb-float-module">
+              <span>CSS SCOPE</span>
+              <strong>ACTIVE</strong>
+            </div>
+            <div class="eb-float-module">
+              <span>HUMAN REVIEW</span>
+              <strong>READY</strong>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="eb-section" aria-labelledby="proof-strip-title">
+    <div class="eb-container">
+      <div class="eb-module-bar eb-reveal">
+        <span class="eb-module-label">MODULE_01 :: BUILD_STACK</span>
+        <span class="eb-module-line" aria-hidden="true"></span>
+        <span class="eb-module-meta">STATUS: BUILD ACTIVE</span>
+      </div>
+      <div class="eb-proof-grid" id="proof-strip-title">
+        <article class="eb-proof-card eb-reveal">
+          <span class="eb-proof-label">REST LAYER</span>
+          <strong>WordPress REST API</strong>
+          <div class="eb-signal-bars" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+          <span class="eb-proof-state">ACTIVE</span>
+        </article>
+        <article class="eb-proof-card eb-reveal">
+          <span class="eb-proof-label">STYLE CHANNEL</span>
+          <strong>Custom HTML/CSS</strong>
+          <div class="eb-signal-bars" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+          <span class="eb-proof-state">SCOPED</span>
+        </article>
+        <article class="eb-proof-card eb-reveal">
+          <span class="eb-proof-label">MOTION SYSTEM</span>
+          <strong>Cinematic animation</strong>
+          <div class="eb-signal-bars" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+          <span class="eb-proof-state">RUNNING</span>
+        </article>
+        <article class="eb-proof-card eb-reveal">
+          <span class="eb-proof-label">MEDIA LAYER</span>
+          <strong>YouTube embed</strong>
+          <div class="eb-signal-bars" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+          <span class="eb-proof-state">READY</span>
+        </article>
+        <article class="eb-proof-card eb-reveal">
+          <span class="eb-proof-label">DEVICE CHANNEL</span>
+          <strong>Responsive design</strong>
+          <div class="eb-signal-bars" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+          <span class="eb-proof-state">PASSING</span>
+        </article>
+        <article class="eb-proof-card eb-reveal">
+          <span class="eb-proof-label">PLUGIN SURFACE</span>
+          <strong>No new plugins installed</strong>
+          <div class="eb-signal-bars" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+          <span class="eb-proof-state">VERIFIED</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="eb-section" aria-labelledby="build-feed-title">
+    <div class="eb-container">
+      <div class="eb-module-bar eb-reveal">
+        <span class="eb-module-label">BUILD_FEED :: WORDPRESS_REST_TRANSMISSION</span>
+        <span class="eb-module-line" aria-hidden="true"></span>
+        <span class="eb-module-meta">STATUS: SIGNAL VERIFIED</span>
+      </div>
+      <div class="eb-section-head eb-reveal">
+        <span class="eb-kicker">Live Agent Build Feed</span>
+        <h2 class="eb-section-title" id="build-feed-title">A simulated activity layer showing how an agent-driven WordPress build can move from instruction to published page.</h2>
+      </div>
+      <div class="eb-feed-panel eb-reveal">
+        <div class="eb-feed-top">
+          <span class="eb-terminal-pill">agent@wordpress:~$ open build transmission</span>
+          <strong class="eb-feed-title">[SYSTEM BUILD] SOURCE: EXTREME BUILD</strong>
+          <span class="eb-status-chip eb-feed-status">BUILD ACTIVE</span>
+        </div>
+        <ol class="eb-feed-list" id="eb-build-feed">
+          <li class="eb-feed-item eb-feed-active">
+            <span class="eb-status-dot" aria-hidden="true"></span>
+            <span class="eb-feed-time">[00:01]</span>
+            <div class="eb-feed-copy">
+              <strong>CREATIVE BRIEF RECEIVED</strong>
+              <span>Human direction captured and converted into a structured build objective.</span>
+            </div>
+            <span class="eb-status-chip">READY</span>
+          </li>
+          <li class="eb-feed-item">
+            <span class="eb-status-dot" aria-hidden="true"></span>
+            <span class="eb-feed-time">[00:03]</span>
+            <div class="eb-feed-copy">
+              <strong>STRUCTURE MAPPED</strong>
+              <span>Page architecture and conversion sequence aligned to the brief.</span>
+            </div>
+            <span class="eb-status-chip">SYNCED</span>
+          </li>
+          <li class="eb-feed-item">
+            <span class="eb-status-dot" aria-hidden="true"></span>
+            <span class="eb-feed-time">[00:07]</span>
+            <div class="eb-feed-copy">
+              <strong>COMMAND CENTRE GENERATED</strong>
+              <span>Hero telemetry cockpit and simulated workflow display assembled.</span>
+            </div>
+            <span class="eb-status-chip">ACTIVE</span>
+          </li>
+          <li class="eb-feed-item">
+            <span class="eb-status-dot" aria-hidden="true"></span>
+            <span class="eb-feed-time">[00:11]</span>
+            <div class="eb-feed-copy">
+              <strong>CSS SCOPE LOCKED</strong>
+              <span>Full visual layer scoped to `.extreme-build-page` for safe delivery.</span>
+            </div>
+            <span class="eb-status-chip">LOCKED</span>
+          </li>
+          <li class="eb-feed-item">
+            <span class="eb-status-dot" aria-hidden="true"></span>
+            <span class="eb-feed-time">[00:15]</span>
+            <div class="eb-feed-copy">
+              <strong>REST PAYLOAD PREPARED</strong>
+              <span>Publish-ready markup, styles, and progressive enhancement layer packaged.</span>
+            </div>
+            <span class="eb-status-chip">CHANNEL</span>
+          </li>
+          <li class="eb-feed-item">
+            <span class="eb-status-dot" aria-hidden="true"></span>
+            <span class="eb-feed-time">[00:18]</span>
+            <div class="eb-feed-copy">
+              <strong>WORDPRESS PAGE UPDATED</strong>
+              <span>New visualised deployment layer pushed into the live page content.</span>
+            </div>
+            <span class="eb-status-chip">LIVE</span>
+          </li>
+          <li class="eb-feed-item">
+            <span class="eb-status-dot" aria-hidden="true"></span>
+            <span class="eb-feed-time">[00:21]</span>
+            <div class="eb-feed-copy">
+              <strong>RESPONSIVE CHECKS COMPLETED</strong>
+              <span>Mobile and desktop spacing, hierarchy, and overflow reviewed.</span>
+            </div>
+            <span class="eb-status-chip">PASSING</span>
+          </li>
+          <li class="eb-feed-item">
+            <span class="eb-status-dot" aria-hidden="true"></span>
+            <span class="eb-feed-time">[00:24]</span>
+            <div class="eb-feed-copy">
+              <strong>HUMAN REVIEW READY</strong>
+              <span>Human-directed. Agent-built. Human-reviewed.</span>
+            </div>
+            <span class="eb-status-chip">VERIFIED</span>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="eb-section" aria-labelledby="video-title">
+    <div class="eb-container">
+      <div class="eb-module-bar eb-reveal">
+        <span class="eb-module-label">MODULE_02 :: MEDIA_LAYER</span>
+        <span class="eb-module-line" aria-hidden="true"></span>
+        <span class="eb-module-meta">STATUS: VIDEO BAY READY</span>
+      </div>
+      <div class="eb-section-head center eb-reveal">
+        <span class="eb-kicker">Watch the Build Story</span>
+        <h2 class="eb-section-title" id="video-title">This page is designed to show what happens when an AI agent is given a clear creative brief, strong constraints, and permission to build something far beyond a basic template.</h2>
+      </div>
+      <div class="eb-video-frame eb-reveal">
+        <div class="eb-video-shell">
+          <div>
+            <div class="eb-play" aria-hidden="true">&#x25b6;</div>
+            <h3>Demo video coming soon</h3>
+            <p class="eb-copy">The video walkthrough can be added here when Aaron supplies the YouTube link.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="eb-section" aria-labelledby="agent-built-title">
+    <div class="eb-container">
+      <div class="eb-module-bar eb-reveal">
+        <span class="eb-module-label">MODULE_03 :: AGENT_CAPABILITY</span>
+        <span class="eb-module-line" aria-hidden="true"></span>
+        <span class="eb-module-meta">STATUS: SYSTEM LAYER ONLINE</span>
+      </div>
+      <div class="eb-section-head eb-reveal">
+        <span class="eb-kicker">What the Agent Built</span>
+        <h2 class="eb-section-title" id="agent-built-title">The result is a complete, conversion-aware WordPress experience: strategy, structure, visuals, responsive layout, and publish-ready implementation.</h2>
+      </div>
+      <div class="eb-grid eb-grid-3">
+        <article class="eb-card eb-reveal">
+          <div class="eb-card-head">
+            <div class="eb-card-icon">UI</div>
+            <div class="eb-card-meta"><span>STATUS</span><span class="eb-card-state">ONLINE</span></div>
+          </div>
+          <span class="eb-card-state">UI MATRIX</span>
+          <h3>Visual System</h3>
+          <p>A premium dark-tech look with glow accents, glass panels, gradient borders, and cinematic depth.</p>
+        </article>
+        <article class="eb-card eb-reveal">
+          <div class="eb-card-head">
+            <div class="eb-card-icon">AN</div>
+            <div class="eb-card-meta"><span>STATUS</span><span class="eb-card-state">RUNNING</span></div>
+          </div>
+          <span class="eb-card-state">ANIMATION ENGINE</span>
+          <h3>Motion Layer</h3>
+          <p>Subtle reveal, lift, and floating effects that make the page feel alive without blocking the message.</p>
+        </article>
+        <article class="eb-card eb-reveal">
+          <div class="eb-card-head">
+            <div class="eb-card-icon">CT</div>
+            <div class="eb-card-meta"><span>STATUS</span><span class="eb-card-state">GUIDED</span></div>
+          </div>
+          <span class="eb-card-state">CTA ROUTING</span>
+          <h3>Conversion Flow</h3>
+          <p>A clear journey from proof, to process, to business meaning, to a focused application CTA.</p>
+        </article>
+        <article class="eb-card eb-reveal">
+          <div class="eb-card-head">
+            <div class="eb-card-icon">DV</div>
+            <div class="eb-card-meta"><span>STATUS</span><span class="eb-card-state">PASSING</span></div>
+          </div>
+          <span class="eb-card-state">DEVICE GRID</span>
+          <h3>Responsive Layout</h3>
+          <p>Desktop impact with mobile-safe stacking, tap-friendly buttons, and readable section spacing.</p>
+        </article>
+        <article class="eb-card eb-reveal">
+          <div class="eb-card-head">
+            <div class="eb-card-icon">VB</div>
+            <div class="eb-card-meta"><span>STATUS</span><span class="eb-card-state">READY</span></div>
+          </div>
+          <span class="eb-card-state">VIDEO BAY</span>
+          <h3>Media Integration</h3>
+          <p>A cinematic video frame is ready for the walkthrough, with a polished placeholder until supplied.</p>
+        </article>
+        <article class="eb-card eb-reveal">
+          <div class="eb-card-head">
+            <div class="eb-card-icon">RE</div>
+            <div class="eb-card-meta"><span>STATUS</span><span class="eb-card-state">LOCKED</span></div>
+          </div>
+          <span class="eb-card-state">REST CHANNEL</span>
+          <h3>WordPress Delivery</h3>
+          <p>The page is rendered by WordPress using custom page content, scoped styling, and safe REST updates.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="eb-section" aria-labelledby="pipeline-title">
+    <div class="eb-container">
+      <div class="eb-module-bar eb-reveal">
+        <span class="eb-module-label">MODULE_04 :: WORKFLOW_PIPELINE</span>
+        <span class="eb-module-line" aria-hidden="true"></span>
+        <span class="eb-module-meta">STATUS: DEPLOYMENT FLOW ACTIVE</span>
+      </div>
+      <div class="eb-section-head center eb-reveal">
+        <span class="eb-kicker">From Prompt to Published Page</span>
+        <h2 class="eb-section-title" id="pipeline-title">The workflow is simple to understand: human direction sets the target, the agent executes the build, and WordPress renders the finished result.</h2>
+      </div>
+      <div class="eb-pipeline">
+        <article class="eb-pipeline-node eb-reveal">
+          <div class="eb-pipeline-dot">1</div>
+          <span class="eb-status-chip">PROMPT</span>
+          <h3>Prompt</h3>
+          <p class="eb-copy">The human gives the goal, tone, audience, constraints, and safety boundaries.</p>
+        </article>
+        <article class="eb-pipeline-node eb-reveal">
+          <div class="eb-pipeline-dot">2</div>
+          <span class="eb-status-chip">PLAN</span>
+          <h3>Plan</h3>
+          <p class="eb-copy">The agent structures the page, conversion path, content hierarchy, and build approach.</p>
+        </article>
+        <article class="eb-pipeline-node eb-reveal">
+          <div class="eb-pipeline-dot">3</div>
+          <span class="eb-status-chip">BUILD</span>
+          <h3>Build</h3>
+          <p class="eb-copy">The agent writes the HTML, CSS, responsive layout, and progressive interaction layer.</p>
+        </article>
+        <article class="eb-pipeline-node eb-reveal">
+          <div class="eb-pipeline-dot">4</div>
+          <span class="eb-status-chip">PUBLISH</span>
+          <h3>Publish</h3>
+          <p class="eb-copy">WordPress receives the finished content and renders the live page for human review.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="eb-section" aria-labelledby="proof-console-title">
+    <div class="eb-container">
+      <div class="eb-module-bar eb-reveal">
+        <span class="eb-module-label">MODULE_05 :: VERIFICATION_MATRIX</span>
+        <span class="eb-module-line" aria-hidden="true"></span>
+        <span class="eb-module-meta">STATUS: HUMAN REVIEW READY</span>
+      </div>
+      <div class="eb-proof-console eb-reveal">
+        <div class="eb-console-grid">
+          <div class="eb-console-copy">
+            <span class="eb-kicker">No Human Manually Coded This Page</span>
+            <h2 class="eb-section-title" id="proof-console-title">The creative direction was human-led. The implementation was agent-executed. No human manually wrote, pasted, or edited the final page code by hand.</h2>
+            <p class="eb-copy">This is a visualised WordPress deployment layer: strategy from the human, structure and implementation through the agent, then a final human review before shipping.</p>
+            <span class="eb-review-note">Human-directed. Agent-built. Human-reviewed.</span>
+          </div>
+          <div class="eb-console-verify">
+            <div class="eb-verify-list">
+              <div class="eb-verify-row">
+                <span class="eb-verify-label">Strategy</span>
+                <span class="eb-verify-value">Human-directed</span>
+                <span class="eb-status-chip">VERIFIED</span>
+              </div>
+              <div class="eb-verify-scan" aria-hidden="true"></div>
+              <div class="eb-verify-row">
+                <span class="eb-verify-label">Structure</span>
+                <span class="eb-verify-value">Agent-assisted</span>
+                <span class="eb-status-chip">VERIFIED</span>
+              </div>
+              <div class="eb-verify-scan" aria-hidden="true"></div>
+              <div class="eb-verify-row">
+                <span class="eb-verify-label">Code implementation</span>
+                <span class="eb-verify-value">Agent-executed</span>
+                <span class="eb-status-chip">VERIFIED</span>
+              </div>
+              <div class="eb-verify-scan" aria-hidden="true"></div>
+              <div class="eb-verify-row">
+                <span class="eb-verify-label">WordPress update</span>
+                <span class="eb-verify-value">REST API</span>
+                <span class="eb-status-chip">LOCKED</span>
+              </div>
+              <div class="eb-verify-scan" aria-hidden="true"></div>
+              <div class="eb-verify-row">
+                <span class="eb-verify-label">Final review</span>
+                <span class="eb-verify-value">Human-reviewed</span>
+                <span class="eb-status-chip">READY</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="eb-section" aria-labelledby="business-title">
+    <div class="eb-container">
+      <div class="eb-module-bar eb-reveal">
+        <span class="eb-module-label">MODULE_06 :: BUSINESS_DEPLOYMENT</span>
+        <span class="eb-module-line" aria-hidden="true"></span>
+        <span class="eb-module-meta">STATUS: APPLICATION CHANNEL OPEN</span>
+      </div>
+      <div class="eb-section-head center eb-reveal">
+        <span class="eb-kicker">Business Meaning</span>
+        <h2 class="eb-section-title" id="business-title">If an agent can build this page, what could it build for your business?</h2>
+        <p class="eb-copy">The same workflow can turn clear business direction into practical WordPress pages, offer pages, and campaign assets.</p>
+      </div>
+      <div class="eb-grid eb-grid-4">
+        <article class="eb-card eb-reveal"><h3>Premium landing pages</h3><p>Launch pages that look deliberate, modern, and conversion-aware.</p></article>
+        <article class="eb-card eb-reveal"><h3>Service pages</h3><p>Clear positioning for offers, expertise, outcomes, and enquiry paths.</p></article>
+        <article class="eb-card eb-reveal"><h3>Lead magnet pages</h3><p>Focused opt-in experiences that explain value quickly and cleanly.</p></article>
+        <article class="eb-card eb-reveal"><h3>Offer pages</h3><p>Structured sales pages for beta offers, workshops, packages, and launches.</p></article>
+        <article class="eb-card eb-reveal"><h3>Booking pages</h3><p>Simple pages that support enquiry, qualification, and next-step action.</p></article>
+        <article class="eb-card eb-reveal"><h3>Content hubs</h3><p>Organised knowledge pages that turn expertise into a useful resource.</p></article>
+        <article class="eb-card eb-reveal"><h3>Campaign pages</h3><p>Fast, focused pages for promotions, proof, announcements, and events.</p></article>
+        <article class="eb-card eb-reveal"><h3>AI-assisted website updates</h3><p>Practical improvements made through human direction and agent execution.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="eb-section" aria-labelledby="launch-bay-title">
+    <div class="eb-container">
+      <div class="eb-launch-bay eb-reveal">
+        <div class="eb-launch-inner">
+          <div>
+            <span class="eb-kicker">Limited Places</span>
+            <h2 class="eb-section-title" id="launch-bay-title">Limited Extreme Build places are opening.</h2>
+            <p class="eb-copy eb-copy-strong">I'm taking on a small number of AI-assisted WordPress builds to demonstrate what this workflow can do for real businesses, creators, consultants, and service providers.</p>
+            <p class="eb-micro">Application channel open</p>
+            <div class="eb-launch-strip" aria-label="Launch bay status">
+              <span class="eb-status-chip">APPLICATION CHANNEL: OPEN</span>
+              <span class="eb-status-chip">BUILD SLOTS: LIMITED</span>
+              <span class="eb-status-chip">REVIEW STATUS: ACTIVE</span>
+            </div>
+            <div class="eb-actions">
+              <a class="eb-button eb-button-primary" href="mailto:aiwizard@aaronellis.au?subject=Extreme%20Build%20Application">Apply for an Extreme Build</a>
+              <a class="eb-button eb-button-secondary" href="mailto:aiwizard@aaronellis.au?subject=Extreme%20Build%20Application">Join the Waitlist</a>
+            </div>
+          </div>
+          <div class="eb-launch-panel">
+            <strong>EXTREME_BUILD :: LAUNCH_BAY</strong>
+            <div class="eb-launch-list">
+              <div class="eb-launch-row"><span>Build slots</span><span class="eb-status-chip">LIMITED</span></div>
+              <div class="eb-launch-row"><span>Review status</span><span class="eb-status-chip">OPEN</span></div>
+              <div class="eb-launch-row"><span>Application channel</span><span class="eb-status-chip">ACTIVE</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script id="extreme-build-page-script">
+(function () {
+  var page = document.querySelector('.extreme-build-page');
+  if (!page) return;
+
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var compactViewport = window.matchMedia && window.matchMedia('(max-width: 1024px), (pointer: coarse)').matches;
+  if (reduceMotion || compactViewport) return;
+
+  function cycleActive(selector, className, delay) {
+    var items = Array.prototype.slice.call(page.querySelectorAll(selector));
+    if (!items.length) return;
+    var index = 0;
+    setInterval(function () {
+      items.forEach(function (item, itemIndex) {
+        if (itemIndex === index) item.classList.add(className);
+        else item.classList.remove(className);
+      });
+      index = (index + 1) % items.length;
+    }, delay);
+  }
+
+  cycleActive('#eb-telemetry-list .eb-telemetry-row', 'eb-active', 1700);
+  cycleActive('#eb-build-feed .eb-feed-item', 'eb-feed-active', 2000);
+})();
+</script>
+<!-- /wp:html -->
+
+<style id="ae-vintage-shared-chrome">
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Oswald:wght@400;500;600;700&family=Cinzel:wght@600;700&display=swap');
+:root {
+  --ae-ink: #061b1f;
+  --ae-deep-teal: #07343a;
+  --ae-teal: #0c5961;
+  --ae-blue-teal: #0f7480;
+  --ae-cream: #f7ead2;
+  --ae-paper: #fff4dc;
+  --ae-gold: #d99a22;
+  --ae-bright-gold: #f2bd45;
+  --ae-orange: #c75a24;
+  --ae-red-shadow: #7d2417;
+  --ae-black: #050807;
+  --ae-muted: #b8c7bd;
+  --ae-shadow: 0 18px 45px rgba(0,0,0,.35);
+}
+body .site-header.dynamic-header {
+  position: relative !important;
+  z-index: 50 !important;
+  background: radial-gradient(circle at 50% -30%, rgba(242, 189, 69, 0.20), transparent 40rem), linear-gradient(180deg, rgba(6, 27, 31, 0.98), rgba(7, 52, 58, 0.96)) !important;
+  border-bottom: 1px solid rgba(217, 154, 34, 0.38) !important;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.22) !important;
+}
+body .site-header.dynamic-header::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(242, 189, 69, 0.82), transparent);
+  pointer-events: none;
+}
+body .site-header .header-inner {
+  max-width: 1220px !important;
+  min-height: 86px !important;
+  padding: 14px 22px !important;
+  gap: 18px !important;
+  align-items: center !important;
+}
+body .site-header .site-branding { gap: 0.35rem !important; }
+body .site-header .custom-logo {
+  width: auto !important;
+  height: clamp(50px, 5vw, 68px) !important;
+  max-width: min(100%, 460px) !important;
+}
+body .site-header .site-description {
+  display: block !important;
+  color: rgba(247, 234, 210, 0.84) !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 0.72rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.12em !important;
+  line-height: 1.35 !important;
+  margin-top: 0.12rem !important;
+  text-transform: uppercase !important;
+}
+body .site-navigation { display: block !important; }
+body .site-navigation-toggle-holder { display: none !important; }
+body .site-navigation-dropdown { display: none !important; }
+body [class*='mobile-nav-strip'] { display: none !important; }
+body .site-navigation .menu { gap: 0.45rem !important; }
+body .site-navigation .menu > li > a {
+  align-items: center !important;
+  border-radius: 999px !important;
+  color: var(--ae-cream) !important;
+  display: inline-flex !important;
+  font-family: 'Oswald', 'Inter', sans-serif !important;
+  font-size: 0.98rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.04em !important;
+  min-height: 42px !important;
+  padding: 0.55rem 0.95rem !important;
+  text-transform: uppercase !important;
+  transition: color .18s ease, background-color .18s ease, transform .18s ease, box-shadow .18s ease !important;
+}
+body .site-navigation .menu > li > a:hover,
+body .site-navigation .menu > li.current-menu-item > a,
+body .site-navigation .menu > li.current_page_item > a {
+  background: rgba(247, 234, 210, 0.08) !important;
+  box-shadow: inset 0 0 0 1px rgba(217, 154, 34, 0.28) !important;
+  color: var(--ae-bright-gold) !important;
+  transform: translateY(-1px) !important;
+}
+body .site-navigation-toggle-holder { justify-content: flex-end !important; }
+body .site-navigation-toggle-holder .site-navigation-toggle {
+  background: rgba(5, 8, 7, 0.78) !important;
+  border: 1px solid rgba(217, 154, 34, 0.34) !important;
+  border-radius: 14px !important;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22) !important;
+  color: var(--ae-cream) !important;
+  min-height: 46px !important;
+  min-width: 46px !important;
+}
+body .site-navigation-toggle-holder .site-navigation-toggle:hover,
+body .site-navigation-toggle-holder.elementor-active .site-navigation-toggle {
+  background: rgba(12, 89, 97, 0.94) !important;
+  border-color: rgba(242, 189, 69, 0.44) !important;
+}
+body .site-navigation-dropdown {
+  left: auto !important;
+  right: 16px !important;
+  top: calc(100% + 10px) !important;
+  width: min(360px, calc(100vw - 32px)) !important;
+  max-width: 360px !important;
+  padding: 0 !important;
+}
+body .site-navigation-dropdown ul.menu {
+  backdrop-filter: blur(14px) !important;
+  background: radial-gradient(circle at top center, rgba(242, 189, 69, 0.14), transparent 38%), linear-gradient(180deg, rgba(6, 27, 31, 0.98), rgba(7, 52, 58, 0.98)) !important;
+  border: 1px solid rgba(217, 154, 34, 0.34) !important;
+  border-radius: 22px !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.34), inset 0 0 0 1px rgba(247, 234, 210, 0.08) !important;
+  display: grid !important;
+  gap: 8px !important;
+  margin: 0 !important;
+  padding: 12px !important;
+}
+body .site-navigation-dropdown ul.menu li a {
+  align-items: center !important;
+  background: rgba(247, 234, 210, 0.05) !important;
+  border: 1px solid rgba(247, 234, 210, 0.08) !important;
+  border-radius: 14px !important;
+  color: var(--ae-cream) !important;
+  display: flex !important;
+  font-family: 'Oswald', 'Inter', sans-serif !important;
+  font-size: 0.96rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.05em !important;
+  min-height: 50px !important;
+  padding: 0 16px !important;
+  text-transform: uppercase !important;
+}
+body .site-navigation-dropdown ul.menu li a:hover,
+body .site-navigation-dropdown ul.menu li.current-menu-item a,
+body .site-navigation-dropdown ul.menu li.current_page_item a {
+  background: rgba(217, 154, 34, 0.12) !important;
+  border-color: rgba(242, 189, 69, 0.34) !important;
+  color: var(--ae-paper) !important;
+}
+body .site-footer.dynamic-footer {
+  position: relative !important;
+  background: radial-gradient(circle at 50% -40%, rgba(242, 189, 69, 0.16), transparent 34rem), linear-gradient(180deg, rgba(5, 8, 7, 0.98), rgba(6, 27, 31, 0.98)) !important;
+  border-top: 1px solid rgba(217, 154, 34, 0.34) !important;
+  padding-top: 18px !important;
+}
+body .site-footer.dynamic-footer::before {
+  content: '✦';
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--ae-bright-gold);
+  font-size: 0.95rem;
+  background: linear-gradient(180deg, rgba(6, 27, 31, 1), rgba(6, 27, 31, 1));
+  padding: 0 12px;
+}
+body .site-footer .footer-inner {
+  align-items: center !important;
+  gap: 18px !important;
+  max-width: 1220px !important;
+  min-height: 100px !important;
+  padding: 18px 22px 28px !important;
+}
+body .site-footer .custom-logo {
+  width: auto !important;
+  height: clamp(36px, 4vw, 48px) !important;
+  max-width: min(100%, 320px) !important;
+}
+body .site-footer .site-description {
+  color: rgba(247, 234, 210, 0.78) !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 0.74rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+}
+body .site-footer .copyright p {
+  color: rgba(247, 234, 210, 0.72) !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 0.84rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.03em !important;
+}
+@media (max-width: 1024px) {
+  body .site-navigation { display: none !important; }
+  body .site-navigation-toggle-holder { display: flex !important; }
+  body .site-navigation-toggle-holder .site-navigation-toggle { display: flex !important; align-items: center !important; justify-content: center !important; }
+  body .site-navigation-dropdown { display: block !important; }
+  body .site-header .header-inner {
+    min-height: 76px !important;
+    padding: 14px 16px !important;
+  }
+  body .site-header .custom-logo {
+    height: clamp(44px, 10vw, 54px) !important;
+    max-width: min(100%, 300px) !important;
+  }
+  body .site-header .site-description {
+    font-size: 0.66rem !important;
+    letter-spacing: 0.1em !important;
+  }
+  body .site-navigation-dropdown {
+    right: 12px !important;
+    width: min(320px, calc(100vw - 24px)) !important;
+  }
+  body .site-footer .footer-inner {
+    gap: 14px !important;
+    min-height: 0 !important;
+    padding: 16px 16px 24px !important;
+  }
+}
+</style>
+
+<style id="ae-header-polish-20260603">
+body .site-header.dynamic-header {
+  background: radial-gradient(circle at 50% -24%, rgba(242, 189, 69, 0.16), transparent 34rem), linear-gradient(180deg, rgba(6, 27, 31, 0.98), rgba(7, 52, 58, 0.96)) !important;
+  border-bottom: 1px solid rgba(217, 154, 34, 0.42) !important;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18) !important;
+  position: relative !important;
+  z-index: 100 !important;
+}
+body .site-header .header-inner {
+  align-items: center !important;
+  column-gap: 14px !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  max-width: 1180px !important;
+  min-height: 66px !important;
+  padding: 8px 18px !important;
+  row-gap: 6px !important;
+}
+body .site-header .site-branding {
+  align-items: center !important;
+  display: flex !important;
+  flex: 0 1 360px !important;
+  gap: 6px !important;
+  justify-content: center !important;
+  min-width: 0 !important;
+  text-align: center !important;
+}
+body .site-header .site-logo,
+body .site-header .custom-logo-link {
+  display: block !important;
+  line-height: 0 !important;
+  max-width: 100% !important;
+}
+body .site-header .custom-logo {
+  display: block !important;
+  height: clamp(38px, 3.4vw, 52px) !important;
+  max-height: 52px !important;
+  max-width: min(360px, 42vw) !important;
+  object-fit: contain !important;
+  width: auto !important;
+}
+body .site-header .site-description {
+  color: rgba(247, 234, 210, 0.78) !important;
+  display: block !important;
+  flex-basis: 100% !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 0.58rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.08em !important;
+  line-height: 1.15 !important;
+  margin: 0 !important;
+  text-transform: uppercase !important;
+}
+body .site-navigation {
+  display: block !important;
+  flex: 1 1 620px !important;
+  min-width: 0 !important;
+}
+body .site-navigation .menu {
+  align-items: center !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 5px !important;
+  justify-content: center !important;
+  margin: 0 !important;
+}
+body .site-navigation .menu > li > a {
+  align-items: center !important;
+  border-radius: 999px !important;
+  color: var(--ae-cream) !important;
+  display: inline-flex !important;
+  font-family: 'Oswald', 'Inter', sans-serif !important;
+  font-size: 0.82rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.03em !important;
+  line-height: 1 !important;
+  min-height: 32px !important;
+  padding: 0.4rem 0.62rem !important;
+  text-transform: uppercase !important;
+  white-space: nowrap !important;
+}
+body .site-navigation .menu > li > a:hover,
+body .site-navigation .menu > li.current-menu-item > a,
+body .site-navigation .menu > li.current_page_item > a {
+  background: rgba(247, 234, 210, 0.07) !important;
+  box-shadow: inset 0 0 0 1px rgba(217, 154, 34, 0.26) !important;
+  color: var(--ae-bright-gold) !important;
+  transform: none !important;
+}
+body .site-navigation-toggle-holder,
+body .site-navigation-dropdown {
+  display: none !important;
+}
+body [class*='mobile-nav-strip'] {
+  display: none !important;
+}
+@media (max-width: 1100px) and (min-width: 981px) {
+  body .site-header .header-inner {
+    padding: 8px 12px !important;
+  }
+  body .site-header .site-branding {
+    flex-basis: 320px !important;
+  }
+  body .site-header .custom-logo {
+    max-width: min(320px, 38vw) !important;
+  }
+  body .site-navigation .menu > li > a {
+    font-size: 0.76rem !important;
+    min-height: 30px !important;
+    padding: 0.36rem 0.48rem !important;
+  }
+}
+@media (max-width: 980px) {
+  body .site-header .header-inner {
+    justify-content: space-between !important;
+    min-height: 64px !important;
+    padding: 8px 14px !important;
+  }
+  body .site-header .site-branding {
+    flex: 1 1 auto !important;
+    justify-content: flex-start !important;
+    text-align: left !important;
+  }
+  body .site-header .custom-logo {
+    height: clamp(36px, 9vw, 46px) !important;
+    max-height: 46px !important;
+    max-width: min(270px, 72vw) !important;
+  }
+  body .site-header .site-description {
+    display: none !important;
+  }
+  body .site-navigation {
+    display: none !important;
+  }
+  body .site-navigation-toggle-holder {
+    display: flex !important;
+    flex: 0 0 auto !important;
+    justify-content: flex-end !important;
+  }
+  body .site-navigation-toggle-holder .site-navigation-toggle {
+    align-items: center !important;
+    background: rgba(5, 8, 7, 0.84) !important;
+    border: 1px solid rgba(217, 154, 34, 0.36) !important;
+    border-radius: 12px !important;
+    color: var(--ae-cream) !important;
+    display: flex !important;
+    justify-content: center !important;
+    min-height: 42px !important;
+    min-width: 42px !important;
+  }
+  body .site-navigation-dropdown {
+    display: block !important;
+    left: auto !important;
+    max-width: 340px !important;
+    padding: 0 !important;
+    right: 12px !important;
+    top: calc(100% + 8px) !important;
+    width: min(340px, calc(100vw - 24px)) !important;
+  }
+  body .site-navigation-dropdown ul.menu {
+    background: radial-gradient(circle at top center, rgba(242, 189, 69, 0.13), transparent 38%), linear-gradient(180deg, rgba(6, 27, 31, 0.99), rgba(7, 52, 58, 0.99)) !important;
+    border: 1px solid rgba(217, 154, 34, 0.34) !important;
+    border-radius: 18px !important;
+    box-shadow: 0 22px 55px rgba(0, 0, 0, 0.34) !important;
+    display: grid !important;
+    gap: 7px !important;
+    margin: 0 !important;
+    padding: 10px !important;
+  }
+  body .site-navigation-dropdown ul.menu li a {
+    align-items: center !important;
+    background: rgba(247, 234, 210, 0.055) !important;
+    border: 1px solid rgba(247, 234, 210, 0.09) !important;
+    border-radius: 12px !important;
+    color: var(--ae-cream) !important;
+    display: flex !important;
+    font-family: 'Oswald', 'Inter', sans-serif !important;
+    font-size: 0.92rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.04em !important;
+    min-height: 44px !important;
+    padding: 0 14px !important;
+    text-transform: uppercase !important;
+  }
+}
+@media (max-width: 420px) {
+  body .site-header .custom-logo {
+    max-width: min(235px, 68vw) !important;
+  }
+}
+</style>
+
+<style id="extreme-mobile-visual-fix-20260603">
+@media (max-width: 640px) {
+  .extreme-build-page .eb-launch-inner {
+    padding: 1.05rem !important;
+    gap: 1.1rem !important;
+  }
+  .extreme-build-page .eb-launch-bay {
+    padding: 0.8rem !important;
+  }
+  .extreme-build-page .eb-actions {
+    gap: 0.75rem !important;
+    margin-top: 1.25rem !important;
+  }
+  .extreme-build-page .eb-button {
+    border-radius: 28px !important;
+    font-size: 1rem !important;
+    line-height: 1.12 !important;
+    min-height: 3.35rem !important;
+    padding: 0.82rem 1.05rem !important;
+    width: 100% !important;
+  }
+  .extreme-build-page .eb-button-primary {
+    box-shadow: 0 10px 24px rgba(48, 151, 255, 0.22) !important;
+  }
+  .extreme-build-page .eb-launch-strip {
+    display: grid !important;
+    gap: 0.62rem !important;
+  }
+  .extreme-build-page .eb-launch-strip .eb-status-chip {
+    justify-content: flex-start !important;
+    line-height: 1.15 !important;
+    min-height: 2.25rem !important;
+    width: 100% !important;
+  }
+  .extreme-build-page .eb-launch-panel {
+    padding: 1rem !important;
+  }
+  .extreme-build-page .eb-launch-list {
+    gap: 0.85rem !important;
+  }
+  .extreme-build-page .eb-launch-row {
+    align-items: flex-start !important;
+    display: grid !important;
+    gap: 0.45rem !important;
+    justify-content: initial !important;
+  }
+  .extreme-build-page .eb-launch-row > span:first-child {
+    color: rgba(232, 251, 255, 0.88) !important;
+    font-size: 1rem !important;
+    line-height: 1.25 !important;
+  }
+  .extreme-build-page .eb-launch-row .eb-status-chip {
+    justify-self: start !important;
+    max-width: 100% !important;
+    overflow-wrap: normal !important;
+    white-space: nowrap !important;
+    word-break: normal !important;
+  }
+  .extreme-build-page .eb-status-chip,
+  .extreme-build-page .eb-proof-state,
+  .extreme-build-page .eb-card-state,
+  .extreme-build-page .eb-mini-state {
+    letter-spacing: 0.08em !important;
+  }
+}
+@media (max-width: 390px) {
+  .extreme-build-page .eb-button {
+    font-size: 0.94rem !important;
+  }
+  .extreme-build-page .eb-status-chip,
+  .extreme-build-page .eb-proof-state,
+  .extreme-build-page .eb-card-state,
+  .extreme-build-page .eb-mini-state {
+    font-size: 0.68rem !important;
+    letter-spacing: 0.06em !important;
+    padding-left: 0.64rem !important;
+    padding-right: 0.64rem !important;
+  }
+  .extreme-build-page .eb-status-chip::before,
+  .extreme-build-page .eb-proof-state::before,
+  .extreme-build-page .eb-card-state::before,
+  .extreme-build-page .eb-mini-state::before {
+    flex: 0 0 0.42rem !important;
+  }
+}
+</style>
+
+<style id="extreme-module-spacing-fix-20260603">
+.extreme-build-page .eb-section {
+  padding-top: clamp(3.5rem, 6vw, 4.8rem) !important;
+  padding-bottom: clamp(3.5rem, 6vw, 4.8rem) !important;
+}
+.extreme-build-page .eb-section-head {
+  margin-bottom: 1.45rem !important;
+}
+.extreme-build-page .eb-section-title {
+  margin-top: 0.45rem !important;
+}
+.extreme-build-page .eb-section + .eb-section {
+  margin-top: 0 !important;
+}
+@media (max-width: 760px) {
+  .extreme-build-page .eb-section {
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+  }
+  .extreme-build-page .eb-section-head {
+    margin-bottom: 1.15rem !important;
+    padding: 0.9rem 1rem !important;
+  }
+}
+@media (max-width: 420px) {
+  .extreme-build-page .eb-section {
+    padding-top: 2.55rem !important;
+    padding-bottom: 2.55rem !important;
+  }
+}
+</style>
+
+<style id="ae-mobile-menu-layer-fix-201">
+body.page-id-201 .site-header.dynamic-header{z-index:100000!important;overflow:visible!important}
+body.page-id-201 .site-header .custom-logo{max-width:160px!important;height:auto!important}
+body.page-id-201 .site-header .header-inner{grid-template-columns:minmax(0,180px) 1fr!important}
+@media (max-width:1024px){body.page-id-201 .site-navigation-dropdown{position:absolute!important;top:100%!important;bottom:auto!important;left:0!important;right:0!important;width:100%!important;overflow-y:auto!important;max-height:calc(100vh - 80px)!important}
+body.page-id-201 .site-navigation-dropdown[aria-hidden="true"]{display:none!important}
+body.page-id-201 .site-navigation-dropdown:not([aria-hidden="true"]){display:block!important}
+body.page-id-201 .site-navigation-dropdown .menu{position:static!important}}
+@media (max-width:520px){body.page-id-201 .site-navigation-dropdown{max-height:calc(100vh - 64px)!important}}
+</style>

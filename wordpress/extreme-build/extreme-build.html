@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<!--
+  EXTREME BUILD — rebuilt, compact + feature-rich edition
+  ----------------------------------------------------------------------------
+  • Open this file in any browser to PREVIEW it exactly as it will look.
+  • To put it LIVE on WordPress: copy everything between the two PASTE markers
+    below and drop it into a single "Custom HTML" block on the Extreme Build page.
+  • 100% self-contained: scoped CSS (root .xb-extreme), vanilla JS, zero plugins,
+    zero external requests. Safe to paste alongside or in place of the old block.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Extreme Build</title>
+<style>/* preview-only chrome — NOT part of the paste block */
+  html,body{margin:0;background:#04080f;}
+</style>
+</head>
+<body>
+
+<!-- =========================  PASTE FROM HERE INTO WORDPRESS  ========================= -->
+<div class="xb-extreme" id="xb-extreme-build" data-xb-root>
+  <canvas class="xb-canvas" aria-hidden="true"></canvas>
+  <div class="xb-cursor-glow" aria-hidden="true"></div>
+
+  <!-- ===== HERO ===== -->
+  <section class="xb-hero xb-shell" aria-label="Extreme Build introduction">
+    <div class="xb-hero-grid">
+      <div class="xb-hero-copy xb-reveal">
+        <span class="xb-eyebrow"><i></i> Agent-built · live WordPress page</span>
+        <h1 class="xb-title">Extreme&nbsp;Build</h1>
+        <p class="xb-lede">
+          One brief, hard constraints, and an AI agent given room to build well beyond a
+          template. Everything you see was generated and published by the agent — scoped,
+          responsive, and plugin-free.
+        </p>
+
+        <div class="xb-command" role="text" aria-label="Build command">
+          <span class="xb-prompt">agent@aaronellis</span>
+          <span class="xb-path">~/extreme-build</span>
+          <span class="xb-cmd">$ <span data-xb-type></span><b class="xb-caret">▍</b></span>
+        </div>
+
+        <div class="xb-stats">
+          <div class="xb-stat"><strong data-xb-count="100" data-xb-suffix="%">0%</strong><span>Agent-built</span></div>
+          <div class="xb-stat"><strong data-xb-count="0">0</strong><span>Plugins added</span></div>
+          <div class="xb-stat"><strong data-xb-count="6">0</strong><span>Build phases</span></div>
+          <div class="xb-stat"><strong data-xb-count="24" data-xb-suffix="s">0s</strong><span>Build time</span></div>
+        </div>
+
+        <div class="xb-actions">
+          <a class="xb-btn xb-btn-primary" href="mailto:aiwizard@aaronellis.au?subject=Extreme%20Build%20Application">Apply for an Extreme Build</a>
+          <a class="xb-btn xb-btn-ghost" href="mailto:aiwizard@aaronellis.au?subject=Extreme%20Build%20Waitlist">Join the waitlist</a>
+        </div>
+      </div>
+
+      <!-- live build cockpit -->
+      <aside class="xb-cockpit xb-reveal" aria-label="Live build status">
+        <div class="xb-cockpit-head">
+          <span class="xb-dots"><i></i><i></i><i></i></span>
+          <span class="xb-cockpit-name">build · live</span>
+          <span class="xb-pulse" data-xb-pulse>RUNNING</span>
+        </div>
+        <div class="xb-ring-wrap">
+          <svg class="xb-ring" viewBox="0 0 120 120" aria-hidden="true">
+            <circle class="xb-ring-bg" cx="60" cy="60" r="52"></circle>
+            <circle class="xb-ring-fg" cx="60" cy="60" r="52"></circle>
+          </svg>
+          <div class="xb-ring-label"><strong data-xb-ring>0%</strong><span>render</span></div>
+        </div>
+        <ul class="xb-mini-log" data-xb-minilog aria-live="polite"></ul>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ===== TABBED MODULE DECK (replaces the long scrolling modules) ===== -->
+  <section class="xb-deck xb-shell xb-reveal" aria-label="Build modules">
+    <div class="xb-tabs" role="tablist" aria-label="Extreme Build modules">
+      <button class="xb-tab is-active" role="tab" aria-selected="true"  id="xb-t-cap"  aria-controls="xb-p-cap"  data-xb-tab="cap">Capabilities</button>
+      <button class="xb-tab"           role="tab" aria-selected="false" id="xb-t-pipe" aria-controls="xb-p-pipe" data-xb-tab="pipe">Pipeline</button>
+      <button class="xb-tab"           role="tab" aria-selected="false" id="xb-t-tel"  aria-controls="xb-p-tel"  data-xb-tab="tel">Telemetry</button>
+      <button class="xb-tab"           role="tab" aria-selected="false" id="xb-t-ver"  aria-controls="xb-p-ver"  data-xb-tab="ver">Verification</button>
+      <button class="xb-tab"           role="tab" aria-selected="false" id="xb-t-dep"  aria-controls="xb-p-dep"  data-xb-tab="dep">Deploy</button>
+    </div>
+
+    <!-- Capabilities -->
+    <div class="xb-panel is-active" role="tabpanel" id="xb-p-cap" aria-labelledby="xb-t-cap" data-xb-panel="cap">
+      <div class="xb-cards">
+        <article class="xb-card"><span class="xb-card-tag">UI / design</span><strong>Visual System</strong><p>Type, colour and layout language built as one coherent, on-brand system.</p><span class="xb-bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><span class="xb-state">ONLINE</span></article>
+        <article class="xb-card"><span class="xb-card-tag">animation</span><strong>Motion Layer</strong><p>Cinematic reveals, live meters and micro-interactions — performance-aware.</p><span class="xb-bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><span class="xb-state">ONLINE</span></article>
+        <article class="xb-card"><span class="xb-card-tag">CTAs</span><strong>Conversion Flow</strong><p>Clear paths to apply and join the waitlist, placed where intent peaks.</p><span class="xb-bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><span class="xb-state">ONLINE</span></article>
+        <article class="xb-card"><span class="xb-card-tag">responsive</span><strong>Responsive Layout</strong><p>One layout that holds its shape from wide desktop down to small phones.</p><span class="xb-bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><span class="xb-state">ONLINE</span></article>
+        <article class="xb-card"><span class="xb-card-tag">media</span><strong>Media Integration</strong><p>Slots for video and rich media, wired in without extra plugins.</p><span class="xb-bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><span class="xb-state">READY</span></article>
+        <article class="xb-card"><span class="xb-card-tag">delivery</span><strong>WordPress Delivery</strong><p>Published through the REST API as scoped page content — theme untouched.</p><span class="xb-bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><span class="xb-state">ONLINE</span></article>
+      </div>
+    </div>
+
+    <!-- Pipeline -->
+    <div class="xb-panel" role="tabpanel" id="xb-p-pipe" aria-labelledby="xb-t-pipe" data-xb-panel="pipe" hidden>
+      <p class="xb-panel-lede">Human direction sets the target, the agent executes the build, WordPress renders the result.</p>
+      <ol class="xb-flow">
+        <li class="xb-node"><span class="xb-node-num">01</span><strong>Prompt</strong><p>A clear creative brief and hard constraints go in.</p></li>
+        <li class="xb-node"><span class="xb-node-num">02</span><strong>Plan</strong><p>The agent maps structure, sections and interaction.</p></li>
+        <li class="xb-node"><span class="xb-node-num">03</span><strong>Build</strong><p>Markup, scoped styles and motion are generated.</p></li>
+        <li class="xb-node"><span class="xb-node-num">04</span><strong>Publish</strong><p>Reviewed by a human, then pushed live via REST.</p></li>
+      </ol>
+    </div>
+
+    <!-- Telemetry -->
+    <div class="xb-panel" role="tabpanel" id="xb-p-tel" aria-labelledby="xb-t-tel" data-xb-panel="tel" hidden>
+      <div class="xb-tel-grid">
+        <div class="xb-feed">
+          <div class="xb-feed-head"><span>[SYSTEM BUILD] SOURCE: EXTREME BUILD</span><span class="xb-pulse" data-xb-pulse>LIVE</span></div>
+          <ul class="xb-feed-list" data-xb-feed aria-live="polite"></ul>
+        </div>
+        <div class="xb-meters">
+          <div class="xb-meter" data-xb-meter="98"><span>REST channel</span><i></i><b>98%</b></div>
+          <div class="xb-meter" data-xb-meter="100"><span>CSS scope</span><i></i><b>100%</b></div>
+          <div class="xb-meter" data-xb-meter="96"><span>Mobile responsive</span><i></i><b>96%</b></div>
+          <div class="xb-meter" data-xb-meter="100"><span>Plugins added</span><i></i><b>0</b></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Verification -->
+    <div class="xb-panel" role="tabpanel" id="xb-p-ver" aria-labelledby="xb-t-ver" data-xb-panel="ver" hidden>
+      <p class="xb-panel-lede">The direction was human-led; the implementation was agent-executed. No human wrote, pasted, or hand-edited the final page code.</p>
+      <ul class="xb-checks">
+        <li><span class="xb-tick" aria-hidden="true"></span>Human set the creative direction</li>
+        <li><span class="xb-tick" aria-hidden="true"></span>Agent executed the full build</li>
+        <li><span class="xb-tick" aria-hidden="true"></span>No code written by hand</li>
+        <li><span class="xb-tick" aria-hidden="true"></span>CSS scoped — theme untouched</li>
+        <li><span class="xb-tick" aria-hidden="true"></span>Human reviewed, then published</li>
+      </ul>
+    </div>
+
+    <!-- Deploy -->
+    <div class="xb-panel" role="tabpanel" id="xb-p-dep" aria-labelledby="xb-t-dep" data-xb-panel="dep" hidden>
+      <p class="xb-panel-lede">If an agent can build this page, what could it build for your business?</p>
+      <div class="xb-chips">
+        <span class="xb-chip">Premium landing pages</span>
+        <span class="xb-chip">Service pages</span>
+        <span class="xb-chip">Lead-magnet pages</span>
+        <span class="xb-chip">Offer pages</span>
+        <span class="xb-chip">Booking pages</span>
+        <span class="xb-chip">Content hubs</span>
+        <span class="xb-chip">Campaign pages</span>
+        <span class="xb-chip">AI-assisted updates</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA BAND ===== -->
+  <section class="xb-cta xb-shell xb-reveal" aria-label="Apply">
+    <div class="xb-cta-inner">
+      <div>
+        <h2 class="xb-cta-title">Limited Extreme Build places are opening</h2>
+        <div class="xb-pills">
+          <span class="xb-pill xb-pill-open">● OPEN</span>
+          <span class="xb-pill">SLOTS · LIMITED</span>
+          <span class="xb-pill">REVIEW · ACTIVE</span>
+        </div>
+      </div>
+      <div class="xb-actions">
+        <a class="xb-btn xb-btn-primary" href="mailto:aiwizard@aaronellis.au?subject=Extreme%20Build%20Application">Apply now</a>
+        <a class="xb-btn xb-btn-ghost" href="mailto:aiwizard@aaronellis.au?subject=Extreme%20Build%20Waitlist">Join the waitlist</a>
+      </div>
+    </div>
+  </section>
+
+  <style>
+  /* ===========================================================================
+     EXTREME BUILD — scoped styles. Everything lives under .xb-extreme so it
+     cannot leak into (or be broken by) the WordPress theme or older blocks.
+     =========================================================================== */
+  .xb-extreme{
+    --xb-bg:#04080f; --xb-bg2:#071120;
+    --xb-panel:rgba(9,18,30,.82); --xb-panel2:rgba(7,14,25,.7);
+    --xb-line:rgba(120,200,255,.16); --xb-line2:rgba(120,200,255,.28);
+    --xb-cyan:#58dfff; --xb-green:#7ef2ab; --xb-magenta:#ca68ff;
+    --xb-text:#eaf6ff; --xb-dim:#94b6cf;
+    --xb-mono:"IBM Plex Mono","SFMono-Regular",ui-monospace,Consolas,monospace;
+    --xb-sans:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    position:relative; isolation:isolate; overflow:hidden;
+    margin:0; padding:0; color:var(--xb-text); font-family:var(--xb-sans);
+    background:
+      radial-gradient(1100px 620px at 85% -8%, rgba(202,104,255,.16), transparent 60%),
+      radial-gradient(1000px 600px at 8% 4%, rgba(88,223,255,.14), transparent 55%),
+      linear-gradient(180deg,var(--xb-bg2),var(--xb-bg) 40%);
+    line-height:1.55; -webkit-font-smoothing:antialiased;
+  }
+  .xb-extreme *,.xb-extreme *::before,.xb-extreme *::after{box-sizing:border-box;}
+  .xb-extreme .xb-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:0;opacity:.55;pointer-events:none;}
+  .xb-extreme .xb-cursor-glow{position:absolute;top:0;left:0;width:420px;height:420px;border-radius:50%;
+    background:radial-gradient(circle,rgba(88,223,255,.16),transparent 65%);transform:translate(-50%,-50%);
+    pointer-events:none;z-index:1;opacity:0;transition:opacity .4s;mix-blend-mode:screen;}
+  .xb-extreme .xb-shell{position:relative;z-index:2;max-width:1140px;margin:0 auto;padding:clamp(2.2rem,5vw,4.2rem) clamp(1rem,4vw,2rem);}
+
+  /* reveal */
+  .xb-extreme .xb-reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease;}
+  .xb-extreme .xb-reveal.is-in{opacity:1;transform:none;}
+
+  /* hero */
+  .xb-extreme .xb-hero{padding-top:clamp(2.6rem,6vw,5rem);}
+  .xb-extreme .xb-hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(1.4rem,3vw,2.6rem);align-items:center;}
+  .xb-extreme .xb-eyebrow{display:inline-flex;align-items:center;gap:.5rem;padding:.4rem .8rem;border:1px solid var(--xb-line2);
+    border-radius:999px;background:var(--xb-panel2);font-family:var(--xb-mono);font-size:.7rem;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--xb-cyan);}
+  .xb-extreme .xb-eyebrow i{width:.5rem;height:.5rem;border-radius:50%;background:var(--xb-green);box-shadow:0 0 10px var(--xb-green);animation:xbBlink 1.6s infinite;}
+  .xb-extreme .xb-title{margin:1rem 0 .6rem;font-size:clamp(2.6rem,7vw,4.6rem);line-height:.98;font-weight:840;letter-spacing:-.02em;
+    background:linear-gradient(120deg,#fff,var(--xb-cyan) 55%,var(--xb-magenta));-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .xb-extreme .xb-lede{margin:0 0 1.1rem;max-width:46ch;color:#cfe4f2;font-size:clamp(.98rem,1.6vw,1.08rem);}
+  .xb-extreme .xb-command{font-family:var(--xb-mono);font-size:.82rem;background:rgba(4,10,17,.92);border:1px solid rgba(126,242,171,.22);
+    border-radius:12px;padding:.7rem .85rem;color:#a9ffb7;display:flex;gap:.5rem;flex-wrap:wrap;align-items:center;}
+  .xb-extreme .xb-command .xb-prompt{color:var(--xb-green);font-weight:700;}
+  .xb-extreme .xb-command .xb-path{color:var(--xb-cyan);}
+  .xb-extreme .xb-command .xb-cmd{color:#dff7ff;}
+  .xb-extreme .xb-caret{display:inline-block;animation:xbBlink 1s steps(1) infinite;color:var(--xb-green);}
+  .xb-extreme .xb-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:.6rem;margin:1.2rem 0;}
+  .xb-extreme .xb-stat{padding:.7rem .6rem;border:1px solid var(--xb-line);border-radius:12px;background:var(--xb-panel2);text-align:left;}
+  .xb-extreme .xb-stat strong{display:block;font-family:var(--xb-mono);font-size:clamp(1.25rem,3vw,1.7rem);font-weight:800;
+    background:linear-gradient(120deg,var(--xb-cyan),var(--xb-green));-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .xb-extreme .xb-stat span{display:block;margin-top:.2rem;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--xb-dim);}
+  .xb-extreme .xb-actions{display:flex;gap:.7rem;flex-wrap:wrap;}
+  .xb-extreme .xb-btn{display:inline-flex;align-items:center;justify-content:center;padding:.8rem 1.3rem;border-radius:12px;
+    font-weight:720;font-size:.92rem;text-decoration:none;cursor:pointer;border:1px solid transparent;transition:transform .18s ease,box-shadow .25s ease,background .25s;}
+  .xb-extreme .xb-btn-primary{color:#031018;background:linear-gradient(120deg,var(--xb-cyan),var(--xb-green));
+    box-shadow:0 10px 30px rgba(88,223,255,.25);}
+  .xb-extreme .xb-btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(88,223,255,.4);}
+  .xb-extreme .xb-btn-ghost{color:var(--xb-text);border-color:var(--xb-line2);background:var(--xb-panel2);}
+  .xb-extreme .xb-btn-ghost:hover{transform:translateY(-2px);border-color:var(--xb-cyan);color:#fff;}
+
+  /* cockpit */
+  .xb-extreme .xb-cockpit{border:1px solid var(--xb-line);border-radius:18px;background:var(--xb-panel);
+    padding:1rem;box-shadow:0 24px 60px rgba(0,0,0,.45),inset 0 0 0 1px rgba(255,255,255,.02);backdrop-filter:blur(6px);}
+  .xb-extreme .xb-cockpit-head{display:flex;align-items:center;gap:.6rem;font-family:var(--xb-mono);font-size:.72rem;color:var(--xb-dim);}
+  .xb-extreme .xb-dots{display:inline-flex;gap:.3rem;}
+  .xb-extreme .xb-dots i{width:.6rem;height:.6rem;border-radius:50%;background:var(--xb-line2);}
+  .xb-extreme .xb-dots i:nth-child(1){background:#ff6b6b;}.xb-extreme .xb-dots i:nth-child(2){background:#ffd166;}.xb-extreme .xb-dots i:nth-child(3){background:var(--xb-green);}
+  .xb-extreme .xb-cockpit-name{flex:1;}
+  .xb-extreme .xb-pulse{font-family:var(--xb-mono);font-size:.6rem;letter-spacing:.12em;color:var(--xb-green);
+    border:1px solid rgba(126,242,171,.4);border-radius:999px;padding:.15rem .5rem;animation:xbPulse 1.8s infinite;}
+  .xb-extreme .xb-ring-wrap{position:relative;width:140px;height:140px;margin:1rem auto;}
+  .xb-extreme .xb-ring{width:140px;height:140px;transform:rotate(-90deg);}
+  .xb-extreme .xb-ring circle{fill:none;stroke-width:8;}
+  .xb-extreme .xb-ring-bg{stroke:rgba(120,200,255,.12);}
+  .xb-extreme .xb-ring-fg{stroke:url(#xbGrad);stroke:var(--xb-cyan);stroke-linecap:round;stroke-dasharray:327;stroke-dashoffset:327;
+    transition:stroke-dashoffset .4s ease;filter:drop-shadow(0 0 6px rgba(88,223,255,.6));}
+  .xb-extreme .xb-ring-label{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+  .xb-extreme .xb-ring-label strong{font-family:var(--xb-mono);font-size:1.5rem;color:#fff;}
+  .xb-extreme .xb-ring-label span{font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--xb-dim);}
+  .xb-extreme .xb-mini-log{list-style:none;margin:0;padding:.4rem 0 0;font-family:var(--xb-mono);font-size:.72rem;min-height:4.4rem;}
+  .xb-extreme .xb-mini-log li{padding:.2rem 0;color:var(--xb-dim);opacity:0;transform:translateY(6px);transition:opacity .35s,transform .35s;}
+  .xb-extreme .xb-mini-log li.is-in{opacity:1;transform:none;color:#cdeefb;}
+  .xb-extreme .xb-mini-log li b{color:var(--xb-green);}
+
+  /* deck / tabs */
+  .xb-extreme .xb-deck{padding-top:0;}
+  .xb-extreme .xb-tabs{display:flex;gap:.4rem;flex-wrap:wrap;border:1px solid var(--xb-line);border-radius:14px;
+    background:var(--xb-panel2);padding:.4rem;margin-bottom:1.2rem;overflow-x:auto;scrollbar-width:none;}
+  .xb-extreme .xb-tabs::-webkit-scrollbar{display:none;}
+  .xb-extreme .xb-tab{flex:1 0 auto;border:0;background:transparent;color:var(--xb-dim);font-family:var(--xb-mono);
+    font-size:.8rem;letter-spacing:.04em;padding:.6rem .9rem;border-radius:10px;cursor:pointer;transition:color .2s,background .2s;white-space:nowrap;}
+  .xb-extreme .xb-tab:hover{color:#fff;}
+  .xb-extreme .xb-tab.is-active{color:#031018;background:linear-gradient(120deg,var(--xb-cyan),var(--xb-green));font-weight:740;}
+  .xb-extreme .xb-tab:focus-visible{outline:2px solid var(--xb-cyan);outline-offset:2px;}
+  .xb-extreme .xb-panel{animation:xbFade .45s ease;}
+  .xb-extreme .xb-panel[hidden]{display:none;}
+  .xb-extreme .xb-panel-lede{margin:0 0 1.1rem;max-width:60ch;color:#cfe4f2;}
+
+  /* capability cards */
+  .xb-extreme .xb-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.9rem;}
+  .xb-extreme .xb-card{position:relative;border:1px solid var(--xb-line);border-radius:14px;background:var(--xb-panel);
+    padding:1.1rem;overflow:hidden;transition:transform .25s ease,border-color .25s ease;}
+  .xb-extreme .xb-card::before{content:"";position:absolute;left:1rem;right:1rem;top:0;height:2px;
+    background:linear-gradient(90deg,var(--xb-cyan),transparent,var(--xb-magenta));}
+  .xb-extreme .xb-card:hover{transform:translateY(-4px);border-color:var(--xb-line2);}
+  .xb-extreme .xb-card-tag{display:block;font-family:var(--xb-mono);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--xb-dim);margin-bottom:.5rem;}
+  .xb-extreme .xb-card strong{display:block;font-size:1.02rem;color:#fff;}
+  .xb-extreme .xb-card p{margin:.4rem 0 .7rem;font-size:.86rem;color:#bcd6e6;}
+  .xb-extreme .xb-bars{display:inline-flex;align-items:flex-end;gap:.18rem;height:1.1rem;}
+  .xb-extreme .xb-bars i{width:.22rem;border-radius:999px;background:linear-gradient(180deg,var(--xb-green),var(--xb-cyan));animation:xbBars 1.5s ease-in-out infinite;}
+  .xb-extreme .xb-bars i:nth-child(1){height:40%;animation-delay:0s}.xb-extreme .xb-bars i:nth-child(2){height:70%;animation-delay:.15s}
+  .xb-extreme .xb-bars i:nth-child(3){height:100%;animation-delay:.3s}.xb-extreme .xb-bars i:nth-child(4){height:60%;animation-delay:.45s}
+  .xb-extreme .xb-bars i:nth-child(5){height:85%;animation-delay:.6s}
+  .xb-extreme .xb-state{position:absolute;top:1rem;right:1rem;font-family:var(--xb-mono);font-size:.58rem;letter-spacing:.1em;
+    color:var(--xb-green);border:1px solid rgba(126,242,171,.35);border-radius:999px;padding:.1rem .45rem;}
+
+  /* pipeline */
+  .xb-extreme .xb-flow{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:.9rem;counter-reset:none;}
+  .xb-extreme .xb-node{position:relative;border:1px solid var(--xb-line);border-radius:14px;background:var(--xb-panel);padding:1.1rem;}
+  .xb-extreme .xb-node::after{content:"→";position:absolute;right:-.75rem;top:50%;transform:translateY(-50%);color:var(--xb-cyan);font-weight:800;z-index:3;}
+  .xb-extreme .xb-node:last-child::after{display:none;}
+  .xb-extreme .xb-node-num{font-family:var(--xb-mono);font-size:.7rem;color:var(--xb-magenta);}
+  .xb-extreme .xb-node strong{display:block;margin:.3rem 0;color:#fff;font-size:1.05rem;}
+  .xb-extreme .xb-node p{margin:0;font-size:.82rem;color:#bcd6e6;}
+
+  /* telemetry */
+  .xb-extreme .xb-tel-grid{display:grid;grid-template-columns:1.3fr .7fr;gap:1rem;align-items:start;}
+  .xb-extreme .xb-feed{border:1px solid var(--xb-line);border-radius:14px;background:rgba(4,10,17,.92);padding:.9rem;font-family:var(--xb-mono);}
+  .xb-extreme .xb-feed-head{display:flex;justify-content:space-between;align-items:center;font-size:.66rem;color:var(--xb-dim);letter-spacing:.06em;margin-bottom:.6rem;}
+  .xb-extreme .xb-feed-list{list-style:none;margin:0;padding:0;font-size:.76rem;min-height:13rem;}
+  .xb-extreme .xb-feed-list li{display:flex;gap:.6rem;padding:.28rem 0;color:var(--xb-dim);opacity:0;transform:translateX(-8px);transition:opacity .3s,transform .3s,color .3s;}
+  .xb-extreme .xb-feed-list li.is-in{opacity:1;transform:none;}
+  .xb-extreme .xb-feed-list li.is-active{color:#dff7ff;}
+  .xb-extreme .xb-feed-list li .t{color:var(--xb-cyan);}
+  .xb-extreme .xb-feed-list li .ok{color:var(--xb-green);margin-left:auto;}
+  .xb-extreme .xb-meters{display:flex;flex-direction:column;gap:.7rem;}
+  .xb-extreme .xb-meter{position:relative;border:1px solid var(--xb-line);border-radius:12px;background:var(--xb-panel);padding:.7rem .8rem;}
+  .xb-extreme .xb-meter span{display:block;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--xb-dim);}
+  .xb-extreme .xb-meter i{display:block;height:.4rem;border-radius:999px;background:rgba(120,200,255,.14);margin:.45rem 0 .1rem;overflow:hidden;position:relative;}
+  .xb-extreme .xb-meter i::after{content:"";position:absolute;inset:0;width:0;border-radius:999px;background:linear-gradient(90deg,var(--xb-cyan),var(--xb-green));transition:width 1.1s ease;}
+  .xb-extreme .xb-meter.is-in i::after{width:var(--xb-fill,0%);}
+  .xb-extreme .xb-meter b{font-family:var(--xb-mono);font-size:.8rem;color:#fff;}
+
+  /* verification */
+  .xb-extreme .xb-checks{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:.7rem;}
+  .xb-extreme .xb-checks li{display:flex;align-items:center;gap:.7rem;border:1px solid var(--xb-line);border-radius:12px;background:var(--xb-panel);padding:.8rem 1rem;font-size:.9rem;color:#dcecf8;}
+  .xb-extreme .xb-tick{flex:none;width:1.3rem;height:1.3rem;border-radius:50%;border:1px solid var(--xb-green);position:relative;}
+  .xb-extreme .xb-tick::after{content:"";position:absolute;left:.42rem;top:.2rem;width:.28rem;height:.55rem;border:solid var(--xb-green);border-width:0 2px 2px 0;transform:rotate(45deg) scale(0);transform-origin:center;transition:transform .3s ease;}
+  .xb-extreme .xb-checks li.is-in .xb-tick::after{transform:rotate(45deg) scale(1);}
+
+  /* deploy chips */
+  .xb-extreme .xb-chips{display:flex;flex-wrap:wrap;gap:.6rem;}
+  .xb-extreme .xb-chip{border:1px solid var(--xb-line);border-radius:999px;background:var(--xb-panel);padding:.55rem 1rem;font-size:.85rem;color:#dcecf8;transition:border-color .2s,transform .2s,color .2s;}
+  .xb-extreme .xb-chip:hover{border-color:var(--xb-cyan);color:#fff;transform:translateY(-2px);}
+
+  /* cta */
+  .xb-extreme .xb-cta-inner{display:flex;align-items:center;justify-content:space-between;gap:1.4rem;flex-wrap:wrap;
+    border:1px solid var(--xb-line2);border-radius:18px;background:linear-gradient(120deg,rgba(88,223,255,.08),rgba(202,104,255,.08));padding:1.6rem;}
+  .xb-extreme .xb-cta-title{margin:0 0 .7rem;font-size:clamp(1.3rem,3vw,1.8rem);color:#fff;}
+  .xb-extreme .xb-pills{display:flex;gap:.5rem;flex-wrap:wrap;}
+  .xb-extreme .xb-pill{font-family:var(--xb-mono);font-size:.66rem;letter-spacing:.1em;color:var(--xb-dim);border:1px solid var(--xb-line);border-radius:999px;padding:.25rem .65rem;}
+  .xb-extreme .xb-pill-open{color:var(--xb-green);border-color:rgba(126,242,171,.4);}
+
+  /* keyframes */
+  @keyframes xbBlink{0%,100%{opacity:1}50%{opacity:.25}}
+  @keyframes xbPulse{0%,100%{box-shadow:0 0 0 0 rgba(126,242,171,.4)}50%{box-shadow:0 0 0 5px rgba(126,242,171,0)}}
+  @keyframes xbBars{0%,100%{transform:scaleY(.4)}50%{transform:scaleY(1)}}
+  @keyframes xbFade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+  /* responsive */
+  @media (max-width:880px){
+    .xb-extreme .xb-hero-grid{grid-template-columns:1fr;}
+    .xb-extreme .xb-cockpit{order:-1;}
+    .xb-extreme .xb-tel-grid{grid-template-columns:1fr;}
+    .xb-extreme .xb-flow{grid-template-columns:repeat(2,1fr);}
+    .xb-extreme .xb-node:nth-child(2)::after{display:none;}
+  }
+  @media (max-width:560px){
+    .xb-extreme .xb-stats{grid-template-columns:repeat(2,1fr);}
+    .xb-extreme .xb-flow{grid-template-columns:1fr;}
+    .xb-extreme .xb-node::after{content:"↓";right:auto;left:50%;top:auto;bottom:-.85rem;transform:translateX(-50%);}
+    .xb-extreme .xb-cta-inner{flex-direction:column;align-items:flex-start;}
+  }
+  /* motion-safe */
+  @media (prefers-reduced-motion:reduce){
+    .xb-extreme .xb-reveal{opacity:1;transform:none;transition:none;}
+    .xb-extreme .xb-canvas{display:none;}
+    .xb-extreme *{animation:none!important;}
+  }
+  </style>
+
+  <script>
+  /* EXTREME BUILD — scoped, dependency-free behaviour. IIFE + idempotent guard. */
+  (function(){
+    var root = document.getElementById('xb-extreme-build');
+    if(!root || root.dataset.xbReady) return;
+    root.dataset.xbReady = '1';
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+    var $  = function(s,c){return (c||root).querySelector(s);};
+    var $$ = function(s,c){return Array.prototype.slice.call((c||root).querySelectorAll(s));};
+
+    /* ---- reveal on scroll ---- */
+    if('IntersectionObserver' in window){
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('is-in'); io.unobserve(e.target);} });
+      },{threshold:.15});
+      $$('.xb-reveal,.xb-meter,.xb-checks li').forEach(function(el){ io.observe(el); });
+    } else {
+      $$('.xb-reveal,.xb-meter,.xb-checks li').forEach(function(el){ el.classList.add('is-in'); });
+    }
+
+    /* ---- meters: set fill width from data attr ---- */
+    $$('.xb-meter').forEach(function(m){ m.style.setProperty('--xb-fill',(m.getAttribute('data-xb-meter')||0)+'%'); });
+
+    /* ---- count-up stats ---- */
+    function countUp(el){
+      var target = parseFloat(el.getAttribute('data-xb-count'))||0;
+      var suffix = el.getAttribute('data-xb-suffix')||'';
+      if(reduce){ el.textContent = target+suffix; return; }
+      var dur=1200, start=performance.now();
+      (function tick(now){
+        var p=Math.min((now-start)/dur,1), val=Math.round(target*(1-Math.pow(1-p,3)));
+        el.textContent = val+suffix;
+        if(p<1) requestAnimationFrame(tick);
+      })(start);
+    }
+    if('IntersectionObserver' in window){
+      var io2=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){countUp(e.target);io2.unobserve(e.target);}});},{threshold:.6});
+      $$('[data-xb-count]').forEach(function(el){io2.observe(el);});
+    } else { $$('[data-xb-count]').forEach(countUp); }
+
+    /* ---- typewriter command ---- */
+    var typeEl = $('[data-xb-type]');
+    if(typeEl){
+      var phrases=['build extreme-build --scope=page --plugins=0','generate hero motion cockpit','publish via wp-rest --review=human'];
+      if(reduce){ typeEl.textContent=phrases[0]; }
+      else{
+        var pi=0,ci=0,del=false;
+        (function type(){
+          var txt=phrases[pi];
+          typeEl.textContent = del ? txt.slice(0,ci--) : txt.slice(0,ci++);
+          var wait=del?40:70;
+          if(!del && ci>txt.length){ del=true; wait=1500; }
+          else if(del && ci<0){ del=false; ci=0; pi=(pi+1)%phrases.length; wait=400; }
+          setTimeout(type,wait);
+        })();
+      }
+    }
+
+    /* ---- tabs ---- */
+    var tabs=$$('.xb-tab'), panels=$$('.xb-panel');
+    function activate(name,focus){
+      tabs.forEach(function(t){
+        var on=t.getAttribute('data-xb-tab')===name;
+        t.classList.toggle('is-active',on); t.setAttribute('aria-selected',on?'true':'false'); t.tabIndex=on?0:-1;
+        if(on&&focus) t.focus();
+      });
+      panels.forEach(function(p){
+        var on=p.getAttribute('data-xb-panel')===name;
+        p.hidden=!on; p.classList.toggle('is-active',on);
+      });
+    }
+    tabs.forEach(function(t,i){
+      t.addEventListener('click',function(){ activate(t.getAttribute('data-xb-tab')); });
+      t.addEventListener('keydown',function(e){
+        if(e.key==='ArrowRight'||e.key==='ArrowLeft'){
+          e.preventDefault();
+          var dir=e.key==='ArrowRight'?1:-1, n=(i+dir+tabs.length)%tabs.length;
+          activate(tabs[n].getAttribute('data-xb-tab'),true);
+        }
+      });
+    });
+
+    /* ---- cursor glow (fine pointers only) ---- */
+    var glow=$('.xb-cursor-glow');
+    if(glow && !reduce && window.matchMedia && window.matchMedia('(pointer:fine)').matches){
+      root.addEventListener('pointermove',function(e){
+        var r=root.getBoundingClientRect();
+        glow.style.transform='translate('+(e.clientX-r.left-210)+'px,'+(e.clientY-r.top-210)+'px)';
+        glow.style.opacity='1';
+      });
+      root.addEventListener('pointerleave',function(){ glow.style.opacity='0'; });
+    }
+
+    /* ---- cockpit: render ring + rotating mini-log ---- */
+    var ring=$('.xb-ring-fg'), ringLabel=$('[data-xb-ring]'), miniLog=$('[data-xb-minilog]');
+    var steps=[
+      {t:'00:01',m:'prompt parsed',d:18},
+      {t:'00:05',m:'layout planned',d:34},
+      {t:'00:09',m:'styles scoped',d:52},
+      {t:'00:14',m:'motion compiled',d:71},
+      {t:'00:19',m:'mobile verified',d:88},
+      {t:'00:24',m:'published via REST',d:100}
+    ];
+    if(ring && miniLog){
+      var C=327, idx=0;
+      function pushLog(s){
+        var li=document.createElement('li'); li.innerHTML='<b>['+s.t+']</b> '+s.m;
+        miniLog.appendChild(li); requestAnimationFrame(function(){ li.classList.add('is-in'); });
+        while(miniLog.children.length>3) miniLog.removeChild(miniLog.firstChild);
+      }
+      function step(){
+        var s=steps[idx];
+        ring.style.strokeDashoffset = C - C*(s.d/100);
+        if(ringLabel) ringLabel.textContent = s.d+'%';
+        pushLog(s);
+        idx=(idx+1)%steps.length;
+        if(idx===0 && ring) { /* brief reset pause handled by interval */ }
+      }
+      step();
+      if(!reduce) var ci=setInterval(step,2200);
+      document.addEventListener('visibilitychange',function(){
+        if(document.hidden){ if(ci) clearInterval(ci); }
+      });
+    }
+
+    /* ---- telemetry feed (build log) ---- */
+    var feed=$('[data-xb-feed]');
+    if(feed){
+      var feedSteps=[
+        ['00:01','Prompt + constraints received','OK'],
+        ['00:03','Page structure mapped','OK'],
+        ['00:07','Scoped CSS system generated','OK'],
+        ['00:11','Motion + reveal layer wired','OK'],
+        ['00:15','Responsive grid verified','OK'],
+        ['00:18','REST payload prepared','OK'],
+        ['00:21','Human review checkpoint','OK'],
+        ['00:24','Published to WordPress','LIVE']
+      ];
+      feed.innerHTML='';
+      feedSteps.forEach(function(s){
+        var li=document.createElement('li');
+        li.innerHTML='<span class="t">['+s[0]+']</span><span>'+s[1]+'</span><span class="ok">'+s[2]+'</span>';
+        feed.appendChild(li);
+      });
+      var items=$$('li',feed);
+      if(reduce){ items.forEach(function(li){li.classList.add('is-in');}); }
+      else{
+        var fi=0;
+        function reveal(){
+          if(fi<items.length){ items[fi].classList.add('is-in'); fi++; setTimeout(reveal,260); }
+          else{ // loop the active highlight
+            var k=0;
+            setInterval(function(){
+              items.forEach(function(li){li.classList.remove('is-active');});
+              items[k].classList.add('is-active'); k=(k+1)%items.length;
+            },900);
+          }
+        }
+        // start feed only when its panel is first shown
+        var telPanel=$('[data-xb-panel="tel"]');
+        var seen=false;
+        var startFeed=function(){ if(!seen && !telPanel.hidden){ seen=true; reveal(); } };
+        $('[data-xb-tab="tel"]').addEventListener('click',function(){ setTimeout(startFeed,50); });
+      }
+    }
+  })();
+  </script>
+</div>
+<!-- =========================  PASTE TO HERE  ========================= -->
+
+</body>
+</html>
