@@ -1,20 +1,18 @@
-name: Deploy Rustwood Studio
+name: Deploy Extreme Hub
 
-# Builds the static site and uploads it to the StartCP host over FTP.
-# Triggers on any push that touches the site, plus a manual "Run workflow" button.
+# Builds Aaron's Extreme Hub and uploads it to the StartCP host over FTP.
 on:
   push:
     branches:
       - main
       - claude/new-server-website-build-oxgwlt
     paths:
-      - "rustwoodstudio/**"
-      - ".github/workflows/deploy-rustwood.yml"
+      - "extremehub/**"
+      - ".github/workflows/deploy-extremehub.yml"
   workflow_dispatch:
 
-# Avoid overlapping deploys clobbering each other.
 concurrency:
-  group: deploy-rustwood
+  group: deploy-extremehub
   cancel-in-progress: true
 
 jobs:
@@ -22,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: rustwoodstudio
+        working-directory: extremehub
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -32,7 +30,7 @@ jobs:
         with:
           node-version: 22
           cache: npm
-          cache-dependency-path: rustwoodstudio/package-lock.json
+          cache-dependency-path: extremehub/package-lock.json
 
       - name: Install dependencies
         run: npm ci
@@ -46,17 +44,11 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          # Plain FTP by default (StartCP). Set the FTP_PROTOCOL secret to
-          # "ftps" if your host supports it — it encrypts the connection.
           protocol: ${{ secrets.FTP_PROTOCOL || 'ftp' }}
           port: ${{ secrets.FTP_PORT || '21' }}
-          # Trailing slashes are required by the action.
           local-dir: ./dist/
-          # The host's web root for rustwoodstudio.au, e.g. ./public_html/ —
-          # set this in the FTP_SERVER_DIR secret.
-          server-dir: ${{ secrets.FTP_SERVER_DIR }}
-          # Keeps a manifest on the server so only changed files upload.
-          # Don't wipe files we didn't create.
+          # Web root on the host; override with the FTP_SERVER_DIR secret.
+          server-dir: ${{ secrets.FTP_SERVER_DIR || './public_html/' }}
           dangerous-clean-slate: false
           exclude: |
             **/.git*
