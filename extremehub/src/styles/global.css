@@ -39,6 +39,18 @@
   --transition: 200ms ease;
 }
 
+/* Alternate neon palettes — swapping the three accent tokens re-skins the
+   entire site (buttons, shader, game, trail) from one place. */
+[data-theme="ember"] {
+  --cyan: #ffc24e; --violet: #ff6a3d; --magenta: #ff3e6e;
+}
+[data-theme="vapor"] {
+  --cyan: #59e0ff; --violet: #b16cff; --magenta: #ff6ad5;
+}
+[data-theme="matrix"] {
+  --cyan: #36f08a; --violet: #1fb86b; --magenta: #b6ff4e;
+}
+
 * , *::before, *::after { box-sizing: border-box; }
 
 html { scroll-behavior: smooth; }

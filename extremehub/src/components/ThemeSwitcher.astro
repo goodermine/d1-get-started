@@ -1,0 +1,65 @@
+---
+// Neon palette switcher. Sets data-theme on <html>; persists in localStorage.
+const themes = [
+  { id: "cyber", label: "Cyber", dot: "#41ead4" },
+  { id: "ember", label: "Ember", dot: "#ff6a3d" },
+  { id: "vapor", label: "Vapor", dot: "#ff6ad5" },
+  { id: "matrix", label: "Matrix", dot: "#36f08a" },
+];
+---
+<div class="theme-switch" role="group" aria-label="Colour theme">
+  {themes.map((t) => (
+    <button class="swatch" data-theme-id={t.id} title={t.label} aria-label={t.label} style={`--dot:${t.dot}`}></button>
+  ))}
+</div>
+
+<script>
+  const root = document.documentElement;
+  const saved = localStorage.getItem("eh-theme");
+  if (saved && saved !== "cyber") root.setAttribute("data-theme", saved);
+  const sync = () => {
+    const cur = root.getAttribute("data-theme") || "cyber";
+    document.querySelectorAll(".swatch").forEach((b) => {
+      const el = b as HTMLElement;
+      el.classList.toggle("active", el.dataset.themeId === cur);
+    });
+  };
+  document.querySelectorAll(".swatch").forEach((b) => {
+    b.addEventListener("click", () => {
+      const id = (b as HTMLElement).dataset.themeId!;
+      if (id === "cyber") root.removeAttribute("data-theme");
+      else root.setAttribute("data-theme", id);
+      localStorage.setItem("eh-theme", id);
+      sync();
+    });
+  });
+  sync();
+</script>
+
+<style>
+  .theme-switch {
+    position: fixed;
+    right: 14px;
+    bottom: 14px;
+    z-index: 40;
+    display: flex;
+    gap: 7px;
+    padding: 7px 9px;
+    background: color-mix(in srgb, var(--surface) 85%, transparent);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    backdrop-filter: blur(8px);
+  }
+  .swatch {
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    background: var(--dot);
+    cursor: pointer;
+    padding: 0;
+    transition: transform 150ms ease, border-color 150ms ease;
+  }
+  .swatch:hover { transform: scale(1.18); }
+  .swatch.active { border-color: var(--text); transform: scale(1.12); }
+  @media (max-width: 560px) { .theme-switch { bottom: 10px; right: 10px; } }
+</style>
