@@ -1,0 +1,102 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHeader from "../components/PageHeader.astro";
+import { site } from "../data/site.ts";
+
+const uses = [
+  { h: "Personal gifts", p: "Anniversaries, birthdays, and the moments that deserve more than a card." },
+  { h: "Tribute songs", p: "For the people and stories worth keeping." },
+  { h: "Event songs", p: "Weddings, milestones, send-offs — written for the room." },
+  { h: "Creative projects", p: "Songs as part of something bigger you're making." },
+  { h: "Performance pieces", p: "Material shaped for your voice and your set." },
+  { h: "Story-based songwriting", p: "Your story, structured and set to music." },
+];
+const process = [
+  { n: "01", h: "Creative brief", p: "We talk through the story, the moment, and what the song needs to do." },
+  { n: "02", h: "Shaping", p: "Lyrics and structure drafted, shared, and refined with you — not at you." },
+  { n: "03", h: "Finishing", p: "The song is completed and delivered in the form that suits the occasion." },
+];
+---
+
+<BaseLayout
+  title="Custom Songs"
+  description="Turn your story into a finished song. Custom songs by Rustwood Studio — personal gifts, tributes, events, and creative projects, written and shaped with care."
+>
+  <PageHeader
+    eyebrow="Creative Work"
+    title="Turn your story into a finished song."
+    lead="Personal stories, tributes, ideas, and moments — turned into custom songs, written and shaped with care, not pumped out like a template."
+  />
+
+  <section class="section">
+    <div class="container">
+      <h2>What people use this for</h2>
+      <div class="uses">
+        {uses.map((u) => (
+          <div class="card use">
+            <h3>{u.h}</h3>
+            <p class="muted">{u.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section process-s">
+    <div class="container">
+      <h2>How it works</h2>
+      <div class="process">
+        {process.map((p) => (
+          <div class="card step">
+            <span class="step-n">{p.n}</span>
+            <h3>{p.h}</h3>
+            <p class="muted">{p.p}</p>
+          </div>
+        ))}
+      </div>
+      <p class="muted hand">
+        Creative work with a human hand. You're involved at every stage, and
+        nothing ships until it sounds like it was made for you — because it was.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container cta-block card">
+      <span class="eyebrow">Start Here</span>
+      <h2>Tell me about the song.</h2>
+      <p class="muted">
+        A few lines about the story, the occasion, and the person it's for is
+        plenty to start.
+      </p>
+      <a
+        href={`mailto:${site.email}?subject=${encodeURIComponent("Creative Brief — Custom Song")}`}
+        class="btn btn-primary"
+      >
+        Book a Creative Brief
+      </a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .uses, .process {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+    gap: var(--space-4);
+    margin-top: var(--space-4);
+  }
+  .uses h3, .process h3 { font-size: var(--fs-lg); }
+  .uses p, .process p { margin: 0; font-size: var(--fs-sm); }
+  .process-s { background: var(--color-bg-2); border-block: 1px solid var(--color-border); }
+  .step-n {
+    font-family: var(--font-heading);
+    font-size: var(--fs-xl);
+    color: var(--color-copper);
+    display: block;
+    margin-bottom: var(--space-2);
+  }
+  .hand { margin-top: var(--space-4); max-width: 40rem; font-size: var(--fs-sm); }
+  .cta-block { text-align: center; max-width: 40rem; margin-inline: auto; }
+  .cta-block .btn { margin-top: var(--space-3); }
+</style>

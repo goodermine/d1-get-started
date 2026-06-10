@@ -1,0 +1,335 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import VoxPanel from "../components/VoxPanel.astro";
+import EmailCapture from "../components/EmailCapture.astro";
+import { site } from "../data/site.ts";
+
+const studioHomes = [
+  "Singing Fundamentals",
+  "VOX vocal analysis tools",
+  "Vocal confidence resources",
+  "Custom song creation",
+  "Creative performance coaching",
+  "Future Rustwood tools & training",
+];
+const steps = [
+  { n: "01", h: "Learn the foundations", p: "Start with the Singing Fundamentals book — clear explanations and usable exercises." },
+  { n: "02", h: "Test your voice", p: "Use VOX to analyse a recording and get practical, evidence-based feedback." },
+  { n: "03", h: "Practise with direction", p: "Work the suggested focus areas and drills instead of guessing." },
+  { n: "04", h: "Go deeper", p: "Book coaching, request a custom song, or use advanced Rustwood tools." },
+];
+const songUses = [
+  "Personal gifts",
+  "Tribute songs",
+  "Event songs",
+  "Creative projects",
+  "Performance pieces",
+  "Story-based songwriting",
+];
+const coachingAreas = [
+  "Vocal confidence",
+  "Performance nerves",
+  "Singing fundamentals",
+  "Microphone technique",
+  "Stage confidence",
+  "Creative performance",
+  "AI-assisted practice systems",
+];
+---
+
+<BaseLayout>
+  <!-- 1 · HERO -->
+  <section class="hero">
+    <div class="container hero-inner">
+      <span class="eyebrow">Rustwood Studio — {site.tagline}</span>
+      <h1>Turn your voice, story, and tools into something finished.</h1>
+      <p class="hero-sub">
+        Rustwood Studio brings together voice training, vocal analysis, creative
+        song work, and practical AI tools — all built around one idea:
+        <em>capability is forged through practice, feedback, and the right systems.</em>
+      </p>
+      <div class="hero-cta">
+        <a href="/vox/" class="btn btn-primary">Explore VOX</a>
+        <a href="/singing-fundamentals/" class="btn btn-ghost">Get the Book</a>
+        <a href={site.appUrl} class="login-link">Client Login →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 · WHAT RUSTWOOD STUDIO IS -->
+  <section class="section what">
+    <div class="container what-grid">
+      <div>
+        <span class="eyebrow">The Studio</span>
+        <h2>Where voice, performance, story, and technology meet.</h2>
+        <p class="muted">
+          Not a music school. Not an AI gimmick. A practical studio for
+          building real-world capability.
+        </p>
+      </div>
+      <ul class="what-list">
+        {studioHomes.map((item) => <li>{item}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <!-- 3 · SINGING FUNDAMENTALS -->
+  <section class="section book">
+    <div class="container book-grid">
+      <div class="book-cover" aria-hidden="true">
+        <div class="cover-art">
+          <span class="cover-title">Singing<br />Fundamentals</span>
+          <span class="cover-author">Aaron Ellis</span>
+        </div>
+      </div>
+      <div>
+        <span class="eyebrow">The Book</span>
+        <h2>Singing Fundamentals</h2>
+        <p>
+          A practical guide for singers who want to understand their voice
+          properly — from beginner foundations through to more advanced vocal
+          ideas.
+        </p>
+        <p class="muted">
+          Built for people who want clear explanations, usable exercises, and a
+          stronger relationship with their own voice.
+        </p>
+        <div class="cta-row">
+          <a href="/singing-fundamentals/" class="btn btn-primary">Get Singing Fundamentals</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 · VOX -->
+  <section class="section vox" id="vox">
+    <div class="container">
+      <div class="vox-intro">
+        <span class="eyebrow">The Tool</span>
+        <h2>VOX — practical vocal feedback, with evidence.</h2>
+        <p class="muted">
+          Upload or record a take, review useful vocal metrics, and get
+          coaching-style guidance on what to practise next. Clearer evidence,
+          less guesswork.
+        </p>
+      </div>
+      <VoxPanel />
+      <div class="vox-cta">
+        <a href={site.appUrl} class="btn btn-primary">Open VOX</a>
+        <a href="/vox/" class="btn btn-ghost">How VOX works</a>
+        <span class="muted vox-note">Private tool access may require login.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 · HOW IT WORKS -->
+  <section class="section how">
+    <div class="container">
+      <span class="eyebrow">The Path</span>
+      <h2>How it works</h2>
+      <div class="steps">
+        {steps.map((s) => (
+          <div class="card step">
+            <span class="step-n">{s.n}</span>
+            <h3>{s.h}</h3>
+            <p class="muted">{s.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 · CUSTOM SONGS -->
+  <section class="section songs">
+    <div class="container songs-grid">
+      <div>
+        <span class="eyebrow">Creative Work</span>
+        <h2>Turn your story into a finished song.</h2>
+        <p class="muted">
+          Rustwood Studio can also help turn personal stories, tributes, ideas,
+          and moments into custom songs — written and shaped with care, not
+          pumped out like a template.
+        </p>
+        <a href="/custom-songs/" class="btn btn-primary">Book a Creative Brief</a>
+      </div>
+      <ul class="what-list">
+        {songUses.map((u) => <li>{u}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <!-- 7 · COACHING -->
+  <section class="section coach">
+    <div class="container coach-inner">
+      <span class="eyebrow">Work With Aaron</span>
+      <h2>Voice is not just sound.</h2>
+      <p>
+        Aaron Ellis brings together decades of martial arts, coaching,
+        hypnotherapy, performance, singing, and AI systems work.
+      </p>
+      <p class="muted">
+        Rustwood Studio exists because voice is confidence, body, rhythm,
+        emotion, attention, and practice — and coaching covers all of it:
+      </p>
+      <ul class="coach-areas">
+        {coachingAreas.map((a) => <li>{a}</li>)}
+      </ul>
+      <a href="/coaching/" class="btn btn-ghost">Enquire About Coaching</a>
+    </div>
+  </section>
+
+  <!-- 8 · JOURNAL TEASER -->
+  <section class="section journal-teaser">
+    <div class="container journal-inner">
+      <span class="eyebrow">Rustwood Journal</span>
+      <h2>Notes from the forge.</h2>
+      <p class="muted">Voice, tools, performance, and capability — written as it's built.</p>
+      <a href="/journal/" class="btn btn-ghost">Read the Journal</a>
+    </div>
+  </section>
+
+  <!-- 9 · EMAIL CAPTURE -->
+  <EmailCapture />
+</BaseLayout>
+
+<style>
+  /* HERO */
+  .hero {
+    position: relative;
+    padding-block: var(--space-7);
+    overflow: hidden;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 70% 55% at 50% -10%, color-mix(in srgb, var(--color-copper) 20%, transparent), transparent 70%),
+      radial-gradient(ellipse 40% 35% at 85% 20%, color-mix(in srgb, var(--color-ember) 8%, transparent), transparent 70%);
+    pointer-events: none;
+  }
+  .hero-inner { position: relative; max-width: 54rem; }
+  .hero h1 { margin-bottom: var(--space-4); }
+  .hero-sub {
+    font-size: var(--fs-lg);
+    color: var(--color-muted);
+    max-width: 42rem;
+    margin-bottom: var(--space-5);
+  }
+  .hero-sub em { color: var(--color-text); font-style: italic; }
+  .hero-cta { display: flex; gap: var(--space-3); align-items: center; flex-wrap: wrap; }
+  .login-link { font-size: var(--fs-sm); font-weight: var(--weight-bold); }
+
+  /* WHAT */
+  .what { border-top: 1px solid var(--color-border); background: var(--color-bg-2); }
+  .what-grid, .songs-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: var(--space-6);
+    align-items: center;
+  }
+  .what-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: var(--space-2);
+  }
+  .what-list li {
+    padding: 0.8rem 1.1rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    font-size: var(--fs-sm);
+  }
+  .what-list li::before { content: "◆ "; color: var(--color-copper); font-size: 0.7em; vertical-align: 2px; }
+
+  /* BOOK */
+  .book-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 17rem) 1fr;
+    gap: var(--space-6);
+    align-items: center;
+  }
+  .book-cover { display: flex; justify-content: center; }
+  .cover-art {
+    aspect-ratio: 2 / 3;
+    width: 100%;
+    max-width: 16rem;
+    border-radius: 6px;
+    border: 1px solid color-mix(in srgb, var(--color-copper) 45%, var(--color-border));
+    background:
+      radial-gradient(ellipse at 50% 0%, color-mix(in srgb, var(--color-copper) 30%, transparent), transparent 65%),
+      linear-gradient(165deg, var(--color-surface-2), var(--color-bg-2));
+    box-shadow: var(--shadow), var(--glow);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: var(--space-4);
+    text-align: center;
+  }
+  .cover-title {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    line-height: 1.15;
+    margin-top: var(--space-5);
+    color: var(--color-ember);
+  }
+  .cover-author { font-size: var(--fs-sm); letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-muted); }
+  .cta-row { margin-top: var(--space-4); }
+
+  /* VOX */
+  .vox { background: var(--color-bg-2); border-block: 1px solid var(--color-border); }
+  .vox-intro { max-width: 44rem; margin-bottom: var(--space-5); }
+  .vox-cta { display: flex; gap: var(--space-3); align-items: center; flex-wrap: wrap; margin-top: var(--space-4); }
+  .vox-note { font-size: var(--fs-xs); }
+
+  /* STEPS */
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+    gap: var(--space-4);
+    margin-top: var(--space-4);
+  }
+  .step-n {
+    font-family: var(--font-heading);
+    font-size: var(--fs-xl);
+    color: var(--color-copper);
+    display: block;
+    margin-bottom: var(--space-2);
+  }
+  .step h3 { font-size: var(--fs-lg); }
+  .step p { font-size: var(--fs-sm); margin: 0; }
+
+  /* SONGS */
+  .songs { background: var(--color-bg-2); border-block: 1px solid var(--color-border); }
+  .songs .btn { margin-top: var(--space-3); }
+
+  /* COACHING */
+  .coach-inner { max-width: var(--maxw-prose); }
+  .coach-areas {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin: var(--space-4) 0 var(--space-5);
+  }
+  .coach-areas li {
+    font-size: var(--fs-sm);
+    padding: 0.45em 1em;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    background: var(--color-surface);
+  }
+
+  /* JOURNAL TEASER */
+  .journal-teaser { padding-block: var(--space-6); border-top: 1px solid var(--color-border); }
+  .journal-inner { text-align: center; max-width: 36rem; margin-inline: auto; }
+  .journal-inner .btn { margin-top: var(--space-2); }
+
+  @media (max-width: 820px) {
+    .what-grid, .songs-grid, .book-grid { grid-template-columns: 1fr; gap: var(--space-5); }
+    .book-cover { justify-content: flex-start; }
+  }
+</style>

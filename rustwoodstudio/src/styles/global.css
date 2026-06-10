@@ -1,0 +1,149 @@
+/* Base element styling — built entirely on the tokens. */
+@import "@fontsource-variable/fraunces";
+@import "@fontsource-variable/inter";
+@import "./tokens.css";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: var(--fs-base);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  position: relative;
+}
+
+/* Subtle grain over the whole site — part of the forge feel */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-heading);
+  font-weight: 580;
+  font-variation-settings: "SOFT" 40, "WONK" 0, "opsz" 60;
+  line-height: 1.07;
+  letter-spacing: 0.005em;
+  margin: 0 0 var(--space-3);
+}
+
+h1 { font-size: var(--fs-3xl); }
+h2 { font-size: var(--fs-2xl); }
+h3 { font-size: var(--fs-xl); }
+
+p { margin: 0 0 var(--space-3); }
+
+a {
+  color: var(--color-ember);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+a:hover { color: var(--color-copper); }
+
+img { max-width: 100%; height: auto; display: block; }
+
+/* Layout helpers */
+.container {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: var(--space-4);
+}
+
+.section { padding-block: var(--space-7); }
+
+.eyebrow {
+  display: block;
+  text-transform: uppercase;
+  letter-spacing: 0.26em;
+  font-size: var(--fs-xs);
+  font-weight: var(--weight-bold);
+  color: var(--color-copper);
+  margin-bottom: var(--space-3);
+}
+
+.muted { color: var(--color-muted); }
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  font-family: var(--font-body);
+  font-weight: var(--weight-bold);
+  font-size: var(--fs-sm);
+  letter-spacing: 0.02em;
+  padding: 0.85em 1.6em;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all var(--transition);
+  white-space: nowrap;
+}
+.btn-primary {
+  background: linear-gradient(135deg, var(--color-ember), var(--color-copper));
+  color: var(--color-on-copper);
+  box-shadow: 0 4px 24px color-mix(in srgb, var(--color-copper) 35%, transparent);
+}
+.btn-primary:hover {
+  filter: brightness(1.08);
+  color: var(--color-on-copper);
+  transform: translateY(-1px);
+}
+.btn-ghost {
+  background: transparent;
+  border-color: var(--color-border);
+  color: var(--color-text);
+}
+.btn-ghost:hover { border-color: var(--color-copper); color: var(--color-ember); }
+
+/* Cards */
+.card {
+  background: linear-gradient(180deg, var(--color-surface-2), var(--color-surface));
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: var(--space-5);
+  transition: border-color var(--transition), transform var(--transition);
+}
+.card:hover { border-color: color-mix(in srgb, var(--color-copper) 55%, var(--color-border)); }
+
+/* Light SaaS panel (VOX) */
+.panel {
+  background: var(--panel-bg);
+  color: var(--panel-text);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius);
+}
+.panel .muted { color: var(--panel-muted); }
+
+/* Accessibility */
+:focus-visible {
+  outline: 2px solid var(--color-copper);
+  outline-offset: 3px;
+}
+.visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0);
+  white-space: nowrap; border: 0;
+}

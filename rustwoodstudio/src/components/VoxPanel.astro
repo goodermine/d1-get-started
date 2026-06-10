@@ -1,0 +1,114 @@
+---
+// VOX dashboard mockup — the "clean SaaS panel inside the dark site".
+// All numbers are illustrative; honest framing lives in the surrounding copy.
+const bars = [
+  34, 52, 68, 45, 76, 88, 64, 50, 72, 90, 66, 42, 58, 80, 70, 48, 62, 84, 56,
+  38, 60, 74, 86, 54, 44, 67, 79, 59, 47, 71,
+];
+const metrics = [
+  { label: "Vocal energy", value: "Steady", note: "consistent across take" },
+  { label: "Peak level", value: "−3.2 dB", note: "no clipping detected" },
+  { label: "Dynamics", value: "Moderate", note: "broad range used" },
+  { label: "Phrase consistency", value: "Good", note: "phrases 3 & 7 drift" },
+  { label: "Pitch centre", value: "≈ A3", note: "approximate" },
+  { label: "Tracking confidence", value: "92%", note: "clean signal" },
+];
+---
+
+<div class="panel vox-panel" role="img" aria-label="Illustration of the VOX analysis dashboard">
+  <div class="vox-head">
+    <span class="vox-brand">VOX <span class="muted">· take 04 — analysis</span></span>
+    <span class="vox-chip">Upload · Analyse · Improve</span>
+  </div>
+
+  <div class="vox-wave" aria-hidden="true">
+    {bars.map((h) => <span style={`--h:${h}%`}></span>)}
+  </div>
+
+  <div class="vox-metrics">
+    {metrics.map((m) => (
+      <div class="vox-metric">
+        <span class="m-label muted">{m.label}</span>
+        <span class="m-value">{m.value}</span>
+        <span class="m-note muted">{m.note}</span>
+      </div>
+    ))}
+  </div>
+
+  <div class="vox-coach">
+    <strong>Practice focus:</strong>
+    <span class="muted">
+      hold phrase endings through bars 3 and 7 — energy dips before the line
+      finishes.
+    </span>
+  </div>
+</div>
+
+<style>
+  .vox-panel {
+    padding: var(--space-4);
+    box-shadow: var(--shadow), var(--glow);
+  }
+  .vox-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+    margin-bottom: var(--space-3);
+  }
+  .vox-brand { font-weight: 700; letter-spacing: 0.04em; }
+  .vox-chip {
+    font-size: var(--fs-xs);
+    font-weight: var(--weight-bold);
+    color: var(--color-copper);
+    background: color-mix(in srgb, var(--color-copper) 12%, transparent);
+    border: 1px solid color-mix(in srgb, var(--color-copper) 35%, transparent);
+    padding: 0.3em 0.8em;
+    border-radius: 999px;
+  }
+  .vox-wave {
+    display: flex;
+    align-items: flex-end;
+    gap: 3px;
+    height: 74px;
+    padding: var(--space-2);
+    background: color-mix(in srgb, var(--panel-border) 35%, var(--panel-bg));
+    border: 1px solid var(--panel-border);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+  }
+  .vox-wave span {
+    flex: 1;
+    height: var(--h);
+    min-width: 3px;
+    border-radius: 2px 2px 0 0;
+    background: linear-gradient(180deg, var(--color-ember), var(--color-copper));
+  }
+  .vox-metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 9.5rem), 1fr));
+    gap: var(--space-2);
+    margin-top: var(--space-3);
+  }
+  .vox-metric {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    padding: 0.7rem 0.9rem;
+    background: var(--panel-bg);
+    border: 1px solid var(--panel-border);
+    border-radius: var(--radius-sm);
+  }
+  .m-label { font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: 0.08em; }
+  .m-value { font-weight: 700; font-size: var(--fs-lg); }
+  .m-note { font-size: var(--fs-xs); }
+  .vox-coach {
+    margin-top: var(--space-3);
+    padding: 0.85rem 1rem;
+    font-size: var(--fs-sm);
+    background: var(--panel-bg);
+    border: 1px dashed color-mix(in srgb, var(--color-copper) 50%, var(--panel-border));
+    border-radius: var(--radius-sm);
+  }
+</style>

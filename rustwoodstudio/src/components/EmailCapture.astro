@@ -1,0 +1,66 @@
+---
+// Email capture — currently opens a pre-filled email until the newsletter
+// platform (e.g. Mailchimp) is wired in. Swap the form action then.
+import { site } from "../data/site.ts";
+---
+
+<section class="section capture" id="rustwood-weekly">
+  <div class="container capture-inner">
+    <span class="eyebrow">Rustwood Weekly</span>
+    <h2>Notes from the forge, to your inbox.</h2>
+    <p class="muted">
+      Practical notes on voice, confidence, creative tools, and Rustwood
+      updates. No hype, no flooding your inbox.
+    </p>
+    <form class="capture-form" id="capture-form">
+      <label class="visually-hidden" for="capture-email">Email address</label>
+      <input
+        id="capture-email"
+        type="email"
+        required
+        placeholder="you@example.com"
+        autocomplete="email"
+      />
+      <button type="submit" class="btn btn-primary">Join Rustwood Weekly</button>
+    </form>
+    <p class="fineprint muted">Unsubscribe any time. Your email is never shared.</p>
+  </div>
+</section>
+
+<script define:vars={{ email: site.email }}>
+  // Until the newsletter platform is connected, hand off to a pre-filled email.
+  document.getElementById("capture-form")?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const v = document.getElementById("capture-email").value;
+    location.href = `mailto:${email}?subject=${encodeURIComponent("Join Rustwood Weekly")}&body=${encodeURIComponent(`Please add me to Rustwood Weekly: ${v}`)}`;
+  });
+</script>
+
+<style>
+  .capture {
+    background:
+      radial-gradient(ellipse at 50% 120%, color-mix(in srgb, var(--color-copper) 16%, transparent), transparent 60%),
+      var(--color-bg-2);
+    border-block: 1px solid var(--color-border);
+  }
+  .capture-inner { max-width: 40rem; margin-inline: auto; text-align: center; }
+  .capture-form {
+    display: flex;
+    gap: var(--space-2);
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: var(--space-4);
+  }
+  .capture-form input {
+    flex: 1 1 16rem;
+    padding: 0.85em 1.1em;
+    font: inherit;
+    font-size: var(--fs-sm);
+    color: var(--color-text);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+  }
+  .capture-form input:focus { border-color: var(--color-copper); outline: none; }
+  .fineprint { font-size: var(--fs-xs); margin-top: var(--space-3); }
+</style>

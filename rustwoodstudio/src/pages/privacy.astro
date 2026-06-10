@@ -1,0 +1,40 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHeader from "../components/PageHeader.astro";
+import { site } from "../data/site.ts";
+---
+
+<BaseLayout title="Privacy Policy" description="Rustwood Studio privacy policy.">
+  <PageHeader eyebrow="Legal" title="Privacy Policy" />
+  <section class="section">
+    <div class="container prose">
+      <p>
+        Rustwood Studio keeps things simple: we collect as little as possible
+        and share nothing.
+      </p>
+      <ul>
+        <li>
+          <strong>Email:</strong> if you join Rustwood Weekly or contact us, your
+          email is used only to reply or to send the newsletter you asked for.
+          It is never sold or shared.
+        </li>
+        <li>
+          <strong>Analytics:</strong> this site does not use invasive tracking.
+        </li>
+        <li>
+          <strong>Client tools:</strong> the private app area at
+          app.rustwoodstudio.au has its own access controls; recordings you
+          analyse there are yours.
+        </li>
+      </ul>
+      <p class="muted">
+        Questions? <a href={`mailto:${site.email}`}>{site.email}</a>
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .prose { max-width: var(--maxw-prose); }
+  .prose li { margin-bottom: var(--space-2); }
+</style>

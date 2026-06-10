@@ -1,0 +1,52 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("journal", ({ data }) => !data.draft);
+  return posts.map((post) => ({ params: { id: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const fmt = (d: Date) =>
+  d.toLocaleDateString("en-AU", { day: "numeric", month: "long", year: "numeric" });
+---
+
+<BaseLayout title={post.data.title} description={post.data.description}>
+  <article class="section">
+    <div class="container article">
+      <header>
+        <div class="post-meta">
+          {post.data.tag && <span class="tag">{post.data.tag}</span>}
+          <span class="muted">{fmt(post.data.pubDate)}</span>
+        </div>
+        <h1>{post.data.title}</h1>
+        <p class="lead muted">{post.data.description}</p>
+      </header>
+      <div class="prose">
+        <Content />
+      </div>
+      <footer class="article-foot">
+        <a href="/journal/" class="btn btn-ghost">← All Journal entries</a>
+      </footer>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .article { max-width: var(--maxw-prose); }
+  .post-meta { display: flex; gap: var(--space-3); align-items: center; margin-bottom: var(--space-3); }
+  .tag {
+    font-size: var(--fs-xs);
+    font-weight: var(--weight-bold);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-copper);
+  }
+  .lead { font-size: var(--fs-lg); border-bottom: 1px solid var(--color-border); padding-bottom: var(--space-4); }
+  .prose :global(h2) { font-size: var(--fs-xl); margin-top: var(--space-5); }
+  .prose :global(li) { margin-bottom: 0.4rem; }
+  .prose :global(strong) { color: var(--color-ember); }
+  .article-foot { margin-top: var(--space-6); }
+</style>
