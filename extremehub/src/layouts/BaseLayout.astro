@@ -19,6 +19,8 @@ const {
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/icon-192.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
     <meta name="theme-color" content="#06070c" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
@@ -49,6 +51,13 @@ const {
           else io.observe(el);
         });
       })();
+
+      // Register the service worker for offline / installability.
+      if ("serviceWorker" in navigator) {
+        addEventListener("load", function () {
+          navigator.serviceWorker.register("/sw.js").catch(function () {});
+        });
+      }
     </script>
   </body>
 </html>

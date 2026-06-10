@@ -12,6 +12,10 @@
     <button type="submit" class="btn btn-primary">Make wonder</button>
   </form>
   <canvas id="wonder-canvas" aria-label="Your word, rendered as animated particles"></canvas>
+  <div class="wonder-actions">
+    <button id="wonder-download" class="btn btn-ghost" type="button">⬇ Download</button>
+    <button id="wonder-share" class="btn btn-ghost" type="button" hidden>⤴ Share</button>
+  </div>
   <p class="hint muted">Every particle finds its place. That's the whole philosophy.</p>
 </div>
 
@@ -25,6 +29,7 @@
   type P = { x: number; y: number; tx: number; ty: number; vx: number; vy: number; c: string };
   let parts: P[] = [];
   let raf = 0;
+  let currentWord = "WONDER";
   const COLORS = ["#41ead4", "#8b5cf6", "#ff3ec8", "#ffc24e", "#e9edf9"];
 
   function fit() {
@@ -54,6 +59,7 @@
   }
 
   function ignite(word: string) {
+    currentWord = word;
     cancelAnimationFrame(raf);
     fit();
     const pts = targetsFor(word);
@@ -117,6 +123,47 @@
     },
     { threshold: 0.4 }
   ).observe(canvas);
+
+  // ---- Share / download your wonder (a branded PNG) ----
+  function composeImage(): Promise<Blob | null> {
+    const out = document.createElement("canvas");
+    out.width = canvas.width;
+    out.height = canvas.height + 64;
+    const o = out.getContext("2d")!;
+    o.fillStyle = "#06070c";
+    o.fillRect(0, 0, out.width, out.height);
+    o.drawImage(canvas, 0, 0);
+    o.fillStyle = "#41ead4";
+    o.font = "700 22px 'Space Grotesk Variable', system-ui, sans-serif";
+    o.textAlign = "left";
+    o.fillText("AARON'S EXTREME HUB", 20, canvas.height + 28);
+    o.fillStyle = "#8d95ad";
+    o.font = "400 16px 'Space Grotesk Variable', system-ui, sans-serif";
+    o.fillText("where words become wonder", 20, canvas.height + 50);
+    return new Promise((res) => out.toBlob(res, "image/png"));
+  }
+  const dlBtn = document.getElementById("wonder-download") as HTMLButtonElement;
+  const shBtn = document.getElementById("wonder-share") as HTMLButtonElement;
+  dlBtn?.addEventListener("click", async () => {
+    const blob = await composeImage();
+    if (!blob) return;
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = `wonder-${currentWord.toLowerCase()}.png`;
+    a.click();
+    URL.revokeObjectURL(a.href);
+  });
+  if (navigator.canShare && navigator.canShare({ files: [new File([], "x.png")] })) {
+    shBtn.hidden = false;
+    shBtn.addEventListener("click", async () => {
+      const blob = await composeImage();
+      if (!blob) return;
+      const file = new File([blob], `wonder-${currentWord.toLowerCase()}.png`, { type: "image/png" });
+      try {
+        await navigator.share({ files: [file], title: "Aaron's Extreme Hub", text: `${currentWord} — made wonder.` });
+      } catch {}
+    });
+  }
 </script>
 
 <style>
@@ -147,5 +194,7 @@
     background: var(--bg);
     border: 1px solid var(--border);
   }
+  .wonder-actions { display: flex; gap: var(--space-2); justify-content: center; margin-top: var(--space-3); }
+  .wonder-actions .btn { padding: 0.6em 1.1em; }
   .hint { font-size: var(--fs-sm); margin: var(--space-3) 0 0; text-align: center; }
 </style>
