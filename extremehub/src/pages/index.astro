@@ -6,6 +6,7 @@ import ThemeSwitcher from "../components/ThemeSwitcher.astro";
 import KonamiEgg from "../components/KonamiEgg.astro";
 import WordWonder from "../components/WordWonder.astro";
 import Invaders from "../components/Invaders.astro";
+import MiniCabinet from "../components/MiniCabinet.astro";
 
 const proofs = [
   { h: "Hand-built, no bloat", p: "No frameworks shipped to your browser. Every effect on this page is a few kilobytes of hand-written code." },
@@ -85,6 +86,20 @@ const terminal = [
         The invaders are letters. The hi-score is yours to lose.
       </p>
       <Invaders />
+    </div>
+  </section>
+
+  <!-- MINI-CABINET -->
+  <section class="section minicab">
+    <div class="container">
+      <span class="eyebrow">exhibit 02½ — insert another coin</span>
+      <h2>The <span class="neon">Mini-Cabinet</span>.</h2>
+      <p class="muted lead">
+        Three more from-scratch games — Snake, Wordbreaker, Ponger. Each one's
+        code only downloads the moment you pick it, so the page stays as quick
+        as ever.
+      </p>
+      <MiniCabinet />
     </div>
   </section>
 
@@ -209,6 +224,8 @@ const terminal = [
       var(--bg-2);
     border-block: 1px solid var(--border);
   }
+
+  .minicab { border-bottom: 1px solid var(--border); }
 
   /* IMPLEMENTED */
   .impl-grid {

@@ -1,0 +1,101 @@
+---
+const games = [
+  { id: "snake", label: "SNAKE", icon: "🐍", desc: "Eat the letters. Don't eat yourself." },
+  { id: "breakout", label: "WORDBREAKER", icon: "🧱", desc: "Smash the words, brick by brick." },
+  { id: "pong", label: "PONGER", icon: "🏓", desc: "First to 7. Beat the machine." },
+];
+---
+<div class="cabinet mc">
+  <div class="mc-bar">
+    <span class="mc-brand">THE MINI-CABINET</span>
+    <button id="mc-mute" class="mute" aria-label="Toggle sound" title="Toggle sound">🔊</button>
+  </div>
+
+  <div id="mc-menu" class="mc-menu">
+    {games.map((g) => (
+      <button class="mc-card" data-game={g.id} data-label={g.label}>
+        <span class="mc-icon">{g.icon}</span>
+        <span class="mc-title">{g.label}</span>
+        <span class="mc-desc muted">{g.desc}</span>
+        <span class="mc-play">► PLAY</span>
+      </button>
+    ))}
+  </div>
+
+  <div id="mc-stage" class="mc-stage" hidden>
+    <div class="mc-stage-bar">
+      <button id="mc-back" class="mc-back">◄ Cabinet</button>
+      <span id="mc-title" class="mc-now"></span>
+    </div>
+    <canvas id="mc-canvas" width="640" height="420" aria-label="Mini-cabinet game"></canvas>
+    <p class="mc-hint muted">Keyboard or touch · your high scores save on this device</p>
+  </div>
+</div>
+
+<script>
+  const menu = document.getElementById("mc-menu") as HTMLElement;
+  const stage = document.getElementById("mc-stage") as HTMLElement;
+  const canvas = document.getElementById("mc-canvas") as HTMLCanvasElement;
+  const titleEl = document.getElementById("mc-title")!;
+  const backBtn = document.getElementById("mc-back")!;
+  const muteBtn = document.getElementById("mc-mute") as HTMLButtonElement;
+
+  let current: { destroy(): void } | null = null;
+  let audioMod: any = null;
+  const getAudio = async () => (audioMod ||= await import("../scripts/games/audio"));
+
+  muteBtn.textContent = localStorage.getItem("wv-mute") === "1" ? "🔇" : "🔊";
+  muteBtn.addEventListener("click", async () => {
+    const a = await getAudio();
+    const m = !a.isMuted(); a.setMuted(m);
+    muteBtn.textContent = m ? "🔇" : "🔊";
+  });
+
+  async function play(name: string, label: string) {
+    current?.destroy(); current = null;
+    let mod: any;
+    if (name === "snake") mod = await import("../scripts/games/snake");
+    else if (name === "breakout") mod = await import("../scripts/games/breakout");
+    else mod = await import("../scripts/games/pong");
+    (await getAudio()).resume();
+    titleEl.textContent = label;
+    menu.hidden = true; stage.hidden = false;
+    current = mod.createGame(canvas);
+  }
+
+  document.querySelectorAll<HTMLElement>(".mc-card").forEach((c) =>
+    c.addEventListener("click", () => play(c.dataset.game!, c.dataset.label!))
+  );
+  backBtn.addEventListener("click", () => {
+    current?.destroy(); current = null;
+    stage.hidden = true; menu.hidden = false;
+  });
+</script>
+
+<style>
+  .mc { display: flex; flex-direction: column; gap: var(--space-3); }
+  /* hidden attribute must win over the display rules below */
+  .mc-menu[hidden], .mc-stage[hidden] { display: none; }
+  .mc-bar, .mc-stage-bar { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); font-family: var(--font-mono); }
+  .mc-brand { font-weight: 700; letter-spacing: 0.3em; color: var(--cyan); font-size: var(--fs-sm); }
+  .mute { background: none; border: none; cursor: pointer; font-size: 1.1rem; line-height: 1; padding: 0; }
+  .mc-menu { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr)); gap: var(--space-3); }
+  .mc-card {
+    display: flex; flex-direction: column; align-items: flex-start; gap: 0.3rem;
+    text-align: left; cursor: pointer;
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm);
+    padding: var(--space-4); color: var(--text); font: inherit;
+    transition: border-color var(--transition), transform var(--transition);
+  }
+  .mc-card:hover { border-color: var(--cyan); transform: translateY(-3px); }
+  .mc-icon { font-size: 1.8rem; }
+  .mc-title { font-family: var(--font-mono); font-weight: 700; letter-spacing: 0.12em; }
+  .mc-desc { font-size: var(--fs-sm); }
+  .mc-play { margin-top: var(--space-2); color: var(--cyan); font-family: var(--font-mono); font-size: var(--fs-sm); font-weight: 700; }
+  .mc-stage-bar { margin-bottom: var(--space-1); }
+  .mc-back { background: none; border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--text); font: inherit; font-size: var(--fs-sm); padding: 0.4em 0.9em; cursor: pointer; }
+  .mc-back:hover { border-color: var(--cyan); color: var(--cyan); }
+  .mc-now { font-family: var(--font-mono); font-weight: 700; letter-spacing: 0.16em; color: var(--magenta); }
+  #mc-canvas { width: 100%; aspect-ratio: 640 / 420; height: auto; display: block; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-sm); }
+  .mc-hint { font-size: var(--fs-xs); text-align: center; margin: var(--space-2) 0 0; }
+</style>
