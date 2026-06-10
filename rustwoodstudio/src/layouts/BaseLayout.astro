@@ -45,5 +45,45 @@ const ogImage = new URL("/og.png", site.url).href;
       <slot />
     </main>
     <Footer />
+
+    <script is:inline>
+      (function () {
+        var d = document;
+        d.documentElement.classList.add("js");
+        var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+        // Auto-tag each top-level section/article so it reveals on scroll.
+        var blocks = d.querySelectorAll("main > section, main > article");
+        blocks.forEach(function (s) {
+          var t = s.querySelector(":scope > .container") || s;
+          t.setAttribute("data-reveal", "");
+        });
+        var targets = d.querySelectorAll("[data-reveal]");
+        if (reduce || !("IntersectionObserver" in window)) {
+          targets.forEach(function (el) { el.classList.add("in"); });
+          return;
+        }
+        var io = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (e) {
+              if (e.isIntersecting) {
+                e.target.classList.add("in");
+                io.unobserve(e.target);
+              }
+            });
+          },
+          { threshold: 0.12, rootMargin: "0px 0px -6% 0px" }
+        );
+        targets.forEach(function (el) {
+          // Anything already within or above the viewport (e.g. on a deep-link
+          // or restored scroll position) reveals immediately; the rest animate
+          // in as they're scrolled to.
+          if (el.getBoundingClientRect().top < window.innerHeight * 0.92) {
+            el.classList.add("in");
+          } else {
+            io.observe(el);
+          }
+        });
+      })();
+    </script>
   </body>
 </html>
