@@ -47,6 +47,7 @@ const terminal = [
       <div class="hero-cta">
         <a href="#arcade" class="btn btn-primary">► Play WORDVADERS</a>
         <a href="#wonder" class="btn btn-ghost">Make a wonder</a>
+        <a href="/dimension/" class="btn btn-ghost dim-cta">✦ Enter the Dimension</a>
       </div>
       <a href="#wonder" class="scroll-hint muted" aria-hidden="true">▼</a>
     </div>
@@ -151,6 +152,19 @@ const terminal = [
           </div>
         ))}
       </div>
+    </div>
+  </section>
+
+  <!-- THE DIMENSION PORTAL -->
+  <section class="section portal">
+    <div class="container portal-inner">
+      <span class="eyebrow">the final exhibit</span>
+      <h2>Enter the <span class="neon">Dimension</span>.</h2>
+      <p class="muted">
+        A 60,000-particle journey through one canvas. Scrolling becomes flying.
+        Words become galaxies. Headphones recommended.
+      </p>
+      <a href="/dimension/" class="btn btn-primary">✦ Enter the Dimension</a>
     </div>
   </section>
 
@@ -284,6 +298,18 @@ const terminal = [
   }
   .proof h3 { font-size: var(--fs-lg); }
   .proof p { margin: 0; font-size: var(--fs-sm); }
+
+  /* PORTAL */
+  .portal {
+    background:
+      radial-gradient(ellipse 60% 80% at 50% 100%, color-mix(in srgb, var(--magenta) 13%, transparent), transparent 65%),
+      var(--bg-2);
+    border-top: 1px solid var(--border);
+    text-align: center;
+  }
+  .portal-inner { max-width: 40rem; margin-inline: auto; }
+  .portal .btn { margin-top: var(--space-3); }
+  .dim-cta { border-color: color-mix(in srgb, var(--magenta) 50%, var(--border)); }
 
   /* FOOTER */
   .foot {
