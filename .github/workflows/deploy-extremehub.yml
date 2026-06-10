@@ -46,7 +46,9 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ${{ secrets.FTP_PROTOCOL || 'ftp' }}
           port: ${{ secrets.FTP_PORT || '21' }}
-          local-dir: ./dist/
+          # Path is relative to the repo root (working-directory does not
+          # apply to action steps, only to run: steps).
+          local-dir: ./extremehub/dist/
           # Web root on the host; override with the FTP_SERVER_DIR secret.
           server-dir: ${{ secrets.FTP_SERVER_DIR || './public_html/' }}
           dangerous-clean-slate: false
