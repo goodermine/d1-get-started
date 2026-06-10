@@ -39,6 +39,10 @@ jobs:
         run: npm run build
 
       - name: Deploy to host over FTP
+        # The host resolves to IPv6 too, but GitHub runners have no IPv6 route,
+        # so force IPv4-first resolution to avoid an ENETUNREACH on connect.
+        env:
+          NODE_OPTIONS: --dns-result-order=ipv4first
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
