@@ -16,8 +16,17 @@ renders its content — the per-page block cannot reach it, and no REST route
 exposes the Customizer CSS. Page 201 (Extreme Build) keeps its own nav strip;
 page 562 (free-audio) hides the header entirely.
 
-## To also fix /articles/ (one manual step)
-Paste `customizer-additional-css.css` at the END of
-**wp-admin → Appearance → Customize → Additional CSS**. It is the same rules
-without page scoping; it is safe alongside the per-page blocks and makes the
-fix truly global (future pages included).
+## /articles/ — RESOLVED (2026-06-10)
+Page 232 was set as the WordPress posts page, so its hand-designed content
+(31KB, including ae-mobile-menu-layer-fix-232 and the polish block) never
+rendered — the theme blog archive showed instead, unreachable by content CSS.
+Fix: `page_for_posts` was unset (232 → 0) via /wp/v2/settings, so /articles/
+now renders its designed page with all fixes. The designed page lists the same
+four published posts; individual post URLs are unaffected. Revert anytime by
+setting `page_for_posts` back to 232.
+NOTE: new blog posts will NOT auto-appear on /articles/ — add them to the
+designed page (matches how the rest of the site is maintained).
+
+`customizer-additional-css.css` is now optional: pasting it into
+**wp-admin → Appearance → Customize → Additional CSS** makes the polish global
+and future-proof, but all 10 current pages are already covered.
