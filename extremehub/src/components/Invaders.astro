@@ -1,0 +1,344 @@
+<div class="cabinet">
+  <div class="bezel">
+    <div class="marquee-row">
+      <span class="title">WORDVADERS</span>
+      <span class="hud">
+        <span>SCORE <b id="iv-score">0</b></span>
+        <span>HI <b id="iv-hi">0</b></span>
+        <span>LIVES <b id="iv-lives">3</b></span>
+      </span>
+    </div>
+    <div class="screen-wrap">
+      <canvas id="iv-canvas" width="720" height="480" aria-label="WORDVADERS — a Space Invaders style arcade game. The invaders are letters."></canvas>
+      <div class="overlay" id="iv-overlay">
+        <p class="ov-title">WORDVADERS</p>
+        <p class="ov-sub">The words are invading.<br />Implement them. Letter by letter.</p>
+        <button class="btn btn-primary" id="iv-start">► INSERT COIN</button>
+        <p class="ov-keys muted">← → move · SPACE fire &nbsp;|&nbsp; touch: buttons below</p>
+      </div>
+    </div>
+    <div class="touch-controls" aria-hidden="false">
+      <button class="tbtn" id="iv-left" aria-label="Move left">◀</button>
+      <button class="tbtn fire" id="iv-fire" aria-label="Fire">⦿</button>
+      <button class="tbtn" id="iv-right" aria-label="Move right">▶</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const cv = document.getElementById("iv-canvas") as HTMLCanvasElement;
+  const ctx = cv.getContext("2d")!;
+  const overlay = document.getElementById("iv-overlay")!;
+  const startBtn = document.getElementById("iv-start")!;
+  const elScore = document.getElementById("iv-score")!;
+  const elHi = document.getElementById("iv-hi")!;
+  const elLives = document.getElementById("iv-lives")!;
+
+  const W = 720, H = 480;
+  const WORDS = ["WONDER", "EXTREME", "FORGED", "SHIPPED", "PIXELS", "IMPLEMENT"];
+  const COLS = ["#41ead4", "#8b5cf6", "#ff3ec8", "#ffc24e"];
+
+  type Inv = { x: number; y: number; ch: string; alive: boolean; col: string };
+  type Shot = { x: number; y: number; vy: number };
+
+  let invs: Inv[] = [];
+  let shots: Shot[] = [];
+  let bombs: Shot[] = [];
+  let px = W / 2, pSpeed = 5.2;
+  let dir = 1, stepDown = false, speed = 0.45;
+  let score = 0, lives = 3, wave = 0;
+  let hi = Number(localStorage.getItem("wordvaders-hi") || 0);
+  let playing = false, over = false, raf = 0, lastShot = 0;
+  let flash = 0;
+  const keys: Record<string, boolean> = {};
+  elHi.textContent = String(hi);
+
+  function spawnWave() {
+    const word = WORDS[wave % WORDS.length];
+    invs = [];
+    const cols = word.length, rows = 4;
+    const gx = Math.min(72, (W - 120) / cols), gy = 46;
+    const ox = (W - gx * (cols - 1)) / 2;
+    for (let r = 0; r < rows; r++)
+      for (let c = 0; c < cols; c++)
+        invs.push({
+          x: ox + c * gx,
+          y: 64 + r * gy,
+          ch: word[c],
+          alive: true,
+          col: COLS[r % COLS.length],
+        });
+    speed = 0.45 + wave * 0.12;
+  }
+
+  function reset() {
+    score = 0; lives = 3; wave = 0;
+    px = W / 2; shots = []; bombs = [];
+    over = false;
+    spawnWave();
+    sync();
+  }
+
+  function sync() {
+    elScore.textContent = String(score);
+    elLives.textContent = String(lives);
+    elHi.textContent = String(hi);
+  }
+
+  function fire() {
+    const now = performance.now();
+    if (now - lastShot < 240) return;
+    lastShot = now;
+    shots.push({ x: px, y: H - 58, vy: -8.5 });
+  }
+
+  function update() {
+    // Player
+    if (keys.ArrowLeft || keys.a) px -= pSpeed;
+    if (keys.ArrowRight || keys.d) px += pSpeed;
+    px = Math.max(26, Math.min(W - 26, px));
+    if (keys[" "] || keys.Spacebar) fire();
+
+    // Invaders march
+    const alive = invs.filter((i) => i.alive);
+    let edge = false;
+    for (const i of alive) {
+      i.x += dir * speed * (1 + (1 - alive.length / invs.length) * 1.6);
+      if (i.x > W - 34 || i.x < 34) edge = true;
+    }
+    if (edge) {
+      dir *= -1;
+      for (const i of alive) i.y += 16;
+    }
+
+    // Invader bombs
+    if (alive.length && Math.random() < 0.012 + wave * 0.002) {
+      const shooter = alive[(Math.random() * alive.length) | 0];
+      bombs.push({ x: shooter.x, y: shooter.y + 14, vy: 3 + wave * 0.3 });
+    }
+
+    // Move projectiles
+    for (const s of shots) s.y += s.vy;
+    for (const b of bombs) b.y += b.vy;
+    shots = shots.filter((s) => s.y > -10);
+    bombs = bombs.filter((b) => b.y < H + 10);
+
+    // Shot ↔ invader collisions
+    for (const s of shots) {
+      for (const i of invs) {
+        if (!i.alive) continue;
+        if (Math.abs(s.x - i.x) < 18 && Math.abs(s.y - i.y) < 16) {
+          i.alive = false;
+          s.y = -99;
+          score += 10 + wave * 5;
+          if (score > hi) { hi = score; localStorage.setItem("wordvaders-hi", String(hi)); }
+          sync();
+          break;
+        }
+      }
+    }
+
+    // Bomb ↔ player
+    for (const b of bombs) {
+      if (Math.abs(b.x - px) < 20 && b.y > H - 64 && b.y < H - 30) {
+        b.y = H + 99;
+        lives--;
+        flash = 8;
+        sync();
+        if (lives <= 0) over = true;
+      }
+    }
+
+    // Invaders reach the ground → game over
+    for (const i of alive) if (i.y > H - 90) over = true;
+
+    // Wave cleared
+    if (!alive.length) { wave++; spawnWave(); }
+  }
+
+  function draw() {
+    ctx.fillStyle = flash > 0 ? "#1a0a14" : "#06070c";
+    if (flash > 0) flash--;
+    ctx.fillRect(0, 0, W, H);
+
+    // Ground line
+    ctx.strokeStyle = "#1d2235";
+    ctx.beginPath(); ctx.moveTo(0, H - 28); ctx.lineTo(W, H - 28); ctx.stroke();
+
+    // Invaders (letters)
+    ctx.font = "700 26px 'Space Grotesk Variable', monospace";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    for (const i of invs) {
+      if (!i.alive) continue;
+      ctx.fillStyle = i.col;
+      ctx.fillText(i.ch, i.x, i.y);
+    }
+
+    // Player ship
+    ctx.fillStyle = "#41ead4";
+    ctx.beginPath();
+    ctx.moveTo(px, H - 60);
+    ctx.lineTo(px - 18, H - 34);
+    ctx.lineTo(px + 18, H - 34);
+    ctx.closePath();
+    ctx.fill();
+
+    // Projectiles
+    ctx.fillStyle = "#e9edf9";
+    for (const s of shots) ctx.fillRect(s.x - 1.5, s.y - 7, 3, 12);
+    ctx.fillStyle = "#ff3ec8";
+    for (const b of bombs) ctx.fillRect(b.x - 2, b.y - 6, 4, 10);
+
+    if (over) {
+      ctx.fillStyle = "rgba(6,7,12,0.78)";
+      ctx.fillRect(0, 0, W, H);
+      ctx.fillStyle = "#ff3ec8";
+      ctx.font = "700 44px 'Space Grotesk Variable', monospace";
+      ctx.fillText("GAME OVER", W / 2, H / 2 - 26);
+      ctx.fillStyle = "#e9edf9";
+      ctx.font = "600 20px 'Space Grotesk Variable', monospace";
+      ctx.fillText(`SCORE ${score}  ·  HI ${hi}`, W / 2, H / 2 + 16);
+      ctx.fillStyle = "#8d95ab";
+      ctx.fillText("press SPACE or ► to play again", W / 2, H / 2 + 52);
+    }
+  }
+
+  function loop() {
+    if (!playing) return;
+    if (!over) update();
+    draw();
+    raf = requestAnimationFrame(loop);
+  }
+
+  function begin() {
+    overlay.style.display = "none";
+    reset();
+    playing = true;
+    cancelAnimationFrame(raf);
+    loop();
+    cv.focus();
+  }
+
+  startBtn.addEventListener("click", begin);
+
+  addEventListener("keydown", (e) => {
+    if (["ArrowLeft", "ArrowRight", " "].includes(e.key) && playing) e.preventDefault();
+    keys[e.key] = true;
+    // Fire on the press itself (throttled in fire()) so quick taps work;
+    // holding space keeps autofiring via the update loop.
+    if ((e.key === " " || e.key === "Spacebar") && playing && !over) fire();
+    if (over && (e.key === " " || e.key === "Enter")) begin();
+  });
+  addEventListener("keyup", (e) => (keys[e.key] = false));
+
+  // Touch controls
+  const hold = (id: string, key: string) => {
+    const el = document.getElementById(id)!;
+    const on = (e: Event) => { e.preventDefault(); keys[key] = true; if (over) begin(); };
+    const off = (e: Event) => { e.preventDefault(); keys[key] = false; };
+    el.addEventListener("touchstart", on, { passive: false });
+    el.addEventListener("touchend", off);
+    el.addEventListener("mousedown", on);
+    el.addEventListener("mouseup", off);
+    el.addEventListener("mouseleave", off);
+  };
+  hold("iv-left", "ArrowLeft");
+  hold("iv-right", "ArrowRight");
+  hold("iv-fire", " ");
+
+  // Pause the loop when the cabinet scrolls away or the tab hides.
+  new IntersectionObserver((e) => {
+    if (!e[0].isIntersecting) { playing = false; cancelAnimationFrame(raf); }
+    else if (overlay.style.display === "none" && !playing) { playing = true; loop(); }
+  }, { threshold: 0.05 }).observe(cv);
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) { playing = false; cancelAnimationFrame(raf); }
+    else if (overlay.style.display === "none") { playing = true; loop(); }
+  });
+
+  // Idle attract screen
+  ctx.fillStyle = "#06070c"; ctx.fillRect(0, 0, W, H);
+</script>
+
+<style>
+  .cabinet {
+    background: linear-gradient(180deg, #111422, #0a0c14);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: clamp(0.8rem, 2.5vw, 1.6rem);
+    box-shadow: 0 0 60px color-mix(in srgb, var(--violet) 18%, transparent);
+  }
+  .marquee-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+    margin-bottom: var(--space-2);
+    font-family: var(--font-mono);
+  }
+  .title {
+    font-weight: 700;
+    letter-spacing: 0.34em;
+    background: linear-gradient(92deg, var(--cyan), var(--magenta));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .hud { display: flex; gap: var(--space-4); font-size: var(--fs-sm); color: var(--muted); }
+  .hud b { color: var(--text); }
+  .screen-wrap { position: relative; }
+  #iv-canvas {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    background: var(--bg);
+  }
+  .overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    text-align: center;
+    background: radial-gradient(ellipse at 50% 40%, color-mix(in srgb, var(--violet) 18%, transparent), rgba(6, 7, 12, 0.88));
+    border-radius: var(--radius-sm);
+    padding: var(--space-4);
+  }
+  .ov-title {
+    font-family: var(--font-mono);
+    font-size: var(--fs-xl);
+    font-weight: 700;
+    letter-spacing: 0.4em;
+    margin: 0;
+  }
+  .ov-sub { margin: 0 0 var(--space-3); color: var(--muted); }
+  .ov-keys { font-size: var(--fs-sm); margin: var(--space-3) 0 0; font-family: var(--font-mono); }
+  .touch-controls {
+    display: none;
+    justify-content: center;
+    gap: var(--space-4);
+    margin-top: var(--space-3);
+  }
+  .tbtn {
+    font: inherit;
+    font-size: 1.4rem;
+    width: 64px;
+    height: 52px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+    touch-action: none;
+  }
+  .tbtn:active { border-color: var(--cyan); color: var(--cyan); }
+  .fire { border-color: color-mix(in srgb, var(--magenta) 60%, var(--border)); }
+  @media (pointer: coarse) {
+    .touch-controls { display: flex; }
+  }
+</style>
