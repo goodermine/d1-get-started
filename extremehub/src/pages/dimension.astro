@@ -24,7 +24,10 @@ const description =
 
     <header class="hud">
       <a href="/" class="hud-back">◄ the hub</a>
-      <button id="dim-sound" class="hud-sound" aria-pressed="false">♪ SOUND OFF</button>
+      <div class="hud-right">
+        <button id="dim-rainbow" class="hud-sound" aria-pressed="false">🌈 RAINBOW</button>
+        <button id="dim-sound" class="hud-sound" aria-pressed="false">♪ SOUND OFF</button>
+      </div>
     </header>
     <div class="progress" aria-hidden="true"><span id="dim-progress"></span></div>
 
@@ -111,7 +114,7 @@ const description =
         const vs = `
           attribute vec3 aA; attribute vec3 aB; attribute float aSeed;
           uniform mat4 uMVP; uniform float uMix, uTime;
-          uniform mediump float uPulse; /* must match fragment precision to link */
+          uniform mediump float uPulse, uPtScale; /* must match fragment precision to link */
           varying float vSeed; varying float vFog;
           void main(){
             vec3 p = mix(aA, aB, uMix);
@@ -123,21 +126,29 @@ const description =
             vec4 mv = uMVP * vec4(p, 1.0);
             gl_Position = mv;
             float w = max(0.4, mv.w);
-            gl_PointSize = clamp((0.9 + aSeed*1.8) * (92.0 / w) * (1.0 + uPulse*0.45), 1.0, 8.0);
+            gl_PointSize = clamp((0.9 + aSeed*1.8) * (92.0 / w) * (1.0 + uPulse*0.45) * uPtScale, 0.8, 9.0);
             vSeed = aSeed;
             vFog = clamp(1.4 - w*0.085, 0.04, 1.0);
           }`;
         const fs = `
           precision mediump float;
           varying float vSeed; varying float vFog;
-          uniform vec3 uC1, uC2, uC3; uniform float uPulse;
+          uniform vec3 uC1, uC2, uC3;
+          uniform float uPulse, uHue, uRainbow, uAlpha;
+          vec3 hsv2rgb(vec3 c){
+            vec4 K = vec4(1.0, 2.0/3.0, 1.0/3.0, 3.0);
+            vec3 p = abs(fract(c.xxx + K.xyz) * 6.0 - K.www);
+            return c.z * mix(K.xxx, clamp(p - K.xxx, 0.0, 1.0), c.y);
+          }
           void main(){
             float d = length(gl_PointCoord - 0.5);
             float a = 1.0 - smoothstep(0.05, 0.5, d);
-            vec3 col = mix(uC1, uC2, vSeed);
-            col = mix(col, uC3, smoothstep(0.75, 1.0, vSeed));
+            vec3 themeCol = mix(uC1, uC2, vSeed);
+            themeCol = mix(themeCol, uC3, smoothstep(0.75, 1.0, vSeed));
+            vec3 rainbowCol = hsv2rgb(vec3(fract(vSeed + uHue), 0.9, 1.0));
+            vec3 col = mix(themeCol, rainbowCol, uRainbow);
             col *= vFog * (0.85 + uPulse*0.5);
-            a *= 0.55; /* keep additive stacking below blow-out */
+            a *= uAlpha; /* low for dense words so additive stacking doesn't blow out */
             gl_FragColor = vec4(col * a, a * vFog);
           }`;
         function shader(type: number, src: string) {
@@ -169,6 +180,13 @@ const description =
         const uC1 = gl.getUniformLocation(prog, "uC1");
         const uC2 = gl.getUniformLocation(prog, "uC2");
         const uC3 = gl.getUniformLocation(prog, "uC3");
+        const uHue = gl.getUniformLocation(prog, "uHue");
+        const uRainbow = gl.getUniformLocation(prog, "uRainbow");
+        const uPtScale = gl.getUniformLocation(prog, "uPtScale");
+        const uAlpha = gl.getUniformLocation(prog, "uAlpha");
+        // Words are dense (shrink points so letters read); cosmic forms are
+        // sparse lines (keep points big & glowy). Index matches builders[].
+        const spread = [1.0, 0.46, 1.0, 1.0, 1.0, 1.0, 0.46];
 
         // theme colours from tokens
         const css = getComputedStyle(document.documentElement);
@@ -262,7 +280,11 @@ const description =
           for (let y = 0; y < c.height; y += 2)
             for (let x = 0; x < c.width; x += 2)
               if (img[(y * c.width + x) * 4 + 3] > 128) pts.push(x, y);
-          const k = c.width / 7.6; // world width ≈ 7.6 so letters read at camera distance
+          // Fit the word to the viewport's visible width so it never spills
+          // off the edges on portrait phones / tablets.
+          const halfH = Math.tan(1.05 / 2) * 7.2;
+          const targetW = Math.min(7.6, halfH * (canvas.width / canvas.height) * 2 * 0.9);
+          const k = c.width / targetW;
           const p = new Float32Array(N * 3);
           const M = pts.length / 2;
           for (let i = 0; i < N; i++) {
@@ -274,7 +296,8 @@ const description =
           return p;
         }
 
-        const builders = [chaos, () => word("WONDER"), galaxy, tunnel, helix, knot, () => word("EXTREME")];
+        let finaleWord = "EXTREME";
+        const builders = [chaos, () => word("WONDER"), galaxy, tunnel, helix, knot, () => word(finaleWord)];
         const cache: (Float32Array | null)[] = builders.map(() => null);
         const form = (i: number) => (cache[i] ||= builders[i]());
 
@@ -306,7 +329,7 @@ const description =
         }
 
         // ---------- camera / interaction ----------
-        let mx = 0, my = 0, pulse = 0;
+        let mx = 0, my = 0, pulse = 0, rainbow = 0, rainbowTarget = 0;
         addEventListener("pointermove", (e) => {
           mx = (e.clientX / innerWidth - 0.5) * 2;
           my = (e.clientY / innerHeight - 0.5) * 2;
@@ -320,7 +343,12 @@ const description =
           gl.viewport(0, 0, canvas.width, canvas.height);
         }
         resize();
-        addEventListener("resize", resize);
+        addEventListener("resize", () => {
+          resize();
+          // Word forms depend on aspect ratio — rebuild them to re-fit.
+          cache[1] = null; cache[6] = null;
+          if (curSeg >= 0) { setSegment(curSeg); bindAttrs(); }
+        });
 
         // ---------- audio (generated) ----------
         const soundBtn = document.getElementById("dim-sound") as HTMLButtonElement;
@@ -361,14 +389,23 @@ const description =
           else if (!soundOn && actx) { clearInterval(seqTimer); actx.close(); actx = null; }
         });
 
+        // ---------- rainbow toggle ----------
+        const rbBtn = document.getElementById("dim-rainbow") as HTMLButtonElement;
+        rbBtn.addEventListener("click", () => {
+          rainbowTarget = rainbowTarget > 0.5 ? 0 : 1;
+          rbBtn.setAttribute("aria-pressed", String(rainbowTarget > 0.5));
+          rbBtn.textContent = rainbowTarget > 0.5 ? "🌈 RAINBOW ON" : "🌈 RAINBOW";
+          pulse = Math.max(pulse, 0.9);
+        });
+
         // ---------- finale word ----------
         const formEl = document.getElementById("dim-form") as HTMLFormElement;
         const inputEl = document.getElementById("dim-word") as HTMLInputElement;
         formEl.addEventListener("submit", (e) => {
           e.preventDefault();
-          const w = (inputEl.value.trim() || "WONDER").toUpperCase();
-          cache[6] = word(w);
-          if (curSeg === 5) setSegment(5);
+          finaleWord = (inputEl.value.trim() || "WONDER").toUpperCase();
+          cache[6] = null;
+          if (curSeg === 5) { setSegment(5); bindAttrs(); }
           pulse = Math.max(pulse, 1.6);
         });
         document.getElementById("dim-again")!.addEventListener("click", (e) => {
@@ -421,12 +458,22 @@ const description =
           mul(MVP, MVP, trans(T1, 0, 0, travel));
 
           pulse *= 0.94;
+          rainbow += (rainbowTarget - rainbow) * 0.08;
           gl.clearColor(0.02, 0.023, 0.04, 1);
           gl.clear(gl.COLOR_BUFFER_BIT);
           gl.uniformMatrix4fv(uMVP, false, MVP);
           gl.uniform1f(uMix, ease(local));
           gl.uniform1f(uTime, time);
           gl.uniform1f(uPulse, pulse);
+          gl.uniform1f(uHue, (time * 0.06) % 1.0);
+          gl.uniform1f(uRainbow, rainbow);
+          const vpF = Math.max(0.55, Math.min(1.0, innerWidth / 900));
+          const wf = spread[seg] * (1 - e) + spread[seg + 1] * e; // 0.46 word .. 1 cosmic
+          gl.uniform1f(uPtScale, wf * vpF);
+          const isWord = wf < 0.8;
+          // Words: bright on big screens (low density), dim on small (high density).
+          const vpNorm = (vpF - 0.55) / 0.45; // 0 on phones .. 1 on desktop
+          gl.uniform1f(uAlpha, isWord ? 0.17 + 0.36 * vpNorm : 0.5);
           gl.drawArrays(gl.POINTS, 0, N);
           raf = requestAnimationFrame(frame);
         }
@@ -466,6 +513,7 @@ const description =
         border: 1px solid var(--border); border-radius: 999px; padding: 0.4em 1em;
         backdrop-filter: blur(6px);
       }
+      .hud-right { display: flex; gap: 8px; }
       .hud-sound[aria-pressed="true"] { color: var(--cyan); border-color: var(--cyan); }
       .progress {
         position: fixed; left: 0; right: 0; bottom: 0; height: 3px;
