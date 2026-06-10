@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import EmailCapture from "../components/EmailCapture.astro";
+import BookCover from "../components/BookCover.astro";
 import { site } from "../data/site.ts";
 
 // TODO(aaron): wire the real buy/download link when the sales setup is ready.
@@ -26,10 +27,7 @@ const helps = [
 >
   <section class="hero">
     <div class="container hero-grid">
-      <div class="cover-art" aria-hidden="true">
-        <span class="cover-title">Singing<br />Fundamentals</span>
-        <span class="cover-author">Aaron Ellis</span>
-      </div>
+      <BookCover />
       <div>
         <span class="eyebrow">The Book</span>
         <h1>Singing Fundamentals</h1>
@@ -91,28 +89,6 @@ const helps = [
     gap: var(--space-6);
     align-items: center;
   }
-  .cover-art {
-    aspect-ratio: 2 / 3;
-    border-radius: 6px;
-    border: 1px solid color-mix(in srgb, var(--color-copper) 45%, var(--color-border));
-    background:
-      radial-gradient(ellipse at 50% 0%, color-mix(in srgb, var(--color-copper) 30%, transparent), transparent 65%),
-      linear-gradient(165deg, var(--color-surface-2), var(--color-bg-2));
-    box-shadow: var(--shadow), var(--glow);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: var(--space-4);
-    text-align: center;
-  }
-  .cover-title {
-    font-family: var(--font-heading);
-    font-size: 1.8rem;
-    line-height: 1.15;
-    margin-top: var(--space-5);
-    color: var(--color-ember);
-  }
-  .cover-author { font-size: var(--fs-sm); letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-muted); }
   .lead { font-size: var(--fs-lg); }
   .cta-row { display: flex; gap: var(--space-3); flex-wrap: wrap; margin-top: var(--space-4); }
 
@@ -137,6 +113,5 @@ const helps = [
 
   @media (max-width: 760px) {
     .hero-grid { grid-template-columns: 1fr; }
-    .cover-art { max-width: 13rem; }
   }
 </style>

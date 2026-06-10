@@ -2,6 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import VoxPanel from "../components/VoxPanel.astro";
 import EmailCapture from "../components/EmailCapture.astro";
+import BookCover from "../components/BookCover.astro";
 import { site } from "../data/site.ts";
 
 const studioHomes = [
@@ -76,11 +77,8 @@ const coachingAreas = [
   <!-- 3 · SINGING FUNDAMENTALS -->
   <section class="section book">
     <div class="container book-grid">
-      <div class="book-cover" aria-hidden="true">
-        <div class="cover-art">
-          <span class="cover-title">Singing<br />Fundamentals</span>
-          <span class="cover-author">Aaron Ellis</span>
-        </div>
+      <div class="book-cover">
+        <BookCover />
       </div>
       <div>
         <span class="eyebrow">The Book</span>
@@ -252,30 +250,6 @@ const coachingAreas = [
     align-items: center;
   }
   .book-cover { display: flex; justify-content: center; }
-  .cover-art {
-    aspect-ratio: 2 / 3;
-    width: 100%;
-    max-width: 16rem;
-    border-radius: 6px;
-    border: 1px solid color-mix(in srgb, var(--color-copper) 45%, var(--color-border));
-    background:
-      radial-gradient(ellipse at 50% 0%, color-mix(in srgb, var(--color-copper) 30%, transparent), transparent 65%),
-      linear-gradient(165deg, var(--color-surface-2), var(--color-bg-2));
-    box-shadow: var(--shadow), var(--glow);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: var(--space-4);
-    text-align: center;
-  }
-  .cover-title {
-    font-family: var(--font-heading);
-    font-size: 1.8rem;
-    line-height: 1.15;
-    margin-top: var(--space-5);
-    color: var(--color-ember);
-  }
-  .cover-author { font-size: var(--fs-sm); letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-muted); }
   .cta-row { margin-top: var(--space-4); }
 
   /* VOX */
