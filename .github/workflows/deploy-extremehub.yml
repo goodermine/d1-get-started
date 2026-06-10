@@ -38,14 +38,24 @@ jobs:
       - name: Build site
         run: npm run build
 
-      - name: Deploy to host over FTP
-        # The host resolves to IPv6 too, but GitHub runners have no IPv6 route,
-        # so force IPv4-first resolution to avoid an ENETUNREACH on connect.
+      - name: Resolve host to IPv4
+        id: ftp
+        # The host also has an AAAA (IPv6) record, but GitHub runners have no
+        # IPv6 route, so the FTP client dies with ENETUNREACH. Resolve the A
+        # record here and hand the action a literal IPv4 so IPv6 is never tried.
+        working-directory: ${{ github.workspace }}
         env:
-          NODE_OPTIONS: --dns-result-order=ipv4first
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+        run: |
+          ipv4="$(getent ahostsv4 "$FTP_SERVER" | awk '{print $1; exit}')"
+          if [ -z "$ipv4" ]; then echo "Could not resolve $FTP_SERVER to IPv4" >&2; exit 1; fi
+          echo "Resolved $FTP_SERVER -> $ipv4"
+          echo "ipv4=$ipv4" >> "$GITHUB_OUTPUT"
+
+      - name: Deploy to host over FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          server: ${{ secrets.FTP_SERVER }}
+          server: ${{ steps.ftp.outputs.ipv4 }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ${{ secrets.FTP_PROTOCOL || 'ftp' }}
