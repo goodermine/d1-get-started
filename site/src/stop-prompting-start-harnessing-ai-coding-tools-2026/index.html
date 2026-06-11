@@ -1,0 +1,794 @@
+---
+layout: base.njk
+title: "Stop Prompting. Start Harnessing. The One Prompt That Actually Works Across Every AI Coding Tool in 2026."
+permalink: "/stop-prompting-start-harnessing-ai-coding-tools-2026/"
+wpId: 253
+---
+<style id="profpro-harness-article-styles">
+.profpro-harness-article {
+  --pp-bg: #03060d;
+  --pp-panel: rgba(10, 18, 33, 0.9);
+  --pp-panel-strong: rgba(11, 24, 43, 0.96);
+  --pp-line: rgba(93, 205, 255, 0.18);
+  --pp-ink: #f5f8ff;
+  --pp-muted: #a8b8cb;
+  --pp-accent: #58dfff;
+  --pp-blue: #3097ff;
+  background: radial-gradient(circle at 14% 8%, rgba(48,151,255,.2), transparent 24rem), radial-gradient(circle at 86% 2%, rgba(202,104,255,.12), transparent 20rem), linear-gradient(180deg,#03060d 0%,#07111f 48%,#040913 100%);
+  color: var(--pp-ink);
+  font-family: Inter, Sora, Manrope, system-ui, sans-serif;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  overflow-x: hidden;
+  position: relative;
+  width: 100vw;
+}
+.profpro-harness-article::before {
+  background-image: linear-gradient(rgba(98,215,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(98,215,255,.04) 1px, transparent 1px);
+  background-size: 36px 36px;
+  content: "";
+  inset: 0;
+  opacity: .28;
+  pointer-events: none;
+  position: absolute;
+}
+.profpro-harness-article * { box-sizing: border-box; }
+.profpro-harness-article .pp-wrap { margin: 0 auto; max-width: 1040px; padding: 0 24px; position: relative; z-index: 1; }
+.profpro-harness-article .pp-mobile-nav-strip { display: none; }
+.profpro-harness-article .pp-hero { padding: 86px 0 46px; }
+.profpro-harness-article .pp-eyebrow { color: #8fd6ff; font-size: .82rem; font-weight: 850; letter-spacing: .16em; margin: 0 0 16px; text-transform: uppercase; }
+.profpro-harness-article .pp-title { color: var(--pp-ink); font-size: clamp(2.6rem, 7vw, 5.7rem); letter-spacing: -.06em; line-height: .94; margin: 0; max-width: 1000px; }
+.profpro-harness-article .pp-lede { color: rgba(223,234,248,.86); font-size: clamp(1.08rem, 2vw, 1.28rem); line-height: 1.65; margin: 24px 0 0; max-width: 780px; }
+.profpro-harness-article .pp-meta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
+.profpro-harness-article .pp-chip { background: rgba(255,255,255,.045); border: 1px solid rgba(93,205,255,.16); border-radius: 999px; color: #f4f8ff; font-size: .78rem; font-weight: 800; letter-spacing: .06em; padding: 10px 12px; text-transform: uppercase; }
+.profpro-harness-article .pp-hero-image { border: 1px solid rgba(93,205,255,.2); border-radius: 26px; box-shadow: 0 24px 70px rgba(0,0,0,.36); display: block; height: auto; margin: 34px 0 0; width: 100%; }
+.profpro-harness-article .pp-content { padding: 16px 0 88px; }
+.profpro-harness-article .pp-panel, .profpro-harness-article .pp-code-shell { background: linear-gradient(180deg, var(--pp-panel-strong), rgba(8,14,26,.96)); border: 1px solid var(--pp-line); border-radius: 26px; box-shadow: 0 24px 70px rgba(0,0,0,.34); }
+.profpro-harness-article .pp-panel { margin: 0 0 22px; padding: clamp(24px,4vw,42px); }
+.profpro-harness-article h2 { color: var(--pp-ink); font-size: clamp(1.8rem,4vw,3rem); letter-spacing: -.045em; line-height: 1; margin: 36px 0 18px; }
+.profpro-harness-article h3 { color: #dff4ff; font-size: 1.25rem; line-height: 1.2; margin: 28px 0 10px; }
+.profpro-harness-article p, .profpro-harness-article li { color: rgba(223,234,248,.82); font-size: 1.02rem; line-height: 1.78; }
+.profpro-harness-article p { margin: 0 0 16px; }
+.profpro-harness-article ul { margin: 0 0 18px; padding-left: 1.25rem; }
+.profpro-harness-article li + li { margin-top: 8px; }
+.profpro-harness-article strong { color: #fff; }
+.profpro-harness-article a { color: #8fd6ff !important; font-weight: 760; }
+.profpro-harness-article blockquote { background: rgba(88,223,255,.08); border: 1px solid rgba(88,223,255,.24); border-left: 4px solid #58dfff; border-radius: 18px; color: #f8fbff; font-size: 1.12rem; font-style: italic; line-height: 1.65; margin: 24px 0; padding: 20px 22px; }
+.profpro-harness-article .pp-code-shell { margin: 26px 0; overflow: hidden; }
+.profpro-harness-article .pp-code-header { align-items: center; background: rgba(3,8,16,.78); border-bottom: 1px solid rgba(93,205,255,.14); display: flex; justify-content: space-between; gap: 14px; padding: 14px 18px; }
+.profpro-harness-article .pp-code-header span { color: #8fd6ff; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .78rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+.profpro-harness-article pre { background: #040b14; color: #dff4ff; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: clamp(.8rem,1.8vw,.94rem); line-height: 1.65; margin: 0; overflow: auto; padding: 20px; white-space: pre-wrap; word-break: break-word; }
+.profpro-harness-article code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+.profpro-harness-article .pp-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 28px; }
+.profpro-harness-article .pp-button { align-items: center; background: linear-gradient(135deg,#66d4ff,#3097ff); border: 1px solid rgba(255,255,255,.16); border-radius: 999px; color: #03101d !important; display: inline-flex; font-weight: 850; justify-content: center; min-height: 48px; padding: 13px 22px; text-decoration: none; }
+.profpro-harness-article .pp-button-secondary { background: rgba(255,255,255,.04); border-color: rgba(93,205,255,.18); color: #eef5ff !important; }
+@media (max-width: 1024px) {
+  .profpro-harness-article .pp-mobile-nav-strip { background: rgba(7,14,25,.96); border-bottom: 1px solid rgba(93,205,255,.14); display: flex; flex-wrap: wrap; gap: 8px; overflow-x: visible; padding: 10px 16px 12px; position: relative; z-index: 30; }
+  .profpro-harness-article .pp-mobile-nav-strip a { background: rgba(255,255,255,.045); border: 1px solid rgba(93,205,255,.16); border-radius: 999px; color: #f4f8ff !important; flex: 0 0 auto; font-size: .78rem; font-weight: 800; letter-spacing: .05em; line-height: 1; min-height: 34px; padding: 11px 13px; text-decoration: none; text-transform: uppercase; }
+  .profpro-harness-article .pp-mobile-nav-strip a[aria-current="page"] { background: rgba(88,223,255,.14); border-color: rgba(88,223,255,.34); }
+}
+@media (max-width: 760px) {
+  .profpro-harness-article { width: 100%; margin-left: 0; margin-right: 0; overflow-x: clip; }
+  .profpro-harness-article .pp-wrap { padding: 0 18px; }
+  .profpro-harness-article .pp-hero { padding: 54px 0 34px; }
+  .profpro-harness-article .pp-title { font-size: clamp(2.35rem,12vw,3.35rem); letter-spacing: -.065em; line-height: .94; }
+  .profpro-harness-article .pp-lede { font-size: 1.06rem; line-height: 1.6; }
+  .profpro-harness-article .pp-panel { border-radius: 20px; padding: 22px 18px; }
+  .profpro-harness-article .pp-code-header { align-items: flex-start; flex-direction: column; gap: 10px; padding: 13px 14px; }
+  .profpro-harness-article pre { font-size: .76rem; line-height: 1.55; padding: 16px 14px; }
+  .profpro-harness-article .pp-actions, .profpro-harness-article .pp-button { width: 100%; }
+}
+</style>
+<article class="profpro-harness-article">
+  <nav class="pp-mobile-nav-strip" aria-label="Mobile quick navigation">
+    <a href="https://aaronellis.co.network/">Home</a>
+    <a href="https://aaronellis.co.network/#portfolio">Portfolio</a>
+    <a href="https://aaronellis.co.network/real-estate-buddy/">Real Estate Buddy</a>
+    <a href="https://aaronellis.co.network/extreme-build/">Extreme Build</a>
+    <a href="https://aaronellis.co.network/articles/" aria-current="page">Articles</a>
+    <a href="https://aaronellis.co.network/resume/">Resume</a>
+    <a href="https://aaronellis.co.network/#contact">Contact</a>
+  </nav>
+  <header class="pp-hero">
+    <div class="pp-wrap">
+      <p class="pp-eyebrow">AI Coding Harness</p>
+      <h1 class="pp-title">Stop Prompting. Start Harnessing. The One Prompt That Actually Works Across Every AI Coding Tool in 2026.</h1>
+      <p class="pp-lede">A practical look at why structured AI harnesses matter more than one-off prompts, and how Professor Pro v3.0 works across modern coding and chat tools.</p>
+      <div class="pp-meta">
+        <span class="pp-chip">Professor Pro</span>
+        <span class="pp-chip">AI Harness</span>
+        <span class="pp-chip">Coding Agents</span>
+        <span class="pp-chip">AGENTS.md</span>
+      </div>
+      <img class="pp-hero-image" src="https://aaronellis.co.network/wp-content/uploads/2026/06/stop-prompting-start-harnessing-feature.webp" alt="Premium editorial hero image showing a structured AI coding harness across workflow cards and a laptop workspace." loading="eager" decoding="async" width="1672" height="941" />
+      <p class="pp-lede"><strong>By Aaron Ellis | aaronellis.co.network</strong></p>
+    </div>
+  </header>
+  <div class="pp-content">
+    <div class="pp-wrap">
+      <section class="pp-panel">
+        <p>Look, I&#x27;m going to be straight with you.</p>
+<p>I&#x27;ve been doing prompt engineering since 2022. Back when most people were still typing &quot;write me a blog post about dogs&quot; into ChatGPT and wondering why it sounded like a Year 9 essay.</p>
+<p>I&#x27;ve built agents, broken agents, rebuilt agents, shipped products, and spent more hours than I&#x27;d like to admit watching an AI agent confidently delete things it shouldn&#x27;t have touched.</p>
+<p>And after all of that — years of testing across Claude, ChatGPT, Codex, Gemini, Cursor, and everything in between — I&#x27;ve landed on something I reckon is worth sharing.</p>
+<p>It&#x27;s not a prompt. It&#x27;s a harness.</p>
+<p>And the difference matters more than you&#x27;d think.</p>
+<h2>What&#x27;s a Harness and Why Should You Care?</h2>
+<p>Here&#x27;s the thing nobody tells you when you start using AI for real work.</p>
+<p>A prompt is what you say to the AI. A harness is the whole operating system around it — the rules, the workflow, the guardrails, the commands, the decision-making framework that tells the AI <em>how</em> to behave, not just <em>what</em> to do.</p>
+<p>Martin Fowler (the software architecture bloke, not the cricketer) put it best: <strong>Agent = Model + Harness.</strong></p>
+<p>Your prompt is one ingredient. The harness is the kitchen.</p>
+<p>I&#x27;ve been running my own harness system called <strong>Professor Pro</strong> for a while now. Started as a prompt pack — five variations for different audiences, a Synapse_CoR agent activation template, a handful of commands. It worked. It sold. People used it for coaching, business planning, SaaS workflows, content, you name it.</p>
+<p>But the field moved. Twice.</p>
+<p>So I rebuilt it. And this time, I built it as a proper harness — one that works in ChatGPT, Claude, Gemini, Codex, Cursor, and Claude Code. Same prompt. Every environment. No duplication.</p>
+<h2>The Problem Everyone&#x27;s Having Right Now</h2>
+<p>I was reading a thread on r/codex the other morning. Bloke was asking why everyone burns through their Codex Pro subscription so fast. The answer buried in the replies was gold:</p>
+<blockquote><em>&quot;I think between Codex users the workflow/harness/prompt style variations are way too large. And I have noticed that without a good harness or approach you can certainly consume way more than needed.&quot;</em></blockquote>
+<p>That&#x27;s the problem in one sentence.</p>
+<p>People are throwing tasks at AI agents with no structure, no guardrails, and no verification discipline. The agent runs wild. Burns tokens. Hallucinates an API that doesn&#x27;t exist. Rewrites files it shouldn&#x27;t have touched. Claims it&#x27;s &quot;done&quot; before a single test has run.</p>
+<p>Sound familiar?</p>
+<p>The fix isn&#x27;t a better prompt. The fix is a better harness.</p>
+<h2>What the Master Harness Actually Does</h2>
+<p>The Professor Pro Master Harness v3.0 works in two modes. It detects which one it&#x27;s in automatically.</p>
+<p><strong>Conversational mode</strong> (when you&#x27;re in ChatGPT, Claude.ai, or Gemini chat): the full Professor Pro orchestration fires up. Goal alignment, expert agent deployment via the Synapse_CoR template, /start and /ts and /save commands, the warm-but-direct personality. It&#x27;s the productivity conductor you know from the original pack, just sharper.</p>
+<p><strong>Autonomous coding mode</strong> (when you&#x27;re in Claude Code, Codex CLI, Cursor, or Gemini CLI): the orchestration suppresses. The coding discipline fires directly. Terse. No fluff. No cheerleading. Just explore, plan, test, implement, verify, commit.</p>
+<p>Same prompt. Both modes. One harness.</p>
+<h2>The Coding Discipline — Where the Real Value Lives</h2>
+<p>This is the bit your friend who writes code actually cares about.</p>
+<p>After researching every leaked system prompt I could find (Codex GPT-5.5, Claude Code v2.1.88, Cursor Agent 2.0), every empirical study (shout-out to the ETH Zurich mob who proved that over-specified instruction files actually <em>reduce</em> accuracy), and every best-practice guide from Anthropic, OpenAI, and Google — I distilled the coding discipline down to ten rules.</p>
+<p>Here they are, in plain English:</p>
+<h3>1. Read Before You Write</h3>
+<p>Before the agent touches a single line of code, it maps the codebase. Structure, patterns, naming conventions, existing tests, build system. Use <code>rg</code> (ripgrep), not <code>grep</code>. Batch your reads into one parallel call. Never assume. Let the existing system teach you how to move.</p>
+<p>This is directly from the leaked Codex system prompt, by the way. And it&#x27;s the single biggest differentiator between an agent that helps and one that creates a mess.</p>
+<h3>2. Plan Before You Build</h3>
+<p>For anything touching three or more files, or anything irreversible: write a plan first. Files to touch, API impact, test strategy, rollback path. Get approval. Then go.</p>
+<p>For a one-file fix? Just crack on.</p>
+<h3>3. TDD as Default</h3>
+<p>Write the tests first. Run them. Watch them fail. Commit the failing tests as a checkpoint. Then implement until they pass.</p>
+<p>And here&#x27;s the rule that saves you from the most common AI disaster: <strong>never modify committed tests to make them pass.</strong> If the tests are wrong, the agent has to tell you and get approval. It doesn&#x27;t just quietly &quot;fix&quot; the tests so it can claim victory.</p>
+<h3>4. Smallest Patch Possible</h3>
+<p>No formatting churn in files you didn&#x27;t ask about. No surprise refactors. The agent makes the smallest change that satisfies the failing test, and that&#x27;s it.</p>
+<h3>5. Three Autonomy Tiers</h3>
+<p>Not everything needs permission. Not everything should be auto-run.</p>
+<ul>
+<li><strong>Auto-run:</strong> reading files, running tests, checking git status.</li>
+<li><strong>Confirm with user:</strong> writing files, committing, adding dependencies, schema changes.</li>
+<li><strong>Hard block:</strong> pushing to remote, deleting things with <code>rm -rf</code>, reading <code>.env</code> or secrets, production deploys.</li>
+</ul>
+<p>This alone will save you from the &quot;oh no, it pushed that to main&quot; moment.</p>
+<h3>6. Announce Before You Act</h3>
+<p>Before every tool call, the agent says one sentence about what it&#x27;s doing and why. Then it reasons on the result before the next call. No silent chain of mystery operations.</p>
+<p>(One exception: Codex in rollout mode, where status updates can cause premature stops. The harness handles this automatically.)</p>
+<h3>7. Checkpoint and Recover</h3>
+<p>Always work on a feature branch. Create a checkpoint commit before multi-file work. If things go sideways, <code>git reset --hard</code> to the checkpoint. Don&#x27;t try to fix a cascade of errors mid-session — that&#x27;s where agents spiral.</p>
+<p>Two failed attempts at the same task? Stop. Surface the blocker. Don&#x27;t loop.</p>
+<h3>8. Compact Your Context</h3>
+<p>When you&#x27;re at about 40% of the context window, compact. Write working state to a scratch file. For batch work, loop per-file instead of holding one mega-session.</p>
+<p>This comes directly from the context engineering research — around 40% is where you start seeing quality degrade.</p>
+<h3>9. Never Touch Secrets</h3>
+<p>Hard-deny reads of <code>.env</code>, <code>secrets/</code>, <code>*.pem</code>, credentials. Never echo them. Never log them. Never include them in output. Full stop.</p>
+<h3>10. End With Proof</h3>
+<p>Every completed task ends with a structured output: summary, <code>git diff --stat</code>, verification command + last 20 lines of output, any outstanding TODOs, and a one-line run recipe.</p>
+<p>No &quot;done!&quot; with nothing to show for it. The agent proves its work.</p>
+<h2>The Commands</h2>
+<p>The full harness gives you eight commands. Five for conversation, three for coding.</p>
+<p><strong>Conversational:</strong></p>
+<ul>
+<li><code>/start</code> — kick off a new goal (optionally tag reasoning depth: quick, standard, or deep)</li>
+<li><code>/ts</code> — three expert agents present their approaches; you pick</li>
+<li><code>/review</code> — the current agent self-critiques against its own success criteria</li>
+<li><code>/handoff</code> — clean transition to a new agent with state preserved</li>
+<li><code>/save</code> — snapshot everything: outcome, progress, decisions, open questions, next step</li>
+</ul>
+<p><strong>Coding:</strong></p>
+<ul>
+<li><code>/explore</code> — map the codebase before doing anything</li>
+<li><code>/plan</code> — write an implementation plan; wait for approval</li>
+<li><code>/verify</code> — run tests, linter, type-checker; quote the output; don&#x27;t claim done until it passes</li>
+</ul>
+<h2>The AGENTS.md — One File, Every Tool</h2>
+<p>Here&#x27;s the bit that makes this genuinely cross-platform.</p>
+<p>The AGENTS.md spec is now the industry standard. It&#x27;s read natively by Codex, Cursor, Gemini CLI, Copilot, Windsurf, Aider, and (via a one-line CLAUDE.md pointer) Claude Code.</p>
+<p>I&#x27;ve stripped the coding discipline out of the Master Harness into a standalone AGENTS.md file you can drop into any repo root. Same rules, no orchestration layer. Every coding tool picks it up automatically.</p>
+<p>For Claude Code, you add a one-line <code>CLAUDE.md</code> next to it:</p>
+<div class="pp-code-shell"><div class="pp-code-header"><span>code.text</span><span>copy-ready</span></div><pre><code>Strictly follow the rules in ./AGENTS.md</code></pre></div>
+<p>That&#x27;s it. Your entire coding harness, in two files, works across every major tool.</p>
+<h2>What the Research Actually Says</h2>
+<p>I didn&#x27;t just make this stuff up over a beer (although some early versions were definitely sketched on a pub napkin).</p>
+<p>A few things I found that shaped the final harness:</p>
+<p><strong>The ETH Zurich study</strong> (Feb 2026) tested Claude Code, Codex, and Qwen Code on real coding benchmarks. Auto-generated instruction files <em>reduced</em> success rates by about 3% and increased costs by over 20%. The lesson: keep your harness short. Every line has to earn its keep.</p>
+<p><strong>The leaked Codex system prompt</strong> opens with: <em>&quot;You read the codebase first, resist easy assumptions, and let the shape of the existing system teach you how to move.&quot;</em> That&#x27;s now baked into the harness as a core principle.</p>
+<p><strong>The leaked Claude Code prompt</strong> caps inter-tool text to 25 words and final responses to 100 words unless the task demands more. Terse is the new default for coding agents.</p>
+<p><strong>Anthropic&#x27;s own data</strong> shows that unguided coding attempts succeed about 33% of the time. Plan-first sessions collapse that failure rate dramatically.</p>
+<h2>Who This Is For</h2>
+<p>If you&#x27;re a business owner using ChatGPT or Claude for strategy, content, and coaching — the conversational mode handles that. Same Professor Pro you might already know, just upgraded.</p>
+<p>If you&#x27;re a developer or builder using Claude Code, Codex, Cursor, or Gemini CLI — the autonomous mode and the AGENTS.md handle that. No fluff. Just discipline.</p>
+<p>If you&#x27;re both (like me) — one prompt, one harness, zero switching.</p>
+<h2>What This Isn&#x27;t</h2>
+<p>I&#x27;m not going to tell you this is the last prompt you&#x27;ll ever need. That&#x27;d be dishonest.</p>
+<p>Models change. New research drops. Some clever person will figure out something better next month.</p>
+<p>But right now, in May 2026, based on everything that&#x27;s been published, leaked, tested, and broken — this is the best harness I know how to build. And I&#x27;ve tested it across every major AI coding and chat environment.</p>
+<p>When the field moves again, I&#x27;ll update it. That&#x27;s how this works.</p>
+<h2>Get the Pack</h2>
+<p>The full Professor Pro v3.0 pack includes:</p>
+<ul>
+<li><strong>The Master Harness</strong> — one prompt, every environment, two modes</li>
+<li><strong>AGENTS.md</strong> — standalone repo-root file for all coding tools</li>
+<li><strong>CLAUDE.md</strong> — one-line Claude Code interop</li>
+<li><strong>Six conversational variations</strong> — Structural Strategy, Coaching, Technical, Business, Scalability, Modern Agentic</li>
+<li><strong>The v2.0 Master Prompt</strong> — conversational-only version for non-coding work</li>
+</ul>
+<p>Available at <strong><a href="https://aaronellis.co.network/">aaronellis.co.network</a></strong> and on Gumroad at <strong><a href="https://aiwizardry.gumroad.com/" rel="noopener">aiwizardry.gumroad.com</a></strong>.</p>
+<h2>The One Rule Above All</h2>
+<p>Read the codebase before assuming anything. Let the shape of the existing system teach you how to move.</p>
+<p>That applies to code. It also applies to business, coaching, content, and life.</p>
+<p>Understand what&#x27;s there. Then improve it.</p>
+<p>That&#x27;s the whole philosophy in one line.</p>
+<p><em>Aaron Ellis is an AI Orchestration &amp; Prompt Engineering Specialist based in Australia. He builds AI agents, teaches prompt engineering, hosts karaoke, and occasionally gets into fights (the sanctioned kind). Find him at <a href="https://aaronellis.co.network/">aaronellis.co.network</a>.</em></p>
+        <div class="pp-actions">
+          <a class="pp-button" href="mailto:completestrength@gmail.com?subject=Professor%20Pro%20Harness%20Article%20Enquiry">Email Aaron</a>
+          <a class="pp-button pp-button-secondary" href="https://aaronellis.co.network/articles/">Back to Articles</a>
+        </div>
+      </section>
+    </div>
+  </div>
+</article>
+
+<style id="ae-vintage-shared-chrome">
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Oswald:wght@400;500;600;700&family=Cinzel:wght@600;700&display=swap');
+:root {
+  --ae-ink: #061b1f;
+  --ae-deep-teal: #07343a;
+  --ae-teal: #0c5961;
+  --ae-blue-teal: #0f7480;
+  --ae-cream: #f7ead2;
+  --ae-paper: #fff4dc;
+  --ae-gold: #d99a22;
+  --ae-bright-gold: #f2bd45;
+  --ae-orange: #c75a24;
+  --ae-red-shadow: #7d2417;
+  --ae-black: #050807;
+  --ae-muted: #b8c7bd;
+  --ae-shadow: 0 18px 45px rgba(0,0,0,.35);
+}
+body .site-header.dynamic-header {
+  position: relative !important;
+  z-index: 50 !important;
+  background: radial-gradient(circle at 50% -30%, rgba(242, 189, 69, 0.20), transparent 40rem), linear-gradient(180deg, rgba(6, 27, 31, 0.98), rgba(7, 52, 58, 0.96)) !important;
+  border-bottom: 1px solid rgba(217, 154, 34, 0.38) !important;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.22) !important;
+}
+body .site-header.dynamic-header::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(242, 189, 69, 0.82), transparent);
+  pointer-events: none;
+}
+body .site-header .header-inner {
+  max-width: 1220px !important;
+  min-height: 86px !important;
+  padding: 14px 22px !important;
+  gap: 18px !important;
+  align-items: center !important;
+}
+body .site-header .site-branding { gap: 0.35rem !important; }
+body .site-header .custom-logo {
+  width: auto !important;
+  height: clamp(50px, 5vw, 68px) !important;
+  max-width: min(100%, 460px) !important;
+}
+body .site-header .site-description {
+  display: block !important;
+  color: rgba(247, 234, 210, 0.84) !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 0.72rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.12em !important;
+  line-height: 1.35 !important;
+  margin-top: 0.12rem !important;
+  text-transform: uppercase !important;
+}
+body .site-navigation { display: block !important; }
+body .site-navigation-toggle-holder { display: none !important; }
+body .site-navigation-dropdown { display: none !important; }
+body [class*='mobile-nav-strip'] { display: none !important; }
+body .site-navigation .menu { gap: 0.45rem !important; }
+body .site-navigation .menu > li > a {
+  align-items: center !important;
+  border-radius: 999px !important;
+  color: var(--ae-cream) !important;
+  display: inline-flex !important;
+  font-family: 'Oswald', 'Inter', sans-serif !important;
+  font-size: 0.98rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.04em !important;
+  min-height: 42px !important;
+  padding: 0.55rem 0.95rem !important;
+  text-transform: uppercase !important;
+  transition: color .18s ease, background-color .18s ease, transform .18s ease, box-shadow .18s ease !important;
+}
+body .site-navigation .menu > li > a:hover,
+body .site-navigation .menu > li.current-menu-item > a,
+body .site-navigation .menu > li.current_page_item > a {
+  background: rgba(247, 234, 210, 0.08) !important;
+  box-shadow: inset 0 0 0 1px rgba(217, 154, 34, 0.28) !important;
+  color: var(--ae-bright-gold) !important;
+  transform: translateY(-1px) !important;
+}
+body .site-navigation-toggle-holder { justify-content: flex-end !important; }
+body .site-navigation-toggle-holder .site-navigation-toggle {
+  background: rgba(5, 8, 7, 0.78) !important;
+  border: 1px solid rgba(217, 154, 34, 0.34) !important;
+  border-radius: 14px !important;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22) !important;
+  color: var(--ae-cream) !important;
+  min-height: 46px !important;
+  min-width: 46px !important;
+}
+body .site-navigation-toggle-holder .site-navigation-toggle:hover,
+body .site-navigation-toggle-holder.elementor-active .site-navigation-toggle {
+  background: rgba(12, 89, 97, 0.94) !important;
+  border-color: rgba(242, 189, 69, 0.44) !important;
+}
+body .site-navigation-dropdown {
+  left: auto !important;
+  right: 16px !important;
+  top: calc(100% + 10px) !important;
+  width: min(360px, calc(100vw - 32px)) !important;
+  max-width: 360px !important;
+  padding: 0 !important;
+}
+body .site-navigation-dropdown ul.menu {
+  backdrop-filter: blur(14px) !important;
+  background: radial-gradient(circle at top center, rgba(242, 189, 69, 0.14), transparent 38%), linear-gradient(180deg, rgba(6, 27, 31, 0.98), rgba(7, 52, 58, 0.98)) !important;
+  border: 1px solid rgba(217, 154, 34, 0.34) !important;
+  border-radius: 22px !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.34), inset 0 0 0 1px rgba(247, 234, 210, 0.08) !important;
+  display: grid !important;
+  gap: 8px !important;
+  margin: 0 !important;
+  padding: 12px !important;
+}
+body .site-navigation-dropdown ul.menu li a {
+  align-items: center !important;
+  background: rgba(247, 234, 210, 0.05) !important;
+  border: 1px solid rgba(247, 234, 210, 0.08) !important;
+  border-radius: 14px !important;
+  color: var(--ae-cream) !important;
+  display: flex !important;
+  font-family: 'Oswald', 'Inter', sans-serif !important;
+  font-size: 0.96rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.05em !important;
+  min-height: 50px !important;
+  padding: 0 16px !important;
+  text-transform: uppercase !important;
+}
+body .site-navigation-dropdown ul.menu li a:hover,
+body .site-navigation-dropdown ul.menu li.current-menu-item a,
+body .site-navigation-dropdown ul.menu li.current_page_item a {
+  background: rgba(217, 154, 34, 0.12) !important;
+  border-color: rgba(242, 189, 69, 0.34) !important;
+  color: var(--ae-paper) !important;
+}
+body .site-footer.dynamic-footer {
+  position: relative !important;
+  background: radial-gradient(circle at 50% -40%, rgba(242, 189, 69, 0.16), transparent 34rem), linear-gradient(180deg, rgba(5, 8, 7, 0.98), rgba(6, 27, 31, 0.98)) !important;
+  border-top: 1px solid rgba(217, 154, 34, 0.34) !important;
+  padding-top: 18px !important;
+}
+body .site-footer.dynamic-footer::before {
+  content: '✦';
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--ae-bright-gold);
+  font-size: 0.95rem;
+  background: linear-gradient(180deg, rgba(6, 27, 31, 1), rgba(6, 27, 31, 1));
+  padding: 0 12px;
+}
+body .site-footer .footer-inner {
+  align-items: center !important;
+  gap: 18px !important;
+  max-width: 1220px !important;
+  min-height: 100px !important;
+  padding: 18px 22px 28px !important;
+}
+body .site-footer .custom-logo {
+  width: auto !important;
+  height: clamp(36px, 4vw, 48px) !important;
+  max-width: min(100%, 320px) !important;
+}
+body .site-footer .site-description {
+  color: rgba(247, 234, 210, 0.78) !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 0.74rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+}
+body .site-footer .copyright p {
+  color: rgba(247, 234, 210, 0.72) !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 0.84rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.03em !important;
+}
+@media (max-width: 1024px) {
+  body .site-navigation { display: none !important; }
+  body .site-navigation-toggle-holder { display: flex !important; }
+  body .site-navigation-toggle-holder .site-navigation-toggle { display: flex !important; align-items: center !important; justify-content: center !important; }
+  body .site-navigation-dropdown { display: block !important; }
+  body .site-header .header-inner {
+    min-height: 76px !important;
+    padding: 14px 16px !important;
+  }
+  body .site-header .custom-logo {
+    height: clamp(44px, 10vw, 54px) !important;
+    max-width: min(100%, 300px) !important;
+  }
+  body .site-header .site-description {
+    font-size: 0.66rem !important;
+    letter-spacing: 0.1em !important;
+  }
+  body .site-navigation-dropdown {
+    right: 12px !important;
+    width: min(320px, calc(100vw - 24px)) !important;
+  }
+  body .site-footer .footer-inner {
+    gap: 14px !important;
+    min-height: 0 !important;
+    padding: 16px 16px 24px !important;
+  }
+}
+</style>
+
+<style id="ae-vintage-articles-override">
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Oswald:wght@400;500;600;700&family=Cinzel:wght@600;700&display=swap');
+.articles-page,
+.promptforge-article,
+.synapse-cor-article,
+.profpro-harness-article {
+  background:
+    radial-gradient(circle at 50% 0%, rgba(242,189,69,.18), transparent 34rem),
+    linear-gradient(180deg, #061b1f 0%, #07343a 52%, #061b1f 100%) !important;
+  color: #f7ead2 !important;
+  font-family: 'Inter', sans-serif !important;
+}
+.articles-page::before,
+.promptforge-article::before,
+.synapse-cor-article::before,
+.profpro-harness-article::before {
+  background-image:
+    linear-gradient(rgba(242,189,69,.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(242,189,69,.04) 1px, transparent 1px) !important;
+  background-size: 40px 40px !important;
+  opacity: .3 !important;
+}
+.ap-mobile-nav-strip,
+.pf-mobile-nav-strip,
+.sc-mobile-nav-strip,
+.pp-mobile-nav-strip { display: none !important; }
+.articles-page .ap-title,
+.promptforge-article .pf-title,
+.synapse-cor-article .sc-title,
+.profpro-harness-article .pp-title,
+.articles-page h2,
+.promptforge-article h2,
+.synapse-cor-article h2,
+.profpro-harness-article h2,
+.promptforge-article h3,
+.synapse-cor-article h3,
+.profpro-harness-article h3 {
+  font-family: 'Oswald', 'Inter', sans-serif !important;
+  text-transform: uppercase;
+  letter-spacing: .02em !important;
+  color: #fff4dc !important;
+}
+.articles-page .ap-title,
+.promptforge-article .pf-title,
+.synapse-cor-article .sc-title,
+.profpro-harness-article .pp-title {
+  text-shadow: 2px 2px 0 #050807, 4px 4px 0 #7d2417 !important;
+  letter-spacing: -.03em !important;
+  line-height: .95 !important;
+}
+.articles-page .ap-eyebrow,
+.promptforge-article .pf-eyebrow,
+.synapse-cor-article .sc-eyebrow,
+.profpro-harness-article .pp-eyebrow,
+.articles-page .ap-chip,
+.promptforge-article .pf-chip,
+.synapse-cor-article .sc-chip,
+.profpro-harness-article .pp-chip,
+.promptforge-article .pf-code-label,
+.synapse-cor-article .sc-code-label,
+.profpro-harness-article .pp-code-header {
+  color: #f2bd45 !important;
+  font-family: 'Cinzel', serif !important;
+  letter-spacing: .12em !important;
+  text-transform: uppercase !important;
+}
+.articles-page .ap-lede,
+.articles-page .ap-text,
+.articles-page .ap-status,
+.articles-page .ap-post-card p,
+.promptforge-article .pf-lede,
+.promptforge-article p,
+.promptforge-article li,
+.synapse-cor-article .sc-lede,
+.synapse-cor-article p,
+.synapse-cor-article li,
+.profpro-harness-article .pp-lede,
+.profpro-harness-article p,
+.profpro-harness-article li {
+  color: rgba(247,234,210,.82) !important;
+}
+.articles-page .ap-panel,
+.articles-page .ap-post-card,
+.promptforge-article .pf-panel,
+.synapse-cor-article .sc-panel,
+.profpro-harness-article .pp-panel,
+.promptforge-article .pf-code-shell,
+.synapse-cor-article .sc-code-shell,
+.profpro-harness-article .pp-code-shell,
+.promptforge-article .pf-hero-media,
+.synapse-cor-article .sc-hero-media,
+.profpro-harness-article .pp-hero-image {
+  background: linear-gradient(180deg, rgba(12,89,97,.92), rgba(6,27,31,.96)) !important;
+  border: 2px solid rgba(217,154,34,.34) !important;
+  box-shadow: 0 20px 48px rgba(0,0,0,.26) !important;
+}
+.articles-page .ap-post-card::before,
+.promptforge-article .pf-panel::before,
+.synapse-cor-article .sc-panel::before,
+.profpro-harness-article .pp-panel::before,
+.promptforge-article .pf-code-shell::before,
+.synapse-cor-article .sc-code-shell::before,
+.profpro-harness-article .pp-code-shell::before {
+  content:'';
+  position:absolute;
+  inset:8px;
+  border:1px solid rgba(247,234,210,.12);
+  border-radius:inherit;
+  pointer-events:none;
+}
+.articles-page .ap-button,
+.promptforge-article .pf-button,
+.synapse-cor-article .sc-button,
+.profpro-harness-article .pp-button {
+  background: linear-gradient(180deg, #f2bd45, #d99a22) !important;
+  color: #050807 !important;
+  border: 2px solid #050807 !important;
+  box-shadow: 0 5px 0 #7d2417 !important;
+  font-family: 'Oswald', 'Inter', sans-serif !important;
+  text-transform: uppercase !important;
+  letter-spacing: .06em !important;
+}
+.articles-page .ap-button-secondary,
+.promptforge-article .pf-button-secondary,
+.synapse-cor-article .sc-button-secondary,
+.profpro-harness-article .pp-button-secondary {
+  background: rgba(247,234,210,.05) !important;
+  color: #fff4dc !important;
+  border-color: rgba(217,154,34,.3) !important;
+}
+.articles-page .ap-chip,
+.promptforge-article .pf-chip,
+.synapse-cor-article .sc-chip,
+.profpro-harness-article .pp-chip {
+  background: rgba(5,8,7,.36) !important;
+  border: 1px solid rgba(217,154,34,.3) !important;
+}
+.articles-page .ap-post-card a,
+.promptforge-article a,
+.synapse-cor-article a,
+.profpro-harness-article a {
+  color: #f2bd45 !important;
+}
+.promptforge-article code,
+.synapse-cor-article code,
+.profpro-harness-article code,
+.promptforge-article pre,
+.synapse-cor-article pre,
+.profpro-harness-article pre {
+  color: #fff4dc !important;
+}
+</style>
+
+<style id="ae-header-polish-20260603">
+body .site-header.dynamic-header {
+  background: radial-gradient(circle at 50% -24%, rgba(242, 189, 69, 0.16), transparent 34rem), linear-gradient(180deg, rgba(6, 27, 31, 0.98), rgba(7, 52, 58, 0.96)) !important;
+  border-bottom: 1px solid rgba(217, 154, 34, 0.42) !important;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18) !important;
+  position: relative !important;
+  z-index: 100 !important;
+}
+body .site-header .header-inner {
+  align-items: center !important;
+  column-gap: 14px !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  max-width: 1180px !important;
+  min-height: 66px !important;
+  padding: 8px 18px !important;
+  row-gap: 6px !important;
+}
+body .site-header .site-branding {
+  align-items: center !important;
+  display: flex !important;
+  flex: 0 1 360px !important;
+  gap: 6px !important;
+  justify-content: center !important;
+  min-width: 0 !important;
+  text-align: center !important;
+}
+body .site-header .site-logo,
+body .site-header .custom-logo-link {
+  display: block !important;
+  line-height: 0 !important;
+  max-width: 100% !important;
+}
+body .site-header .custom-logo {
+  display: block !important;
+  height: clamp(38px, 3.4vw, 52px) !important;
+  max-height: 52px !important;
+  max-width: min(360px, 42vw) !important;
+  object-fit: contain !important;
+  width: auto !important;
+}
+body .site-header .site-description {
+  color: rgba(247, 234, 210, 0.78) !important;
+  display: block !important;
+  flex-basis: 100% !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 0.58rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.08em !important;
+  line-height: 1.15 !important;
+  margin: 0 !important;
+  text-transform: uppercase !important;
+}
+body .site-navigation {
+  display: block !important;
+  flex: 1 1 620px !important;
+  min-width: 0 !important;
+}
+body .site-navigation .menu {
+  align-items: center !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 5px !important;
+  justify-content: center !important;
+  margin: 0 !important;
+}
+body .site-navigation .menu > li > a {
+  align-items: center !important;
+  border-radius: 999px !important;
+  color: var(--ae-cream) !important;
+  display: inline-flex !important;
+  font-family: 'Oswald', 'Inter', sans-serif !important;
+  font-size: 0.82rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.03em !important;
+  line-height: 1 !important;
+  min-height: 32px !important;
+  padding: 0.4rem 0.62rem !important;
+  text-transform: uppercase !important;
+  white-space: nowrap !important;
+}
+body .site-navigation .menu > li > a:hover,
+body .site-navigation .menu > li.current-menu-item > a,
+body .site-navigation .menu > li.current_page_item > a {
+  background: rgba(247, 234, 210, 0.07) !important;
+  box-shadow: inset 0 0 0 1px rgba(217, 154, 34, 0.26) !important;
+  color: var(--ae-bright-gold) !important;
+  transform: none !important;
+}
+body .site-navigation-toggle-holder,
+body .site-navigation-dropdown {
+  display: none !important;
+}
+body [class*='mobile-nav-strip'] {
+  display: none !important;
+}
+@media (max-width: 1100px) and (min-width: 981px) {
+  body .site-header .header-inner {
+    padding: 8px 12px !important;
+  }
+  body .site-header .site-branding {
+    flex-basis: 320px !important;
+  }
+  body .site-header .custom-logo {
+    max-width: min(320px, 38vw) !important;
+  }
+  body .site-navigation .menu > li > a {
+    font-size: 0.76rem !important;
+    min-height: 30px !important;
+    padding: 0.36rem 0.48rem !important;
+  }
+}
+@media (max-width: 980px) {
+  body .site-header .header-inner {
+    justify-content: space-between !important;
+    min-height: 64px !important;
+    padding: 8px 14px !important;
+  }
+  body .site-header .site-branding {
+    flex: 1 1 auto !important;
+    justify-content: flex-start !important;
+    text-align: left !important;
+  }
+  body .site-header .custom-logo {
+    height: clamp(36px, 9vw, 46px) !important;
+    max-height: 46px !important;
+    max-width: min(270px, 72vw) !important;
+  }
+  body .site-header .site-description {
+    display: none !important;
+  }
+  body .site-navigation {
+    display: none !important;
+  }
+  body .site-navigation-toggle-holder {
+    display: flex !important;
+    flex: 0 0 auto !important;
+    justify-content: flex-end !important;
+  }
+  body .site-navigation-toggle-holder .site-navigation-toggle {
+    align-items: center !important;
+    background: rgba(5, 8, 7, 0.84) !important;
+    border: 1px solid rgba(217, 154, 34, 0.36) !important;
+    border-radius: 12px !important;
+    color: var(--ae-cream) !important;
+    display: flex !important;
+    justify-content: center !important;
+    min-height: 42px !important;
+    min-width: 42px !important;
+  }
+  body .site-navigation-dropdown {
+    display: block !important;
+    left: auto !important;
+    max-width: 340px !important;
+    padding: 0 !important;
+    right: 12px !important;
+    top: calc(100% + 8px) !important;
+    width: min(340px, calc(100vw - 24px)) !important;
+  }
+  body .site-navigation-dropdown ul.menu {
+    background: radial-gradient(circle at top center, rgba(242, 189, 69, 0.13), transparent 38%), linear-gradient(180deg, rgba(6, 27, 31, 0.99), rgba(7, 52, 58, 0.99)) !important;
+    border: 1px solid rgba(217, 154, 34, 0.34) !important;
+    border-radius: 18px !important;
+    box-shadow: 0 22px 55px rgba(0, 0, 0, 0.34) !important;
+    display: grid !important;
+    gap: 7px !important;
+    margin: 0 !important;
+    padding: 10px !important;
+  }
+  body .site-navigation-dropdown ul.menu li a {
+    align-items: center !important;
+    background: rgba(247, 234, 210, 0.055) !important;
+    border: 1px solid rgba(247, 234, 210, 0.09) !important;
+    border-radius: 12px !important;
+    color: var(--ae-cream) !important;
+    display: flex !important;
+    font-family: 'Oswald', 'Inter', sans-serif !important;
+    font-size: 0.92rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.04em !important;
+    min-height: 44px !important;
+    padding: 0 14px !important;
+    text-transform: uppercase !important;
+  }
+}
+@media (max-width: 420px) {
+  body .site-header .custom-logo {
+    max-width: min(235px, 68vw) !important;
+  }
+}
+</style>
+<style id="ae-nav-resize-fix-css">@media (max-width:1024px){body .site-header .site-navigation-dropdown[aria-hidden="true"]{display:none!important}body .site-header .site-navigation-dropdown:not([aria-hidden="true"]){display:block!important;opacity:1!important;visibility:visible!important;transform:none!important;pointer-events:auto!important}}</style><script id="ae-nav-resize-fix-js" src="data:text/javascript;base64,LyogYWUtbmF2LXJlc2l6ZS1maXgg4oCUIEhlbGxvIEVsZW1lbnRvciAzLjQuOSBjbG9zZXMgdGhlIG1vYmlsZSBkcm9wZG93biBvbiBhbnkKICAgd2luZG93IHJlc2l6ZSAoaW5jbC4gbW9iaWxlIFVSTC1iYXIgY29sbGFwc2Ugd2hlbiB5b3Ugc3RhcnQgc2Nyb2xsaW5nKSwgYnkKICAgc3RyaXBwaW5nIC5lbGVtZW50b3ItYWN0aXZlIGZyb20gdGhlIHRvZ2dsZSBob2xkZXIgV0lUSE9VVCByZXNldHRpbmcKICAgYXJpYS1leHBhbmRlZC9hcmlhLWhpZGRlbi4gUmVzdWx0OiBtZW51IHZhbmlzaGVzIG1pZC1zY3JvbGwsIFggc3RheXMgc3R1Y2suCiAgIFNoaW06IHdoaWxlIHRoZSBkcm9wZG93biBpcyBnZW51aW5lbHkgb3BlbiAoYXJpYS1oaWRkZW49ImZhbHNlIiksIHZldG8gdGhhdAogICBjbGFzcyByZW1vdmFsOyBrZWVwIHRoZSB0b2dnbGUgaWNvbiBzdGF0ZSBpbiBzeW5jLiBSZWFsIGNsb3NlcyAod2hpY2ggc2V0CiAgIGFyaWEtaGlkZGVuPSJ0cnVlIikgcGFzcyB0aHJvdWdoIHVudG91Y2hlZC4gKi8KKGZ1bmN0aW9uKCl7CiAgZnVuY3Rpb24gaW5pdCgpewogICAgdmFyIGhvbGRlcj1kb2N1bWVudC5xdWVyeVNlbGVjdG9yKCcuc2l0ZS1oZWFkZXIgLnNpdGUtbmF2aWdhdGlvbi10b2dnbGUtaG9sZGVyJyk7CiAgICB2YXIgZHJvcD1kb2N1bWVudC5xdWVyeVNlbGVjdG9yKCcuc2l0ZS1oZWFkZXIgLnNpdGUtbmF2aWdhdGlvbi1kcm9wZG93bicpOwogICAgdmFyIHRvZ2dsZT1kb2N1bWVudC5xdWVyeVNlbGVjdG9yKCcuc2l0ZS1oZWFkZXIgLnNpdGUtbmF2aWdhdGlvbi10b2dnbGUnKTsKICAgIGlmKCFob2xkZXJ8fCFkcm9wfHwhdG9nZ2xlKXtyZXR1cm47fQogICAgaWYoaG9sZGVyLmRhdGFzZXQuYWVOYXZTaGltKXtyZXR1cm47fQogICAgaG9sZGVyLmRhdGFzZXQuYWVOYXZTaGltPScxJzsKICAgIHZhciBzeW5jaW5nPWZhbHNlOwogICAgZnVuY3Rpb24gc3luYygpewogICAgICBpZihzeW5jaW5nKXtyZXR1cm47fQogICAgICBzeW5jaW5nPXRydWU7CiAgICAgIHZhciBvcGVuPWRyb3AuZ2V0QXR0cmlidXRlKCdhcmlhLWhpZGRlbicpPT09J2ZhbHNlJzsKICAgICAgdmFyIGFjdGl2ZT1ob2xkZXIuY2xhc3NMaXN0LmNvbnRhaW5zKCdlbGVtZW50b3ItYWN0aXZlJyk7CiAgICAgIGlmKG9wZW4mJiFhY3RpdmUpe2hvbGRlci5jbGFzc0xpc3QuYWRkKCdlbGVtZW50b3ItYWN0aXZlJyk7fQogICAgICBpZighb3BlbiYmYWN0aXZlKXtob2xkZXIuY2xhc3NMaXN0LnJlbW92ZSgnZWxlbWVudG9yLWFjdGl2ZScpO30KICAgICAgdG9nZ2xlLnNldEF0dHJpYnV0ZSgnYXJpYS1leHBhbmRlZCcsb3Blbj8ndHJ1ZSc6J2ZhbHNlJyk7CiAgICAgIHN5bmNpbmc9ZmFsc2U7CiAgICB9CiAgICB2YXIgbW89bmV3IE11dGF0aW9uT2JzZXJ2ZXIoc3luYyk7CiAgICBtby5vYnNlcnZlKGhvbGRlcix7YXR0cmlidXRlczp0cnVlLGF0dHJpYnV0ZUZpbHRlcjpbJ2NsYXNzJ119KTsKICAgIG1vLm9ic2VydmUoZHJvcCx7YXR0cmlidXRlczp0cnVlLGF0dHJpYnV0ZUZpbHRlcjpbJ2FyaWEtaGlkZGVuJ119KTsKICB9CiAgaWYoZG9jdW1lbnQucmVhZHlTdGF0ZT09PSdjb21wbGV0ZScpe2luaXQoKTt9CiAgZWxzZXt3aW5kb3cuYWRkRXZlbnRMaXN0ZW5lcignbG9hZCcsaW5pdCk7fQp9KSgpOwo="></script>

@@ -1,0 +1,783 @@
+---
+layout: base.njk
+title: "Bring Me the Mess: How Rough Ideas Become Build-Ready Systems"
+permalink: "/bring-me-the-mess/"
+wpId: 339
+---
+<style id="bring-mess-article-styles">
+
+.bring-mess-article .bma-kicker {
+  background: rgba(5,8,7,.72);
+  border: 1px solid rgba(242,189,69,.42);
+  border-radius: 999px;
+  color: #fff4dc !important;
+  display: inline-flex;
+  padding: .48rem .72rem;
+  text-shadow: 0 1px 0 #050807;
+}
+.bring-mess-article .bma-chip {
+  background: rgba(255,244,220,.95) !important;
+  border-color: rgba(217,154,34,.5) !important;
+  color: #102018 !important;
+  text-shadow: none !important;
+}
+.bring-mess-article .bma-hero-image {
+  border: 2px solid rgba(217,154,34,.46);
+  border-radius: 18px;
+  box-shadow: 0 24px 68px rgba(0,0,0,.34);
+  display: block;
+  height: auto;
+  margin: 30px 0 0;
+  width: 100%;
+}
+@media (max-width: 700px) {
+  .bring-mess-article .bma-hero-image {
+    border-radius: 14px;
+    margin-top: 24px;
+  }
+}
+
+body.single-post .entry-title,
+body.single-post .entry-header,
+body.single-post .page-header {
+  display: none !important;
+}
+.bring-mess-article {
+  background: radial-gradient(circle at 50% 0%, rgba(242,189,69,.20), transparent 32rem), linear-gradient(180deg, #061b1f 0%, #07343a 42%, #050807 100%);
+  color: #f7ead2;
+  font-family: Inter, system-ui, sans-serif;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  overflow-x: clip;
+  position: relative;
+  width: 100vw;
+}
+.bring-mess-article::before {
+  background-image: linear-gradient(rgba(242,189,69,.055) 1px, transparent 1px), linear-gradient(90deg, rgba(242,189,69,.04) 1px, transparent 1px);
+  background-size: 38px 38px;
+  content: '';
+  inset: 0;
+  opacity: .36;
+  pointer-events: none;
+  position: absolute;
+}
+.bring-mess-article * { box-sizing: border-box; }
+.bma-wrap {
+  margin: 0 auto;
+  max-width: 980px;
+  padding: 0 22px;
+  position: relative;
+  z-index: 1;
+}
+.bma-hero {
+  padding: clamp(54px, 8vw, 92px) 0 34px;
+}
+.bma-kicker,
+.bma-chip,
+.bma-card-label {
+  color: #f2bd45;
+  font-family: Cinzel, Georgia, serif;
+  font-weight: 800;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+.bma-kicker { font-size: .84rem; margin: 0 0 16px; }
+.bma-title {
+  color: #fff4dc;
+  font-family: Oswald, Inter, sans-serif;
+  font-size: clamp(3.2rem, 9vw, 7rem);
+  letter-spacing: .01em;
+  line-height: .88;
+  margin: 0;
+  max-width: 900px;
+  text-transform: uppercase;
+  text-shadow: 2px 2px 0 #050807, 5px 5px 0 #7d2417;
+}
+.bma-subtitle {
+  color: rgba(247,234,210,.9);
+  font-size: clamp(1.2rem, 2.6vw, 1.55rem);
+  font-weight: 700;
+  line-height: 1.35;
+  margin: 20px 0 0;
+  max-width: 720px;
+}
+.bma-hero-line {
+  background: linear-gradient(180deg, rgba(255,244,220,.98), rgba(247,234,210,.96));
+  border: 2px solid rgba(217,154,34,.42);
+  border-radius: 18px;
+  box-shadow: 0 20px 52px rgba(0,0,0,.24);
+  color: #102018;
+  font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+  font-weight: 800;
+  line-height: 1.45;
+  margin: 30px 0 0;
+  padding: 22px;
+}
+.bma-meta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+.bma-chip {
+  background: rgba(5,8,7,.54);
+  border: 1px solid rgba(217,154,34,.38);
+  border-radius: 999px;
+  font-size: .74rem;
+  padding: .5rem .72rem;
+}
+.bma-content { padding: 12px 0 clamp(70px, 9vw, 110px); }
+.bma-panel {
+  background: linear-gradient(180deg, rgba(255,244,220,.98), rgba(247,234,210,.96));
+  border: 2px solid rgba(217,154,34,.38);
+  border-radius: 18px;
+  box-shadow: 0 22px 58px rgba(0,0,0,.24);
+  color: #102018;
+  margin: 0 0 22px;
+  padding: clamp(24px, 4vw, 42px);
+  position: relative;
+}
+.bma-panel::before {
+  border: 1px solid rgba(6,27,31,.12);
+  border-radius: 12px;
+  content: '';
+  inset: 8px;
+  pointer-events: none;
+  position: absolute;
+}
+.bma-panel > * { position: relative; z-index: 1; }
+.bma-panel h2 {
+  color: #061b1f;
+  font-family: Oswald, Inter, sans-serif;
+  font-size: clamp(1.85rem, 4.6vw, 3.1rem);
+  line-height: 1;
+  margin: 0 0 18px;
+  text-transform: uppercase;
+}
+.bma-panel p,
+.bma-panel li {
+  color: #102018;
+  font-size: 1.05rem;
+  line-height: 1.75;
+}
+.bma-panel p { margin: 0 0 16px; }
+.bma-panel p:last-child { margin-bottom: 0; }
+.bma-panel ul { margin: 12px 0 0; padding-left: 1.2rem; }
+.bma-panel li { margin: 0 0 8px; }
+.bma-quote {
+  background: linear-gradient(180deg, rgba(6,27,31,.96), rgba(7,52,58,.96));
+  border: 2px solid rgba(217,154,34,.42);
+  border-radius: 18px;
+  box-shadow: 0 22px 58px rgba(0,0,0,.24);
+  color: #fff4dc;
+  font-family: Oswald, Inter, sans-serif;
+  font-size: clamp(1.7rem, 4vw, 2.8rem);
+  line-height: 1.05;
+  margin: 0 0 22px;
+  padding: clamp(26px, 5vw, 46px);
+  text-transform: uppercase;
+}
+.bma-quote p { margin: 0; }
+.bma-cta {
+  background: linear-gradient(180deg, #f2bd45, #d99a22);
+  border: 3px solid #050807;
+  border-radius: 20px;
+  box-shadow: 0 7px 0 #7d2417, 0 24px 58px rgba(0,0,0,.28);
+  color: #050807;
+  margin-top: 28px;
+  padding: clamp(24px, 4vw, 40px);
+}
+.bma-cta h2,
+.bma-cta p { color: #050807; }
+.bma-cta h2 { font-family: Oswald, Inter, sans-serif; font-size: clamp(2rem, 5vw, 3.4rem); line-height: 1; margin: 0 0 14px; text-transform: uppercase; }
+.bma-cta p { font-size: 1.08rem; font-weight: 650; line-height: 1.62; margin: 0; }
+@media (max-width: 700px) {
+  .bma-wrap { padding: 0 18px; }
+  .bma-title { text-shadow: 1px 1px 0 #050807, 3px 3px 0 #7d2417; }
+  .bma-panel { padding: 24px; }
+}
+</style>
+
+<style id="ae-vintage-shared-chrome">
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Oswald:wght@400;500;600;700&family=Cinzel:wght@600;700&display=swap');
+:root {
+  --ae-ink: #061b1f;
+  --ae-deep-teal: #07343a;
+  --ae-teal: #0c5961;
+  --ae-blue-teal: #0f7480;
+  --ae-cream: #f7ead2;
+  --ae-paper: #fff4dc;
+  --ae-gold: #d99a22;
+  --ae-bright-gold: #f2bd45;
+  --ae-orange: #c75a24;
+  --ae-red-shadow: #7d2417;
+  --ae-black: #050807;
+  --ae-muted: #b8c7bd;
+  --ae-shadow: 0 18px 45px rgba(0,0,0,.35);
+}
+body .site-header.dynamic-header {
+  position: relative !important;
+  z-index: 50 !important;
+  background: radial-gradient(circle at 50% -30%, rgba(242, 189, 69, 0.20), transparent 40rem), linear-gradient(180deg, rgba(6, 27, 31, 0.98), rgba(7, 52, 58, 0.96)) !important;
+  border-bottom: 1px solid rgba(217, 154, 34, 0.38) !important;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.22) !important;
+}
+body .site-header.dynamic-header::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(242, 189, 69, 0.82), transparent);
+  pointer-events: none;
+}
+body .site-header .header-inner {
+  max-width: 1220px !important;
+  min-height: 86px !important;
+  padding: 14px 22px !important;
+  gap: 18px !important;
+  align-items: center !important;
+}
+body .site-header .site-branding { gap: 0.35rem !important; }
+body .site-header .custom-logo {
+  width: auto !important;
+  height: clamp(50px, 5vw, 68px) !important;
+  max-width: min(100%, 460px) !important;
+}
+body .site-header .site-description {
+  display: block !important;
+  color: rgba(247, 234, 210, 0.84) !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 0.72rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.12em !important;
+  line-height: 1.35 !important;
+  margin-top: 0.12rem !important;
+  text-transform: uppercase !important;
+}
+body .site-navigation { display: block !important; }
+body .site-navigation-toggle-holder { display: none !important; }
+body .site-navigation-dropdown { display: none !important; }
+body [class*='mobile-nav-strip'] { display: none !important; }
+body .site-navigation .menu { gap: 0.45rem !important; }
+body .site-navigation .menu > li > a {
+  align-items: center !important;
+  border-radius: 999px !important;
+  color: var(--ae-cream) !important;
+  display: inline-flex !important;
+  font-family: 'Oswald', 'Inter', sans-serif !important;
+  font-size: 0.98rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.04em !important;
+  min-height: 42px !important;
+  padding: 0.55rem 0.95rem !important;
+  text-transform: uppercase !important;
+  transition: color .18s ease, background-color .18s ease, transform .18s ease, box-shadow .18s ease !important;
+}
+body .site-navigation .menu > li > a:hover,
+body .site-navigation .menu > li.current-menu-item > a,
+body .site-navigation .menu > li.current_page_item > a {
+  background: rgba(247, 234, 210, 0.08) !important;
+  box-shadow: inset 0 0 0 1px rgba(217, 154, 34, 0.28) !important;
+  color: var(--ae-bright-gold) !important;
+  transform: translateY(-1px) !important;
+}
+body .site-navigation-toggle-holder { justify-content: flex-end !important; }
+body .site-navigation-toggle-holder .site-navigation-toggle {
+  background: rgba(5, 8, 7, 0.78) !important;
+  border: 1px solid rgba(217, 154, 34, 0.34) !important;
+  border-radius: 14px !important;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22) !important;
+  color: var(--ae-cream) !important;
+  min-height: 46px !important;
+  min-width: 46px !important;
+}
+body .site-navigation-toggle-holder .site-navigation-toggle:hover,
+body .site-navigation-toggle-holder.elementor-active .site-navigation-toggle {
+  background: rgba(12, 89, 97, 0.94) !important;
+  border-color: rgba(242, 189, 69, 0.44) !important;
+}
+body .site-navigation-dropdown {
+  left: auto !important;
+  right: 16px !important;
+  top: calc(100% + 10px) !important;
+  width: min(360px, calc(100vw - 32px)) !important;
+  max-width: 360px !important;
+  padding: 0 !important;
+}
+body .site-navigation-dropdown ul.menu {
+  backdrop-filter: blur(14px) !important;
+  background: radial-gradient(circle at top center, rgba(242, 189, 69, 0.14), transparent 38%), linear-gradient(180deg, rgba(6, 27, 31, 0.98), rgba(7, 52, 58, 0.98)) !important;
+  border: 1px solid rgba(217, 154, 34, 0.34) !important;
+  border-radius: 22px !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.34), inset 0 0 0 1px rgba(247, 234, 210, 0.08) !important;
+  display: grid !important;
+  gap: 8px !important;
+  margin: 0 !important;
+  padding: 12px !important;
+}
+body .site-navigation-dropdown ul.menu li a {
+  align-items: center !important;
+  background: rgba(247, 234, 210, 0.05) !important;
+  border: 1px solid rgba(247, 234, 210, 0.08) !important;
+  border-radius: 14px !important;
+  color: var(--ae-cream) !important;
+  display: flex !important;
+  font-family: 'Oswald', 'Inter', sans-serif !important;
+  font-size: 0.96rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.05em !important;
+  min-height: 50px !important;
+  padding: 0 16px !important;
+  text-transform: uppercase !important;
+}
+body .site-navigation-dropdown ul.menu li a:hover,
+body .site-navigation-dropdown ul.menu li.current-menu-item a,
+body .site-navigation-dropdown ul.menu li.current_page_item a {
+  background: rgba(217, 154, 34, 0.12) !important;
+  border-color: rgba(242, 189, 69, 0.34) !important;
+  color: var(--ae-paper) !important;
+}
+body .site-footer.dynamic-footer {
+  position: relative !important;
+  background: radial-gradient(circle at 50% -40%, rgba(242, 189, 69, 0.16), transparent 34rem), linear-gradient(180deg, rgba(5, 8, 7, 0.98), rgba(6, 27, 31, 0.98)) !important;
+  border-top: 1px solid rgba(217, 154, 34, 0.34) !important;
+  padding-top: 18px !important;
+}
+body .site-footer.dynamic-footer::before {
+  content: '✦';
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--ae-bright-gold);
+  font-size: 0.95rem;
+  background: linear-gradient(180deg, rgba(6, 27, 31, 1), rgba(6, 27, 31, 1));
+  padding: 0 12px;
+}
+body .site-footer .footer-inner {
+  align-items: center !important;
+  gap: 18px !important;
+  max-width: 1220px !important;
+  min-height: 100px !important;
+  padding: 18px 22px 28px !important;
+}
+body .site-footer .custom-logo {
+  width: auto !important;
+  height: clamp(36px, 4vw, 48px) !important;
+  max-width: min(100%, 320px) !important;
+}
+body .site-footer .site-description {
+  color: rgba(247, 234, 210, 0.78) !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 0.74rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+}
+body .site-footer .copyright p {
+  color: rgba(247, 234, 210, 0.72) !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 0.84rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.03em !important;
+}
+@media (max-width: 1024px) {
+  body .site-navigation { display: none !important; }
+  body .site-navigation-toggle-holder { display: flex !important; }
+  body .site-navigation-toggle-holder .site-navigation-toggle { display: flex !important; align-items: center !important; justify-content: center !important; }
+  body .site-navigation-dropdown { display: block !important; }
+  body .site-header .header-inner {
+    min-height: 76px !important;
+    padding: 14px 16px !important;
+  }
+  body .site-header .custom-logo {
+    height: clamp(44px, 10vw, 54px) !important;
+    max-width: min(100%, 300px) !important;
+  }
+  body .site-header .site-description {
+    font-size: 0.66rem !important;
+    letter-spacing: 0.1em !important;
+  }
+  body .site-navigation-dropdown {
+    right: 12px !important;
+    width: min(320px, calc(100vw - 24px)) !important;
+  }
+  body .site-footer .footer-inner {
+    gap: 14px !important;
+    min-height: 0 !important;
+    padding: 16px 16px 24px !important;
+  }
+}
+</style>
+
+<style id="ae-vintage-articles-override">
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Oswald:wght@400;500;600;700&family=Cinzel:wght@600;700&display=swap');
+.articles-page,
+.promptforge-article,
+.synapse-cor-article,
+.profpro-harness-article {
+  background:
+    radial-gradient(circle at 50% 0%, rgba(242,189,69,.18), transparent 34rem),
+    linear-gradient(180deg, #061b1f 0%, #07343a 52%, #061b1f 100%) !important;
+  color: #f7ead2 !important;
+  font-family: 'Inter', sans-serif !important;
+}
+.articles-page::before,
+.promptforge-article::before,
+.synapse-cor-article::before,
+.profpro-harness-article::before {
+  background-image:
+    linear-gradient(rgba(242,189,69,.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(242,189,69,.04) 1px, transparent 1px) !important;
+  background-size: 40px 40px !important;
+  opacity: .3 !important;
+}
+.ap-mobile-nav-strip,
+.pf-mobile-nav-strip,
+.sc-mobile-nav-strip,
+.pp-mobile-nav-strip { display: none !important; }
+.articles-page .ap-title,
+.promptforge-article .pf-title,
+.synapse-cor-article .sc-title,
+.profpro-harness-article .pp-title,
+.articles-page h2,
+.promptforge-article h2,
+.synapse-cor-article h2,
+.profpro-harness-article h2,
+.promptforge-article h3,
+.synapse-cor-article h3,
+.profpro-harness-article h3 {
+  font-family: 'Oswald', 'Inter', sans-serif !important;
+  text-transform: uppercase;
+  letter-spacing: .02em !important;
+  color: #fff4dc !important;
+}
+.articles-page .ap-title,
+.promptforge-article .pf-title,
+.synapse-cor-article .sc-title,
+.profpro-harness-article .pp-title {
+  text-shadow: 2px 2px 0 #050807, 4px 4px 0 #7d2417 !important;
+  letter-spacing: -.03em !important;
+  line-height: .95 !important;
+}
+.articles-page .ap-eyebrow,
+.promptforge-article .pf-eyebrow,
+.synapse-cor-article .sc-eyebrow,
+.profpro-harness-article .pp-eyebrow,
+.articles-page .ap-chip,
+.promptforge-article .pf-chip,
+.synapse-cor-article .sc-chip,
+.profpro-harness-article .pp-chip,
+.promptforge-article .pf-code-label,
+.synapse-cor-article .sc-code-label,
+.profpro-harness-article .pp-code-header {
+  color: #f2bd45 !important;
+  font-family: 'Cinzel', serif !important;
+  letter-spacing: .12em !important;
+  text-transform: uppercase !important;
+}
+.articles-page .ap-lede,
+.articles-page .ap-text,
+.articles-page .ap-status,
+.articles-page .ap-post-card p,
+.promptforge-article .pf-lede,
+.promptforge-article p,
+.promptforge-article li,
+.synapse-cor-article .sc-lede,
+.synapse-cor-article p,
+.synapse-cor-article li,
+.profpro-harness-article .pp-lede,
+.profpro-harness-article p,
+.profpro-harness-article li {
+  color: rgba(247,234,210,.82) !important;
+}
+.articles-page .ap-panel,
+.articles-page .ap-post-card,
+.promptforge-article .pf-panel,
+.synapse-cor-article .sc-panel,
+.profpro-harness-article .pp-panel,
+.promptforge-article .pf-code-shell,
+.synapse-cor-article .sc-code-shell,
+.profpro-harness-article .pp-code-shell,
+.promptforge-article .pf-hero-media,
+.synapse-cor-article .sc-hero-media,
+.profpro-harness-article .pp-hero-image {
+  background: linear-gradient(180deg, rgba(12,89,97,.92), rgba(6,27,31,.96)) !important;
+  border: 2px solid rgba(217,154,34,.34) !important;
+  box-shadow: 0 20px 48px rgba(0,0,0,.26) !important;
+}
+.articles-page .ap-post-card::before,
+.promptforge-article .pf-panel::before,
+.synapse-cor-article .sc-panel::before,
+.profpro-harness-article .pp-panel::before,
+.promptforge-article .pf-code-shell::before,
+.synapse-cor-article .sc-code-shell::before,
+.profpro-harness-article .pp-code-shell::before {
+  content:'';
+  position:absolute;
+  inset:8px;
+  border:1px solid rgba(247,234,210,.12);
+  border-radius:inherit;
+  pointer-events:none;
+}
+.articles-page .ap-button,
+.promptforge-article .pf-button,
+.synapse-cor-article .sc-button,
+.profpro-harness-article .pp-button {
+  background: linear-gradient(180deg, #f2bd45, #d99a22) !important;
+  color: #050807 !important;
+  border: 2px solid #050807 !important;
+  box-shadow: 0 5px 0 #7d2417 !important;
+  font-family: 'Oswald', 'Inter', sans-serif !important;
+  text-transform: uppercase !important;
+  letter-spacing: .06em !important;
+}
+.articles-page .ap-button-secondary,
+.promptforge-article .pf-button-secondary,
+.synapse-cor-article .sc-button-secondary,
+.profpro-harness-article .pp-button-secondary {
+  background: rgba(247,234,210,.05) !important;
+  color: #fff4dc !important;
+  border-color: rgba(217,154,34,.3) !important;
+}
+.articles-page .ap-chip,
+.promptforge-article .pf-chip,
+.synapse-cor-article .sc-chip,
+.profpro-harness-article .pp-chip {
+  background: rgba(5,8,7,.36) !important;
+  border: 1px solid rgba(217,154,34,.3) !important;
+}
+.articles-page .ap-post-card a,
+.promptforge-article a,
+.synapse-cor-article a,
+.profpro-harness-article a {
+  color: #f2bd45 !important;
+}
+.promptforge-article code,
+.synapse-cor-article code,
+.profpro-harness-article code,
+.promptforge-article pre,
+.synapse-cor-article pre,
+.profpro-harness-article pre {
+  color: #fff4dc !important;
+}
+</style>
+
+<style id="ae-header-polish-20260603">
+body .site-header.dynamic-header {
+  background: radial-gradient(circle at 50% -24%, rgba(242, 189, 69, 0.16), transparent 34rem), linear-gradient(180deg, rgba(6, 27, 31, 0.98), rgba(7, 52, 58, 0.96)) !important;
+  border-bottom: 1px solid rgba(217, 154, 34, 0.42) !important;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18) !important;
+  position: relative !important;
+  z-index: 100 !important;
+}
+body .site-header .header-inner {
+  align-items: center !important;
+  column-gap: 14px !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  max-width: 1180px !important;
+  min-height: 66px !important;
+  padding: 8px 18px !important;
+  row-gap: 6px !important;
+}
+body .site-header .site-branding {
+  align-items: center !important;
+  display: flex !important;
+  flex: 0 1 360px !important;
+  gap: 6px !important;
+  justify-content: center !important;
+  min-width: 0 !important;
+  text-align: center !important;
+}
+body .site-header .site-logo,
+body .site-header .custom-logo-link {
+  display: block !important;
+  line-height: 0 !important;
+  max-width: 100% !important;
+}
+body .site-header .custom-logo {
+  display: block !important;
+  height: clamp(38px, 3.4vw, 52px) !important;
+  max-height: 52px !important;
+  max-width: min(360px, 42vw) !important;
+  object-fit: contain !important;
+  width: auto !important;
+}
+body .site-header .site-description {
+  color: rgba(247, 234, 210, 0.78) !important;
+  display: block !important;
+  flex-basis: 100% !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 0.58rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.08em !important;
+  line-height: 1.15 !important;
+  margin: 0 !important;
+  text-transform: uppercase !important;
+}
+body .site-navigation {
+  display: block !important;
+  flex: 1 1 620px !important;
+  min-width: 0 !important;
+}
+body .site-navigation .menu {
+  align-items: center !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 5px !important;
+  justify-content: center !important;
+  margin: 0 !important;
+}
+body .site-navigation .menu > li > a {
+  align-items: center !important;
+  border-radius: 999px !important;
+  color: var(--ae-cream) !important;
+  display: inline-flex !important;
+  font-family: 'Oswald', 'Inter', sans-serif !important;
+  font-size: 0.82rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.03em !important;
+  line-height: 1 !important;
+  min-height: 32px !important;
+  padding: 0.4rem 0.62rem !important;
+  text-transform: uppercase !important;
+  white-space: nowrap !important;
+}
+body .site-navigation .menu > li > a:hover,
+body .site-navigation .menu > li.current-menu-item > a,
+body .site-navigation .menu > li.current_page_item > a {
+  background: rgba(247, 234, 210, 0.07) !important;
+  box-shadow: inset 0 0 0 1px rgba(217, 154, 34, 0.26) !important;
+  color: var(--ae-bright-gold) !important;
+  transform: none !important;
+}
+body .site-navigation-toggle-holder,
+body .site-navigation-dropdown {
+  display: none !important;
+}
+body [class*='mobile-nav-strip'] {
+  display: none !important;
+}
+@media (max-width: 1100px) and (min-width: 981px) {
+  body .site-header .header-inner {
+    padding: 8px 12px !important;
+  }
+  body .site-header .site-branding {
+    flex-basis: 320px !important;
+  }
+  body .site-header .custom-logo {
+    max-width: min(320px, 38vw) !important;
+  }
+  body .site-navigation .menu > li > a {
+    font-size: 0.76rem !important;
+    min-height: 30px !important;
+    padding: 0.36rem 0.48rem !important;
+  }
+}
+@media (max-width: 980px) {
+  body .site-header .header-inner {
+    justify-content: space-between !important;
+    min-height: 64px !important;
+    padding: 8px 14px !important;
+  }
+  body .site-header .site-branding {
+    flex: 1 1 auto !important;
+    justify-content: flex-start !important;
+    text-align: left !important;
+  }
+  body .site-header .custom-logo {
+    height: clamp(36px, 9vw, 46px) !important;
+    max-height: 46px !important;
+    max-width: min(270px, 72vw) !important;
+  }
+  body .site-header .site-description {
+    display: none !important;
+  }
+  body .site-navigation {
+    display: none !important;
+  }
+  body .site-navigation-toggle-holder {
+    display: flex !important;
+    flex: 0 0 auto !important;
+    justify-content: flex-end !important;
+  }
+  body .site-navigation-toggle-holder .site-navigation-toggle {
+    align-items: center !important;
+    background: rgba(5, 8, 7, 0.84) !important;
+    border: 1px solid rgba(217, 154, 34, 0.36) !important;
+    border-radius: 12px !important;
+    color: var(--ae-cream) !important;
+    display: flex !important;
+    justify-content: center !important;
+    min-height: 42px !important;
+    min-width: 42px !important;
+  }
+  body .site-navigation-dropdown {
+    display: block !important;
+    left: auto !important;
+    max-width: 340px !important;
+    padding: 0 !important;
+    right: 12px !important;
+    top: calc(100% + 8px) !important;
+    width: min(340px, calc(100vw - 24px)) !important;
+  }
+  body .site-navigation-dropdown ul.menu {
+    background: radial-gradient(circle at top center, rgba(242, 189, 69, 0.13), transparent 38%), linear-gradient(180deg, rgba(6, 27, 31, 0.99), rgba(7, 52, 58, 0.99)) !important;
+    border: 1px solid rgba(217, 154, 34, 0.34) !important;
+    border-radius: 18px !important;
+    box-shadow: 0 22px 55px rgba(0, 0, 0, 0.34) !important;
+    display: grid !important;
+    gap: 7px !important;
+    margin: 0 !important;
+    padding: 10px !important;
+  }
+  body .site-navigation-dropdown ul.menu li a {
+    align-items: center !important;
+    background: rgba(247, 234, 210, 0.055) !important;
+    border: 1px solid rgba(247, 234, 210, 0.09) !important;
+    border-radius: 12px !important;
+    color: var(--ae-cream) !important;
+    display: flex !important;
+    font-family: 'Oswald', 'Inter', sans-serif !important;
+    font-size: 0.92rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.04em !important;
+    min-height: 44px !important;
+    padding: 0 14px !important;
+    text-transform: uppercase !important;
+  }
+}
+@media (max-width: 420px) {
+  body .site-header .custom-logo {
+    max-width: min(235px, 68vw) !important;
+  }
+}
+</style>
+
+<article class="bring-mess-article">
+  <div class="bma-wrap">
+    <header class="bma-hero">
+      <p class="bma-kicker">AI Systems Notes</p>
+      <h1 class="bma-title">Bring Me the Mess</h1>
+      <p class="bma-subtitle">How rough ideas become build-ready systems</p>
+      <p class="bma-hero-line">Rough ideas are not the problem. They are where the build starts.</p>
+      <div class="bma-meta"><span class="bma-chip">Human-directed AI</span><span class="bma-chip">Build Trails</span><span class="bma-chip">AI Systems</span></div>
+      <img fetchpriority="high" class="bma-hero-image" src="https://aaronellis.co.network/wp-content/uploads/2026/06/bring-me-the-mess-hero.webp" alt="Bring Me the Mess hero artwork" width="1400" height="788" loading="eager" decoding="async">
+    </header>
+    <div class="bma-content">
+      <section class="bma-panel"><p>Most people do not have a shortage of ideas.</p><p>They have notes everywhere. Screenshots. Voice memos. Half-written plans. Business ideas they keep circling back to. A website they want to fix. A book they want to finish. An app idea that sounds great in their head but turns into fog the moment they try to explain it.</p><p>That is usually where the problem starts.</p><p>Not with the idea.</p><p>With the mess around the idea.</p><p>The modern world keeps telling people they need more tools. More apps. More AI subscriptions. More templates. More automation.</p><p>But most people do not need more tools at the beginning.</p><p>They need someone who can look at the mess and say:</p><p>“Right. Here is what this is actually trying to become.”</p><p>That is the work I keep finding myself drawn to.</p><p>Not just writing prompts. Not just giving AI tips. Not just building random digital bits and pieces.</p><p>The real work is taking a rough, half-formed idea and turning it into something structured enough to build, test, explain, sell, improve, or hand over to an AI agent, developer, designer, or business owner.</p><p>That is what I mean by:</p><p>Bring me the mess.</p></section><blockquote class="bma-quote"><p>Rough ideas are not the problem. They are where the build starts.</p></blockquote><section class="bma-panel"><h2>The mess is usually the raw material</h2><p>When someone has an idea, it rarely arrives neatly.</p><p>It might sound like:</p><ul><li>I need a better way to use ChatGPT in my business.</li><li>I want to build an app, but I do not know where to start.</li><li>I have all these notes for a book, but they are everywhere.</li><li>I want my website to explain what I do, but it feels scattered.</li><li>I know AI could help me, but I do not want to become a prompt engineer.</li><li>I have a workflow that is driving me mad.</li><li>I have been using AI, but the results are inconsistent.</li></ul><p>That is not failure.</p><p>That is raw material.</p><p>The mistake is expecting the first version of an idea to be clean. It almost never is. Most useful things start as a pile of thoughts, frustrations, examples, half-solutions, and vague excitement.</p><p>The skill is not pretending the mess is not there.</p><p>The skill is knowing how to sort it.</p></section><section class="bma-panel"><h2>AI does not fix a messy idea by itself</h2><p>AI is powerful, but it is not magic.</p><p>Give AI a vague request and it will often give you a polished vague answer.</p><p>It may sound impressive. It may even look finished at first glance. But underneath, the structure is often weak.</p><p>That is why so many AI outputs feel useful for about five minutes and then fall apart when you try to use them in the real world.</p><ul><li>The prompt was not grounded.</li><li>The goal was not clear.</li><li>The constraints were not defined.</li><li>The audience was not understood.</li><li>The output format was not controlled.</li><li>The review process was missing.</li><li>The next step was vague.</li></ul><p>That is why I do not see the prompt as the whole product.</p><p>The real value is the system around the prompt.</p><p>A good AI workflow needs a job. It needs boundaries. It needs a structure. It needs a clear output. It needs a way to be checked. It needs human judgement.</p><p>Without that, AI can give you more words, but not necessarily more progress.</p></section><section class="bma-panel"><h2>What I actually build</h2><p>The simplest way to explain my work is this:</p><p>I turn rough ideas into build-ready systems.</p><p>That might become:</p><ul><li>an AI product concept</li><li>a prompt system</li><li>a business workflow</li><li>a website structure</li><li>a book outline</li><li>a digital product</li><li>an Android workflow plan</li><li>an agent-ready handoff</li><li>a technical brief</li><li>a content engine</li><li>a practical AI setup for a small business</li></ul><p>The exact output changes depending on the idea.</p><p>But the movement is the same:</p><p>messy input -&gt; clear structure -&gt; usable artefact</p><p>That is the part I care about.</p><p>I like the moment when a vague idea becomes something you can actually point to.</p><p>A page. A plan. A prompt pack. A workflow. A product outline. A field report. A system brief. A build document. A prototype path.</p><p>Something real enough that the next person, tool, agent, or version can do something with it.</p></section><section class="bma-panel"><h2>The Build Trail</h2><p>I think every serious AI project needs a trail.</p><p>Not just a shiny final output, but a visible path showing how the thing came together.</p><p>The Build Trail asks a few simple questions:</p><ul><li>What was the rough idea? What was the original mess, frustration, opportunity, or half-formed thought?</li><li>What was the real goal? What was the idea actually trying to become?</li><li>What were the constraints? What had to be safe, clear, practical, compliant, simple, affordable, or human-reviewed?</li><li>What system was needed? Did it need a prompt structure, a workflow, a product plan, a content system, an app concept, or an agent handoff?</li><li>What artefact came out of it? What was actually produced?</li><li>What does this prove? What capability, process, or lesson does the build demonstrate?</li></ul><p>That is how I want this website to work.</p><p>Not as a static portfolio.</p><p>As a living proof exhibit.</p><p>Every article, build, field report, and project should help answer one question:</p><p>Can Aaron take a rough idea and turn it into something structured enough to use?</p><p>That is the proof.</p></section><section class="bma-panel"><h2>Why this matters now</h2><p>AI has changed the value of ideas.</p><p>A few years ago, having an idea often meant being stuck. You needed a developer, a designer, a writer, a strategist, a marketer, and a pile of money before anything could move.</p><p>Now, one person with clear direction can get much further.</p><p>But there is a catch.</p><p>The people who will benefit most from AI are not necessarily the people who know the fanciest prompts.</p><p>They are the people who can think clearly enough to direct the machine.</p><ul><li>They can define the problem.</li><li>They can shape the task.</li><li>They can judge the output.</li><li>They can spot nonsense.</li><li>They can decide what matters.</li><li>They can turn scattered thoughts into a sequence.</li></ul><p>That is the real skill.</p><p>Not replacing people with AI.</p><p>Directing AI with enough human judgement that useful things get built.</p></section><section class="bma-panel"><h2>The human stays in the centre</h2><p>I am not interested in pretending AI should run everything by itself.</p><p>That sounds impressive until you actually watch systems break, drift, hallucinate, misunderstand context, or confidently take the wrong path.</p><p>The stronger model is human-directed AI.</p><ul><li>The human sets the intention.</li><li>The human defines the boundaries.</li><li>The human reviews the output.</li><li>The human decides what gets published, sent, built, changed, or handed over.</li></ul><p>AI can help generate, structure, test, compare, rewrite, organise, prototype, and document.</p><p>But the judgement still matters.</p><p>That is why my work is not about removing the human.</p><p>It is about giving the human more leverage.</p></section><section class="bma-panel"><h2>What “bring me the mess” really means</h2><p>It means you do not need to arrive with a perfect brief.</p><p>You do not need the polished version.</p><p>You do not need to already know the platform, tool, stack, structure, or exact output.</p><p>You can arrive with:</p><ul><li>scattered notes</li><li>a rough idea</li><li>a broken workflow</li><li>a half-built product</li><li>a confusing AI setup</li><li>a messy content plan</li><li>a book concept</li><li>a website that no longer fits</li><li>a business process that needs simplifying</li><li>an app idea you cannot explain cleanly yet</li></ul><p>That is enough to begin.</p><p>The first job is not to make it fancy.</p><p>The first job is to find the shape.</p></section><section class="bma-panel"><h2>From rough idea to build-ready system</h2><p>A build-ready system does not always mean finished software.</p><p>Sometimes it means a proper blueprint.</p><p>Sometimes it means a prompt harness.</p><p>Sometimes it means a content structure.</p><p>Sometimes it means a WordPress page.</p><p>Sometimes it means a product brief.</p><p>Sometimes it means a document that lets an AI coding agent, designer, assistant, or developer continue without guessing.</p><p>The point is that the idea has moved.</p><p>It is no longer floating around in your head.</p><ul><li>It has a structure.</li><li>It has a purpose.</li><li>It has a next step.</li><li>It has a form.</li><li>It can be tested.</li><li>It can be improved.</li><li>It can be handed off.</li></ul><p>That is progress.</p></section><section class="bma-panel"><h2>This is the direction of Aaron Ellis AI Builds</h2><p>This website is becoming a record of that process.</p><p>The articles are not just articles.</p><p>They are notes from the build floor.</p><p>The projects are not just portfolio pieces.</p><p>They are proof exhibits.</p><p>The field reports are not just experiments.</p><p>They are lessons from trying to make AI useful in the real world.</p><p>The prompt systems are not just clever instructions.</p><p>They are ways of turning vague requests into controlled outputs.</p><p>The books, websites, workflows, app concepts, and agent handoffs all point back to the same central idea:</p><p>rough ideas can become build-ready systems when they are given structure, judgement, and a proper execution path.</p><p>That is the work.</p><p>That is the offer.</p><p>That is the proof.</p></section><section class="bma-panel"><h2>Bring me the mess</h2><p>So if you have an idea that is not clean yet, that is fine.</p><p>If your notes are scattered, that is fine.</p><p>If you know something could be better but cannot quite explain the system yet, that is fine.</p><p>If you have tried AI and ended up with more output but not more clarity, that is very common.</p><p>Bring me the mess.</p><p>The mess is not the problem.</p><p>The mess is where the build starts.</p></section><section class="bma-cta"><h2>Have a rough idea?</h2><p>Have a rough idea, messy workflow, app concept, book plan, website problem, or AI setup that needs structure? Bring me the mess, and let’s find the build inside it.</p></section>
+    </div>
+  </div>
+</article>
+
+<style id="bring-mess-hero-line-fix-20260603">
+.bring-mess-article .bma-hero-line {
+  color: #061b1f !important;
+  opacity: 1 !important;
+  text-shadow: none !important;
+  font-weight: 900 !important;
+}
+.bring-mess-article .bma-hero-line * {
+  color: #061b1f !important;
+  opacity: 1 !important;
+  text-shadow: none !important;
+}
+</style>
+<style id="ae-nav-resize-fix-css">@media (max-width:1024px){body .site-header .site-navigation-dropdown[aria-hidden="true"]{display:none!important}body .site-header .site-navigation-dropdown:not([aria-hidden="true"]){display:block!important;opacity:1!important;visibility:visible!important;transform:none!important;pointer-events:auto!important}}</style><script id="ae-nav-resize-fix-js" src="data:text/javascript;base64,LyogYWUtbmF2LXJlc2l6ZS1maXgg4oCUIEhlbGxvIEVsZW1lbnRvciAzLjQuOSBjbG9zZXMgdGhlIG1vYmlsZSBkcm9wZG93biBvbiBhbnkKICAgd2luZG93IHJlc2l6ZSAoaW5jbC4gbW9iaWxlIFVSTC1iYXIgY29sbGFwc2Ugd2hlbiB5b3Ugc3RhcnQgc2Nyb2xsaW5nKSwgYnkKICAgc3RyaXBwaW5nIC5lbGVtZW50b3ItYWN0aXZlIGZyb20gdGhlIHRvZ2dsZSBob2xkZXIgV0lUSE9VVCByZXNldHRpbmcKICAgYXJpYS1leHBhbmRlZC9hcmlhLWhpZGRlbi4gUmVzdWx0OiBtZW51IHZhbmlzaGVzIG1pZC1zY3JvbGwsIFggc3RheXMgc3R1Y2suCiAgIFNoaW06IHdoaWxlIHRoZSBkcm9wZG93biBpcyBnZW51aW5lbHkgb3BlbiAoYXJpYS1oaWRkZW49ImZhbHNlIiksIHZldG8gdGhhdAogICBjbGFzcyByZW1vdmFsOyBrZWVwIHRoZSB0b2dnbGUgaWNvbiBzdGF0ZSBpbiBzeW5jLiBSZWFsIGNsb3NlcyAod2hpY2ggc2V0CiAgIGFyaWEtaGlkZGVuPSJ0cnVlIikgcGFzcyB0aHJvdWdoIHVudG91Y2hlZC4gKi8KKGZ1bmN0aW9uKCl7CiAgZnVuY3Rpb24gaW5pdCgpewogICAgdmFyIGhvbGRlcj1kb2N1bWVudC5xdWVyeVNlbGVjdG9yKCcuc2l0ZS1oZWFkZXIgLnNpdGUtbmF2aWdhdGlvbi10b2dnbGUtaG9sZGVyJyk7CiAgICB2YXIgZHJvcD1kb2N1bWVudC5xdWVyeVNlbGVjdG9yKCcuc2l0ZS1oZWFkZXIgLnNpdGUtbmF2aWdhdGlvbi1kcm9wZG93bicpOwogICAgdmFyIHRvZ2dsZT1kb2N1bWVudC5xdWVyeVNlbGVjdG9yKCcuc2l0ZS1oZWFkZXIgLnNpdGUtbmF2aWdhdGlvbi10b2dnbGUnKTsKICAgIGlmKCFob2xkZXJ8fCFkcm9wfHwhdG9nZ2xlKXtyZXR1cm47fQogICAgaWYoaG9sZGVyLmRhdGFzZXQuYWVOYXZTaGltKXtyZXR1cm47fQogICAgaG9sZGVyLmRhdGFzZXQuYWVOYXZTaGltPScxJzsKICAgIHZhciBzeW5jaW5nPWZhbHNlOwogICAgZnVuY3Rpb24gc3luYygpewogICAgICBpZihzeW5jaW5nKXtyZXR1cm47fQogICAgICBzeW5jaW5nPXRydWU7CiAgICAgIHZhciBvcGVuPWRyb3AuZ2V0QXR0cmlidXRlKCdhcmlhLWhpZGRlbicpPT09J2ZhbHNlJzsKICAgICAgdmFyIGFjdGl2ZT1ob2xkZXIuY2xhc3NMaXN0LmNvbnRhaW5zKCdlbGVtZW50b3ItYWN0aXZlJyk7CiAgICAgIGlmKG9wZW4mJiFhY3RpdmUpe2hvbGRlci5jbGFzc0xpc3QuYWRkKCdlbGVtZW50b3ItYWN0aXZlJyk7fQogICAgICBpZighb3BlbiYmYWN0aXZlKXtob2xkZXIuY2xhc3NMaXN0LnJlbW92ZSgnZWxlbWVudG9yLWFjdGl2ZScpO30KICAgICAgdG9nZ2xlLnNldEF0dHJpYnV0ZSgnYXJpYS1leHBhbmRlZCcsb3Blbj8ndHJ1ZSc6J2ZhbHNlJyk7CiAgICAgIHN5bmNpbmc9ZmFsc2U7CiAgICB9CiAgICB2YXIgbW89bmV3IE11dGF0aW9uT2JzZXJ2ZXIoc3luYyk7CiAgICBtby5vYnNlcnZlKGhvbGRlcix7YXR0cmlidXRlczp0cnVlLGF0dHJpYnV0ZUZpbHRlcjpbJ2NsYXNzJ119KTsKICAgIG1vLm9ic2VydmUoZHJvcCx7YXR0cmlidXRlczp0cnVlLGF0dHJpYnV0ZUZpbHRlcjpbJ2FyaWEtaGlkZGVuJ119KTsKICB9CiAgaWYoZG9jdW1lbnQucmVhZHlTdGF0ZT09PSdjb21wbGV0ZScpe2luaXQoKTt9CiAgZWxzZXt3aW5kb3cuYWRkRXZlbnRMaXN0ZW5lcignbG9hZCcsaW5pdCk7fQp9KSgpOwo="></script>

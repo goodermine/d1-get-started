@@ -1,0 +1,13 @@
+<footer class="site-foot">
+  <div class="site-foot-inner">
+    <img src="{{ site.logo }}" alt="{{ site.title }}" width="200" height="44" loading="lazy" decoding="async">
+    <p class="site-foot-tagline">{{ site.tagline }}</p>
+    <ul class="site-foot-nav">
+      {% for item in site.footerMenu %}
+      <li><a href="{{ item.url }}">{{ item.title }}</a></li>
+      {% endfor %}
+    </ul>
+    <p class="site-foot-legal">&copy; <span id="foot-year"></span> {{ site.title }}. All rights reserved.</p>
+  </div>
+</footer>
+<script>document.getElementById('foot-year').textContent = new Date().getFullYear();</script>

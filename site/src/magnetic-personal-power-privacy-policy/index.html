@@ -1,0 +1,294 @@
+---
+layout: base.njk
+title: "Magnetic Personal Power Privacy Policy"
+permalink: "/magnetic-personal-power-privacy-policy/"
+wpId: 276
+---
+<style id="mpp-privacy-policy-styles">
+  .mpp-privacy-page {
+    --bg: #09090f;
+    --bg-2: #12131d;
+    --panel: rgba(20, 24, 38, 0.88);
+    --panel-2: rgba(14, 17, 28, 0.94);
+    --border: rgba(133, 173, 255, 0.16);
+    --accent: #89a9ff;
+    --accent-2: #d6e2ff;
+    --text: #f6f8ff;
+    --muted: #b9c3df;
+    --soft: #9aa7c7;
+    --radius: 28px;
+    --shadow: 0 28px 80px rgba(0, 0, 0, 0.35);
+    background:
+      radial-gradient(circle at top left, rgba(99, 126, 255, 0.14), transparent 34%),
+      radial-gradient(circle at 85% 12%, rgba(138, 170, 255, 0.09), transparent 28%),
+      linear-gradient(180deg, #080910 0%, #0d1020 48%, #090a12 100%);
+    color: var(--text);
+    font-family: Inter, "Segoe UI", sans-serif;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    overflow-x: clip;
+    padding: 0 0 96px;
+    width: 100vw;
+  }
+  .mpp-privacy-page * { box-sizing: border-box; }
+  .mpp-privacy-page .mpp-wrap {
+    margin: 0 auto;
+    max-width: 980px;
+    padding: 0 22px;
+    width: 100%;
+  }
+  .mpp-privacy-page .mpp-hero {
+    padding: 72px 0 26px;
+    position: relative;
+  }
+  .mpp-privacy-page .mpp-hero-card {
+    background: linear-gradient(180deg, rgba(18, 24, 41, 0.94), rgba(12, 15, 26, 0.97));
+    border: 1px solid var(--border);
+    border-radius: 32px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    padding: 34px 32px;
+    position: relative;
+  }
+  .mpp-privacy-page .mpp-hero-card::before {
+    background: linear-gradient(90deg, rgba(137,169,255,0.26), rgba(214,226,255,0.06));
+    content: "";
+    height: 1px;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .mpp-privacy-page .mpp-kicker {
+    color: var(--accent);
+    font-size: 0.82rem;
+    font-weight: 800;
+    letter-spacing: 0.22em;
+    margin: 0 0 14px;
+    text-transform: uppercase;
+  }
+  .mpp-privacy-page h1 {
+    color: var(--text);
+    font-size: clamp(2.2rem, 5vw, 4rem);
+    letter-spacing: -0.045em;
+    line-height: 0.96;
+    margin: 0;
+  }
+  .mpp-privacy-page .mpp-subtitle {
+    color: var(--accent-2);
+    font-size: 1.08rem;
+    line-height: 1.7;
+    margin: 18px 0 0;
+    max-width: 720px;
+  }
+  .mpp-privacy-page .mpp-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 22px;
+  }
+  .mpp-privacy-page .mpp-pill {
+    background: rgba(137, 169, 255, 0.08);
+    border: 1px solid rgba(137, 169, 255, 0.2);
+    border-radius: 999px;
+    color: var(--accent-2);
+    display: inline-flex;
+    font-size: 0.88rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    padding: 11px 15px;
+  }
+  .mpp-privacy-page .mpp-section {
+    padding-top: 18px;
+  }
+  .mpp-privacy-page .mpp-section-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 26px 24px;
+  }
+  .mpp-privacy-page .mpp-grid {
+    display: grid;
+    gap: 18px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .mpp-privacy-page .mpp-block {
+    background: var(--panel-2);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 22px;
+    padding: 22px 20px;
+  }
+  .mpp-privacy-page h2 {
+    font-size: clamp(1.42rem, 2.8vw, 2rem);
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    margin: 0 0 14px;
+  }
+  .mpp-privacy-page h3 {
+    color: var(--text);
+    font-size: 1.06rem;
+    letter-spacing: -0.02em;
+    margin: 0 0 10px;
+  }
+  .mpp-privacy-page p,
+  .mpp-privacy-page li {
+    color: var(--muted);
+    font-size: 1rem;
+    line-height: 1.72;
+  }
+  .mpp-privacy-page p { margin: 0 0 14px; }
+  .mpp-privacy-page p:last-child { margin-bottom: 0; }
+  .mpp-privacy-page ul {
+    margin: 0;
+    padding-left: 18px;
+  }
+  .mpp-privacy-page li + li { margin-top: 8px; }
+  .mpp-privacy-page .mpp-lead {
+    color: var(--text);
+    font-size: 1.06rem;
+  }
+  .mpp-privacy-page .mpp-callout {
+    background: linear-gradient(180deg, rgba(137,169,255,0.08), rgba(255,255,255,0.02));
+    border: 1px solid rgba(137,169,255,0.16);
+    border-radius: 24px;
+    margin-top: 18px;
+    padding: 20px;
+  }
+  .mpp-privacy-page .mpp-contact {
+    display: grid;
+    gap: 18px;
+    grid-template-columns: 1.1fr 0.9fr;
+  }
+  .mpp-privacy-page .mpp-email {
+    color: var(--text);
+    font-weight: 700;
+    text-decoration: none;
+  }
+  .mpp-privacy-page .mpp-email:hover { color: var(--accent); }
+  @media (max-width: 860px) {
+    .mpp-privacy-page .mpp-grid,
+    .mpp-privacy-page .mpp-contact {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 640px) {
+    .mpp-privacy-page { padding-bottom: 72px; }
+    .mpp-privacy-page .mpp-wrap { padding: 0 16px; }
+    .mpp-privacy-page .mpp-hero { padding-top: 42px; }
+    .mpp-privacy-page .mpp-hero-card,
+    .mpp-privacy-page .mpp-section-card { border-radius: 24px; padding: 22px 18px; }
+    .mpp-privacy-page .mpp-block { border-radius: 18px; padding: 18px 16px; }
+    .mpp-privacy-page p,
+    .mpp-privacy-page li { font-size: 0.98rem; }
+  }
+</style>
+<p><main class="mpp-privacy-page"></p>
+<header class="mpp-hero">
+<div class="mpp-wrap">
+<section class="mpp-hero-card">
+<p class="mpp-kicker">Public Policy Page</p>
+<h1>Privacy Policy</h1>
+<p class="mpp-subtitle">Magnetic Personal Power is an Android app created by Aaron Ellis. The app provides offline hypnosis, relaxation, and personal development audio, along with embedded support booklets.</p>
+<div class="mpp-meta">
+          <span class="mpp-pill">App: Magnetic Personal Power</span><br />
+          <span class="mpp-pill">Developer: Aaron Ellis</span><br />
+          <span class="mpp-pill">Effective date: 2 June 2026</span>
+        </div>
+</section></div>
+</header>
+<section class="mpp-section">
+<div class="mpp-wrap">
+<div class="mpp-section-card">
+<div class="mpp-grid">
+<article class="mpp-block">
+<h2>1. Introduction</h2>
+<p class="mpp-lead">Magnetic Personal Power is designed to work offline on the user’s device.</p>
+<p>The app provides hypnosis, relaxation, and personal development audio sessions, together with embedded support booklets bundled inside the app package.</p>
+<p>The app is intended to be straightforward: no account, no backend, no tracking, and no internet requirement for normal use.</p>
+</article>
+<article class="mpp-block">
+<h2>2. Information We Collect</h2>
+<p>Magnetic Personal Power does not collect personal information from users.</p>
+<ul>
+<li>No account or login is required.</li>
+<li>No names, email addresses, location data, or personal identifiers are collected.</li>
+<li>No health data, payment information, contacts, photos, camera data, or microphone recordings are collected.</li>
+<li>No analytics, ads, subscriptions, in-app purchases, cloud sync, or backend data collection are used.</li>
+</ul>
+</article></div>
+</p></div>
+</p></div>
+</section>
+<section class="mpp-section">
+<div class="mpp-wrap">
+<div class="mpp-section-card">
+<div class="mpp-grid">
+<article class="mpp-block">
+<h2>3. How The App Uses Information</h2>
+<p>Because the app does not collect personal information, no personal information is used, sold, shared, transmitted, or processed by Aaron Ellis through the app.</p>
+<p>Playback happens locally on the user’s device using audio and booklet files bundled inside the app.</p>
+</article>
+<article class="mpp-block">
+<h2>4. Local Device Storage</h2>
+<p>The app may store limited information locally on the user’s device, such as whether the intro video should be shown again.</p>
+<p>If a user chooses to download an embedded PDF booklet, the file is saved locally to the user’s device.</p>
+<p>These local preferences or files remain on the device and are not sent to Aaron Ellis or any external server.</p>
+</article></div>
+</p></div>
+</p></div>
+</section>
+<section class="mpp-section">
+<div class="mpp-wrap">
+<div class="mpp-section-card">
+<div class="mpp-grid">
+<article class="mpp-block">
+<h2>5. Third-Party Services</h2>
+<p>The app does not use advertising networks, analytics services, cloud syncing, social login, or third-party tracking tools.</p>
+<p>The app does not require an internet connection for normal playback and reading functions.</p>
+</article>
+<article class="mpp-block">
+<h2>6. Data Sharing</h2>
+<p>Magnetic Personal Power does not sell, rent, trade, or share user personal information.</p>
+<p>Because the app does not collect personal information, there is no personal data transmission or distribution by the app.</p>
+</article></div>
+</p></div>
+</p></div>
+</section>
+<section class="mpp-section">
+<div class="mpp-wrap">
+<div class="mpp-section-card">
+<div class="mpp-grid">
+<article class="mpp-block">
+<h2>7. Children’s Privacy</h2>
+<p>The app is intended for a general audience and is not designed to collect information from children.</p>
+<p>Since the app does not collect personal information, it does not knowingly collect personal information from children.</p>
+</article>
+<article class="mpp-block">
+<h2>8. Health / Wellness Disclaimer</h2>
+<p>The app provides relaxation and personal development audio only. It is not medical treatment and is not a substitute for professional medical, psychological, or mental health care.</p>
+<p>Users should not listen while driving, operating machinery, or doing anything that requires full attention.</p>
+</article></div>
+<div class="mpp-callout">
+<h3>Plain-language summary</h3>
+<p>Magnetic Personal Power works locally on the device. It does not ask for an account, does not track the user, does not transmit personal data, and does not rely on a backend server.</p>
+</p></div>
+</p></div>
+</p></div>
+</section>
+<section class="mpp-section">
+<div class="mpp-wrap">
+<div class="mpp-section-card mpp-contact">
+<article class="mpp-block">
+<h2>9. Changes To This Policy</h2>
+<p>This privacy policy may be updated from time to time.</p>
+<p>Any updates will be posted on this page with a revised effective date.</p>
+</article>
+<article class="mpp-block">
+<h2>10. Contact</h2>
+<p>For privacy questions about this app, contact:</p>
+<p><strong>Aaron Ellis</strong><br /><a class="mpp-email" href="mailto:rustwood.agent@gmail.com">rustwood.agent@gmail.com</a></p>
+</article></div>
+</p></div>
+</section>
+<p></main></p>

@@ -1,0 +1,146 @@
+/* ============================================================
+   Shared chrome for the static aaronellis.co.network rebuild.
+   Design tokens lifted from the canonical home.html fragment.
+   This file styles ONLY the global header/footer/page shell;
+   each page's own scoped .ae-* / .xb- styles ride along inline.
+   ============================================================ */
+:root {
+  --ae-ink: #061b1f;
+  --ae-deep-teal: #07343a;
+  --ae-teal: #0c5961;
+  --ae-cream: #f7ead2;
+  --ae-paper: #fff4dc;
+  --ae-sand: #e9d5a2;
+  --ae-gold: #d99a22;
+  --ae-bright-gold: #f2bd45;
+  --ae-line: rgba(247, 234, 210, 0.16);
+  --ae-serif: Georgia, "Times New Roman", Times, serif;
+  --ae-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--ae-ink);
+  color: var(--ae-cream);
+  font-family: var(--ae-sans);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+a { color: inherit; }
+
+main { display: block; }
+
+/* ---------- Site header ---------- */
+.site-head {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: radial-gradient(circle at 50% -30%, rgba(242, 189, 69, 0.18), transparent 40rem),
+    linear-gradient(180deg, rgba(6, 27, 31, 0.98), rgba(7, 52, 58, 0.96));
+  border-bottom: 1px solid rgba(217, 154, 34, 0.38);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.22);
+}
+.site-head::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(242, 189, 69, 0.82), transparent);
+  pointer-events: none;
+}
+.site-head-inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px clamp(16px, 4vw, 28px);
+}
+.site-brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; flex: 0 0 auto; }
+.site-brand img { height: 40px; width: auto; display: block; }
+
+.site-nav { display: flex; align-items: center; }
+.site-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  align-items: center;
+}
+.site-nav a {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 11px;
+  border-radius: 8px;
+  color: var(--ae-cream);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.92rem;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.site-nav a:hover, .site-nav a:focus-visible { background: rgba(217, 154, 34, 0.14); color: var(--ae-bright-gold); outline: none; }
+.site-nav a[aria-current="page"] { color: var(--ae-bright-gold); background: rgba(217, 154, 34, 0.10); box-shadow: inset 0 -2px 0 var(--ae-gold); }
+
+/* Mobile menu toggle (hidden on desktop) */
+.nav-toggle {
+  display: none;
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(247, 234, 210, 0.22);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--ae-cream);
+  cursor: pointer;
+}
+.nav-toggle svg { width: 22px; height: 22px; }
+
+@media (max-width: 1024px) {
+  .nav-toggle { display: inline-flex; }
+  .site-nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    display: block;
+    padding: 6px clamp(16px, 4vw, 28px) 14px;
+    background: rgba(6, 12, 14, 0.98);
+    border-top: 1px solid rgba(217, 154, 34, 0.35);
+    box-shadow: 0 24px 50px rgba(0, 0, 0, 0.55);
+    max-height: calc(100vh - 70px);
+    overflow-y: auto;
+  }
+  .site-nav[hidden] { display: none; }
+  .site-nav ul { flex-direction: column; align-items: stretch; gap: 0; }
+  .site-nav li { border-bottom: 1px solid rgba(247, 234, 210, 0.08); }
+  .site-nav li:last-child { border-bottom: 0; }
+  .site-nav a { display: block; padding: 13px 8px; font-size: 1rem; border-radius: 8px; }
+  .site-nav a[aria-current="page"] { box-shadow: inset 3px 0 0 var(--ae-gold); }
+}
+
+/* ---------- Site footer ---------- */
+.site-foot {
+  background: linear-gradient(180deg, var(--ae-ink), #03100f);
+  border-top: 1px solid rgba(217, 154, 34, 0.3);
+  color: rgba(247, 234, 210, 0.82);
+  padding: clamp(36px, 6vw, 56px) clamp(16px, 4vw, 28px);
+}
+.site-foot-inner { max-width: 1180px; margin: 0 auto; display: grid; gap: 20px; justify-items: center; text-align: center; }
+.site-foot img { height: 44px; width: auto; opacity: 0.95; }
+.site-foot-tagline { font-family: var(--ae-serif); font-style: italic; color: var(--ae-sand); margin: 0; }
+.site-foot-nav { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 18px; justify-content: center; }
+.site-foot-nav a { color: rgba(247, 234, 210, 0.82); text-decoration: none; font-size: 0.92rem; }
+.site-foot-nav a:hover { color: var(--ae-bright-gold); }
+.site-foot-legal { font-size: 0.8rem; color: rgba(247, 234, 210, 0.55); margin: 0; }

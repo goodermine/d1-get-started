@@ -1,0 +1,29 @@
+{
+  "title": "Aaron Ellis",
+  "tagline": "Systems for the machine. Tools for the mind.",
+  "url": "https://aaronellis.co.network",
+  "logo": "/assets/aaron-ellis-wordmark-gold.png",
+  "monogram": "/assets/uploads/2026/06/ae-hub-monogram-gold-512.webp",
+  "mainMenu": [
+    { "title": "Home", "url": "/" },
+    { "title": "Magnetic", "url": "/magnetic/" },
+    { "title": "Portfolio", "url": "/ai/#portfolio" },
+    { "title": "Real Estate Buddy", "url": "/real-estate-buddy/" },
+    { "title": "Private Pages", "url": "/private-pages/" },
+    { "title": "Extreme Build", "url": "/extreme-build/" },
+    { "title": "Articles", "url": "/articles/" },
+    { "title": "Resume", "url": "/resume/" },
+    { "title": "Wiki", "url": "/knowledge-base/" },
+    { "title": "Prompts", "url": "/prompt-library/" },
+    { "title": "Books", "url": "/books/" },
+    { "title": "Contact", "url": "/ai/#contact" }
+  ],
+  "footerMenu": [
+    { "title": "AI Builds", "url": "/ai/" },
+    { "title": "Books", "url": "/books/" },
+    { "title": "Magnetic", "url": "/magnetic/" },
+    { "title": "Wiki", "url": "/knowledge-base/" },
+    { "title": "Prompts", "url": "/prompt-library/" },
+    { "title": "Privacy Policy", "url": "/magnetic-personal-power-privacy-policy/" }
+  ]
+}

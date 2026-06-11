@@ -1,0 +1,1166 @@
+{
+  "menus": {
+    "status": 200,
+    "data": [
+      {
+        "id": 7,
+        "description": "",
+        "name": "Footer Navigation",
+        "slug": "footer-navigation",
+        "meta": [],
+        "locations": [
+          "menu-2"
+        ],
+        "auto_add": false,
+        "_links": {
+          "self": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menus/7",
+              "targetHints": {
+                "allow": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE"
+                ]
+              }
+            }
+          ],
+          "collection": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menus"
+            }
+          ],
+          "about": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/taxonomies/nav_menu"
+            }
+          ],
+          "wp:post_type": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-items?menus=7"
+            }
+          ],
+          "wp:menu-location": [
+            {
+              "embeddable": true,
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-locations/menu-2"
+            }
+          ],
+          "curies": [
+            {
+              "name": "wp",
+              "href": "https://api.w.org/{rel}",
+              "templated": true
+            }
+          ]
+        }
+      },
+      {
+        "id": 6,
+        "description": "",
+        "name": "Main Navigation",
+        "slug": "main-navigation",
+        "meta": [],
+        "locations": [
+          "menu-1"
+        ],
+        "auto_add": false,
+        "_links": {
+          "self": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menus/6",
+              "targetHints": {
+                "allow": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE"
+                ]
+              }
+            }
+          ],
+          "collection": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menus"
+            }
+          ],
+          "about": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/taxonomies/nav_menu"
+            }
+          ],
+          "wp:post_type": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-items?menus=6"
+            }
+          ],
+          "wp:menu-location": [
+            {
+              "embeddable": true,
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-locations/menu-1"
+            }
+          ],
+          "curies": [
+            {
+              "name": "wp",
+              "href": "https://api.w.org/{rel}",
+              "templated": true
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "menu-items": {
+    "status": 200,
+    "data": [
+      {
+        "id": 148,
+        "title": {
+          "raw": "Home",
+          "rendered": "Home"
+        },
+        "status": "publish",
+        "url": "https://aaronellis.co.network/",
+        "attr_title": "",
+        "description": "",
+        "type": "custom",
+        "type_label": "Custom Link",
+        "object": "custom",
+        "object_id": 148,
+        "parent": 0,
+        "menu_order": 1,
+        "target": "",
+        "classes": [
+          ""
+        ],
+        "xfn": [
+          ""
+        ],
+        "invalid": false,
+        "meta": [],
+        "menus": 6,
+        "_links": {
+          "self": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-items/148",
+              "targetHints": {
+                "allow": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE"
+                ]
+              }
+            }
+          ],
+          "collection": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-items"
+            }
+          ],
+          "about": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/types/nav_menu_item"
+            }
+          ],
+          "wp:term": [
+            {
+              "taxonomy": "nav_menu",
+              "embeddable": true,
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menus?post=148"
+            }
+          ],
+          "wp:action-publish": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-items/148"
+            }
+          ],
+          "wp:action-unfiltered-html": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-items/148"
+            }
+          ],
+          "wp:action-create-menus": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-items/148"
+            }
+          ],
+          "wp:action-assign-menus": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-items/148"
+            }
+          ],
+          "curies": [
+            {
+              "name": "wp",
+              "href": "https://api.w.org/{rel}",
+              "templated": true
+            }
+          ]
+        }
+      },
+      {
+        "id": 289,
+        "title": {
+          "raw": "Magnetic",
+          "rendered": "Magnetic"
+        },
+        "status": "publish",
+        "url": "https://aaronellis.co.network/magnetic/",
+        "attr_title": "",
+        "description": "",
+        "type": "custom",
+        "type_label": "Custom Link",
+        "object": "custom",
+        "object_id": 289,
+        "parent": 0,
+        "menu_order": 2,
+        "target": "",
+        "classes": [
+          ""
+        ],
+        "xfn": [
+          ""
+        ],
+        "invalid": false,
+        "meta": [],
+        "menus": 6,
+        "_links": {
+          "self": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-items/289",
+              "targetHints": {
+                "allow": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE"
+                ]
+              }
+            }
+          ],
+          "collection": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-items"
+            }
+          ],
+          "about": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/types/nav_menu_item"
+            }
+          ],
+          "wp:term": [
+            {
+              "taxonomy": "nav_menu",
+              "embeddable": true,
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menus?post=289"
+            }
+          ],
+          "wp:action-publish": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-items/289"
+            }
+          ],
+          "wp:action-unfiltered-html": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-items/289"
+            }
+          ],
+          "wp:action-create-menus": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-items/289"
+            }
+          ],
+          "wp:action-assign-menus": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-items/289"
+            }
+          ],
+          "curies": [
+            {
+              "name": "wp",
+              "href": "https://api.w.org/{rel}",
+              "templated": true
+            }
+          ]
+        }
+      },
+      {
+        "id": 151,
+        "title": {
+          "raw": "Portfolio",
+          "rendered": "Portfolio"
+        },
+        "status": "publish",
+        "url": "https://aaronellis.co.network/ai/#portfolio",
+        "attr_title": "",
+        "description": "",
+        "type": "custom",
+        "type_label": "Custom Link",
+        "object": "custom",
+        "object_id": 151,
+        "parent": 0,
+        "menu_order": 3,
+        "target": "",
+        "classes": [
+          ""
+        ],
+        "xfn": [
+          ""
+        ],
+        "invalid": false,
+        "meta": [],
+        "menus": 6,
+        "_links": {
+          "self": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-items/151",
+              "targetHints": {
+                "allow": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE"
+                ]
+              }
+            }
+          ],
+          "collection": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-items"
+            }
+          ],
+          "about": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/types/nav_menu_item"
+            }
+          ],
+          "wp:term": [
+            {
+              "taxonomy": "nav_menu",
+              "embeddable": true,
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menus?post=151"
+            }
+          ],
+          "wp:action-publish": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-items/151"
+            }
+          ],
+          "wp:action-unfiltered-html": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-items/151"
+            }
+          ],
+          "wp:action-create-menus": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-items/151"
+            }
+          ],
+          "wp:action-assign-menus": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-items/151"
+            }
+          ],
+          "curies": [
+            {
+              "name": "wp",
+              "href": "https://api.w.org/{rel}",
+              "templated": true
+            }
+          ]
+        }
+      },
+      {
+        "id": 196,
+        "title": {
+          "raw": "Real Estate Buddy",
+          "rendered": "Real Estate Buddy"
+        },
+        "status": "publish",
+        "url": "https://aaronellis.co.network/real-estate-buddy/",
+        "attr_title": "",
+        "description": "",
+        "type": "custom",
+        "type_label": "Custom Link",
+        "object": "custom",
+        "object_id": 196,
+        "parent": 0,
+        "menu_order": 4,
+        "target": "",
+        "classes": [
+          ""
+        ],
+        "xfn": [
+          ""
+        ],
+        "invalid": false,
+        "meta": [],
+        "menus": 6,
+        "_links": {
+          "self": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-items/196",
+              "targetHints": {
+                "allow": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE"
+                ]
+              }
+            }
+          ],
+          "collection": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-items"
+            }
+          ],
+          "about": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/types/nav_menu_item"
+            }
+          ],
+          "wp:term": [
+            {
+              "taxonomy": "nav_menu",
+              "embeddable": true,
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menus?post=196"
+            }
+          ],
+          "wp:action-publish": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-items/196"
+            }
+          ],
+          "wp:action-unfiltered-html": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-items/196"
+            }
+          ],
+          "wp:action-create-menus": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-items/196"
+            }
+          ],
+          "wp:action-assign-menus": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-items/196"
+            }
+          ],
+          "curies": [
+            {
+              "name": "wp",
+              "href": "https://api.w.org/{rel}",
+              "templated": true
+            }
+          ]
+        }
+      },
+      {
+        "id": 329,
+        "title": {
+          "raw": "Private Pages",
+          "rendered": "Private Pages"
+        },
+        "status": "publish",
+        "url": "https://aaronellis.co.network/private-pages/",
+        "attr_title": "",
+        "description": "",
+        "type": "custom",
+        "type_label": "Custom Link",
+        "object": "custom",
+        "object_id": 329,
+        "parent": 0,
+        "menu_order": 5,
+        "target": "",
+        "classes": [
+          ""
+        ],
+        "xfn": [
+          ""
+        ],
+        "invalid": false,
+        "meta": [],
+        "menus": 6,
+        "_links": {
+          "self": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-items/329",
+              "targetHints": {
+                "allow": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE"
+                ]
+              }
+            }
+          ],
+          "collection": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-items"
+            }
+          ],
+          "about": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/types/nav_menu_item"
+            }
+          ],
+          "wp:term": [
+            {
+              "taxonomy": "nav_menu",
+              "embeddable": true,
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menus?post=329"
+            }
+          ],
+          "wp:action-publish": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-items/329"
+            }
+          ],
+          "wp:action-unfiltered-html": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-items/329"
+            }
+          ],
+          "wp:action-create-menus": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-items/329"
+            }
+          ],
+          "wp:action-assign-menus": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-items/329"
+            }
+          ],
+          "curies": [
+            {
+              "name": "wp",
+              "href": "https://api.w.org/{rel}",
+              "templated": true
+            }
+          ]
+        }
+      },
+      {
+        "id": 203,
+        "title": {
+          "raw": "Extreme Build",
+          "rendered": "Extreme Build"
+        },
+        "status": "publish",
+        "url": "https://aaronellis.co.network/extreme-build/",
+        "attr_title": "",
+        "description": "",
+        "type": "custom",
+        "type_label": "Custom Link",
+        "object": "custom",
+        "object_id": 203,
+        "parent": 0,
+        "menu_order": 6,
+        "target": "",
+        "classes": [
+          ""
+        ],
+        "xfn": [
+          ""
+        ],
+        "invalid": false,
+        "meta": [],
+        "menus": 6,
+        "_links": {
+          "self": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-items/203",
+              "targetHints": {
+                "allow": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE"
+                ]
+              }
+            }
+          ],
+          "collection": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-items"
+            }
+          ],
+          "about": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/types/nav_menu_item"
+            }
+          ],
+          "wp:term": [
+            {
+              "taxonomy": "nav_menu",
+              "embeddable": true,
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menus?post=203"
+            }
+          ],
+          "wp:action-publish": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-items/203"
+            }
+          ],
+          "wp:action-unfiltered-html": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-items/203"
+            }
+          ],
+          "wp:action-create-menus": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-items/203"
+            }
+          ],
+          "wp:action-assign-menus": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-items/203"
+            }
+          ],
+          "curies": [
+            {
+              "name": "wp",
+              "href": "https://api.w.org/{rel}",
+              "templated": true
+            }
+          ]
+        }
+      },
+      {
+        "id": 237,
+        "title": {
+          "raw": "Articles",
+          "rendered": "Articles"
+        },
+        "status": "publish",
+        "url": "https://aaronellis.co.network/articles/",
+        "attr_title": "",
+        "description": "",
+        "type": "custom",
+        "type_label": "Custom Link",
+        "object": "custom",
+        "object_id": 237,
+        "parent": 0,
+        "menu_order": 7,
+        "target": "",
+        "classes": [
+          ""
+        ],
+        "xfn": [
+          ""
+        ],
+        "invalid": false,
+        "meta": [],
+        "menus": 6,
+        "_links": {
+          "self": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-items/237",
+              "targetHints": {
+                "allow": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE"
+                ]
+              }
+            }
+          ],
+          "collection": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-items"
+            }
+          ],
+          "about": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/types/nav_menu_item"
+            }
+          ],
+          "wp:term": [
+            {
+              "taxonomy": "nav_menu",
+              "embeddable": true,
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menus?post=237"
+            }
+          ],
+          "wp:action-publish": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-items/237"
+            }
+          ],
+          "wp:action-unfiltered-html": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-items/237"
+            }
+          ],
+          "wp:action-create-menus": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-items/237"
+            }
+          ],
+          "wp:action-assign-menus": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-items/237"
+            }
+          ],
+          "curies": [
+            {
+              "name": "wp",
+              "href": "https://api.w.org/{rel}",
+              "templated": true
+            }
+          ]
+        }
+      },
+      {
+        "id": 152,
+        "title": {
+          "raw": "Resume",
+          "rendered": "Resume"
+        },
+        "status": "publish",
+        "url": "https://aaronellis.co.network/resume/",
+        "attr_title": "",
+        "description": "",
+        "type": "custom",
+        "type_label": "Custom Link",
+        "object": "custom",
+        "object_id": 152,
+        "parent": 0,
+        "menu_order": 8,
+        "target": "",
+        "classes": [
+          ""
+        ],
+        "xfn": [
+          ""
+        ],
+        "invalid": false,
+        "meta": [],
+        "menus": 6,
+        "_links": {
+          "self": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-items/152",
+              "targetHints": {
+                "allow": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE"
+                ]
+              }
+            }
+          ],
+          "collection": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-items"
+            }
+          ],
+          "about": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/types/nav_menu_item"
+            }
+          ],
+          "wp:term": [
+            {
+              "taxonomy": "nav_menu",
+              "embeddable": true,
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menus?post=152"
+            }
+          ],
+          "wp:action-publish": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-items/152"
+            }
+          ],
+          "wp:action-unfiltered-html": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-items/152"
+            }
+          ],
+          "wp:action-create-menus": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-items/152"
+            }
+          ],
+          "wp:action-assign-menus": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-items/152"
+            }
+          ],
+          "curies": [
+            {
+              "name": "wp",
+              "href": "https://api.w.org/{rel}",
+              "templated": true
+            }
+          ]
+        }
+      },
+      {
+        "id": 363,
+        "title": {
+          "raw": "Wiki",
+          "rendered": "Wiki"
+        },
+        "status": "publish",
+        "url": "https://aaronellis.co.network/knowledge-base/",
+        "attr_title": "",
+        "description": "",
+        "type": "custom",
+        "type_label": "Custom Link",
+        "object": "custom",
+        "object_id": 363,
+        "parent": 0,
+        "menu_order": 9,
+        "target": "",
+        "classes": [
+          ""
+        ],
+        "xfn": [
+          ""
+        ],
+        "invalid": false,
+        "meta": [],
+        "menus": 6,
+        "_links": {
+          "self": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-items/363",
+              "targetHints": {
+                "allow": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE"
+                ]
+              }
+            }
+          ],
+          "collection": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-items"
+            }
+          ],
+          "about": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/types/nav_menu_item"
+            }
+          ],
+          "wp:term": [
+            {
+              "taxonomy": "nav_menu",
+              "embeddable": true,
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menus?post=363"
+            }
+          ],
+          "wp:action-publish": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-items/363"
+            }
+          ],
+          "wp:action-unfiltered-html": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-items/363"
+            }
+          ],
+          "wp:action-create-menus": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-items/363"
+            }
+          ],
+          "wp:action-assign-menus": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-items/363"
+            }
+          ],
+          "curies": [
+            {
+              "name": "wp",
+              "href": "https://api.w.org/{rel}",
+              "templated": true
+            }
+          ]
+        }
+      },
+      {
+        "id": 365,
+        "title": {
+          "raw": "Prompts",
+          "rendered": "Prompts"
+        },
+        "status": "publish",
+        "url": "https://aaronellis.co.network/prompt-library/",
+        "attr_title": "",
+        "description": "",
+        "type": "custom",
+        "type_label": "Custom Link",
+        "object": "custom",
+        "object_id": 365,
+        "parent": 0,
+        "menu_order": 10,
+        "target": "",
+        "classes": [
+          ""
+        ],
+        "xfn": [
+          ""
+        ],
+        "invalid": false,
+        "meta": [],
+        "menus": 6,
+        "_links": {
+          "self": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-items/365",
+              "targetHints": {
+                "allow": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE"
+                ]
+              }
+            }
+          ],
+          "collection": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-items"
+            }
+          ],
+          "about": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/types/nav_menu_item"
+            }
+          ],
+          "wp:term": [
+            {
+              "taxonomy": "nav_menu",
+              "embeddable": true,
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menus?post=365"
+            }
+          ],
+          "wp:action-publish": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-items/365"
+            }
+          ],
+          "wp:action-unfiltered-html": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-items/365"
+            }
+          ],
+          "wp:action-create-menus": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-items/365"
+            }
+          ],
+          "wp:action-assign-menus": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-items/365"
+            }
+          ],
+          "curies": [
+            {
+              "name": "wp",
+              "href": "https://api.w.org/{rel}",
+              "templated": true
+            }
+          ]
+        }
+      },
+      {
+        "id": 450,
+        "title": {
+          "raw": "Books",
+          "rendered": "Books"
+        },
+        "status": "publish",
+        "url": "https://aaronellis.co.network/books/",
+        "attr_title": "",
+        "description": "",
+        "type": "custom",
+        "type_label": "Custom Link",
+        "object": "custom",
+        "object_id": 450,
+        "parent": 0,
+        "menu_order": 11,
+        "target": "",
+        "classes": [
+          ""
+        ],
+        "xfn": [
+          ""
+        ],
+        "invalid": false,
+        "meta": [],
+        "menus": 6,
+        "_links": {
+          "self": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-items/450",
+              "targetHints": {
+                "allow": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE"
+                ]
+              }
+            }
+          ],
+          "collection": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-items"
+            }
+          ],
+          "about": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/types/nav_menu_item"
+            }
+          ],
+          "wp:term": [
+            {
+              "taxonomy": "nav_menu",
+              "embeddable": true,
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menus?post=450"
+            }
+          ],
+          "wp:action-publish": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-items/450"
+            }
+          ],
+          "wp:action-unfiltered-html": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-items/450"
+            }
+          ],
+          "wp:action-create-menus": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-items/450"
+            }
+          ],
+          "wp:action-assign-menus": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-items/450"
+            }
+          ],
+          "curies": [
+            {
+              "name": "wp",
+              "href": "https://api.w.org/{rel}",
+              "templated": true
+            }
+          ]
+        }
+      },
+      {
+        "id": 153,
+        "title": {
+          "raw": "Contact",
+          "rendered": "Contact"
+        },
+        "status": "publish",
+        "url": "https://aaronellis.co.network/ai/#contact",
+        "attr_title": "",
+        "description": "",
+        "type": "custom",
+        "type_label": "Custom Link",
+        "object": "custom",
+        "object_id": 153,
+        "parent": 0,
+        "menu_order": 12,
+        "target": "",
+        "classes": [
+          ""
+        ],
+        "xfn": [
+          ""
+        ],
+        "invalid": false,
+        "meta": [],
+        "menus": 6,
+        "_links": {
+          "self": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-items/153",
+              "targetHints": {
+                "allow": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE"
+                ]
+              }
+            }
+          ],
+          "collection": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-items"
+            }
+          ],
+          "about": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/types/nav_menu_item"
+            }
+          ],
+          "wp:term": [
+            {
+              "taxonomy": "nav_menu",
+              "embeddable": true,
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menus?post=153"
+            }
+          ],
+          "wp:action-publish": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-items/153"
+            }
+          ],
+          "wp:action-unfiltered-html": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-items/153"
+            }
+          ],
+          "wp:action-create-menus": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-items/153"
+            }
+          ],
+          "wp:action-assign-menus": [
+            {
+              "href": "https://aaronellis.co.network/wp-json/wp/v2/menu-items/153"
+            }
+          ],
+          "curies": [
+            {
+              "name": "wp",
+              "href": "https://api.w.org/{rel}",
+              "templated": true
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

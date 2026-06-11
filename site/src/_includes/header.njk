@@ -1,0 +1,40 @@
+<header class="site-head">
+  <div class="site-head-inner">
+    <a class="site-brand" href="/" aria-label="{{ site.title }} — home">
+      <img src="{{ site.logo }}" alt="{{ site.title }}" width="180" height="40" decoding="async">
+    </a>
+    <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+    </button>
+    <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+      <ul>
+        {% for item in site.mainMenu %}
+        <li><a href="{{ item.url }}"{% if item.url | isActive(page.url) %} aria-current="page"{% endif %}>{{ item.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </nav>
+  </div>
+</header>
+<script>
+  (function () {
+    var btn = document.querySelector('.nav-toggle');
+    var nav = document.getElementById('site-nav');
+    if (!btn || !nav) return;
+    function setOpen(open) {
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      if (open) { nav.removeAttribute('hidden'); } else { nav.setAttribute('hidden', ''); }
+    }
+    // Start collapsed only on narrow screens; CSS shows it on desktop regardless.
+    function syncInitial() { if (window.matchMedia('(max-width: 1024px)').matches) setOpen(false); else nav.removeAttribute('hidden'); }
+    syncInitial();
+    window.addEventListener('resize', syncInitial);
+    btn.addEventListener('click', function () { setOpen(btn.getAttribute('aria-expanded') !== 'true'); });
+    nav.addEventListener('click', function (e) { if (e.target.closest('a') && window.matchMedia('(max-width: 1024px)').matches) setOpen(false); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setOpen(false); });
+  })();
+</script>

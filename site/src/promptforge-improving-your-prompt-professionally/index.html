@@ -1,0 +1,1045 @@
+---
+layout: base.njk
+title: "PromptForge: Improving your prompt professionally"
+permalink: "/promptforge-improving-your-prompt-professionally/"
+wpId: 239
+---
+<style id="promptforge-article-styles">
+.promptforge-article {
+  --pf-bg: #03060d;
+  --pf-panel: rgba(10, 18, 33, 0.9);
+  --pf-panel-strong: rgba(11, 24, 43, 0.96);
+  --pf-line: rgba(93, 205, 255, 0.18);
+  --pf-ink: #f5f8ff;
+  --pf-muted: #a8b8cb;
+  --pf-accent: #58dfff;
+  --pf-blue: #3097ff;
+  background:
+    radial-gradient(circle at 14% 8%, rgba(48, 151, 255, 0.2), transparent 24rem),
+    radial-gradient(circle at 86% 2%, rgba(202, 104, 255, 0.12), transparent 20rem),
+    linear-gradient(180deg, #03060d 0%, #07111f 48%, #040913 100%);
+  color: var(--pf-ink);
+  font-family: Inter, Sora, Manrope, system-ui, sans-serif;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  overflow-x: hidden;
+  position: relative;
+  width: 100vw;
+}
+.promptforge-article::before {
+  background-image:
+    linear-gradient(rgba(98, 215, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(98, 215, 255, 0.04) 1px, transparent 1px);
+  background-size: 36px 36px;
+  content: "";
+  inset: 0;
+  opacity: 0.28;
+  pointer-events: none;
+  position: absolute;
+}
+.promptforge-article * {
+  box-sizing: border-box;
+}
+.promptforge-article .pf-wrap {
+  margin: 0 auto;
+  max-width: 1040px;
+  padding: 0 24px;
+  position: relative;
+  z-index: 1;
+}
+.promptforge-article .pf-mobile-nav-strip {
+  display: none;
+}
+.promptforge-article .pf-hero {
+  padding: 96px 0 56px;
+}
+.promptforge-article .pf-eyebrow {
+  color: #8fd6ff;
+  font-size: 0.82rem;
+  font-weight: 850;
+  letter-spacing: 0.16em;
+  margin: 0 0 16px;
+  text-transform: uppercase;
+}
+.promptforge-article .pf-title {
+  color: var(--pf-ink);
+  font-size: clamp(2.7rem, 7.4vw, 6rem);
+  letter-spacing: -0.06em;
+  line-height: 0.94;
+  margin: 0;
+  max-width: 980px;
+}
+.promptforge-article .pf-lede {
+  color: rgba(223, 234, 248, 0.86);
+  font-size: clamp(1.08rem, 2vw, 1.3rem);
+  line-height: 1.65;
+  margin: 24px 0 0;
+  max-width: 780px;
+}
+.promptforge-article .pf-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 26px;
+}
+.promptforge-article .pf-hero-media {
+  margin-top: 32px;
+}
+.promptforge-article .pf-hero-media img {
+  border: 1px solid rgba(93, 205, 255, 0.18);
+  border-radius: 28px;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.34);
+  display: block;
+  height: auto;
+  width: 100%;
+}
+.promptforge-article .pf-chip {
+  background: rgba(255, 255, 255, 0.045);
+  border: 1px solid rgba(93, 205, 255, 0.16);
+  border-radius: 999px;
+  color: #f4f8ff;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  padding: 10px 12px;
+  text-transform: uppercase;
+}
+.promptforge-article .pf-content {
+  padding: 16px 0 88px;
+}
+.promptforge-article .pf-panel,
+.promptforge-article .pf-callout,
+.promptforge-article .pf-code-shell {
+  background: linear-gradient(180deg, var(--pf-panel-strong), rgba(8, 14, 26, 0.96));
+  border: 1px solid var(--pf-line);
+  border-radius: 26px;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.34);
+}
+.promptforge-article .pf-panel {
+  margin: 0 0 22px;
+  padding: clamp(24px, 4vw, 42px);
+}
+.promptforge-article h2 {
+  color: var(--pf-ink);
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  letter-spacing: -0.045em;
+  line-height: 1;
+  margin: 0 0 18px;
+}
+.promptforge-article h3 {
+  color: #dff4ff;
+  font-size: 1.25rem;
+  line-height: 1.2;
+  margin: 24px 0 10px;
+}
+.promptforge-article p,
+.promptforge-article li {
+  color: rgba(223, 234, 248, 0.82);
+  font-size: 1.02rem;
+  line-height: 1.78;
+}
+.promptforge-article p {
+  margin: 0 0 16px;
+}
+.promptforge-article ul,
+.promptforge-article ol {
+  margin: 0 0 18px;
+  padding-left: 1.25rem;
+}
+.promptforge-article li + li {
+  margin-top: 8px;
+}
+.promptforge-article strong {
+  color: #ffffff;
+}
+.promptforge-article .pf-callout {
+  border-color: rgba(88, 223, 255, 0.26);
+  margin: 24px 0;
+  padding: 22px;
+}
+.promptforge-article .pf-code-shell {
+  margin: 26px 0 0;
+  overflow: hidden;
+}
+.promptforge-article .pf-code-header {
+  align-items: center;
+  background: rgba(3, 8, 16, 0.78);
+  border-bottom: 1px solid rgba(93, 205, 255, 0.14);
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 14px 18px;
+}
+.promptforge-article .pf-code-label {
+  color: #8fd6ff;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.promptforge-article .pf-code-status {
+  background: rgba(88, 223, 255, 0.12);
+  border: 1px solid rgba(88, 223, 255, 0.22);
+  border-radius: 999px;
+  color: #dff8ff;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  padding: 7px 9px;
+  text-transform: uppercase;
+}
+.promptforge-article pre {
+  background: #040b14;
+  color: #dff4ff;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: clamp(0.8rem, 1.8vw, 0.94rem);
+  line-height: 1.65;
+  margin: 0;
+  max-height: 820px;
+  overflow: auto;
+  padding: 20px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.promptforge-article code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+.promptforge-article .pf-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 28px;
+}
+.promptforge-article .pf-button {
+  align-items: center;
+  background: linear-gradient(135deg, #66d4ff, #3097ff);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 999px;
+  color: #03101d !important;
+  display: inline-flex;
+  font-weight: 850;
+  justify-content: center;
+  min-height: 48px;
+  padding: 13px 22px;
+  text-decoration: none;
+}
+.promptforge-article .pf-button-secondary {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(93, 205, 255, 0.18);
+  color: #eef5ff !important;
+}
+@media (max-width: 1024px) {
+  .promptforge-article .pf-mobile-nav-strip {
+    background: rgba(7, 14, 25, 0.96);
+    border-bottom: 1px solid rgba(93, 205, 255, 0.14);
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 10px 16px 12px;
+    position: relative;
+    scrollbar-width: none;
+    z-index: 30;
+  }
+  .promptforge-article .pf-mobile-nav-strip::-webkit-scrollbar {
+    display: none;
+  }
+  .promptforge-article .pf-mobile-nav-strip a {
+    background: rgba(255, 255, 255, 0.045);
+    border: 1px solid rgba(93, 205, 255, 0.16);
+    border-radius: 999px;
+    color: #f4f8ff !important;
+    flex: 0 0 auto;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    line-height: 1;
+    min-height: 34px;
+    padding: 11px 13px;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+  .promptforge-article .pf-mobile-nav-strip a[aria-current="page"] {
+    background: rgba(88, 223, 255, 0.14);
+    border-color: rgba(88, 223, 255, 0.34);
+  }
+}
+@media (max-width: 760px) {
+  .promptforge-article .pf-wrap {
+    padding: 0 18px;
+  }
+  .promptforge-article .pf-hero {
+    padding: 54px 0 34px;
+  }
+  .promptforge-article .pf-panel {
+    border-radius: 20px;
+    padding: 22px 18px;
+  }
+  .promptforge-article .pf-title {
+    font-size: clamp(2.55rem, 13vw, 3.65rem);
+    letter-spacing: -0.065em;
+    line-height: 0.94;
+  }
+  .promptforge-article .pf-lede {
+    font-size: 1.06rem;
+    line-height: 1.6;
+  }
+  .promptforge-article .pf-code-shell {
+    border-radius: 20px;
+    margin-left: -2px;
+    margin-right: -2px;
+  }
+  .promptforge-article .pf-code-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
+    padding: 13px 14px;
+  }
+  .promptforge-article .pf-code-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    overflow-wrap: anywhere;
+  }
+  .promptforge-article .pf-code-status {
+    align-self: flex-start;
+    font-size: 0.66rem;
+    letter-spacing: 0.06em;
+    max-width: 100%;
+    white-space: normal;
+  }
+  .promptforge-article pre {
+    font-size: 0.76rem;
+    line-height: 1.55;
+    max-height: 620px;
+    padding: 16px 14px;
+  }
+  .promptforge-article .pf-actions,
+  .promptforge-article .pf-button {
+    width: 100%;
+  }
+}
+</style>
+
+<article class="promptforge-article">
+  <nav class="pf-mobile-nav-strip" aria-label="Mobile quick navigation">
+    <a href="https://aaronellis.co.network/">Home</a>
+    <a href="https://aaronellis.co.network/#portfolio">Portfolio</a>
+    <a href="https://aaronellis.co.network/real-estate-buddy/">Real Estate Buddy</a>
+    <a href="https://aaronellis.co.network/extreme-build/">Extreme Build</a>
+    <a href="https://aaronellis.co.network/articles/" aria-current="page">Articles</a>
+    <a href="https://aaronellis.co.network/resume/">Resume</a>
+    <a href="https://aaronellis.co.network/#contact">Contact</a>
+  </nav>
+
+  <header class="pf-hero">
+    <div class="pf-wrap">
+      <p class="pf-eyebrow">Prompt Engineering</p>
+      <h1 class="pf-title">PromptForge: Improving your prompt professionally</h1>
+      <p class="pf-lede">A reusable AI instruction set for turning rough prompt ideas into clear, production-ready prompts without getting stuck in endless rewrites, explanations, or vague advice.</p>
+      <div class="pf-meta">
+        <span class="pf-chip">Prompt Systems</span>
+        <span class="pf-chip">Agent Design</span>
+        <span class="pf-chip">Workflow Clarity</span>
+        <span class="pf-chip">Copy-and-Use</span>
+      </div>
+      <figure class="pf-hero-media">
+        <img src="https://aaronellis.co.network/wp-content/uploads/2026/06/promptforge-improving-your-prompt-professionally-feature.webp" alt="Editorial AI workspace illustration showing rough prompt ideas being refined into a production-ready prompt system." loading="eager" decoding="async" width="1672" height="941" />
+      </figure>
+    </div>
+  </header>
+
+  <div class="pf-content">
+    <div class="pf-wrap">
+      <section class="pf-panel">
+        <h2>Why PromptForge exists</h2>
+        <p>Most people do not struggle with AI because the model is useless. They struggle because their instructions are loose, incomplete, or too broad. A weak prompt usually asks the AI to guess the goal, the audience, the format, the tone, and the boundaries all at once.</p>
+        <p><strong>PromptForge</strong> is designed to solve that problem. Instead of acting like a general chatbot, it acts as a prompt-building specialist. Its job is to ask only the questions that matter, then produce a polished prompt the user can copy and run.</p>
+        <p>The point is not to make prompt engineering feel complicated. The point is to make the process cleaner, faster, and more professional.</p>
+      </section>
+
+      <section class="pf-panel">
+        <h2>What makes a professional prompt different?</h2>
+        <p>A professional prompt does more than describe a task. It gives the AI a role, a job, boundaries, context, output expectations, and quality standards. That removes ambiguity and makes the response easier to use.</p>
+        <p>Good prompts usually include:</p>
+        <ul>
+          <li><strong>Role:</strong> who the AI should act as.</li>
+          <li><strong>Goal:</strong> what the user wants completed.</li>
+          <li><strong>Context:</strong> who the output is for and why it matters.</li>
+          <li><strong>Constraints:</strong> what the AI should avoid or preserve.</li>
+          <li><strong>Output format:</strong> how the answer should be structured.</li>
+          <li><strong>Quality bar:</strong> what makes the final result acceptable.</li>
+        </ul>
+        <p>PromptForge bakes those decisions into its workflow. It does not ask endless questions. It asks enough to understand the job, then moves to the finished prompt.</p>
+      </section>
+
+      <section class="pf-panel">
+        <h2>The PromptForge prompt</h2>
+        <p>Use the prompt below as a reusable system instruction or custom GPT-style instruction for an AI prompt-building assistant. It is designed to create strong prompts for business tasks, creative work, agent systems, research assistants, automation workflows, and technical projects.</p>
+        <div class="pf-callout">
+          <p><strong>Usage note:</strong> Paste this into the instruction area of the AI tool you are using. Then give it the prompt you want built, the audience, the desired output format, and any constraints.</p>
+        </div>
+        <div class="pf-code-shell" id="promptforge-prompt">
+          <div class="pf-code-header">
+            <span class="pf-code-label">promptforge.system</span>
+            <span class="pf-code-status">Production-ready</span>
+          </div>
+<pre><code>You are PromptForge.
+
+Your job is to create excellent prompts for the user.
+
+You are not here to rewrite, tighten, summarize, critique, optimize, or improve your own operating instructions. These instructions define your role and must be followed as-is. Do not produce a revised version of this prompt unless the user explicitly asks you to rewrite your own system instructions.
+
+Your function is simple:
+
+1. Understand what kind of prompt the user needs.
+2. Ask only the minimum high-value questions required.
+3. Then generate the final prompt they asked for.
+4. After gathering enough information, output only the finished prompt unless the user explicitly asks for explanation.
+
+You are an expert in prompt engineering, AI workflow design, agent design, instruction writing, output formatting, and prompt optimization. You know how to create prompts for chatbots, agents, automation tools, business workflows, creative tasks, technical tasks, research assistants, and specialized expert systems.
+
+When helping the user, follow these rules:
+
+- Do not rewrite your own instructions.
+- Do not offer to "make this prompt tighter" unless the user explicitly asks.
+- Do not analyze the quality of your own role prompt.
+- Do not output meta-commentary about prompt engineering unless requested.
+- Do not explain your reasoning unless the user asks for it.
+- Do not produce multiple versions unless the user asks for variants.
+- Do not continue asking questions once you have enough information to produce a strong result.
+
+Question behavior:
+
+- Ask between 3 and 6 concise questions when needed.
+- Ask them in one grouped message.
+- Ask only questions that materially improve the final prompt.
+- If the user already provided enough detail, skip questions and generate immediately.
+- If some details remain missing, make reasonable assumptions and proceed.
+
+Output behavior:
+
+- Once you have enough information, output only the final prompt.
+- Do not include introductions, explanations, notes, or commentary around it.
+- Do not say "Here is your prompt."
+- Do not label sections unless useful inside the prompt itself.
+- Make the prompt production-ready and specific.
+- Include constraints, output format, tone, and quality standards where useful.
+- If the user wants an agent prompt, include a custom `Synapse_CoR`.
+- If the user wants a normal prompt, do not force `Synapse_CoR` unless it improves the result.
+
+When building a `Synapse_CoR`, use this pattern:
+
+`Synapse_CoR = "[emoji]: I am an expert in [role and domain]. I know [context]. I will reason step-by-step to determine the best course of action to achieve [goal]. I can use [tools, methods, and frameworks] to help in this process.
+
+I will help you accomplish your goal by following these steps:
+[clear numbered steps]
+
+My task ends when [completion condition].
+
+[first step or first question]"`
+
+Quality bar:
+
+- Be concrete, not generic.
+- Be structured, not vague.
+- Anticipate failure modes.
+- Make the prompt easy to copy and use immediately.
+- Prefer polished final output over rough templates.
+- Keep placeholders minimal.
+- Tailor the prompt to the exact goal, platform, audience, and constraints.
+
+Your default workflow:
+
+- Identify the task.
+- Identify the target AI/platform if relevant.
+- Identify the desired output.
+- Identify tone, constraints, and context.
+- Ask concise questions if needed.
+- Produce the final prompt.
+- Stop.
+
+Your first response to a new request should be:
+
+"What do you want the AI to do, who is it for, what should the output look like, and are there any constraints or tone requirements?"</code></pre>
+        </div>
+      </section>
+
+      <section class="pf-panel">
+        <h2>How to use it well</h2>
+        <p>PromptForge works best when you give it a real job, not a vague wish. Instead of saying, &#8220;make me a prompt for marketing,&#8221; say what the AI should create, who the output is for, what platform it will be used in, and what style or restrictions matter.</p>
+        <h3>Example request</h3>
+        <p>&#8220;Create a prompt for a real estate assistant that helps draft vendor update emails. It should sound professional but human, avoid legal advice, and produce a short email plus optional SMS version.&#8221;</p>
+        <p>That gives PromptForge enough information to build a useful prompt without turning the process into a long consultation.</p>
+      </section>
+
+      <section class="pf-panel">
+        <h2>Where this fits in a practical AI workflow</h2>
+        <p>A prompt like this is useful when you want repeatable quality. It can help create prompts for one-off tasks, reusable business workflows, custom AI assistants, agent instructions, content systems, technical handoffs, or internal operating procedures.</p>
+        <p>It is also useful because it keeps the AI focused. The assistant does not drift into analyzing itself or explaining prompt theory. It asks what it needs, builds the prompt, and stops.</p>
+        <div class="pf-actions">
+          <a class="pf-button" href="mailto:completestrength@gmail.com?subject=PromptForge%20Article%20Enquiry">Email Aaron</a>
+          <a class="pf-button pf-button-secondary" href="https://aaronellis.co.network/articles/">Back to Articles</a>
+        </div>
+      </section>
+    </div>
+  </div>
+</article>
+
+<style id="ae-vintage-shared-chrome">
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Oswald:wght@400;500;600;700&family=Cinzel:wght@600;700&display=swap');
+:root {
+  --ae-ink: #061b1f;
+  --ae-deep-teal: #07343a;
+  --ae-teal: #0c5961;
+  --ae-blue-teal: #0f7480;
+  --ae-cream: #f7ead2;
+  --ae-paper: #fff4dc;
+  --ae-gold: #d99a22;
+  --ae-bright-gold: #f2bd45;
+  --ae-orange: #c75a24;
+  --ae-red-shadow: #7d2417;
+  --ae-black: #050807;
+  --ae-muted: #b8c7bd;
+  --ae-shadow: 0 18px 45px rgba(0,0,0,.35);
+}
+body .site-header.dynamic-header {
+  position: relative !important;
+  z-index: 50 !important;
+  background: radial-gradient(circle at 50% -30%, rgba(242, 189, 69, 0.20), transparent 40rem), linear-gradient(180deg, rgba(6, 27, 31, 0.98), rgba(7, 52, 58, 0.96)) !important;
+  border-bottom: 1px solid rgba(217, 154, 34, 0.38) !important;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.22) !important;
+}
+body .site-header.dynamic-header::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(242, 189, 69, 0.82), transparent);
+  pointer-events: none;
+}
+body .site-header .header-inner {
+  max-width: 1220px !important;
+  min-height: 86px !important;
+  padding: 14px 22px !important;
+  gap: 18px !important;
+  align-items: center !important;
+}
+body .site-header .site-branding { gap: 0.35rem !important; }
+body .site-header .custom-logo {
+  width: auto !important;
+  height: clamp(50px, 5vw, 68px) !important;
+  max-width: min(100%, 460px) !important;
+}
+body .site-header .site-description {
+  display: block !important;
+  color: rgba(247, 234, 210, 0.84) !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 0.72rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.12em !important;
+  line-height: 1.35 !important;
+  margin-top: 0.12rem !important;
+  text-transform: uppercase !important;
+}
+body .site-navigation { display: block !important; }
+body .site-navigation-toggle-holder { display: none !important; }
+body .site-navigation-dropdown { display: none !important; }
+body [class*='mobile-nav-strip'] { display: none !important; }
+body .site-navigation .menu { gap: 0.45rem !important; }
+body .site-navigation .menu > li > a {
+  align-items: center !important;
+  border-radius: 999px !important;
+  color: var(--ae-cream) !important;
+  display: inline-flex !important;
+  font-family: 'Oswald', 'Inter', sans-serif !important;
+  font-size: 0.98rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.04em !important;
+  min-height: 42px !important;
+  padding: 0.55rem 0.95rem !important;
+  text-transform: uppercase !important;
+  transition: color .18s ease, background-color .18s ease, transform .18s ease, box-shadow .18s ease !important;
+}
+body .site-navigation .menu > li > a:hover,
+body .site-navigation .menu > li.current-menu-item > a,
+body .site-navigation .menu > li.current_page_item > a {
+  background: rgba(247, 234, 210, 0.08) !important;
+  box-shadow: inset 0 0 0 1px rgba(217, 154, 34, 0.28) !important;
+  color: var(--ae-bright-gold) !important;
+  transform: translateY(-1px) !important;
+}
+body .site-navigation-toggle-holder { justify-content: flex-end !important; }
+body .site-navigation-toggle-holder .site-navigation-toggle {
+  background: rgba(5, 8, 7, 0.78) !important;
+  border: 1px solid rgba(217, 154, 34, 0.34) !important;
+  border-radius: 14px !important;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22) !important;
+  color: var(--ae-cream) !important;
+  min-height: 46px !important;
+  min-width: 46px !important;
+}
+body .site-navigation-toggle-holder .site-navigation-toggle:hover,
+body .site-navigation-toggle-holder.elementor-active .site-navigation-toggle {
+  background: rgba(12, 89, 97, 0.94) !important;
+  border-color: rgba(242, 189, 69, 0.44) !important;
+}
+body .site-navigation-dropdown {
+  left: auto !important;
+  right: 16px !important;
+  top: calc(100% + 10px) !important;
+  width: min(360px, calc(100vw - 32px)) !important;
+  max-width: 360px !important;
+  padding: 0 !important;
+}
+body .site-navigation-dropdown ul.menu {
+  backdrop-filter: blur(14px) !important;
+  background: radial-gradient(circle at top center, rgba(242, 189, 69, 0.14), transparent 38%), linear-gradient(180deg, rgba(6, 27, 31, 0.98), rgba(7, 52, 58, 0.98)) !important;
+  border: 1px solid rgba(217, 154, 34, 0.34) !important;
+  border-radius: 22px !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.34), inset 0 0 0 1px rgba(247, 234, 210, 0.08) !important;
+  display: grid !important;
+  gap: 8px !important;
+  margin: 0 !important;
+  padding: 12px !important;
+}
+body .site-navigation-dropdown ul.menu li a {
+  align-items: center !important;
+  background: rgba(247, 234, 210, 0.05) !important;
+  border: 1px solid rgba(247, 234, 210, 0.08) !important;
+  border-radius: 14px !important;
+  color: var(--ae-cream) !important;
+  display: flex !important;
+  font-family: 'Oswald', 'Inter', sans-serif !important;
+  font-size: 0.96rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.05em !important;
+  min-height: 50px !important;
+  padding: 0 16px !important;
+  text-transform: uppercase !important;
+}
+body .site-navigation-dropdown ul.menu li a:hover,
+body .site-navigation-dropdown ul.menu li.current-menu-item a,
+body .site-navigation-dropdown ul.menu li.current_page_item a {
+  background: rgba(217, 154, 34, 0.12) !important;
+  border-color: rgba(242, 189, 69, 0.34) !important;
+  color: var(--ae-paper) !important;
+}
+body .site-footer.dynamic-footer {
+  position: relative !important;
+  background: radial-gradient(circle at 50% -40%, rgba(242, 189, 69, 0.16), transparent 34rem), linear-gradient(180deg, rgba(5, 8, 7, 0.98), rgba(6, 27, 31, 0.98)) !important;
+  border-top: 1px solid rgba(217, 154, 34, 0.34) !important;
+  padding-top: 18px !important;
+}
+body .site-footer.dynamic-footer::before {
+  content: '✦';
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--ae-bright-gold);
+  font-size: 0.95rem;
+  background: linear-gradient(180deg, rgba(6, 27, 31, 1), rgba(6, 27, 31, 1));
+  padding: 0 12px;
+}
+body .site-footer .footer-inner {
+  align-items: center !important;
+  gap: 18px !important;
+  max-width: 1220px !important;
+  min-height: 100px !important;
+  padding: 18px 22px 28px !important;
+}
+body .site-footer .custom-logo {
+  width: auto !important;
+  height: clamp(36px, 4vw, 48px) !important;
+  max-width: min(100%, 320px) !important;
+}
+body .site-footer .site-description {
+  color: rgba(247, 234, 210, 0.78) !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 0.74rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+}
+body .site-footer .copyright p {
+  color: rgba(247, 234, 210, 0.72) !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 0.84rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.03em !important;
+}
+@media (max-width: 1024px) {
+  body .site-navigation { display: none !important; }
+  body .site-navigation-toggle-holder { display: flex !important; }
+  body .site-navigation-toggle-holder .site-navigation-toggle { display: flex !important; align-items: center !important; justify-content: center !important; }
+  body .site-navigation-dropdown { display: block !important; }
+  body .site-header .header-inner {
+    min-height: 76px !important;
+    padding: 14px 16px !important;
+  }
+  body .site-header .custom-logo {
+    height: clamp(44px, 10vw, 54px) !important;
+    max-width: min(100%, 300px) !important;
+  }
+  body .site-header .site-description {
+    font-size: 0.66rem !important;
+    letter-spacing: 0.1em !important;
+  }
+  body .site-navigation-dropdown {
+    right: 12px !important;
+    width: min(320px, calc(100vw - 24px)) !important;
+  }
+  body .site-footer .footer-inner {
+    gap: 14px !important;
+    min-height: 0 !important;
+    padding: 16px 16px 24px !important;
+  }
+}
+</style>
+
+<style id="ae-vintage-articles-override">
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Oswald:wght@400;500;600;700&family=Cinzel:wght@600;700&display=swap');
+.articles-page,
+.promptforge-article,
+.synapse-cor-article,
+.profpro-harness-article {
+  background:
+    radial-gradient(circle at 50% 0%, rgba(242,189,69,.18), transparent 34rem),
+    linear-gradient(180deg, #061b1f 0%, #07343a 52%, #061b1f 100%) !important;
+  color: #f7ead2 !important;
+  font-family: 'Inter', sans-serif !important;
+}
+.articles-page::before,
+.promptforge-article::before,
+.synapse-cor-article::before,
+.profpro-harness-article::before {
+  background-image:
+    linear-gradient(rgba(242,189,69,.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(242,189,69,.04) 1px, transparent 1px) !important;
+  background-size: 40px 40px !important;
+  opacity: .3 !important;
+}
+.ap-mobile-nav-strip,
+.pf-mobile-nav-strip,
+.sc-mobile-nav-strip,
+.pp-mobile-nav-strip { display: none !important; }
+.articles-page .ap-title,
+.promptforge-article .pf-title,
+.synapse-cor-article .sc-title,
+.profpro-harness-article .pp-title,
+.articles-page h2,
+.promptforge-article h2,
+.synapse-cor-article h2,
+.profpro-harness-article h2,
+.promptforge-article h3,
+.synapse-cor-article h3,
+.profpro-harness-article h3 {
+  font-family: 'Oswald', 'Inter', sans-serif !important;
+  text-transform: uppercase;
+  letter-spacing: .02em !important;
+  color: #fff4dc !important;
+}
+.articles-page .ap-title,
+.promptforge-article .pf-title,
+.synapse-cor-article .sc-title,
+.profpro-harness-article .pp-title {
+  text-shadow: 2px 2px 0 #050807, 4px 4px 0 #7d2417 !important;
+  letter-spacing: -.03em !important;
+  line-height: .95 !important;
+}
+.articles-page .ap-eyebrow,
+.promptforge-article .pf-eyebrow,
+.synapse-cor-article .sc-eyebrow,
+.profpro-harness-article .pp-eyebrow,
+.articles-page .ap-chip,
+.promptforge-article .pf-chip,
+.synapse-cor-article .sc-chip,
+.profpro-harness-article .pp-chip,
+.promptforge-article .pf-code-label,
+.synapse-cor-article .sc-code-label,
+.profpro-harness-article .pp-code-header {
+  color: #f2bd45 !important;
+  font-family: 'Cinzel', serif !important;
+  letter-spacing: .12em !important;
+  text-transform: uppercase !important;
+}
+.articles-page .ap-lede,
+.articles-page .ap-text,
+.articles-page .ap-status,
+.articles-page .ap-post-card p,
+.promptforge-article .pf-lede,
+.promptforge-article p,
+.promptforge-article li,
+.synapse-cor-article .sc-lede,
+.synapse-cor-article p,
+.synapse-cor-article li,
+.profpro-harness-article .pp-lede,
+.profpro-harness-article p,
+.profpro-harness-article li {
+  color: rgba(247,234,210,.82) !important;
+}
+.articles-page .ap-panel,
+.articles-page .ap-post-card,
+.promptforge-article .pf-panel,
+.synapse-cor-article .sc-panel,
+.profpro-harness-article .pp-panel,
+.promptforge-article .pf-code-shell,
+.synapse-cor-article .sc-code-shell,
+.profpro-harness-article .pp-code-shell,
+.promptforge-article .pf-hero-media,
+.synapse-cor-article .sc-hero-media,
+.profpro-harness-article .pp-hero-image {
+  background: linear-gradient(180deg, rgba(12,89,97,.92), rgba(6,27,31,.96)) !important;
+  border: 2px solid rgba(217,154,34,.34) !important;
+  box-shadow: 0 20px 48px rgba(0,0,0,.26) !important;
+}
+.articles-page .ap-post-card::before,
+.promptforge-article .pf-panel::before,
+.synapse-cor-article .sc-panel::before,
+.profpro-harness-article .pp-panel::before,
+.promptforge-article .pf-code-shell::before,
+.synapse-cor-article .sc-code-shell::before,
+.profpro-harness-article .pp-code-shell::before {
+  content:'';
+  position:absolute;
+  inset:8px;
+  border:1px solid rgba(247,234,210,.12);
+  border-radius:inherit;
+  pointer-events:none;
+}
+.articles-page .ap-button,
+.promptforge-article .pf-button,
+.synapse-cor-article .sc-button,
+.profpro-harness-article .pp-button {
+  background: linear-gradient(180deg, #f2bd45, #d99a22) !important;
+  color: #050807 !important;
+  border: 2px solid #050807 !important;
+  box-shadow: 0 5px 0 #7d2417 !important;
+  font-family: 'Oswald', 'Inter', sans-serif !important;
+  text-transform: uppercase !important;
+  letter-spacing: .06em !important;
+}
+.articles-page .ap-button-secondary,
+.promptforge-article .pf-button-secondary,
+.synapse-cor-article .sc-button-secondary,
+.profpro-harness-article .pp-button-secondary {
+  background: rgba(247,234,210,.05) !important;
+  color: #fff4dc !important;
+  border-color: rgba(217,154,34,.3) !important;
+}
+.articles-page .ap-chip,
+.promptforge-article .pf-chip,
+.synapse-cor-article .sc-chip,
+.profpro-harness-article .pp-chip {
+  background: rgba(5,8,7,.36) !important;
+  border: 1px solid rgba(217,154,34,.3) !important;
+}
+.articles-page .ap-post-card a,
+.promptforge-article a,
+.synapse-cor-article a,
+.profpro-harness-article a {
+  color: #f2bd45 !important;
+}
+.promptforge-article code,
+.synapse-cor-article code,
+.profpro-harness-article code,
+.promptforge-article pre,
+.synapse-cor-article pre,
+.profpro-harness-article pre {
+  color: #fff4dc !important;
+}
+</style>
+
+<style id="ae-header-polish-20260603">
+body .site-header.dynamic-header {
+  background: radial-gradient(circle at 50% -24%, rgba(242, 189, 69, 0.16), transparent 34rem), linear-gradient(180deg, rgba(6, 27, 31, 0.98), rgba(7, 52, 58, 0.96)) !important;
+  border-bottom: 1px solid rgba(217, 154, 34, 0.42) !important;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18) !important;
+  position: relative !important;
+  z-index: 100 !important;
+}
+body .site-header .header-inner {
+  align-items: center !important;
+  column-gap: 14px !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  max-width: 1180px !important;
+  min-height: 66px !important;
+  padding: 8px 18px !important;
+  row-gap: 6px !important;
+}
+body .site-header .site-branding {
+  align-items: center !important;
+  display: flex !important;
+  flex: 0 1 360px !important;
+  gap: 6px !important;
+  justify-content: center !important;
+  min-width: 0 !important;
+  text-align: center !important;
+}
+body .site-header .site-logo,
+body .site-header .custom-logo-link {
+  display: block !important;
+  line-height: 0 !important;
+  max-width: 100% !important;
+}
+body .site-header .custom-logo {
+  display: block !important;
+  height: clamp(38px, 3.4vw, 52px) !important;
+  max-height: 52px !important;
+  max-width: min(360px, 42vw) !important;
+  object-fit: contain !important;
+  width: auto !important;
+}
+body .site-header .site-description {
+  color: rgba(247, 234, 210, 0.78) !important;
+  display: block !important;
+  flex-basis: 100% !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 0.58rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.08em !important;
+  line-height: 1.15 !important;
+  margin: 0 !important;
+  text-transform: uppercase !important;
+}
+body .site-navigation {
+  display: block !important;
+  flex: 1 1 620px !important;
+  min-width: 0 !important;
+}
+body .site-navigation .menu {
+  align-items: center !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 5px !important;
+  justify-content: center !important;
+  margin: 0 !important;
+}
+body .site-navigation .menu > li > a {
+  align-items: center !important;
+  border-radius: 999px !important;
+  color: var(--ae-cream) !important;
+  display: inline-flex !important;
+  font-family: 'Oswald', 'Inter', sans-serif !important;
+  font-size: 0.82rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.03em !important;
+  line-height: 1 !important;
+  min-height: 32px !important;
+  padding: 0.4rem 0.62rem !important;
+  text-transform: uppercase !important;
+  white-space: nowrap !important;
+}
+body .site-navigation .menu > li > a:hover,
+body .site-navigation .menu > li.current-menu-item > a,
+body .site-navigation .menu > li.current_page_item > a {
+  background: rgba(247, 234, 210, 0.07) !important;
+  box-shadow: inset 0 0 0 1px rgba(217, 154, 34, 0.26) !important;
+  color: var(--ae-bright-gold) !important;
+  transform: none !important;
+}
+body .site-navigation-toggle-holder,
+body .site-navigation-dropdown {
+  display: none !important;
+}
+body [class*='mobile-nav-strip'] {
+  display: none !important;
+}
+@media (max-width: 1100px) and (min-width: 981px) {
+  body .site-header .header-inner {
+    padding: 8px 12px !important;
+  }
+  body .site-header .site-branding {
+    flex-basis: 320px !important;
+  }
+  body .site-header .custom-logo {
+    max-width: min(320px, 38vw) !important;
+  }
+  body .site-navigation .menu > li > a {
+    font-size: 0.76rem !important;
+    min-height: 30px !important;
+    padding: 0.36rem 0.48rem !important;
+  }
+}
+@media (max-width: 980px) {
+  body .site-header .header-inner {
+    justify-content: space-between !important;
+    min-height: 64px !important;
+    padding: 8px 14px !important;
+  }
+  body .site-header .site-branding {
+    flex: 1 1 auto !important;
+    justify-content: flex-start !important;
+    text-align: left !important;
+  }
+  body .site-header .custom-logo {
+    height: clamp(36px, 9vw, 46px) !important;
+    max-height: 46px !important;
+    max-width: min(270px, 72vw) !important;
+  }
+  body .site-header .site-description {
+    display: none !important;
+  }
+  body .site-navigation {
+    display: none !important;
+  }
+  body .site-navigation-toggle-holder {
+    display: flex !important;
+    flex: 0 0 auto !important;
+    justify-content: flex-end !important;
+  }
+  body .site-navigation-toggle-holder .site-navigation-toggle {
+    align-items: center !important;
+    background: rgba(5, 8, 7, 0.84) !important;
+    border: 1px solid rgba(217, 154, 34, 0.36) !important;
+    border-radius: 12px !important;
+    color: var(--ae-cream) !important;
+    display: flex !important;
+    justify-content: center !important;
+    min-height: 42px !important;
+    min-width: 42px !important;
+  }
+  body .site-navigation-dropdown {
+    display: block !important;
+    left: auto !important;
+    max-width: 340px !important;
+    padding: 0 !important;
+    right: 12px !important;
+    top: calc(100% + 8px) !important;
+    width: min(340px, calc(100vw - 24px)) !important;
+  }
+  body .site-navigation-dropdown ul.menu {
+    background: radial-gradient(circle at top center, rgba(242, 189, 69, 0.13), transparent 38%), linear-gradient(180deg, rgba(6, 27, 31, 0.99), rgba(7, 52, 58, 0.99)) !important;
+    border: 1px solid rgba(217, 154, 34, 0.34) !important;
+    border-radius: 18px !important;
+    box-shadow: 0 22px 55px rgba(0, 0, 0, 0.34) !important;
+    display: grid !important;
+    gap: 7px !important;
+    margin: 0 !important;
+    padding: 10px !important;
+  }
+  body .site-navigation-dropdown ul.menu li a {
+    align-items: center !important;
+    background: rgba(247, 234, 210, 0.055) !important;
+    border: 1px solid rgba(247, 234, 210, 0.09) !important;
+    border-radius: 12px !important;
+    color: var(--ae-cream) !important;
+    display: flex !important;
+    font-family: 'Oswald', 'Inter', sans-serif !important;
+    font-size: 0.92rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.04em !important;
+    min-height: 44px !important;
+    padding: 0 14px !important;
+    text-transform: uppercase !important;
+  }
+}
+@media (max-width: 420px) {
+  body .site-header .custom-logo {
+    max-width: min(235px, 68vw) !important;
+  }
+}
+</style>
+<style id="ae-nav-resize-fix-css">@media (max-width:1024px){body .site-header .site-navigation-dropdown[aria-hidden="true"]{display:none!important}body .site-header .site-navigation-dropdown:not([aria-hidden="true"]){display:block!important;opacity:1!important;visibility:visible!important;transform:none!important;pointer-events:auto!important}}</style><script id="ae-nav-resize-fix-js" src="data:text/javascript;base64,LyogYWUtbmF2LXJlc2l6ZS1maXgg4oCUIEhlbGxvIEVsZW1lbnRvciAzLjQuOSBjbG9zZXMgdGhlIG1vYmlsZSBkcm9wZG93biBvbiBhbnkKICAgd2luZG93IHJlc2l6ZSAoaW5jbC4gbW9iaWxlIFVSTC1iYXIgY29sbGFwc2Ugd2hlbiB5b3Ugc3RhcnQgc2Nyb2xsaW5nKSwgYnkKICAgc3RyaXBwaW5nIC5lbGVtZW50b3ItYWN0aXZlIGZyb20gdGhlIHRvZ2dsZSBob2xkZXIgV0lUSE9VVCByZXNldHRpbmcKICAgYXJpYS1leHBhbmRlZC9hcmlhLWhpZGRlbi4gUmVzdWx0OiBtZW51IHZhbmlzaGVzIG1pZC1zY3JvbGwsIFggc3RheXMgc3R1Y2suCiAgIFNoaW06IHdoaWxlIHRoZSBkcm9wZG93biBpcyBnZW51aW5lbHkgb3BlbiAoYXJpYS1oaWRkZW49ImZhbHNlIiksIHZldG8gdGhhdAogICBjbGFzcyByZW1vdmFsOyBrZWVwIHRoZSB0b2dnbGUgaWNvbiBzdGF0ZSBpbiBzeW5jLiBSZWFsIGNsb3NlcyAod2hpY2ggc2V0CiAgIGFyaWEtaGlkZGVuPSJ0cnVlIikgcGFzcyB0aHJvdWdoIHVudG91Y2hlZC4gKi8KKGZ1bmN0aW9uKCl7CiAgZnVuY3Rpb24gaW5pdCgpewogICAgdmFyIGhvbGRlcj1kb2N1bWVudC5xdWVyeVNlbGVjdG9yKCcuc2l0ZS1oZWFkZXIgLnNpdGUtbmF2aWdhdGlvbi10b2dnbGUtaG9sZGVyJyk7CiAgICB2YXIgZHJvcD1kb2N1bWVudC5xdWVyeVNlbGVjdG9yKCcuc2l0ZS1oZWFkZXIgLnNpdGUtbmF2aWdhdGlvbi1kcm9wZG93bicpOwogICAgdmFyIHRvZ2dsZT1kb2N1bWVudC5xdWVyeVNlbGVjdG9yKCcuc2l0ZS1oZWFkZXIgLnNpdGUtbmF2aWdhdGlvbi10b2dnbGUnKTsKICAgIGlmKCFob2xkZXJ8fCFkcm9wfHwhdG9nZ2xlKXtyZXR1cm47fQogICAgaWYoaG9sZGVyLmRhdGFzZXQuYWVOYXZTaGltKXtyZXR1cm47fQogICAgaG9sZGVyLmRhdGFzZXQuYWVOYXZTaGltPScxJzsKICAgIHZhciBzeW5jaW5nPWZhbHNlOwogICAgZnVuY3Rpb24gc3luYygpewogICAgICBpZihzeW5jaW5nKXtyZXR1cm47fQogICAgICBzeW5jaW5nPXRydWU7CiAgICAgIHZhciBvcGVuPWRyb3AuZ2V0QXR0cmlidXRlKCdhcmlhLWhpZGRlbicpPT09J2ZhbHNlJzsKICAgICAgdmFyIGFjdGl2ZT1ob2xkZXIuY2xhc3NMaXN0LmNvbnRhaW5zKCdlbGVtZW50b3ItYWN0aXZlJyk7CiAgICAgIGlmKG9wZW4mJiFhY3RpdmUpe2hvbGRlci5jbGFzc0xpc3QuYWRkKCdlbGVtZW50b3ItYWN0aXZlJyk7fQogICAgICBpZighb3BlbiYmYWN0aXZlKXtob2xkZXIuY2xhc3NMaXN0LnJlbW92ZSgnZWxlbWVudG9yLWFjdGl2ZScpO30KICAgICAgdG9nZ2xlLnNldEF0dHJpYnV0ZSgnYXJpYS1leHBhbmRlZCcsb3Blbj8ndHJ1ZSc6J2ZhbHNlJyk7CiAgICAgIHN5bmNpbmc9ZmFsc2U7CiAgICB9CiAgICB2YXIgbW89bmV3IE11dGF0aW9uT2JzZXJ2ZXIoc3luYyk7CiAgICBtby5vYnNlcnZlKGhvbGRlcix7YXR0cmlidXRlczp0cnVlLGF0dHJpYnV0ZUZpbHRlcjpbJ2NsYXNzJ119KTsKICAgIG1vLm9ic2VydmUoZHJvcCx7YXR0cmlidXRlczp0cnVlLGF0dHJpYnV0ZUZpbHRlcjpbJ2FyaWEtaGlkZGVuJ119KTsKICB9CiAgaWYoZG9jdW1lbnQucmVhZHlTdGF0ZT09PSdjb21wbGV0ZScpe2luaXQoKTt9CiAgZWxzZXt3aW5kb3cuYWRkRXZlbnRMaXN0ZW5lcignbG9hZCcsaW5pdCk7fQp9KSgpOwo="></script>

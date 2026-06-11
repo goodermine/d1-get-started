@@ -170,3 +170,8 @@ dist
 
 .dev.vars
 .wrangler/
+
+# Static rebuild (Eleventy) — build output + regenerable extraction intermediates.
+# tools/extracted/ also holds private (password-gated) page plaintext: never commit it.
+site/_site/
+tools/extracted/
