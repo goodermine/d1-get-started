@@ -16,6 +16,19 @@ const index = JSON.parse(fs.readFileSync(`${EX}/index.json`, 'utf8'));
 // their plaintext content into the repo. The old draft vault is excluded too.
 const GATED = new Set(['alex-private-song-guide', 'rilda-song-guide']);
 
+// Make the build self-contained and host-portable:
+//  - localized images   -> /assets/uploads/...
+//  - large media (.mp3)  -> /wp-content/uploads/... (kept on the host)
+//  - any other internal  -> root-relative
+function rewriteUrls(s) {
+  s = s.replace(/@import\s+url\(['"]?https:\/\/fonts\.googleapis\.com[^)]*\)\s*;?/g, ''); // fonts now self-hosted
+  s = s.replace(/https:\/\/aaronellis\.co\.network\/wp-content\/uploads\/([^"'`)\\\s&]*\.mp3)/g, '/wp-content/uploads/$1');
+  s = s.replace(/https:\/\/aaronellis\.co\.network\/wp-content\/uploads\//g, '/assets/uploads/');
+  s = s.replace(/https:\/\/aaronellis\.co\.network\//g, '/');
+  s = s.replace(/https:\/\/aaronellis\.co\.network\b/g, '');
+  return s;
+}
+
 function permalinkFromLink(item) {
   if (item.slug === 'home') return '/';
   let p = item.link.replace(ORIGIN, '');
@@ -41,7 +54,7 @@ for (const item of index) {
   const permalink = permalinkFromLink(item);
   const file = `${EX}/rendered/${String(item.id).padStart(4, '0')}-${item.slug}.html`;
   if (!fs.existsSync(file)) { skipped.push(`${item.slug} (no rendered file)`); continue; }
-  const content = fs.readFileSync(file, 'utf8').trim();
+  const content = rewriteUrls(fs.readFileSync(file, 'utf8').trim());
 
   const fm = [
     '---',
