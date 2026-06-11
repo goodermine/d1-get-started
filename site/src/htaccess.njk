@@ -20,6 +20,42 @@ RedirectMatch 301 ^/category/.*$ /articles/
 RedirectMatch 301 ^/tag/.*$ /articles/
 RedirectMatch 301 ^/author/.*$ /
 
+# ============================================================
+# Retire WordPress. The site is now 100% static, so NO PHP should
+# ever execute, and the WordPress endpoints should be sealed off.
+# This takes effect the moment this file is extracted into the
+# web root — WordPress is neutralized even before its files are
+# deleted. (Keep /wp-content/uploads/ — it still serves media.)
+# ============================================================
+
+# 1) Deny execution/access to every PHP file (wp-login, xmlrpc,
+#    wp-cron, index.php, and any shell uploaded into /wp-content/...).
+<FilesMatch "\.php$">
+  <IfModule mod_authz_core.c>Require all denied</IfModule>
+  <IfModule !mod_authz_core.c>Deny from all</IfModule>
+</FilesMatch>
+
+# 2) Block WordPress paths that don't map to a .php file directly.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteRule ^wp-json(/|$)   - [F,L]
+  RewriteRule ^wp-admin(/|$)  - [F,L]
+  RewriteRule ^wp-includes(/|$) - [F,L]
+</IfModule>
+
+# 3) Block version/fingerprint and info files.
+<FilesMatch "^(readme\.html|license\.txt|wp-config(-sample)?\.php|xmlrpc\.php|wp-cron\.php)$">
+  <IfModule mod_authz_core.c>Require all denied</IfModule>
+  <IfModule !mod_authz_core.c>Deny from all</IfModule>
+</FilesMatch>
+
+# 4) Baseline security headers for the static site.
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header set X-Frame-Options "SAMEORIGIN"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
 # Long-cache static assets (images/fonts/css/js); HTML stays fresh.
 <IfModule mod_expires.c>
   ExpiresActive On
