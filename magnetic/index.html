@@ -1,0 +1,564 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Magnetic Series — Aaron Ellis</title>
+<meta name="description" content="The Magnetic Series by Aaron Ellis — clinical hypnotherapist, 2× Australian Muay Thai champion, 30+ year strength coach. Ten books on influence that's felt, not forced.">
+<style>
+  :root{
+    --bg:#05060a;
+    --teal:#1a3a3a;
+    --teal-deep:#102626;
+    --gold:#c9a84c;
+    --gold-bright:#e9cd7a;
+    --ink:#e8e4d8;
+    --muted:#9a957f;
+    --line:rgba(201,168,76,.25);
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:Georgia,'Times New Roman',serif;
+    font-size:1.06rem;
+    line-height:1.75;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  h1,h2,h3{font-weight:normal;line-height:1.15;margin:0 0 .6em}
+  a{color:var(--gold);text-decoration:none}
+  a:hover{color:var(--gold-bright)}
+  .wrap{max-width:1080px;margin-inline:auto;padding-inline:24px}
+  section{padding-block:clamp(5rem,12vh,8.5rem);position:relative}
+  .eyebrow{
+    display:block;
+    font-size:.78rem;
+    letter-spacing:.45em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:1.6rem;
+  }
+  .rule{width:64px;height:1px;background:var(--gold);opacity:.6;margin:2.2rem 0}
+
+  /* ---------- scroll reveal ---------- */
+  .reveal{opacity:0;transform:translateY(34px);transition:opacity 1.4s ease,transform 1.4s ease}
+  .reveal.in{opacity:1;transform:none}
+  .reveal.d1{transition-delay:.15s}
+  .reveal.d2{transition-delay:.3s}
+  .reveal.d3{transition-delay:.45s}
+  @media (prefers-reduced-motion:reduce){
+    .reveal{opacity:1;transform:none;transition:none}
+  }
+
+  /* ---------- hero ---------- */
+  .hero{
+    min-height:100svh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    overflow:hidden;
+    padding-block:0;
+  }
+  .fog{position:absolute;inset:-20%;pointer-events:none}
+  .fog i{
+    position:absolute;
+    width:70vmax;height:70vmax;
+    border-radius:50%;
+    filter:blur(60px);
+    opacity:.5;
+  }
+  .fog i:nth-child(1){
+    background:radial-gradient(circle at 50% 50%, rgba(26,58,58,.55), transparent 60%);
+    top:-10%;left:-15%;
+    animation:driftA 38s ease-in-out infinite alternate;
+  }
+  .fog i:nth-child(2){
+    background:radial-gradient(circle at 50% 50%, rgba(201,168,76,.10), transparent 60%);
+    bottom:-20%;right:-15%;
+    animation:driftB 47s ease-in-out infinite alternate;
+  }
+  .fog i:nth-child(3){
+    background:radial-gradient(circle at 50% 50%, rgba(26,58,58,.4), transparent 65%);
+    top:30%;left:35%;
+    animation:driftC 55s ease-in-out infinite alternate;
+  }
+  @keyframes driftA{to{transform:translate3d(12vw,6vh,0) scale(1.15)}}
+  @keyframes driftB{to{transform:translate3d(-10vw,-8vh,0) scale(1.2)}}
+  @keyframes driftC{to{transform:translate3d(-8vw,10vh,0) scale(.9)}}
+  @media (prefers-reduced-motion:reduce){.fog i{animation:none}}
+
+  .hero-inner{position:relative;max-width:54rem;padding:24px}
+  .hero-name{
+    font-size:.85rem;
+    letter-spacing:.55em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:1.2rem;
+  }
+  .hero-title{
+    font-size:clamp(2.4rem,7vw,4.6rem);
+    color:var(--gold);
+    letter-spacing:.04em;
+    margin-bottom:2.4rem;
+  }
+  .hero-phrase{
+    min-height:5.2em;
+    display:block;
+    font-size:clamp(1.05rem,2.4vw,1.4rem);
+    font-style:italic;
+    color:var(--ink);
+    opacity:0;
+    transition:opacity 1.6s ease;
+    max-width:38rem;
+    margin-inline:auto;
+  }
+  .hero-phrase.show{opacity:.92}
+  .hero-phrase strong,.trance-line strong{
+    color:var(--gold-bright);
+    font-weight:normal;
+    font-style:normal;
+  }
+  .scroll-cta{
+    display:inline-block;
+    margin-top:3rem;
+    font-size:.8rem;
+    letter-spacing:.4em;
+    text-transform:uppercase;
+    color:var(--muted);
+  }
+  .scroll-cta::after{
+    content:"↓";
+    display:block;
+    margin-top:.8rem;
+    font-size:1.1rem;
+    color:var(--gold);
+    animation:bob 2.6s ease-in-out infinite;
+  }
+  @keyframes bob{50%{transform:translateY(8px);opacity:.5}}
+  @media (prefers-reduced-motion:reduce){.scroll-cta::after{animation:none}}
+
+  /* ---------- about ---------- */
+  .about-grid{display:grid;grid-template-columns:160px 1fr;gap:3rem;align-items:center}
+  .monogram-ph{
+    aspect-ratio:1;
+    border:1px dashed var(--line);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--gold);
+    font-size:2.4rem;
+    letter-spacing:.1em;
+    background:var(--teal-deep);
+  }
+  .creds{list-style:none;margin:1.4rem 0 0;padding:0}
+  .creds li{
+    padding:.55rem 0;
+    border-bottom:1px solid rgba(201,168,76,.12);
+    color:var(--ink);
+  }
+  .creds li::before{content:"— ";color:var(--gold)}
+  @media (max-width:640px){
+    .about-grid{grid-template-columns:1fr}
+    .monogram-ph{max-width:140px}
+  }
+
+  /* ---------- series ---------- */
+  .series{background:linear-gradient(180deg,transparent,rgba(16,38,38,.45) 18%,rgba(16,38,38,.45) 82%,transparent)}
+  .books{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+    gap:1.2rem;
+    margin-top:3rem;
+  }
+  .book{
+    appearance:none;
+    border:1px solid var(--line);
+    background:linear-gradient(165deg,var(--teal),var(--teal-deep));
+    color:var(--gold);
+    font:inherit;
+    text-align:left;
+    padding:1.6rem 1.3rem;
+    min-height:11.5rem;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    cursor:pointer;
+    transition:transform .5s ease,box-shadow .5s ease,border-color .5s ease;
+  }
+  .book:hover,.book:focus-visible{
+    transform:translateY(-7px);
+    border-color:var(--gold);
+    box-shadow:0 14px 38px rgba(0,0,0,.5),0 0 24px rgba(201,168,76,.22);
+    outline:none;
+  }
+  .book .no{font-size:.75rem;letter-spacing:.3em;color:var(--muted)}
+  .book .t{font-size:1.16rem;line-height:1.3;letter-spacing:.02em}
+  .book .open{font-size:.75rem;letter-spacing:.25em;text-transform:uppercase;color:var(--muted);margin-top:1.2rem}
+
+  /* ---------- modal ---------- */
+  .modal{
+    position:fixed;inset:0;
+    display:none;
+    align-items:center;justify-content:center;
+    padding:24px;
+    background:rgba(5,6,10,.86);
+    z-index:60;
+  }
+  .modal.open{display:flex}
+  .modal-card{
+    max-width:30rem;width:100%;
+    background:linear-gradient(165deg,var(--teal),var(--teal-deep));
+    border:1px solid var(--gold);
+    padding:2.6rem 2.4rem;
+    text-align:center;
+    box-shadow:0 30px 80px rgba(0,0,0,.6);
+  }
+  .modal-card h3{color:var(--gold);font-size:1.7rem;margin-bottom:1rem}
+  .modal-card p{color:var(--ink);font-style:italic;margin:0 0 2rem}
+  .btn-gold{
+    display:inline-block;
+    font:inherit;
+    background:var(--gold);
+    color:#0b0c10;
+    border:none;
+    padding:.85em 2em;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    font-size:.85rem;
+    cursor:pointer;
+    transition:background .4s ease,transform .4s ease;
+  }
+  .btn-gold:hover{background:var(--gold-bright);color:#0b0c10;transform:translateY(-2px)}
+  .modal-close{
+    position:absolute;top:18px;right:22px;
+    background:none;border:none;
+    color:var(--muted);font-size:1.6rem;font-family:Georgia,serif;
+    cursor:pointer;
+  }
+  .modal-close:hover{color:var(--gold)}
+
+  /* ---------- method ---------- */
+  .pillars{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1.4rem;margin-top:3rem}
+  .pillar{border-top:1px solid var(--gold);padding-top:1.4rem}
+  .pillar h3{color:var(--gold);font-size:1.25rem}
+  .pillar p{color:var(--muted);margin:0;font-size:.98rem}
+
+  /* ---------- opt-in ---------- */
+  .optin{background:var(--teal-deep);text-align:center}
+  .optin h2{color:var(--gold);font-size:clamp(1.7rem,4vw,2.4rem)}
+  .optin p{max-width:34rem;margin:0 auto 2.2rem;color:var(--ink)}
+  .optin form{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap}
+  .optin input[type=email]{
+    font:inherit;
+    background:var(--bg);
+    border:1px solid var(--line);
+    color:var(--ink);
+    padding:.85em 1.2em;
+    width:min(78vw,22rem);
+  }
+  .optin input[type=email]:focus{outline:none;border-color:var(--gold)}
+
+  /* ---------- trance generator ---------- */
+  .trance{text-align:center}
+  .trance-stage{
+    min-height:9em;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    max-width:44rem;
+    margin:2.4rem auto 0;
+    padding:0 12px;
+  }
+  .trance-line{
+    font-size:clamp(1.3rem,3.4vw,1.9rem);
+    font-style:italic;
+    line-height:1.6;
+    opacity:0;
+    transition:opacity 1.5s ease;
+  }
+  .trance-line.show{opacity:1}
+  .trance-hint{font-size:.78rem;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);margin-top:2.4rem}
+
+  /* ---------- testimonials ---------- */
+  .testi{background:linear-gradient(180deg,transparent,rgba(16,38,38,.5) 20%,rgba(16,38,38,.5) 80%,transparent);text-align:center}
+  .testi-stage{min-height:13em;display:flex;align-items:center;justify-content:center;max-width:50rem;margin-inline:auto;padding:0 12px}
+  .quote{opacity:0;transition:opacity 1.6s ease}
+  .quote.show{opacity:1}
+  .quote p{font-size:clamp(1.15rem,2.8vw,1.6rem);line-height:1.7;margin:0 0 1.4rem;color:var(--ink)}
+  .quote cite{font-style:normal;font-size:.85rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold)}
+
+  /* ---------- footer ---------- */
+  footer{
+    border-top:1px solid rgba(201,168,76,.15);
+    padding:3.5rem 24px 4rem;
+    text-align:center;
+    color:var(--muted);
+    font-size:.92rem;
+  }
+  footer .links{margin-bottom:1.2rem}
+  footer .links a{margin:0 1rem}
+  footer .tag{font-style:italic;color:var(--ink);margin-bottom:1.2rem}
+</style>
+</head>
+<body>
+
+<!-- 1 · HERO -->
+<section class="hero" id="top">
+  <div class="fog" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="hero-inner">
+    <p class="hero-name">Aaron Ellis</p>
+    <h1 class="hero-title">The Magnetic Series</h1>
+    <p class="hero-phrase" id="hero-phrase" aria-live="polite"></p>
+    <a class="scroll-cta" href="#about">Begin</a>
+  </div>
+</section>
+
+<!-- 2 · ABOUT AARON -->
+<section id="about">
+  <div class="wrap">
+    <span class="eyebrow reveal">The Author</span>
+    <div class="about-grid">
+      <div class="monogram-ph reveal" aria-label="AE monogram logo placeholder">AE</div>
+      <div>
+        <h2 class="reveal">Aaron Ellis</h2>
+        <p class="reveal d1">Influence you can feel in the room — earned the hard way, taught the honest way.</p>
+        <ul class="creds reveal d2">
+          <li>Clinical hypnotherapist</li>
+          <li>2× Australian Muay Thai champion</li>
+          <li>30+ years strength &amp; conditioning</li>
+          <li>Performer</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3 · THE SERIES -->
+<section class="series" id="series">
+  <div class="wrap">
+    <span class="eyebrow reveal">Ten Books</span>
+    <h2 class="reveal">The Series</h2>
+    <p class="reveal d1" style="max-width:34rem;color:var(--muted)">Each book stands alone. Together, they build something you carry into every room.</p>
+    <div class="books" id="books"></div>
+  </div>
+</section>
+
+<!-- modal -->
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal-card" style="position:relative">
+    <button class="modal-close" id="modal-close" aria-label="Close">×</button>
+    <h3 id="modal-title"></h3>
+    <p id="modal-line"></p>
+    <a class="btn-gold" href="#" id="modal-buy">Get it on Amazon</a>
+  </div>
+</div>
+
+<!-- 4 · THE METHOD -->
+<section id="method">
+  <div class="wrap">
+    <span class="eyebrow reveal">Why It Works</span>
+    <h2 class="reveal">The Method</h2>
+    <div class="pillars">
+      <div class="pillar reveal"><h3>Hypnotic Language</h3><p>Patterns drawn from clinical practice, woven into every page.</p></div>
+      <div class="pillar reveal d1"><h3>Practitioner Field-Tested</h3><p>Methods proven across thousands of sessions, not theory.</p></div>
+      <div class="pillar reveal d2"><h3>Ethics First</h3><p>Influence that's felt, never forced. No manipulation manuals here.</p></div>
+      <div class="pillar reveal d3"><h3>Immediately Applicable</h3><p>Read a tactic, use it the same day.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 · FREE AUDIO OPT-IN -->
+<section class="optin">
+  <div class="wrap">
+    <span class="eyebrow reveal">Free Audio</span>
+    <h2 class="reveal">Experience the method before you read a word.</h2>
+    <p class="reveal d1">A free audio session in Aaron's voice — so you can feel what the books teach.</p>
+    <form class="reveal d2" action="MAILCHIMP_URL_HERE" method="post" target="_blank" novalidate>
+      <label class="sr" for="optin-email" style="position:absolute;left:-9999px">Email address</label>
+      <input id="optin-email" type="email" name="EMAIL" placeholder="Your email address" required>
+      <button class="btn-gold" type="submit">Send Me the Audio</button>
+    </form>
+  </div>
+</section>
+
+<!-- 6 · TRANCE PHRASE GENERATOR -->
+<section class="trance" id="trance">
+  <div class="wrap">
+    <span class="eyebrow reveal">The Showpiece</span>
+    <h2 class="reveal">A taste of the language inside.</h2>
+    <div class="trance-stage" id="trance-stage" role="button" tabindex="0" aria-label="Show the next phrase">
+      <p class="trance-line" id="trance-line" aria-live="polite"></p>
+    </div>
+    <p class="trance-hint reveal">tap to draw another</p>
+  </div>
+</section>
+
+<!-- 7 · TESTIMONIALS -->
+<section class="testi">
+  <div class="wrap">
+    <span class="eyebrow reveal">In Their Words</span>
+    <div class="testi-stage">
+      <blockquote class="quote" id="quote">
+        <p id="quote-text"></p>
+        <cite id="quote-cite"></cite>
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+<!-- 8 · FOOTER -->
+<footer>
+  <div class="links">
+    <a href="https://aaronellis.au">aaronellis.au</a>
+    <a href="https://facebook.com/socialsuperpowers">facebook.com/socialsuperpowers</a>
+  </div>
+  <p class="tag">Influence that's felt, not forced.</p>
+  <p>Aaron Ellis Hypnosis &amp; Personal Development</p>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---------- data ---------- */
+  var phrases = [
+    'As you read these words, you can <strong>notice how ready you are</strong> to change something.',
+    'People who are serious about influence <strong>find themselves drawn to these ideas</strong>.',
+    'You don’t have to decide yet — just <strong>let yourself become curious</strong>.',
+    'Somewhere in the back of your mind, you already <strong>know this works</strong>.',
+    'The more you scroll, the more you <strong>want to understand how</strong>.',
+    'And you might <strong>feel that pull</strong> before you can explain it.',
+    'A person can <strong>realise, quite suddenly, that they’ve been waiting for this</strong>.',
+    'You can <strong>imagine how it feels</strong> to walk into any room already in control.',
+    'Notice what happens when you <strong>let the idea settle in</strong>.',
+    'By the time you finish reading, you’ll <strong>have already started to change</strong>.',
+    'It’s natural to <strong>want more of what works</strong>.',
+    'You can <strong>keep this for later</strong>, or you can <strong>begin now</strong>.',
+    'The mind that asks “how?” is the mind that’s <strong>ready to learn</strong>.',
+    'And as that becomes clearer, you <strong>find yourself wanting the rest</strong>.',
+    'You might be surprised how easily you <strong>decide this is for you</strong>.',
+    'Something in you <strong>recognises the truth of this</strong>.',
+    'The smartest people in the room <strong>read quietly, then act</strong>.',
+    'You can <strong>let the curiosity grow</strong> — there’s no rush.',
+    'Before you know it, you’ll <strong>wonder why you waited</strong>.',
+    'And the part of you that wants to change is <strong>already saying yes</strong>.'
+  ];
+
+  var books = [
+    ["Magnetic Personal Power","The presence people feel before you speak. Build it from the inside out."],
+    ["Warmth First","Likability isn’t luck. It’s a skill — and it’s learnable."],
+    ["Stuck Is a Trance","You’re not broken. You’re rehearsed. Here’s how to rewrite the script."],
+    ["The Body Says No First","Your body speaks before your mind catches up. Learn to listen."],
+    ["The Guilt Switch","The quiet weight you carry has an off switch. Find it."],
+    ["The Language of Change","Words that move people — starting with yourself."],
+    ["Bulletproof Conversation","Stay calm, grounded and impossible to rattle, whoever’s across from you."],
+    ["The Yes Set","How agreement builds, one small yes at a time."],
+    ["Magnetic Influence","Influence that’s felt, not forced. The practitioner’s way."],
+    ["Perspective-Bending Language","Change the frame, change the outcome. Master the art."]
+  ];
+
+  var quotes = [
+    ['“Aaron was able to get me to completely reframe my thinking within one session, so the anxiety I was having completely fell away — and I felt like a completely different person coming out.”','— Sport confidence client'],
+    ['“That moment was really mind-blowing for me. In 40 minutes I was like a different person. It’s absolutely amazing.”','— Identity-shift client'],
+    ['“It created a shift in my mind almost immediately. The day after, I felt inspired and motivated again. I’m procrastinating no more.”','— Business client'],
+    ['“I never dreamed I’d be driving on the highway the same day as a session. Relaxed, calm and in control.”','— Driving-panic client'],
+    ['“I’m a hypnotherapist myself and I’ve done a lot of sessions — this was straight to the point, got to the core really easily. No script.”','— Hypnotherapist peer']
+  ];
+
+  /* ---------- scroll reveal ---------- */
+  var targets = document.querySelectorAll(".reveal");
+  if (reduce || !("IntersectionObserver" in window)) {
+    targets.forEach(function(el){ el.classList.add("in"); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); }
+      });
+    },{threshold:.15});
+    targets.forEach(function(el){ io.observe(el); });
+  }
+
+  /* ---------- generic slow crossfader ---------- */
+  function cycler(el, items, ms, render){
+    var i = -1, timer = null;
+    function show(next){
+      el.classList.remove("show");
+      setTimeout(function(){
+        i = (typeof next === "number") ? next : (i + 1) % items.length;
+        render(items[i]);
+        el.classList.add("show");
+      }, reduce ? 0 : 1100);
+    }
+    function arm(){ if (!reduce) timer = setInterval(show, ms); }
+    show(0); arm();
+    return {
+      advance:function(){
+        if (timer) clearInterval(timer);
+        show(); arm();
+      }
+    };
+  }
+
+  /* ---------- hero phrases ---------- */
+  var heroEl = document.getElementById("hero-phrase");
+  cycler(heroEl, phrases, 7000, function(item){ heroEl.innerHTML = item; });
+
+  /* ---------- books grid + modal ---------- */
+  var grid = document.getElementById("books");
+  books.forEach(function(b, idx){
+    var btn = document.createElement("button");
+    btn.className = "book reveal" + (idx % 4 ? " d" + (idx % 4) : "");
+    btn.innerHTML = '<span class="no">' + String(idx+1).padStart(2,"0") + '</span>' +
+                    '<span class="t">' + b[0] + '</span>' +
+                    '<span class="open">Open →</span>';
+    btn.addEventListener("click", function(){ openModal(b[0], b[1]); });
+    grid.appendChild(btn);
+    if (!reduce && "IntersectionObserver" in window) {
+      var io2 = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add("in"); io2.unobserve(e.target);} });
+      },{threshold:.1});
+      io2.observe(btn);
+    } else { btn.classList.add("in"); }
+  });
+
+  var modal = document.getElementById("modal");
+  var lastFocus = null;
+  function openModal(title, line){
+    lastFocus = document.activeElement;
+    document.getElementById("modal-title").textContent = title;
+    document.getElementById("modal-line").textContent = line;
+    modal.classList.add("open");
+    document.getElementById("modal-close").focus();
+  }
+  function closeModal(){
+    modal.classList.remove("open");
+    if (lastFocus) lastFocus.focus();
+  }
+  document.getElementById("modal-close").addEventListener("click", closeModal);
+  modal.addEventListener("click", function(e){ if (e.target === modal) closeModal(); });
+  addEventListener("keydown", function(e){ if (e.key === "Escape" && modal.classList.contains("open")) closeModal(); });
+
+  /* ---------- trance generator ---------- */
+  var tranceEl = document.getElementById("trance-line");
+  var trance = cycler(tranceEl, phrases, 5200, function(item){ tranceEl.innerHTML = item; });
+  var stage = document.getElementById("trance-stage");
+  stage.addEventListener("click", function(){ trance.advance(); });
+  stage.addEventListener("keydown", function(e){
+    if (e.key === "Enter" || e.key === " "){ e.preventDefault(); trance.advance(); }
+  });
+
+  /* ---------- testimonials ---------- */
+  var qEl = document.getElementById("quote");
+  var qText = document.getElementById("quote-text");
+  var qCite = document.getElementById("quote-cite");
+  cycler(qEl, quotes, 8000, function(item){ qText.textContent = item[0]; qCite.textContent = item[1]; });
+})();
+</script>
+</body>
+</html>
