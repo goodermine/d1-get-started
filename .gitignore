@@ -175,3 +175,6 @@ dist
 # tools/extracted/ also holds private (password-gated) page plaintext: never commit it.
 site/_site/
 tools/extracted/
+
+# Deploy bundle (regenerable build artifact)
+dist/
