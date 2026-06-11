@@ -15,5 +15,6 @@
     {{ content | safe }}
   </main>
   {% include "footer.njk" %}
+  {% if '<form class="ae-resource-search"' in content %}<script src="/assets/resource-search.js"></script>{% endif %}
 </body>
 </html>

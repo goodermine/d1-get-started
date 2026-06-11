@@ -41,11 +41,22 @@ node ../tools/build-src.mjs    # turn extracted content into site/src/**/index.h
 
 `tools/extracted/` is gitignored — it also contains the password-gated pages' plaintext.
 
-## Still TODO (see /root/.claude/plans plan file)
+## Done
 
-- Localize `wp-content/uploads` images into `assets/` and self-host the Inter/Oswald/Cinzel
-  fonts the wiki/prompt pages use (currently still loaded from the live domain / Google).
-- Client-side crypto gate for the two private song guides (reuse the `/magnetic/` pattern).
-- Replace the Contact Form 7 form with a static form service.
-- 301 redirect map + `sitemap.xml` / `robots.txt`.
-- Deploy to the current host (needs SFTP/control-panel access).
+- All 48 public pages build with our own header/footer chrome (no theme JS).
+- `sitemap.xml`, `robots.txt`, and `.htaccess` 301s generated at build time.
+- Client-side resource search (`assets/resource-search.js`) replaces the WP search
+  box on the Wiki / Prompt Library indexes.
+- Reusable client-side crypto gate (`assets/gate.js`) + `tools/encrypt-gate.mjs`.
+- Contact: the site never used Contact Form 7 — "Contact" is a plain
+  `mailto:` link, which works unchanged. No form service needed.
+
+## Still TODO
+
+- **Two private song-guide pages** (`/alex-private-song-guide/`, `/rilda-song-guide/`):
+  build with `assets/gate.js` once the page passwords are provided (encrypt the
+  guide HTML with `tools/encrypt-gate.mjs`). Plaintext is never committed.
+- **Deploy** to the current host (Apache) — needs SFTP/control-panel access + docroot.
+  Keep the existing `/wp-content/uploads/` directory in place so image URLs keep working.
+- **Optional polish:** self-host the Inter/Oswald/Cinzel fonts the wiki/prompt pages
+  `@import` from Google, and rewrite absolute `wp-content/uploads` URLs to root-relative.
