@@ -417,13 +417,14 @@
         var p=parts[i];
         p.x+=(p.tx-p.x)*0.17; p.y+=(p.ty-p.y)*0.17;
         var near=1-Math.min(1,(Math.abs(p.tx-p.x)+Math.abs(p.ty-p.y))/(50*dpr));
-        ctx.globalAlpha=Math.min(1,p.a*(0.45+e*1.5*Math.max(near,0.18)));
+        var pulse=1+0.18*Math.sin(el*0.004+i*0.3);
+        ctx.globalAlpha=Math.min(1,p.a*(0.45+e*1.5*Math.max(near,0.18))*pulse);
         ctx.fillStyle=p.warm?"#ecca78":"#7fae9e";
         var s=p.r*(1+e*1.2);
         ctx.fillRect(p.x,p.y,s,s);
       }
       ctx.globalAlpha=1; ctx.globalCompositeOperation="source-over";
-      if (el>2800){
+      if (el>4600){
         introActive=false;
         var hi=document.querySelector(".hero-inner"); if(hi){ hi.style.transition="opacity 1.4s ease"; hi.style.opacity="1"; }
         for (var j=0;j<parts.length;j++){ parts[j].vx=(Math.random()-0.5)*4.5; parts[j].vy=(Math.random()-0.5)*4.5; }
