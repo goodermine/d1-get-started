@@ -1,0 +1,5 @@
+# Copy this file to `.dev.vars` and fill in your key for local development.
+# `.dev.vars` is gitignored — your key never gets committed.
+#
+# Get a key at https://console.anthropic.com → API Keys.
+ANTHROPIC_API_KEY=sk-ant-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx

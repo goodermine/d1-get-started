@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Extension Builder — describe it, get a Chrome extension</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrap">
+        <div class="brand">
+          <span class="logo">⚒︎</span>
+          <span>Extension Builder</span>
+          <span class="tag">MVP</span>
+        </div>
+        <a class="ghost-link" href="https://developer.chrome.com/docs/extensions/get-started" target="_blank" rel="noopener">What's a Chrome extension?</a>
+      </div>
+    </header>
+
+    <main class="wrap">
+      <!-- Step 1: prompt -->
+      <section class="hero" id="prompt-step">
+        <h1>Describe a browser tool. Get a Chrome extension.</h1>
+        <p class="sub">
+          Tell it what you want in plain English. No code, no Web Store, no account — you'll
+          download a folder and load it straight into Chrome.
+        </p>
+
+        <form id="gen-form">
+          <textarea
+            id="prompt"
+            placeholder="e.g. A button that strips all images from the current page so I can read distraction-free."
+            maxlength="4000"
+            rows="4"
+          ></textarea>
+          <div class="examples" id="examples">
+            <span class="examples-label">Try:</span>
+          </div>
+          <button type="submit" id="generate-btn" class="primary">Generate extension</button>
+        </form>
+
+        <div id="error" class="error" hidden></div>
+      </section>
+
+      <!-- Loading -->
+      <section id="loading" class="loading" hidden>
+        <div class="spinner"></div>
+        <p>Building your extension… this usually takes 10–30 seconds.</p>
+      </section>
+
+      <!-- Step 2: results -->
+      <section id="result" class="result" hidden>
+        <div class="result-head">
+          <div>
+            <h2 id="ext-name">Your extension</h2>
+            <p id="ext-desc" class="sub"></p>
+          </div>
+          <div class="result-actions">
+            <button id="download-btn" class="primary">⬇ Download .zip</button>
+            <button id="restart-btn" class="ghost">Start over</button>
+          </div>
+        </div>
+
+        <div class="result-grid">
+          <!-- Files -->
+          <div class="panel">
+            <div class="panel-title">Files</div>
+            <div class="files">
+              <ul id="file-list" class="file-list"></ul>
+              <pre id="file-view" class="file-view"><code></code></pre>
+            </div>
+          </div>
+
+          <!-- Preview + install -->
+          <div class="panel">
+            <div class="panel-title">Popup preview <span class="muted">(approximate)</span></div>
+            <iframe id="preview" class="preview" sandbox="allow-scripts" title="Popup preview"></iframe>
+
+            <div class="panel-title">Install it (one time)</div>
+            <ol class="install-steps">
+              <li>Unzip the download somewhere you'll remember.</li>
+              <li>Open <code>chrome://extensions</code> in Chrome.</li>
+              <li>Turn on <strong>Developer mode</strong> (top-right toggle).</li>
+              <li>Click <strong>Load unpacked</strong> and pick the unzipped folder.</li>
+              <li>It's installed! Find it in your extensions menu (puzzle-piece icon).</li>
+            </ol>
+            <p class="muted small">
+              Changed your mind later? You can pin it, disable it, or remove it from the same
+              <code>chrome://extensions</code> page.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        Generated extensions run only on your machine. Review the code before loading anything you didn't write.
+      </div>
+    </footer>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
