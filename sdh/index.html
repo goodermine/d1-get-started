@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Strategic Dialogue Hypnotherapy — Training for Practitioners | Aaron Ellis</title>
+<meta name="description" content="Strategic Dialogue Hypnotherapy: a question-led method for change, taught live to hypnotherapists, coaches and change-workers. Create breakthroughs that actually hold. Book a free call.">
+<meta name="theme-color" content="#16284A">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Strategic Dialogue Hypnotherapy — Training for Practitioners">
+<meta property="og:description" content="A question-led method for change. Create breakthroughs that actually hold. Taught live by Aaron Ellis.">
+<style>
+  :root{
+    --navy:#1F3864; --navy-deep:#16284A; --navy-mid:#2E4E8F;
+    --gold:#B58A2E; --gold-light:#D9B85C;
+    --ice:#E8EDF6; --cream:#F4ECD8; --ink:#242424; --white:#FFFFFF;
+    --serif:Cambria,Georgia,"Times New Roman",serif;
+    --sans:"Segoe UI",-apple-system,BlinkMacSystemFont,Roboto,Helvetica,Arial,sans-serif;
+    --maxw:1080px; --maxw-prose:46rem;
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--white);color:var(--ink);font-family:var(--sans);font-size:1.12rem;line-height:1.7;-webkit-font-smoothing:antialiased}
+  h1,h2,h3,h4{font-family:var(--serif);color:var(--navy);font-weight:700;line-height:1.12;margin:0 0 .5em}
+  h1{font-size:clamp(2.1rem,5.4vw,3.6rem)}
+  h2{font-size:clamp(1.7rem,4vw,2.6rem)}
+  h3{font-size:clamp(1.2rem,2.4vw,1.5rem)}
+  p{margin:0 0 1.1rem}
+  img{max-width:100%;height:auto;display:block}
+  a{color:var(--navy-mid)}
+  .wrap{width:100%;max-width:var(--maxw);margin-inline:auto;padding-inline:24px}
+  section{padding-block:clamp(3.5rem,8vw,6rem);position:relative}
+  .prose{max-width:var(--maxw-prose)}
+  .eyebrow{display:block;font-family:var(--sans);font-size:.8rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}
+
+  /* on dark sections */
+  .dark{background:var(--navy-deep);color:#e9eef7}
+  .dark h1,.dark h2,.dark h3{color:#fff}
+  .dark .eyebrow{color:var(--gold-light)}
+  .ice{background:var(--ice)}
+  .cream{background:var(--cream)}
+
+  /* buttons */
+  .btn{display:inline-flex;align-items:center;gap:.5em;font-family:var(--sans);font-weight:700;font-size:1.05rem;line-height:1;
+    padding:1.05em 1.9em;border-radius:10px;border:2px solid transparent;cursor:pointer;text-decoration:none;transition:transform .15s ease,box-shadow .2s ease,background .2s ease}
+  .btn-gold{background:var(--gold);color:var(--navy-deep);box-shadow:0 6px 22px rgba(181,138,46,.35)}
+  .btn-gold:hover{background:var(--gold-light);color:var(--navy-deep);transform:translateY(-2px);box-shadow:0 10px 30px rgba(181,138,46,.45)}
+  .btn-lg{font-size:1.18rem;padding:1.15em 2.3em}
+  .btn-row{display:flex;flex-wrap:wrap;gap:1rem;align-items:center}
+  .undernote{font-size:.95rem;opacity:.8;margin:.9rem 0 0}
+
+  /* sticky header */
+  header.site{position:fixed;top:0;left:0;right:0;z-index:60;
+    background:rgba(22,40,74,.72);backdrop-filter:blur(10px);
+    border-bottom:1px solid rgba(255,255,255,0);transition:background .3s ease,border-color .3s ease,box-shadow .3s ease}
+  header.site.scrolled{background:rgba(22,40,74,.96);border-bottom-color:rgba(217,184,92,.25);box-shadow:0 6px 24px rgba(0,0,0,.25)}
+  .hdr{display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:66px}
+  .brand{display:inline-flex;align-items:center;gap:.6rem;color:#fff;text-decoration:none;font-family:var(--serif);font-weight:700;letter-spacing:.04em;font-size:1.15rem}
+  .brand .mk{display:grid;place-items:center;width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,var(--gold-light),var(--gold));color:var(--navy-deep);font-weight:700}
+  .hdr .btn{padding:.7em 1.25em;font-size:.95rem}
+  @media (max-width:520px){ .brand span.full{display:none} }
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity 1s ease,transform 1s ease}
+  .reveal.in{opacity:1;transform:none}
+  .reveal.d1{transition-delay:.12s}.reveal.d2{transition-delay:.24s}.reveal.d3{transition-delay:.36s}
+  @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+
+  /* hero */
+  .hero{background:radial-gradient(ellipse 120% 90% at 50% -10%,#22386a,var(--navy-deep) 70%);color:#eaf0fa;padding-top:clamp(7rem,16vw,9rem);text-align:center;overflow:hidden}
+  .hero h1{max-width:18ch;margin-inline:auto}
+  .hero h1 .accent{color:var(--gold-light)}
+  .hero .lead{max-width:42rem;margin:1.4rem auto;color:#cdd8ec;font-size:clamp(1.08rem,1.6vw,1.3rem)}
+  .hero .lead .strong{color:#fff}
+  .hero .btn-row{justify-content:center;margin-top:1.8rem}
+
+  /* method pull quote */
+  .pullquote{font-family:var(--serif);font-style:italic;font-size:clamp(1.3rem,3vw,1.8rem);color:var(--navy);
+    border-left:4px solid var(--gold);padding:.2em 0 .2em 1.1em;margin:2rem 0 0;max-width:40rem}
+  .dark .pullquote{color:#fff;border-color:var(--gold-light)}
+
+  /* diagram */
+  .diagram-box{margin-top:2rem;border:1px solid rgba(31,56,100,.2);border-radius:14px;background:var(--white);
+    padding:1rem;box-shadow:0 18px 50px rgba(31,56,100,.12);max-width:680px;margin-inline:auto;cursor:zoom-in;text-align:center}
+  .diagram-box img{margin-inline:auto;border-radius:8px}
+  .diagram-ph{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.6rem;
+    min-height:300px;border:2px dashed rgba(31,56,100,.3);border-radius:10px;color:var(--navy-mid);padding:2rem;text-align:center}
+  .diagram-ph .tag{font-family:var(--serif);font-size:1.2rem;color:var(--navy)}
+  .diagram-cap{font-size:.92rem;color:var(--navy-mid);margin-top:.8rem;text-align:center}
+
+  /* who it's for */
+  .for-list{list-style:none;padding:0;margin:1.5rem 0 0;max-width:44rem;display:grid;gap:1rem}
+  .for-list li{padding-left:1.8rem;position:relative}
+  .for-list li::before{content:"";position:absolute;left:0;top:.6em;width:.7rem;height:.7rem;border-radius:50%;background:var(--gold-light)}
+  .for-list b{color:#fff}
+
+  /* what changes cards */
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:1.3rem;margin-top:2rem}
+  .card{background:var(--white);border:1px solid rgba(31,56,100,.12);border-radius:14px;padding:1.7rem;box-shadow:0 10px 30px rgba(31,56,100,.06);transition:transform .2s ease,box-shadow .2s ease}
+  .card:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(31,56,100,.12)}
+  .card h3{color:var(--navy);margin-bottom:.4em}
+  .card p{margin:0;color:#41506a}
+  .promise{font-family:var(--serif);font-weight:700;font-size:clamp(1.25rem,2.6vw,1.6rem);color:var(--navy);max-width:42rem;margin:2.4rem auto 0;text-align:center}
+
+  /* training bullets */
+  .feat{list-style:none;padding:0;margin:1.5rem 0 0;display:grid;gap:1.1rem;max-width:44rem}
+  .feat li{padding-left:2rem;position:relative}
+  .feat li::before{content:"→";position:absolute;left:0;color:var(--gold);font-weight:700}
+  .feat b{color:var(--navy)}
+  .dark .feat b{color:#fff}
+
+  /* about */
+  .about-grid{display:grid;grid-template-columns:260px 1fr;gap:2.6rem;align-items:start}
+  .about-photo{aspect-ratio:4/5;border-radius:14px;overflow:hidden;background:var(--navy-mid);box-shadow:0 18px 44px rgba(31,56,100,.22)}
+  .about-photo .ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:#cdd8ec;text-align:center;padding:1rem;font-size:.95rem;background:linear-gradient(160deg,#2E4E8F,#16284A)}
+  @media (max-width:680px){.about-grid{grid-template-columns:1fr}.about-photo{max-width:260px}}
+
+  /* pricing */
+  .price-card{max-width:560px;margin:2rem auto 0;background:var(--navy-deep);color:#eaf0fa;border-radius:18px;padding:2.4rem;text-align:center;box-shadow:0 22px 60px rgba(22,40,74,.3);border:1px solid rgba(217,184,92,.3)}
+  .price-card h3{color:#fff}
+  .price-card .amount{font-family:var(--serif);font-size:clamp(2.2rem,6vw,3rem);color:var(--gold-light);margin:.2rem 0}
+  .price-card .alt{color:#cdd8ec;margin:.2rem 0 1.2rem}
+  .price-card .meta{font-size:.95rem;color:#aebbd6;margin-top:1.2rem}
+  .interest{margin:1.4rem auto 0;max-width:560px;text-align:center}
+  .interest form{display:flex;gap:.6rem;justify-content:center;flex-wrap:wrap;margin-top:.6rem}
+  .interest input{font:inherit;padding:.8em 1em;border:1px solid rgba(31,56,100,.25);border-radius:9px;width:min(80vw,22rem)}
+  .interest input:focus{outline:none;border-color:var(--gold)}
+
+  /* faq */
+  .faq{max-width:46rem;margin:2.4rem auto 0}
+  .faq details{border-bottom:1px solid rgba(31,56,100,.15)}
+  .faq summary{list-style:none;cursor:pointer;padding:1.1rem 2.2rem 1.1rem 0;position:relative;font-family:var(--serif);font-weight:700;color:var(--navy);font-size:1.12rem}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::after{content:"+";position:absolute;right:.2rem;top:50%;transform:translateY(-50%);font-size:1.5rem;color:var(--gold);transition:transform .25s ease}
+  .faq details[open] summary::after{content:"–"}
+  .faq .ans{padding:0 0 1.2rem;color:#41506a;max-width:42rem}
+
+  /* final */
+  .final{text-align:center}
+  .final .btn-row{justify-content:center;margin-top:1.6rem}
+
+  footer{background:#0f1d38;color:#9fb0d0;text-align:center;padding:2.6rem 24px 3rem;font-size:.92rem}
+  footer .b{color:#fff;font-family:var(--serif);font-size:1.05rem;letter-spacing:.04em}
+
+  /* lightbox */
+  .lb{position:fixed;inset:0;background:rgba(11,17,32,.92);display:none;align-items:center;justify-content:center;z-index:90;padding:24px;cursor:zoom-out}
+  .lb.open{display:flex}
+  .lb img{max-width:96vw;max-height:92vh;border-radius:8px;box-shadow:0 30px 80px rgba(0,0,0,.6)}
+</style>
+</head>
+<body>
+
+<!-- STICKY HEADER -->
+<header class="site" id="site-header">
+  <div class="wrap hdr">
+    <!-- [ LOGO ] — replace this wordmark with Aaron's supplied logo -->
+    <a class="brand" href="#top"><span class="mk">AE</span><span class="full">Aaron Ellis</span></a>
+    <a class="btn btn-gold" href="[ BOOKING_LINK ]">Book a Call</a>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- 1 · HERO -->
+<section class="hero" id="hero">
+  <div class="wrap">
+    <h1 class="reveal">I help hypnotherapists &amp; coaches create <span class="accent">breakthroughs that actually hold.</span></h1>
+    <p class="lead reveal d1">
+      Strategic Dialogue Hypnotherapy is a question-led method for change — built over six years of practice on a single uncomfortable discovery: <span class="strong">most of what we're trained to do in the room gets in the client's way.</span>
+    </p>
+    <p class="lead reveal d1">
+      No scripts. No swinging watches. No clever technique stacked on clever technique. Just the right question, asked at the right moment, held in the right silence — and a client who changes themselves while you do far less than you were ever taught to.
+    </p>
+    <div class="btn-row reveal d2">
+      <a class="btn btn-gold btn-lg" href="[ BOOKING_LINK ]">Book a Free Call →</a>
+    </div>
+    <p class="undernote reveal d2">For practising hypnotherapists, coaches &amp; change-workers.</p>
+  </div>
+</section>
+
+<!-- 2 · THE PROBLEM -->
+<section id="problem">
+  <div class="wrap prose">
+    <span class="eyebrow reveal">The Problem</span>
+    <h2 class="reveal">Most therapy works hard in the wrong direction.</h2>
+    <p class="reveal d1">You've felt it. The session where you deployed every tool you own — the inductions, the reframes, the techniques — and the client nodded, thanked you, and came back three weeks later with the same problem wearing different clothes.</p>
+    <p class="reveal d1">It isn't that the techniques are wrong. It's that they're aimed at the symptom while the structure underneath stays untouched. You can spend a career getting better at doing more, and watch the same problems quietly reassemble themselves.</p>
+    <p class="reveal d1">Strategic Dialogue Hypnotherapy starts somewhere else entirely: not with what you can add, but with what the client is already holding in place — and what happens when you help them find the one belief the whole thing rests on.</p>
+  </div>
+</section>
+
+<!-- 3 · THE METHOD -->
+<section class="cream" id="method">
+  <div class="wrap prose">
+    <span class="eyebrow reveal">The Method</span>
+    <h2 class="reveal">A different kind of conversation.</h2>
+    <p class="reveal d1">In most hypnotherapy, trance is the treatment — the thing you induce and then work within. Here, trance is the byproduct. It arrives on its own when a person is genuinely searching for an answer they don't already have. Your job is to ask the question that starts that search — and then get out of its way.</p>
+    <p class="reveal d1">It's called Strategic Dialogue because the whole method runs on conversation: careful, deliberate, stripped-back questioning that does the work no technique can. Questions with a purpose, placed with intent, followed by the one thing most practitioners can't bear to offer — silence.</p>
+    <p class="reveal d1">What makes it strategic is structure. Every problem a client brings is held up by something — a single load-bearing belief that keeps the whole shape standing. The method is a disciplined way of finding that belief and loosening it, so the problem can no longer stand in its old form. You don't argue the client out of anything. You don't install a solution. You help them arrive, themselves, at the place where the structure gives way — and let them rebuild from there.</p>
+    <p class="pullquote reveal d1">It is, in the end, a method built on respect: for the client's own mind, for the answer already in them, and for the quiet it takes to let it surface.</p>
+  </div>
+</section>
+
+<!-- 4 · THE DIAGRAM -->
+<section id="diagram">
+  <div class="wrap">
+    <div class="prose">
+      <span class="eyebrow reveal">The Shape of a Session</span>
+      <h2 class="reveal">The shape of a session.</h2>
+      <p class="reveal d1">Every session follows one arc — from the first plain question to the change that lasts. This is the shape of the work.</p>
+    </div>
+    <!-- Drop SDH-Dialogue-Arc-Flowchart.png next to this file and it appears automatically. -->
+    <div class="diagram-box reveal d1" id="diagram-box">
+      <img src="SDH-Dialogue-Arc-Flowchart.png" alt="The Dialogue Arc — the stages of a Strategic Dialogue Hypnotherapy session"
+           onerror="this.style.display='none';document.getElementById('diagram-ph').style.display='flex';">
+      <div class="diagram-ph" id="diagram-ph" style="display:none">
+        <span class="tag">The Dialogue Arc</span>
+        <span>[ DIALOGUE_ARC_DIAGRAM ] — add <code>SDH-Dialogue-Arc-Flowchart.png</code> beside this page and it will appear here.</span>
+      </div>
+    </div>
+    <p class="diagram-cap reveal d1">Tap to enlarge. The arc shows the stages and flow of a session — not the questioning technique itself.</p>
+  </div>
+</section>
+
+<!-- 5 · WHO IT'S FOR -->
+<section class="dark" id="who">
+  <div class="wrap prose">
+    <span class="eyebrow reveal">Who It's For</span>
+    <h2 class="reveal">For practitioners ready to do less, and reach further.</h2>
+    <p class="reveal d1">This training is for the change-worker who suspects there's a simpler, deeper way to work than the one they were handed. It's for you if —</p>
+    <ul class="for-list reveal d1">
+      <li><b>You're a hypnotherapist, coach, or therapist with real clients</b> — and a sense that your best work happens in moments you can't quite explain.</li>
+      <li><b>You're tired of technique for its own sake</b> — of methods that ask you to do more while the client does less.</li>
+      <li><b>You want change that holds</b> — not a client who feels better in the room and relapses by the weekend.</li>
+      <li><b>You're willing to be uncomfortable</b> — to sit in a silence, to ask the question no one else will, to trust the client's mind over your own cleverness.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 6 · WHAT CHANGES -->
+<section class="ice" id="changes">
+  <div class="wrap">
+    <div class="prose">
+      <span class="eyebrow reveal">What Changes</span>
+      <h2 class="reveal">What changes in your practice.</h2>
+    </div>
+    <div class="cards">
+      <div class="card reveal"><h3>A quieter, more powerful presence</h3><p>You stop performing competence and start embodying it. The pressure to 'do something' loosens — and your sessions deepen as you do less.</p></div>
+      <div class="card reveal d1"><h3>Change that lasts</h3><p>Because the work goes to the structure, not the symptom, the shifts your clients make tend to hold — instead of quietly reassembling weeks later.</p></div>
+      <div class="card reveal d2"><h3>A method, not a bag of tricks</h3><p>One coherent approach you can trust in any session, rather than reaching for the right technique under pressure and hoping it lands.</p></div>
+      <div class="card reveal"><h3>Confidence in the hardest moments</h3><p>The silence, the loaded pause, the question that opens something — these stop being frightening and become your most reliable tools.</p></div>
+      <div class="card reveal d1"><h3>Work that feels like less effort</h3><p>The end of carrying the whole session on your back, and the start of letting the client's own mind do the work it was always able to do.</p></div>
+    </div>
+    <p class="promise reveal d1">Learn this method and you'll have a more effective way to communicate, and to create breakthroughs with the people you work with.</p>
+  </div>
+</section>
+
+<!-- 7 · THE TRAINING -->
+<section id="training">
+  <div class="wrap prose">
+    <span class="eyebrow reveal">The Training</span>
+    <h2 class="reveal">How the training works.</h2>
+    <p class="reveal d1">The method is taught live, in a small group, over three sessions — the way a craft is meant to be passed on: by watching it done, then doing it yourself, with guidance.</p>
+    <ul class="feat reveal d1">
+      <li><b>Live and small.</b> A maximum of ten practitioners per group — you're seen, coached, and given room to practise.</li>
+      <li><b>Demonstration-led.</b> You watch the method worked in real time, with the thinking narrated as it happens — then practise it yourself.</li>
+      <li><b>Three focused sessions.</b> Each builds on the last, taking you from the foundations through to running the full approach yourself.</li>
+      <li><b>Online, wherever you are.</b> Delivered live over video, so you can train from your own practice, anywhere in the world.</li>
+    </ul>
+    <div class="btn-row reveal d1" style="margin-top:1.8rem">
+      <a class="btn btn-gold" href="[ BOOKING_LINK ]">Book a Free Call →</a>
+    </div>
+  </div>
+</section>
+
+<!-- 8 · ABOUT AARON -->
+<section class="cream" id="about">
+  <div class="wrap">
+    <span class="eyebrow reveal">About Aaron</span>
+    <h2 class="reveal">Taught by the practitioner who developed it.</h2>
+    <div class="about-grid" style="margin-top:1.6rem">
+      <!-- [ AARON_PHOTO ] — replace with a real photo of Aaron -->
+      <div class="about-photo reveal"><div class="ph">[ AARON_PHOTO ]<br>A real photo of Aaron<br>(headshot or in-session)</div></div>
+      <div class="prose reveal d1">
+        <p>Aaron Ellis has spent his whole life coaching people through change. It began on the mat — teaching martial arts from an early age — and grew into a career as a fitness and strength coach, and an instructor in Systema, the Russian martial art. The common thread, across every discipline, was the same: helping people change something they didn't think they could.</p>
+        <p>For the last seven years that work has been in the mind. Aaron has practised hypnosis for seven years and developed Strategic Dialogue Hypnotherapy over the past six — refining it across more than 250 clients, session by session, in the room rather than the lecture hall. He is the author of the method's complete written work.</p>
+        <p>The method grew from a simple, hard-won conviction: that the right question, asked at the right moment, in the right silence, does more than a hundred clever techniques.</p>
+        <p><strong>You're not learning a theory someone wrote down. You're learning a craft someone has spent a lifetime practising.</strong></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 9 · PRICING + FAQ -->
+<section id="pricing">
+  <div class="wrap">
+    <div class="prose">
+      <span class="eyebrow reveal">The Offer</span>
+      <h2 class="reveal">Simple, honest pricing.</h2>
+    </div>
+    <div class="price-card reveal d1">
+      <h3>The Training</h3>
+      <div class="amount">$997</div>
+      <div class="alt">paid in full — or two payments of $648.50 ($1,297 total)</div>
+      <a class="btn btn-gold btn-lg" href="[ BOOKING_LINK ]">Book a Free Call →</a>
+      <div class="meta">Three live sessions · maximum 10 per group · online.<br>Dates for the next group: <strong>[ COHORT_DATES ]</strong> — announced soon.</div>
+    </div>
+
+    <div class="interest reveal d1">
+      <p style="margin:0;color:#41506a">Not ready to book? Register your interest and you'll be first to know when dates open.</p>
+      <!-- [ INTEREST_FORM ] — set this action to Aaron's form provider -->
+      <form action="[ INTEREST_FORM ]" method="post">
+        <label for="interest-email" style="position:absolute;left:-9999px">Email address</label>
+        <input id="interest-email" type="email" name="email" placeholder="Your email address" required>
+        <button class="btn btn-gold" type="submit">Keep me posted</button>
+      </form>
+    </div>
+
+    <div class="prose" style="margin-top:3.5rem">
+      <h2 class="reveal" style="text-align:center">Questions, answered.</h2>
+    </div>
+    <div class="faq reveal d1">
+      <details><summary>Do I need to be a hypnotherapist already?</summary><div class="ans">This is a method for practising change-workers — hypnotherapists, coaches, and therapists who already see clients. It builds on your existing skills rather than replacing them.</div></details>
+      <details><summary>Is this another bag of techniques to learn?</summary><div class="ans">The opposite. It's one coherent approach that often replaces the scramble for the right technique. Most practitioners find they end up doing less, not more.</div></details>
+      <details><summary>What makes it different from what I already do?</summary><div class="ans">Most approaches work on the symptom and ask you to do more. This one works on the structure underneath and asks you to do less — to trust the client's own mind, and the quiet it takes to let the answer surface.</div></details>
+      <details><summary>How is it delivered?</summary><div class="ans">Live, online, in a small group of no more than ten, across three focused sessions. You train from your own practice, wherever you are.</div></details>
+      <details><summary>What does it cost?</summary><div class="ans">$997 paid in full, or two payments of $648.50 ($1,297 total). Both options give you the complete live training.</div></details>
+      <details><summary>When does it run?</summary><div class="ans">Dates for the next group are being confirmed. Book a free call or register your interest and you'll be first to know — places are limited to ten per group.</div></details>
+    </div>
+  </div>
+</section>
+
+<!-- 10 · FINAL CTA -->
+<section class="dark final" id="final">
+  <div class="wrap prose" style="margin-inline:auto;text-align:center">
+    <h2 class="reveal">Learn to do less, and change more.</h2>
+    <p class="reveal d1">If you've read this far, some part of you already suspects it's true — that the most powerful work you'll ever do happens in the moments you stop trying so hard.</p>
+    <p class="reveal d1">Book a free call and we'll talk about whether this method is right for the way you want to work.</p>
+    <div class="btn-row reveal d2">
+      <a class="btn btn-gold btn-lg" href="[ BOOKING_LINK ]">Book a Free Call →</a>
+    </div>
+    <p class="undernote reveal d2">Places are limited to ten per group.</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <p class="b">Aaron Ellis · Strategic Dialogue Hypnotherapy</p>
+  <p>A question-led method for change. Taught live to practitioners.</p>
+  <p>© <span id="yr"></span> Aaron Ellis. All rights reserved.</p>
+</footer>
+
+<div class="lb" id="lb" aria-hidden="true"><img id="lb-img" src="" alt="The Dialogue Arc, enlarged"></div>
+
+<script>
+(function(){
+  "use strict";
+  var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // year
+  document.getElementById("yr").textContent = new Date().getFullYear();
+
+  // sticky header shadow
+  var hdr = document.getElementById("site-header");
+  addEventListener("scroll", function(){ hdr.classList.toggle("scrolled", scrollY > 30); }, {passive:true});
+
+  // scroll reveal
+  var els = [].slice.call(document.querySelectorAll(".reveal"));
+  if (reduce || !("IntersectionObserver" in window)) { els.forEach(function(e){e.classList.add("in");}); }
+  else {
+    var io = new IntersectionObserver(function(en){ en.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } }); }, {threshold:.14});
+    els.forEach(function(e){ io.observe(e); });
+  }
+
+  // diagram lightbox (only if the real image is present)
+  var box = document.getElementById("diagram-box");
+  var lb = document.getElementById("lb"), lbImg = document.getElementById("lb-img");
+  box.addEventListener("click", function(){
+    var img = box.querySelector("img");
+    if (!img || img.style.display === "none" || !img.complete || !img.naturalWidth) return;
+    lbImg.src = img.src; lb.classList.add("open");
+  });
+  lb.addEventListener("click", function(){ lb.classList.remove("open"); lbImg.src=""; });
+  addEventListener("keydown", function(e){ if(e.key==="Escape"){ lb.classList.remove("open"); } });
+})();
+</script>
+</body>
+</html>
