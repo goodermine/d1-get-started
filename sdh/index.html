@@ -185,6 +185,26 @@
   .video-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
   .video-note{margin-top:1rem;font-size:.95rem;color:#6a7488;text-align:center}
   .video-note a{color:var(--gold);font-weight:700}
+
+  /* video thumbnail grid + lightbox */
+  .vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr));gap:1.1rem;margin-top:2.2rem}
+  .vcard{text-decoration:none;color:var(--navy);display:flex;flex-direction:column;gap:.55rem}
+  .vthumb{position:relative;aspect-ratio:16/9;border-radius:12px;overflow:hidden;border:1px solid rgba(31,56,100,.15);box-shadow:0 8px 24px rgba(31,56,100,.12);background:#0e1b35}
+  .vthumb img{width:100%;height:100%;object-fit:cover;transition:transform .35s ease}
+  .vcard:hover .vthumb img,.vcard:focus-visible .vthumb img{transform:scale(1.06)}
+  .vplay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(16,27,53,.12);transition:background .25s ease}
+  .vcard:hover .vplay{background:rgba(16,27,53,.28)}
+  .vplay i{width:56px;height:56px;border-radius:50%;background:rgba(181,138,46,.95);display:grid;place-items:center;box-shadow:0 6px 20px rgba(0,0,0,.45);transition:transform .25s ease}
+  .vplay i::after{content:"";border-style:solid;border-width:9px 0 9px 15px;border-color:transparent transparent transparent #16284A;margin-left:3px}
+  .vcard:hover .vplay i{transform:scale(1.12)}
+  .vtitle{font-size:.92rem;font-weight:600;color:var(--navy);line-height:1.3}
+  .vlb{position:fixed;inset:0;background:rgba(11,17,32,.94);display:none;align-items:center;justify-content:center;z-index:95;padding:24px}
+  .vlb.open{display:flex}
+  .vlb-inner{width:min(960px,96vw);position:relative}
+  .vlb-frame{position:relative;aspect-ratio:16/9;background:#000;border-radius:12px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.6)}
+  .vlb-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .vlb-close{position:absolute;top:-46px;right:0;background:none;border:none;color:#fff;font-size:2.1rem;font-family:Georgia,serif;cursor:pointer;line-height:1}
+  .vlb-close:hover{color:var(--gold-light)}
 </style>
 </head>
 <body>
@@ -405,15 +425,37 @@
     <span class="eyebrow reveal" style="justify-content:center">Watch</span>
     <h2 class="reveal">See the breakthroughs for yourself.</h2>
     <p class="reveal d1" style="max-width:40rem;margin:0 auto;color:#41506a">The words above are drawn from these conversations. Watch real clients describe the change, in their own voice.</p>
-    <div class="video-frame reveal d1">
-      <div class="video-wrap">
-        <iframe src="https://www.youtube.com/embed/v6UO_GbONhI?list=PLOf1mgEJvC_bZipYzUwE1M6DizGDOaAQ-&rel=0"
-                title="Client testimonials — Strategic Dialogue Hypnotherapy"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
-      </div>
+    <div class="vgrid reveal d1" id="vgrid">
+      <a class="vcard" href="https://www.youtube.com/watch?v=v6UO_GbONhI" target="_blank" rel="noopener" data-id="v6UO_GbONhI" aria-label="Play video: Stuck To Mind Blowing Change - Business Breakthroughs"><span class="vthumb"><img src="https://i.ytimg.com/vi/v6UO_GbONhI/hqdefault.jpg" alt="Stuck To Mind Blowing Change - Business Breakthroughs" loading="lazy" width="480" height="360"><span class="vplay"><i></i></span></span><span class="vtitle">Stuck To Mind Blowing Change - Business Breakthroughs</span></a>
+      <a class="vcard" href="https://www.youtube.com/watch?v=gKdqgdnZN44" target="_blank" rel="noopener" data-id="gKdqgdnZN44" aria-label="Play video: A game changer..."><span class="vthumb"><img src="https://i.ytimg.com/vi/gKdqgdnZN44/hqdefault.jpg" alt="A game changer..." loading="lazy" width="480" height="360"><span class="vplay"><i></i></span></span><span class="vtitle">A game changer...</span></a>
+      <a class="vcard" href="https://www.youtube.com/watch?v=5gL0KFVYejc" target="_blank" rel="noopener" data-id="5gL0KFVYejc" aria-label="Play video: Remarkable Result: Issue, Block Gone!"><span class="vthumb"><img src="https://i.ytimg.com/vi/5gL0KFVYejc/hqdefault.jpg" alt="Remarkable Result: Issue, Block Gone!" loading="lazy" width="480" height="360"><span class="vplay"><i></i></span></span><span class="vtitle">Remarkable Result: Issue, Block Gone!</span></a>
+      <a class="vcard" href="https://www.youtube.com/watch?v=NG066uTQ4CM" target="_blank" rel="noopener" data-id="NG066uTQ4CM" aria-label="Play video: 20 Year Problem Gone"><span class="vthumb"><img src="https://i.ytimg.com/vi/NG066uTQ4CM/hqdefault.jpg" alt="20 Year Problem Gone" loading="lazy" width="480" height="360"><span class="vplay"><i></i></span></span><span class="vtitle">20 Year Problem Gone</span></a>
+      <a class="vcard" href="https://www.youtube.com/watch?v=jyR0Rkseww8" target="_blank" rel="noopener" data-id="jyR0Rkseww8" aria-label="Play video: Remove Your Fear -  Fear of changing career gone"><span class="vthumb"><img src="https://i.ytimg.com/vi/jyR0Rkseww8/hqdefault.jpg" alt="Remove Your Fear -  Fear of changing career gone" loading="lazy" width="480" height="360"><span class="vplay"><i></i></span></span><span class="vtitle">Remove Your Fear -  Fear of changing career gone</span></a>
+      <a class="vcard" href="https://www.youtube.com/watch?v=x_Li9T8X7-I" target="_blank" rel="noopener" data-id="x_Li9T8X7-I" aria-label="Play video: Felt Clouded, Tired, Confused and Frustrated. NOW ENERGIZED!"><span class="vthumb"><img src="https://i.ytimg.com/vi/x_Li9T8X7-I/hqdefault.jpg" alt="Felt Clouded, Tired, Confused and Frustrated. NOW ENERGIZED!" loading="lazy" width="480" height="360"><span class="vplay"><i></i></span></span><span class="vtitle">Felt Clouded, Tired, Confused and Frustrated. NOW ENERGIZED!</span></a>
+      <a class="vcard" href="https://www.youtube.com/watch?v=BrKXf6m8lGI" target="_blank" rel="noopener" data-id="BrKXf6m8lGI" aria-label="Play video: Was Feelings Tense &amp; Frustrated. Instant Shift"><span class="vthumb"><img src="https://i.ytimg.com/vi/BrKXf6m8lGI/hqdefault.jpg" alt="Was Feelings Tense &amp; Frustrated. Instant Shift" loading="lazy" width="480" height="360"><span class="vplay"><i></i></span></span><span class="vtitle">Was Feelings Tense &amp; Frustrated. Instant Shift</span></a>
+      <a class="vcard" href="https://www.youtube.com/watch?v=0JbGkOFbVx4" target="_blank" rel="noopener" data-id="0JbGkOFbVx4" aria-label="Play video: Panic Attacks... Gone!!!"><span class="vthumb"><img src="https://i.ytimg.com/vi/0JbGkOFbVx4/hqdefault.jpg" alt="Panic Attacks... Gone!!!" loading="lazy" width="480" height="360"><span class="vplay"><i></i></span></span><span class="vtitle">Panic Attacks... Gone!!!</span></a>
+      <a class="vcard" href="https://www.youtube.com/watch?v=Mb-8abLBCUU" target="_blank" rel="noopener" data-id="Mb-8abLBCUU" aria-label="Play video: Feel The Shift: Block Gone."><span class="vthumb"><img src="https://i.ytimg.com/vi/Mb-8abLBCUU/hqdefault.jpg" alt="Feel The Shift: Block Gone." loading="lazy" width="480" height="360"><span class="vplay"><i></i></span></span><span class="vtitle">Feel The Shift: Block Gone.</span></a>
+      <a class="vcard" href="https://www.youtube.com/watch?v=0xWiNIIxq0Q" target="_blank" rel="noopener" data-id="0xWiNIIxq0Q" aria-label="Play video: Testimonial - Sport Confidence and Anxiety"><span class="vthumb"><img src="https://i.ytimg.com/vi/0xWiNIIxq0Q/hqdefault.jpg" alt="Testimonial - Sport Confidence and Anxiety" loading="lazy" width="480" height="360"><span class="vplay"><i></i></span></span><span class="vtitle">Testimonial - Sport Confidence and Anxiety</span></a>
+      <a class="vcard" href="https://www.youtube.com/watch?v=Lwi8-eBI0jM" target="_blank" rel="noopener" data-id="Lwi8-eBI0jM" aria-label="Play video: Resolved - Stuck, demotivated and procrastinating"><span class="vthumb"><img src="https://i.ytimg.com/vi/Lwi8-eBI0jM/hqdefault.jpg" alt="Resolved - Stuck, demotivated and procrastinating" loading="lazy" width="480" height="360"><span class="vplay"><i></i></span></span><span class="vtitle">Resolved - Stuck, demotivated and procrastinating</span></a>
+      <a class="vcard" href="https://www.youtube.com/watch?v=Y302iWz5YWg" target="_blank" rel="noopener" data-id="Y302iWz5YWg" aria-label="Play video: STUCK &quot;CANT SPEAK” to “CANT STOP&quot;!"><span class="vthumb"><img src="https://i.ytimg.com/vi/Y302iWz5YWg/hqdefault.jpg" alt="STUCK &quot;CANT SPEAK” to “CANT STOP&quot;!" loading="lazy" width="480" height="360"><span class="vplay"><i></i></span></span><span class="vtitle">STUCK &quot;CANT SPEAK” to “CANT STOP&quot;!</span></a>
+      <a class="vcard" href="https://www.youtube.com/watch?v=FFbmwgr_2RI" target="_blank" rel="noopener" data-id="FFbmwgr_2RI" aria-label="Play video: Stuck, Blocked in Business - Now Action!!!"><span class="vthumb"><img src="https://i.ytimg.com/vi/FFbmwgr_2RI/hqdefault.jpg" alt="Stuck, Blocked in Business - Now Action!!!" loading="lazy" width="480" height="360"><span class="vplay"><i></i></span></span><span class="vtitle">Stuck, Blocked in Business - Now Action!!!</span></a>
+      <a class="vcard" href="https://www.youtube.com/watch?v=FH6ylMFQJ9g" target="_blank" rel="noopener" data-id="FH6ylMFQJ9g" aria-label="Play video: Problem gone, negative feelings and thinking… REPLACED WITH CALM CONFIDENCE…"><span class="vthumb"><img src="https://i.ytimg.com/vi/FH6ylMFQJ9g/hqdefault.jpg" alt="Problem gone, negative feelings and thinking… REPLACED WITH CALM CONFIDENCE…" loading="lazy" width="480" height="360"><span class="vplay"><i></i></span></span><span class="vtitle">Problem gone, negative feelings and thinking… REPLACED WITH CALM CONFIDENCE…</span></a>
+      <a class="vcard" href="https://www.youtube.com/watch?v=XMN_e9Jjjso" target="_blank" rel="noopener" data-id="XMN_e9Jjjso" aria-label="Play video: Business Blocks Gone! Action The Next Day"><span class="vthumb"><img src="https://i.ytimg.com/vi/XMN_e9Jjjso/hqdefault.jpg" alt="Business Blocks Gone! Action The Next Day" loading="lazy" width="480" height="360"><span class="vplay"><i></i></span></span><span class="vtitle">Business Blocks Gone! Action The Next Day</span></a>
+      <a class="vcard" href="https://www.youtube.com/watch?v=801UZJUd4o4" target="_blank" rel="noopener" data-id="801UZJUd4o4" aria-label="Play video: Remarkable Results: Massive Improvements"><span class="vthumb"><img src="https://i.ytimg.com/vi/801UZJUd4o4/hqdefault.jpg" alt="Remarkable Results: Massive Improvements" loading="lazy" width="480" height="360"><span class="vplay"><i></i></span></span><span class="vtitle">Remarkable Results: Massive Improvements</span></a>
+      <a class="vcard" href="https://www.youtube.com/watch?v=_E5HcBcfyEk" target="_blank" rel="noopener" data-id="_E5HcBcfyEk" aria-label="Play video: Release Stress And Anxiety"><span class="vthumb"><img src="https://i.ytimg.com/vi/_E5HcBcfyEk/hqdefault.jpg" alt="Release Stress And Anxiety" loading="lazy" width="480" height="360"><span class="vplay"><i></i></span></span><span class="vtitle">Release Stress And Anxiety</span></a>
+      <a class="vcard" href="https://www.youtube.com/watch?v=obA7M89XjVk" target="_blank" rel="noopener" data-id="obA7M89XjVk" aria-label="Play video: SPORTS PERFORMANCE - MUAY THAI - MENTAL PREPARATION FOCUS AND FLOW"><span class="vthumb"><img src="https://i.ytimg.com/vi/obA7M89XjVk/hqdefault.jpg" alt="SPORTS PERFORMANCE - MUAY THAI - MENTAL PREPARATION FOCUS AND FLOW" loading="lazy" width="480" height="360"><span class="vplay"><i></i></span></span><span class="vtitle">SPORTS PERFORMANCE - MUAY THAI - MENTAL PREPARATION FOCUS AND FLOW</span></a>
+      <a class="vcard" href="https://www.youtube.com/watch?v=k8QhSwJzBQE" target="_blank" rel="noopener" data-id="k8QhSwJzBQE" aria-label="Play video: PERFORM AT YOUR BEST - SPORTS PERFORMANCE"><span class="vthumb"><img src="https://i.ytimg.com/vi/k8QhSwJzBQE/hqdefault.jpg" alt="PERFORM AT YOUR BEST - SPORTS PERFORMANCE" loading="lazy" width="480" height="360"><span class="vplay"><i></i></span></span><span class="vtitle">PERFORM AT YOUR BEST - SPORTS PERFORMANCE</span></a>
+      <a class="vcard" href="https://www.youtube.com/watch?v=yTO5pqdPed0" target="_blank" rel="noopener" data-id="yTO5pqdPed0" aria-label="Play video: Amazing Results Rapid Breakthroughs - SLEEP, PAIN, CLARITY, FOCUS, SELF-DOUBT"><span class="vthumb"><img src="https://i.ytimg.com/vi/yTO5pqdPed0/hqdefault.jpg" alt="Amazing Results Rapid Breakthroughs - SLEEP, PAIN, CLARITY, FOCUS, SELF-DOUBT" loading="lazy" width="480" height="360"><span class="vplay"><i></i></span></span><span class="vtitle">Amazing Results Rapid Breakthroughs - SLEEP, PAIN, CLARITY, FOCUS, SELF-DOUBT</span></a>
+      <a class="vcard" href="https://www.youtube.com/watch?v=8jx7JqCHR3U" target="_blank" rel="noopener" data-id="8jx7JqCHR3U" aria-label="Play video: Stuck &quot;Speaking” To “Can&#x27;t Stop&quot;! Gone! Blocks Making Video Content"><span class="vthumb"><img src="https://i.ytimg.com/vi/8jx7JqCHR3U/hqdefault.jpg" alt="Stuck &quot;Speaking” To “Can&#x27;t Stop&quot;! Gone! Blocks Making Video Content" loading="lazy" width="480" height="360"><span class="vplay"><i></i></span></span><span class="vtitle">Stuck &quot;Speaking” To “Can&#x27;t Stop&quot;! Gone! Blocks Making Video Content</span></a>
+      <a class="vcard" href="https://www.youtube.com/watch?v=C5WYaGmPsRs" target="_blank" rel="noopener" data-id="C5WYaGmPsRs" aria-label="Play video: Another breakthrough - Regaining the strength and force from within. Now ready for massive action."><span class="vthumb"><img src="https://i.ytimg.com/vi/C5WYaGmPsRs/hqdefault.jpg" alt="Another breakthrough - Regaining the strength and force from within. Now ready for massive action." loading="lazy" width="480" height="360"><span class="vplay"><i></i></span></span><span class="vtitle">Another breakthrough - Regaining the strength and force from within. Now ready for massive action.</span></a>
+      <a class="vcard" href="https://www.youtube.com/watch?v=DmTYIiZUhGs" target="_blank" rel="noopener" data-id="DmTYIiZUhGs" aria-label="Play video: Stuck To Biz Breakthrough - Imposter Syndrome And Other Sabotaging Business Beliefs."><span class="vthumb"><img src="https://i.ytimg.com/vi/DmTYIiZUhGs/hqdefault.jpg" alt="Stuck To Biz Breakthrough - Imposter Syndrome And Other Sabotaging Business Beliefs." loading="lazy" width="480" height="360"><span class="vplay"><i></i></span></span><span class="vtitle">Stuck To Biz Breakthrough - Imposter Syndrome And Other Sabotaging Business Beliefs.</span></a>
+      <a class="vcard" href="https://www.youtube.com/watch?v=emjUnGtOy0Y" target="_blank" rel="noopener" data-id="emjUnGtOy0Y" aria-label="Play video: Massive Improvements: Remarkable Results"><span class="vthumb"><img src="https://i.ytimg.com/vi/emjUnGtOy0Y/hqdefault.jpg" alt="Massive Improvements: Remarkable Results" loading="lazy" width="480" height="360"><span class="vplay"><i></i></span></span><span class="vtitle">Massive Improvements: Remarkable Results</span></a>
+      <a class="vcard" href="https://www.youtube.com/watch?v=6Sgmw0EhSiE" target="_blank" rel="noopener" data-id="6Sgmw0EhSiE" aria-label="Play video: Get Insight Into The Problem - Feel Better Fast"><span class="vthumb"><img src="https://i.ytimg.com/vi/6Sgmw0EhSiE/hqdefault.jpg" alt="Get Insight Into The Problem - Feel Better Fast" loading="lazy" width="480" height="360"><span class="vplay"><i></i></span></span><span class="vtitle">Get Insight Into The Problem - Feel Better Fast</span></a>
+      <a class="vcard" href="https://www.youtube.com/watch?v=cjUGBuIlh7Y" target="_blank" rel="noopener" data-id="cjUGBuIlh7Y" aria-label="Play video: Anxiety and Depression Free After 10 years Suffering"><span class="vthumb"><img src="https://i.ytimg.com/vi/cjUGBuIlh7Y/hqdefault.jpg" alt="Anxiety and Depression Free After 10 years Suffering" loading="lazy" width="480" height="360"><span class="vplay"><i></i></span></span><span class="vtitle">Anxiety and Depression Free After 10 years Suffering</span></a>
+      <a class="vcard" href="https://www.youtube.com/watch?v=sADzsXguuhw" target="_blank" rel="noopener" data-id="sADzsXguuhw" aria-label="Play video: You have the resources inside… Solving Problems Fast!"><span class="vthumb"><img src="https://i.ytimg.com/vi/sADzsXguuhw/hqdefault.jpg" alt="You have the resources inside… Solving Problems Fast!" loading="lazy" width="480" height="360"><span class="vplay"><i></i></span></span><span class="vtitle">You have the resources inside… Solving Problems Fast!</span></a>
+      <a class="vcard" href="https://www.youtube.com/watch?v=tIMsMW3PQLw" target="_blank" rel="noopener" data-id="tIMsMW3PQLw" aria-label="Play video: Solving Problems Fast! Testimonial"><span class="vthumb"><img src="https://i.ytimg.com/vi/tIMsMW3PQLw/hqdefault.jpg" alt="Solving Problems Fast! Testimonial" loading="lazy" width="480" height="360"><span class="vplay"><i></i></span></span><span class="vtitle">Solving Problems Fast! Testimonial</span></a>
     </div>
-    <p class="video-note reveal d1">Playlist not loading? <a href="https://youtube.com/playlist?list=PLOf1mgEJvC_bZipYzUwE1M6DizGDOaAQ-" target="_blank" rel="noopener">Watch on YouTube →</a></p>
+    <p class="video-note reveal d1">28 client conversations, in their own words · <a href="https://youtube.com/playlist?list=PLOf1mgEJvC_bZipYzUwE1M6DizGDOaAQ-" target="_blank" rel="noopener">View the full playlist on YouTube →</a></p>
   </div>
 </section>
 
@@ -452,6 +494,7 @@
   <p>© <span id="yr"></span> Aaron Ellis. All rights reserved.</p>
 </footer>
 
+<div class="vlb" id="vlb" aria-hidden="true"><div class="vlb-inner"><button class="vlb-close" id="vlb-close" aria-label="Close video">×</button><div class="vlb-frame" id="vlb-frame"></div></div></div>
 <div class="lb" id="lb" aria-hidden="true"><img id="lb-img" src="" alt="The Dialogue Arc, enlarged"></div>
 
 <script>
@@ -479,6 +522,19 @@
   });
   lb.addEventListener("click", function(){ lb.classList.remove("open"); lbImg.src=""; });
   addEventListener("keydown", function(e){ if(e.key==="Escape"){ lb.classList.remove("open"); } });
+})();
+</script>
+<script>
+(function(){
+  var grid=document.getElementById("vgrid");
+  var vlb=document.getElementById("vlb"), frame=document.getElementById("vlb-frame");
+  if(!grid||!vlb) return;
+  function openV(id){ frame.innerHTML='<iframe src="https://www.youtube.com/embed/'+id+'?autoplay=1&rel=0" title="Client testimonial — Strategic Dialogue Hypnotherapy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>'; vlb.classList.add("open"); }
+  function closeV(){ vlb.classList.remove("open"); frame.innerHTML=""; }
+  grid.addEventListener("click",function(e){ var c=e.target.closest(".vcard"); if(c){ e.preventDefault(); openV(c.getAttribute("data-id")); } });
+  document.getElementById("vlb-close").addEventListener("click",closeV);
+  vlb.addEventListener("click",function(e){ if(e.target===vlb) closeV(); });
+  addEventListener("keydown",function(e){ if(e.key==="Escape"&&vlb.classList.contains("open")) closeV(); });
 })();
 </script>
 </body>
