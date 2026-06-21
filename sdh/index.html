@@ -178,6 +178,13 @@
   .t-card figcaption{color:var(--gold);font-style:normal;font-weight:700;font-size:.92rem;letter-spacing:.03em}
   .t-blurbs{display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center;margin-top:2.6rem;max-width:50rem;margin-inline:auto}
   .t-blurbs span{font-size:.9rem;background:#fff;border:1px solid rgba(217,184,92,.55);color:var(--navy);padding:.5em 1.05em;border-radius:999px}
+
+  /* video playlist */
+  .video-frame{max-width:900px;margin:2rem auto 0;border:1px solid rgba(217,184,92,.45);border-radius:18px;padding:.6rem;background:#0e1b35;box-shadow:0 28px 66px rgba(22,40,74,.32)}
+  .video-wrap{position:relative;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:#000}
+  .video-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .video-note{margin-top:1rem;font-size:.95rem;color:#6a7488;text-align:center}
+  .video-note a{color:var(--gold);font-weight:700}
 </style>
 </head>
 <body>
@@ -392,7 +399,25 @@
   </div>
 </section>
 
-<!-- 10 · FINAL CTA -->
+<!-- 9 1/2 - WATCH (video playlist) -->
+<section class="cream" id="watch">
+  <div class="wrap" style="text-align:center">
+    <span class="eyebrow reveal" style="justify-content:center">Watch</span>
+    <h2 class="reveal">See the breakthroughs for yourself.</h2>
+    <p class="reveal d1" style="max-width:40rem;margin:0 auto;color:#41506a">The words above are drawn from these conversations. Watch real clients describe the change, in their own voice.</p>
+    <div class="video-frame reveal d1">
+      <div class="video-wrap">
+        <iframe src="https://www.youtube-nocookie.com/embed/videoseries?list=PLOf1mgEJvC_bZipYzUwE1M6DizGDOaAQ-&rel=0"
+                title="Client testimonials — Strategic Dialogue Hypnotherapy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
+      </div>
+    </div>
+    <p class="video-note reveal d1">Playlist not loading? <a href="https://youtube.com/playlist?list=PLOf1mgEJvC_bZipYzUwE1M6DizGDOaAQ-" target="_blank" rel="noopener">Watch on YouTube →</a></p>
+  </div>
+</section>
+
+<!-- 10 - FINAL CTA -->
 <section class="dark final" id="final">
   <div class="wrap prose" style="margin-inline:auto;text-align:center">
     <h2 class="reveal">Learn to do less, and change more.</h2>
