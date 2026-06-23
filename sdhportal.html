@@ -295,16 +295,10 @@
     </div>
 
     <div class="login-card">
-      <div class="field-group">
-        <label>Username</label>
-        <input type="text" id="login-email" placeholder="Enter your username" autocomplete="username">
-      </div>
-      <div class="field-group">
-        <label>Password</label>
-        <input type="password" id="login-password" placeholder="Enter your password" autocomplete="current-password">
-      </div>
-      <div class="error-msg" id="login-error">Incorrect username or password. Please try again.</div>
-      <button class="btn-primary" onclick="handleLogin()">Enter Portal</button>
+      <p style="text-align:center;color:var(--text-muted);font-size:13px;line-height:1.7;margin-bottom:24px;">
+        You're signed in as a verified member.<br>Welcome to your training portal.
+      </p>
+      <button class="btn-primary" onclick="enterPortal()">Enter Portal</button>
     </div>
 
     <p class="login-note">Access is granted to enrolled practitioners only.<br>Contact Aaron to request enrolment.</p>
@@ -396,11 +390,6 @@
 </div>
 
 <script>
-// ══════════════════════════════ DEMO CREDENTIALS (front-of-house only) ══════════════════════════════
-const DEMO_USERS = [
-  { email: 'sdh-trainer', password: 'sdh$&@26', name: 'SDH Trainer' },
-];
-
 // ══════════════════════════════ COURSE DATA ══════════════════════════════
 const MODULES = [
   {
@@ -463,23 +452,19 @@ const MODULES = [
 // ══════════════════════════════ STATE ══════════════════════════════
 let currentUser = null, currentModule = null, currentSession = null;
 
-// ══════════════════════════════ AUTH ══════════════════════════════
-function handleLogin() {
-  const email = document.getElementById('login-email').value.trim().toLowerCase();
-  const pass  = document.getElementById('login-password').value;
-  const user  = DEMO_USERS.find(u => u.email === email && u.password === pass);
-  if (!user) { document.getElementById('login-error').classList.add('show'); return; }
-  document.getElementById('login-error').classList.remove('show');
-  currentUser = user;
+// ══════════════════════════════ ENTRY ══════════════════════════════
+// Real access control is handled server-side by HTTP Basic Auth on the
+// /members/ folder (per-member logins). This screen is just a branded splash.
+function enterPortal() {
+  currentUser = { name: 'Member' };
   showDashboard();
 }
 function handleLogout() {
+  // returns to the splash; to fully sign out, the member closes the browser
+  // (Basic Auth credentials are held by the browser for the session).
   currentUser = null;
   showView('view-login');
-  document.getElementById('login-email').value = '';
-  document.getElementById('login-password').value = '';
 }
-document.getElementById('login-password').addEventListener('keydown', e => { if (e.key === 'Enter') handleLogin(); });
 
 // ══════════════════════════════ VIEWS ══════════════════════════════
 function showView(id) {
@@ -489,7 +474,7 @@ function showView(id) {
 }
 function showDashboard() {
   document.getElementById('user-display').textContent = currentUser.name;
-  document.getElementById('dash-greeting').textContent = `Welcome back, ${currentUser.name.split(' ')[0]}.`;
+  document.getElementById('dash-greeting').textContent = 'Welcome back.';
   renderModules();
   showView('view-dashboard');
 }
