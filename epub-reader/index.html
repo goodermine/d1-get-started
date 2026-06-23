@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reading Library — SDH Member Portal</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f6f4ef;          /* clean light page */
+    --card:#ffffff;
+    --ink:#222831;         /* primary text */
+    --muted:#6f7680;
+    --gold:#b08d2e;        /* readable gold for text */
+    --gold-soft:#C9A84C;   /* brand gold for accents */
+    --border:#e7e3d8;
+    --shadow:0 6px 22px rgba(20,24,33,.07);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--ink);font-family:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh}
+
+  /* header */
+  .topbar{background:#fff;border-bottom:1px solid var(--border);height:64px;display:flex;align-items:center;
+    justify-content:space-between;padding:0 28px;position:sticky;top:0;z-index:10}
+  .brand{font-family:'Cinzel',serif;font-size:11px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--gold)}
+  .top-right{display:flex;align-items:center;gap:16px}
+  .top-link{font-size:13px;color:var(--muted);text-decoration:none;padding:7px 14px;border:1px solid var(--border);border-radius:7px;transition:.2s}
+  .top-link:hover{border-color:var(--gold-soft);color:var(--gold)}
+
+  /* hero */
+  .wrap{max-width:1080px;margin:0 auto;padding:40px 28px 64px;width:100%}
+  .eyebrow{font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+  h1{font-family:'Cinzel',serif;font-size:30px;font-weight:700;margin-bottom:10px}
+  .lede{color:var(--muted);max-width:600px;margin-bottom:36px}
+
+  .section-label{font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);
+    margin-bottom:20px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+
+  /* grid */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:24px}
+  .book{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;text-decoration:none;color:inherit;
+    display:flex;flex-direction:column;box-shadow:var(--shadow);transition:transform .18s,box-shadow .18s,border-color .18s}
+  .book:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(20,24,33,.12);border-color:var(--gold-soft)}
+  .cover{position:relative;width:100%;padding-top:150%;overflow:hidden;background:linear-gradient(135deg,#2D2D44,#1A1A2E)}
+  .cover img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+  /* fallback cover (no image) */
+  .cover .fallback{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;padding:18px;gap:10px}
+  .cover .fallback .ttl{font-family:'Cinzel',serif;font-size:15px;font-weight:700;color:#F0EDE6;line-height:1.3}
+  .cover .fallback .au{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-soft)}
+  .book-body{padding:14px 16px 18px}
+  .book-title{font-family:'Cinzel',serif;font-size:14px;font-weight:600;line-height:1.3;margin-bottom:4px}
+  .book-author{font-size:12px;color:var(--muted)}
+  .read-pill{margin-top:12px;display:inline-block;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--gold);border:1px solid var(--gold-soft);border-radius:20px;padding:5px 12px}
+
+  .empty{grid-column:1/-1;text-align:center;color:var(--muted);padding:48px 20px;border:1px dashed var(--border);border-radius:12px}
+
+  footer{text-align:center;color:var(--muted);font-size:12px;padding:32px 20px 48px}
+
+  @media (max-width:600px){
+    .topbar{padding:0 16px}
+    .wrap{padding:28px 16px 48px}
+    h1{font-size:24px}
+    .grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:16px}
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">SDH Member Portal · Library</div>
+  <div class="top-right">
+    <a class="top-link" href="../sdhportal.html">← Portal</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="eyebrow">Members Reading Room</div>
+  <h1>Reading Library</h1>
+  <p class="lede">Your books, ready to read in the browser — on your phone, tablet, or computer. Tap any title to open it. The reader remembers where you left off.</p>
+
+  <div class="section-label">Available Books</div>
+  <div class="grid" id="grid"></div>
+</main>
+
+<footer>Access is granted to enrolled members only.</footer>
+
+<script>
+/* ════════════════════════════════════════════════════════════
+   ADD A BOOK:  1) upload the .epub into the  books/  folder
+                2) add one entry to this list
+   ──────────────────────────────────────────────────────────
+   file   = the .epub filename inside books/  (required)
+   title  = shown in the library and the reader   (required)
+   author = shown under the title                 (optional)
+   cover  = an image in covers/ e.g. "covers/mybook.jpg"
+            (optional — leave out for an auto title card)
+   ════════════════════════════════════════════════════════════ */
+const BOOKS = [
+  {
+    file:   "sample.epub",
+    title:  "Pride and Prejudice",
+    author: "Jane Austen",
+    cover:  ""   // e.g. "covers/pride.jpg"
+  },
+  // {
+  //   file:   "my-next-book.epub",
+  //   title:  "My Next Book",
+  //   author: "Author Name",
+  //   cover:  "covers/my-next-book.jpg"
+  // },
+];
+
+/* ── render ── */
+const grid = document.getElementById("grid");
+
+function esc(s){ return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+if (!BOOKS.length){
+  grid.innerHTML = '<div class="empty">No books yet. Add one in the BOOKS list and upload its .epub to the books/ folder.</div>';
+} else {
+  grid.innerHTML = BOOKS.map(b => {
+    const bookUrl = "books/" + b.file;
+    const href = "reader.html?book=" + encodeURIComponent(bookUrl) + "&title=" + encodeURIComponent(b.title);
+    const coverInner = b.cover
+      ? '<img src="' + esc(b.cover) + '" alt="' + esc(b.title) + ' cover" loading="lazy">'
+      : '<div class="fallback"><span class="ttl">' + esc(b.title) + '</span>' +
+        (b.author ? '<span class="au">' + esc(b.author) + '</span>' : '') + '</div>';
+    return '<a class="book" href="' + href + '">' +
+             '<div class="cover">' + coverInner + '</div>' +
+             '<div class="book-body">' +
+               '<div class="book-title">' + esc(b.title) + '</div>' +
+               (b.author ? '<div class="book-author">' + esc(b.author) + '</div>' : '') +
+               '<span class="read-pill">Read ›</span>' +
+             '</div>' +
+           '</a>';
+  }).join("");
+}
+</script>
+</body>
+</html>
