@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Is This Song AI-Made? — Detector</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f6f7f9; --card:#ffffff; --ink:#1d2530; --muted:#697586;
+    --line:#e3e7ec; --accent:#4f46e5; --accent-soft:#eef0fe;
+    --ai:#d6453d; --ai-bg:#fdecea; --maybe:#c8851a; --maybe-bg:#fcf3e3;
+    --neutral:#5b6675; --neutral-bg:#eef1f4;
+    --shadow:0 6px 24px rgba(20,28,40,.08);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--ink);font-family:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.6;-webkit-font-smoothing:antialiased;padding:32px 16px}
+  .tool{max-width:620px;margin:0 auto}
+
+  .head{text-align:center;margin-bottom:24px}
+  .badge{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--accent);background:var(--accent-soft);border-radius:20px;padding:5px 12px;margin-bottom:12px}
+  h1{font-size:26px;font-weight:700;letter-spacing:-.01em}
+  .sub{color:var(--muted);font-size:14px;margin-top:6px}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:22px;margin-bottom:18px}
+
+  /* input mode tabs */
+  .tabs{display:flex;gap:6px;background:var(--neutral-bg);border-radius:10px;padding:4px;margin-bottom:18px}
+  .tab{flex:1;border:none;background:transparent;font:inherit;font-size:13px;font-weight:600;color:var(--muted);
+    padding:9px;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px}
+  .tab.active{background:#fff;color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.08)}
+  .tab[disabled]{cursor:not-allowed;opacity:.7}
+  .tab .soon{font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#fff;background:var(--muted);border-radius:10px;padding:2px 6px}
+
+  /* dropzone */
+  .drop{border:2px dashed var(--line);border-radius:12px;padding:34px 20px;text-align:center;cursor:pointer;
+    transition:border-color .15s,background .15s}
+  .drop:hover,.drop.drag{border-color:var(--accent);background:var(--accent-soft)}
+  .drop .ic{font-size:34px;line-height:1;margin-bottom:10px}
+  .drop .big{font-weight:600;font-size:15px}
+  .drop .small{color:var(--muted);font-size:12.5px;margin-top:4px}
+  .drop .formats{color:var(--muted);font-size:11.5px;margin-top:10px}
+  .file{display:none;align-items:center;gap:12px;margin-top:14px;background:var(--neutral-bg);border-radius:10px;padding:12px 14px}
+  .file.show{display:flex}
+  .file .name{flex:1;min-width:0;font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .file .size{font-size:12px;color:var(--muted)}
+  .file .x{border:none;background:none;cursor:pointer;color:var(--muted);font-size:18px;line-height:1}
+
+  /* youtube panel */
+  .yt{display:none}
+  .yt.show{display:block}
+  .yt input{width:100%;border:1px solid var(--line);border-radius:9px;padding:12px 14px;font:inherit;font-size:14px;color:var(--ink);outline:none;background:#fafbfc}
+  .yt .hint{font-size:12.5px;color:var(--muted);margin-top:10px;background:var(--maybe-bg);border:1px solid #f0e0bf;border-radius:8px;padding:10px 12px}
+
+  .panel{display:none}
+  .panel.show{display:block}
+
+  .btn{width:100%;margin-top:16px;background:var(--accent);color:#fff;border:none;border-radius:9px;padding:13px;
+    font:inherit;font-size:14px;font-weight:600;cursor:pointer;transition:opacity .15s}
+  .btn:hover{opacity:.92}
+  .btn[disabled]{opacity:.45;cursor:not-allowed}
+
+  /* result */
+  #result{display:none}
+  #result.show{display:block}
+  .verdict{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+  .verdict .dot{width:14px;height:14px;border-radius:50%;flex-shrink:0}
+  .verdict .vt{font-size:19px;font-weight:700}
+  .verdict .cf{margin-left:auto;font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;border-radius:20px;padding:5px 11px}
+  .v-ai .vt{color:var(--ai)} .v-ai .dot{background:var(--ai)} .v-ai .cf{color:var(--ai);background:var(--ai-bg)}
+  .v-maybe .vt{color:var(--maybe)} .v-maybe .dot{background:var(--maybe)} .v-maybe .cf{color:var(--maybe);background:var(--maybe-bg)}
+  .v-neutral .vt{color:var(--neutral)} .v-neutral .dot{background:var(--neutral)} .v-neutral .cf{color:var(--neutral);background:var(--neutral-bg)}
+
+  .meter{height:7px;border-radius:5px;background:var(--neutral-bg);overflow:hidden;margin-bottom:18px}
+  .meter span{display:block;height:100%;border-radius:5px;transition:width .5s ease}
+
+  .sig-label{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+  .sig{display:flex;align-items:center;gap:10px;font-size:13.5px;padding:9px 0;border-top:1px solid var(--line)}
+  .sig .tag{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;border-radius:6px;padding:2px 7px;flex-shrink:0}
+  .tag-high{color:var(--ai);background:var(--ai-bg)} .tag-medium{color:var(--maybe);background:var(--maybe-bg)} .tag-info{color:var(--neutral);background:var(--neutral-bg)}
+  .none{font-size:13.5px;color:var(--muted);font-style:italic}
+
+  .notes{margin-top:18px;background:var(--neutral-bg);border-radius:10px;padding:14px 16px}
+  .notes li{font-size:12.5px;color:var(--muted);margin-left:18px;margin-bottom:6px}
+  .notes li:last-child{margin-bottom:0}
+
+  .disclaimer{font-size:11.5px;color:var(--muted);text-align:center;margin-top:6px;line-height:1.5}
+  .err{display:none;color:var(--ai);background:var(--ai-bg);border:1px solid #f3cfcb;border-radius:9px;padding:12px 14px;font-size:13px;margin-top:14px}
+  .err.show{display:block}
+  .spin{display:inline-block;width:16px;height:16px;border:2px solid rgba(255,255,255,.5);border-top-color:#fff;border-radius:50%;animation:s .8s linear infinite;vertical-align:-3px;margin-right:8px}
+  @keyframes s{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+<div class="tool">
+
+  <div class="head">
+    <span class="badge">Audio Tool</span>
+    <h1>Is This Song AI‑Made?</h1>
+    <p class="sub">Upload a track and we'll check it for AI‑generation fingerprints — watermarks and Content Credentials. You'll get a likelihood, not a verdict set in stone.</p>
+  </div>
+
+  <div class="card">
+    <div class="tabs">
+      <button class="tab active" id="tab-upload">⬆ Upload audio</button>
+      <button class="tab" id="tab-yt" disabled>▶ YouTube link <span class="soon">Soon</span></button>
+    </div>
+
+    <!-- UPLOAD -->
+    <div class="panel show" id="panel-upload">
+      <div class="drop" id="drop">
+        <div class="ic">🎵</div>
+        <div class="big">Drop an audio file here</div>
+        <div class="small">or click to browse</div>
+        <div class="formats">MP3 · WAV · FLAC · OGG · M4A — up to 100 MB</div>
+      </div>
+      <input type="file" id="file" accept="audio/*,.mp3,.wav,.flac,.ogg,.m4a,.aac" hidden>
+      <div class="file" id="filebox">
+        <span class="ic">📄</span>
+        <span class="name" id="filename"></span>
+        <span class="size" id="filesize"></span>
+        <button class="x" id="clearfile" title="Remove">✕</button>
+      </div>
+      <button class="btn" id="analyze" disabled>Analyze track</button>
+    </div>
+
+    <!-- YOUTUBE (disabled placeholder) -->
+    <div class="panel" id="panel-yt">
+      <div class="yt show">
+        <input type="url" placeholder="https://www.youtube.com/watch?v=…" disabled>
+        <div class="hint"><strong>Coming soon.</strong> Analyzing a YouTube link needs a separate audio‑extraction step on the server, and pulling audio from YouTube is against its Terms of Service. For now, download the audio yourself and use <strong>Upload</strong> above.</div>
+      </div>
+    </div>
+
+    <div class="err" id="err"></div>
+  </div>
+
+  <!-- RESULT -->
+  <div class="card" id="result">
+    <div class="verdict" id="verdict">
+      <span class="dot"></span>
+      <span class="vt" id="vtext"></span>
+      <span class="cf" id="vconf"></span>
+    </div>
+    <div class="meter"><span id="meter"></span></div>
+
+    <div class="sig-label">Signals found</div>
+    <div id="signals"></div>
+
+    <ul class="notes" id="notes"></ul>
+    <p class="disclaimer">This is a probabilistic likelihood based on provenance data, not proof. It can miss AI tracks whose metadata was removed, and should never be used to accuse anyone.</p>
+  </div>
+
+  <p class="disclaimer">Free provenance scan · An acoustic‑analysis upgrade can be added later for tracks with no metadata.</p>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ════════════════════════════════════════════════════════════
+     SET THIS to your deployed Worker endpoint.
+     After `npm run deploy`, it'll be something like:
+       https://d1-get-started.<your-subdomain>.workers.dev/api/detect-music
+     (or a custom route if you map the Worker under your own domain).
+     ════════════════════════════════════════════════════════════ */
+  const WORKER_URL = "https://d1-get-started.YOUR-SUBDOMAIN.workers.dev/api/detect-music";
+
+  const $ = (id) => document.getElementById(id);
+  const drop = $("drop"), fileInput = $("file"), filebox = $("filebox");
+  const analyze = $("analyze"), err = $("err"), result = $("result");
+  let chosen = null;
+
+  // tabs (YouTube is disabled for v1)
+  $("tab-upload").addEventListener("click", () => {
+    $("tab-upload").classList.add("active"); $("tab-yt").classList.remove("active");
+    $("panel-upload").classList.add("show"); $("panel-yt").classList.remove("show");
+  });
+
+  // dropzone interactions
+  drop.addEventListener("click", () => fileInput.click());
+  ["dragenter","dragover"].forEach(e => drop.addEventListener(e, ev => { ev.preventDefault(); drop.classList.add("drag"); }));
+  ["dragleave","drop"].forEach(e => drop.addEventListener(e, ev => { ev.preventDefault(); drop.classList.remove("drag"); }));
+  drop.addEventListener("drop", ev => { const f = ev.dataTransfer.files[0]; if (f) setFile(f); });
+  fileInput.addEventListener("change", () => { if (fileInput.files[0]) setFile(fileInput.files[0]); });
+  $("clearfile").addEventListener("click", clearFile);
+
+  function fmtSize(n){ return n < 1048576 ? (n/1024).toFixed(0)+" KB" : (n/1048576).toFixed(1)+" MB"; }
+
+  function setFile(f){
+    hideErr();
+    if (f.size > 100*1024*1024){ showErr("That file is over 100 MB. Please use a smaller file."); return; }
+    chosen = f;
+    $("filename").textContent = f.name;
+    $("filesize").textContent = fmtSize(f.size);
+    filebox.classList.add("show");
+    analyze.disabled = false;
+  }
+  function clearFile(){
+    chosen = null; fileInput.value = "";
+    filebox.classList.remove("show"); analyze.disabled = true;
+    result.classList.remove("show"); hideErr();
+  }
+  function showErr(m){ err.textContent = m; err.classList.add("show"); }
+  function hideErr(){ err.classList.remove("show"); }
+
+  analyze.addEventListener("click", async () => {
+    if (!chosen) return;
+    hideErr(); result.classList.remove("show");
+    analyze.disabled = true;
+    const original = analyze.textContent;
+    analyze.innerHTML = '<span class="spin"></span>Analyzing…';
+    try {
+      const res = await fetch(WORKER_URL, {
+        method: "POST",
+        headers: { "Content-Type": chosen.type || "application/octet-stream", "X-Filename": chosen.name },
+        body: chosen
+      });
+      const data = await res.json();
+      if (!res.ok || data.error){ showErr(data.error || "The analyzer returned an error."); return; }
+      render(data);
+    } catch (e) {
+      showErr("Couldn't reach the analyzer. Check that the Worker URL is set and deployed.");
+    } finally {
+      analyze.disabled = false; analyze.textContent = original;
+    }
+  });
+
+  function render(data){
+    const v = data.verdict || "Inconclusive";
+    const cls = /likely ai/i.test(v) ? "v-ai" : /possibly ai/i.test(v) ? "v-maybe" : "v-neutral";
+    const vEl = $("verdict");
+    vEl.className = "verdict " + cls;
+    $("vtext").textContent = v;
+    $("vconf").textContent = (data.confidence || "low") + " confidence";
+
+    const width = data.confidence === "high" ? 92 : data.confidence === "medium" ? 60 : 22;
+    const color = cls === "v-ai" ? "var(--ai)" : cls === "v-maybe" ? "var(--maybe)" : "var(--neutral)";
+    const meter = $("meter"); meter.style.width = width + "%"; meter.style.background = color;
+
+    const sig = $("signals");
+    if (data.signals && data.signals.length){
+      sig.innerHTML = data.signals.map(s =>
+        '<div class="sig"><span class="tag tag-'+s.weight+'">'+s.weight+'</span><span>'+escapeHtml(s.label)+'</span></div>'
+      ).join("");
+    } else {
+      sig.innerHTML = '<div class="sig none">No provenance or watermark signals were detected in this file.</div>';
+    }
+
+    $("notes").innerHTML = (data.notes||[]).map(n => '<li>'+escapeHtml(n)+'</li>').join("");
+    result.classList.add("show");
+    result.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  }
+
+  function escapeHtml(s){ return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+})();
+</script>
+</body>
+</html>
