@@ -1,0 +1,113 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { site } from "../data/site.ts";
+
+// TODO(phase 3): replace the companion-audio section with the encrypted
+// PasswordGate component once Aaron provides the audio files + password.
+const AMAZON_URL = "#"; // TODO(aaron): real Amazon link
+const whatsInside = [
+  {
+    h: "Confidence from within",
+    p: "Where real, durable confidence actually comes from — and why approval-seeking quietly drains it.",
+  },
+  {
+    h: "Grounded presence",
+    p: "Practical ways to stay centred under pressure, in rooms and conversations that used to rattle you.",
+  },
+  {
+    h: "Magnetic, not pushy",
+    p: "Drawing people in through warmth and steadiness rather than performance or force.",
+  },
+];
+---
+
+<BaseLayout
+  title="Magnetic Personal Power"
+  description="Magnetic Personal Power by Aaron Ellis — calm, grounded confidence that comes from within, and needs no one's permission. With companion audio."
+>
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="cover">
+        <img src="/img/books/magnetic-personal-power.jpg" alt="Magnetic Personal Power cover" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'cover-mono',textContent:'AE'}))" />
+      </div>
+      <div>
+        <span class="eyebrow">The Magnetic Series · Book 1</span>
+        <h1>Magnetic Personal Power</h1>
+        <p class="tagline">
+          Calm, grounded confidence that comes from within — and needs no
+          one's permission.
+        </p>
+        <p class="muted">
+          If your confidence has always depended on the room, the result, or
+          someone else's approval, this book is about building the kind that
+          doesn't. Quieter, steadier, and entirely your own.
+        </p>
+        <div class="cta">
+          <a href={AMAZON_URL} class="btn btn-primary">Buy on Amazon</a>
+          <a href="#audio" class="btn btn-ghost">Companion audio</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>What's inside</h2>
+      <div class="inside-grid">
+        {whatsInside.map((item) => (
+          <div class="card">
+            <h3>{item.h}</h3>
+            <p class="muted">{item.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="audio" class="section audio">
+    <div class="container audio-inner card">
+      <span class="eyebrow">Companion audio</span>
+      <h2>Listen alongside the book</h2>
+      <p class="muted">
+        Buyers get access to companion audio — no email, no account, nothing
+        tracked. Access is unlocked with a password from inside the book.
+      </p>
+      <p class="note muted">🔒 Secure audio unlock is being set up. Check back shortly.</p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero { padding-block: var(--space-6); }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 18rem) 1fr;
+    gap: var(--space-5);
+    align-items: center;
+  }
+  .cover {
+    aspect-ratio: 2 / 3;
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--color-surface-2), var(--color-surface));
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow);
+    display: grid; place-items: center;
+  }
+  .cover img { width: 100%; height: 100%; object-fit: cover; }
+  .cover-mono { font-family: var(--font-heading); font-size: 4rem; font-weight: 700; color: var(--color-accent); opacity: 0.5; }
+  .tagline { font-family: var(--font-heading); font-size: var(--fs-xl); color: var(--color-accent-2); }
+  .cta { display: flex; gap: var(--space-3); flex-wrap: wrap; margin-top: var(--space-4); }
+  .inside-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+    gap: var(--space-4);
+  }
+  .inside-grid h3 { font-size: var(--fs-lg); }
+  .audio-inner { max-width: var(--maxw-prose); }
+  .note { margin-top: var(--space-3); font-size: var(--fs-sm); }
+  @media (max-width: 720px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .cover { max-width: 14rem; }
+  }
+</style>

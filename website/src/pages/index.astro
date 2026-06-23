@@ -1,0 +1,129 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { site } from "../data/site.ts";
+---
+
+<BaseLayout>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero-inner">
+      <span class="hero-monogram">{site.monogram}</span>
+      <h1>{site.name}</h1>
+      <p class="hero-tagline">{site.tagline}</p>
+      <p class="hero-sub muted">
+        AI product developer, prompt-systems builder, and author. I turn rough
+        ideas into build-ready systems — and write tools for clearer thinking.
+      </p>
+      <div class="hero-cta">
+        <a href="/extreme-build/" class="btn btn-primary">Enter AI Builds</a>
+        <a href="/books/" class="btn btn-ghost">View Books</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE TWO DOORS -->
+  <section class="section doors">
+    <div class="container">
+      <div class="door-grid">
+        <a href="/extreme-build/" class="card door">
+          <span class="eyebrow">Door 01</span>
+          <h2>AI Builds</h2>
+          <p class="muted">
+            AI products, prompt systems, and agent-ready workflows — from a
+            rough brief through to a deployment-ready handoff.
+          </p>
+          <span class="door-link">Explore the builds →</span>
+        </a>
+
+        <a href="/books/" class="card door">
+          <span class="eyebrow">Door 02</span>
+          <h2>Books</h2>
+          <p class="muted">
+            The Magnetic Series and more — practical psychology for calm,
+            grounded confidence and clearer communication.
+          </p>
+          <span class="door-link">Browse the library →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section about">
+    <div class="container about-inner">
+      <span class="eyebrow">About Aaron</span>
+      <h2>Two crafts, one method.</h2>
+      <p>
+        I work at the meeting point of two disciplines. On one side: AI product
+        development — prompt systems, agent workflows, and the harnesses that
+        make them reliable. On the other: the inner work of a clinical
+        hypnotherapist and coach, distilled into books on confidence,
+        communication, and change.
+      </p>
+      <p class="muted">
+        The thread between them is the same: take something messy and human, and
+        give it a structure you can actually use.
+      </p>
+      <div class="hero-cta">
+        <a href="/resume/" class="btn btn-ghost">Read my background</a>
+        <a href={`mailto:${site.email}`} class="btn btn-ghost">Get in touch</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero {
+    position: relative;
+    padding-block: var(--space-7);
+    text-align: center;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: -40% 0 auto 0;
+    height: 80%;
+    background: radial-gradient(
+      ellipse at 50% 0%,
+      color-mix(in srgb, var(--color-accent) 16%, transparent),
+      transparent 60%
+    );
+    pointer-events: none;
+  }
+  .hero-inner { position: relative; max-width: 50rem; margin-inline: auto; }
+  .hero-monogram {
+    display: inline-grid;
+    place-items: center;
+    width: 84px; height: 84px;
+    border-radius: 18px;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 2.6rem;
+    color: var(--color-on-accent);
+    background: linear-gradient(135deg, var(--color-accent-2), var(--color-accent));
+    box-shadow: var(--shadow);
+    margin-bottom: var(--space-4);
+  }
+  .hero h1 { margin-bottom: var(--space-2); }
+  .hero-tagline {
+    font-family: var(--font-heading);
+    font-size: var(--fs-xl);
+    color: var(--color-accent-2);
+    margin-bottom: var(--space-3);
+  }
+  .hero-sub { max-width: 38rem; margin-inline: auto; margin-bottom: var(--space-5); }
+  .hero-cta { display: flex; gap: var(--space-3); justify-content: center; flex-wrap: wrap; }
+
+  .door-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+    gap: var(--space-4);
+  }
+  .door { display: flex; flex-direction: column; }
+  .door h2 { margin-top: var(--space-1); }
+  .door-link { margin-top: auto; padding-top: var(--space-3); color: var(--color-accent); font-weight: var(--weight-bold); font-size: var(--fs-sm); }
+
+  .about-inner { max-width: var(--maxw-prose); }
+  .about .hero-cta { justify-content: flex-start; margin-top: var(--space-4); }
+</style>

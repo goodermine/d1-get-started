@@ -1,0 +1,89 @@
+---
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { site } from "../data/site.ts";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+const { title, description = site.description } = Astro.props;
+const fullTitle = title
+  ? `${title} — ${site.name}`
+  : `${site.name} — ${site.tagline}`;
+const canonical = new URL(Astro.url.pathname, site.url).href;
+const ogImage = new URL("/og.png", site.url).href;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+    <meta name="theme-color" content="#0e0c0a" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={ogImage} />
+  </head>
+  <body>
+    <a href="#main" class="visually-hidden">Skip to content</a>
+    <Header />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+
+    <script is:inline>
+      (function () {
+        var d = document;
+        d.documentElement.classList.add("js");
+        var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+        // Auto-tag each top-level section/article so it reveals on scroll.
+        var blocks = d.querySelectorAll("main > section, main > article");
+        blocks.forEach(function (s) {
+          var t = s.querySelector(":scope > .container") || s;
+          t.setAttribute("data-reveal", "");
+        });
+        var targets = d.querySelectorAll("[data-reveal]");
+        if (reduce || !("IntersectionObserver" in window)) {
+          targets.forEach(function (el) { el.classList.add("in"); });
+          return;
+        }
+        var io = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (e) {
+              if (e.isIntersecting) {
+                e.target.classList.add("in");
+                io.unobserve(e.target);
+              }
+            });
+          },
+          { threshold: 0.12, rootMargin: "0px 0px -6% 0px" }
+        );
+        targets.forEach(function (el) {
+          // Anything already within or above the viewport (e.g. on a deep-link
+          // or restored scroll position) reveals immediately; the rest animate
+          // in as they're scrolled to.
+          if (el.getBoundingClientRect().top < window.innerHeight * 0.92) {
+            el.classList.add("in");
+          } else {
+            io.observe(el);
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>

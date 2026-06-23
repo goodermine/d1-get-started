@@ -1,0 +1,117 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import EmailCapture from "../components/EmailCapture.astro";
+import BookCover from "../components/BookCover.astro";
+import { site } from "../data/site.ts";
+
+// TODO(aaron): wire the real buy/download link when the sales setup is ready.
+const BUY_URL = `mailto:${site.email}?subject=${encodeURIComponent("Singing Fundamentals")}`;
+
+const whoFor = [
+  "Beginners who want to start properly, not pick up bad habits",
+  "Self-taught singers with gaps in their foundations",
+  "Returning singers rebuilding after time away",
+  "Performers who want to understand what their voice is doing",
+];
+const helps = [
+  { h: "Understand your instrument", p: "What's actually happening when you sing — explained clearly, without jargon for its own sake." },
+  { h: "Usable exercises", p: "Drills you can actually do, with a reason attached to each one." },
+  { h: "A stronger relationship with your voice", p: "Less guessing and fear, more evidence and practice." },
+  { h: "A path that continues", p: "The book pairs naturally with VOX analysis and coaching when you're ready to go deeper." },
+];
+---
+
+<BaseLayout
+  title="Singing Fundamentals"
+  description="Singing Fundamentals by Aaron Ellis — a practical guide for singers who want to understand their voice properly, from beginner foundations to advanced vocal ideas."
+>
+  <section class="hero">
+    <div class="container hero-grid">
+      <BookCover />
+      <div>
+        <span class="eyebrow">The Book</span>
+        <h1>Singing Fundamentals</h1>
+        <p class="lead">
+          A practical guide for singers who want to understand their voice
+          properly — from beginner foundations through to more advanced vocal
+          ideas.
+        </p>
+        <p class="muted">
+          Clear explanations. Usable exercises. A stronger relationship with
+          your own voice. No guru hype, no shortcuts that aren't.
+        </p>
+        <div class="cta-row">
+          <a href={BUY_URL} class="btn btn-primary">Get Singing Fundamentals</a>
+          <a href="/vox/" class="btn btn-ghost">Pair it with VOX</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>Who it's for</h2>
+      <ul class="who-list">
+        {whoFor.map((w) => <li>{w}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section helps">
+    <div class="container">
+      <h2>What it helps with</h2>
+      <div class="helps-grid">
+        {helps.map((item) => (
+          <div class="card">
+            <h3>{item.h}</h3>
+            <p class="muted">{item.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <EmailCapture />
+</BaseLayout>
+
+<style>
+  .hero { padding-block: var(--space-6); position: relative; overflow: hidden; }
+  .hero::before {
+    content: "";
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 50% 60% at 20% 10%, color-mix(in srgb, var(--color-copper) 16%, transparent), transparent 70%);
+    pointer-events: none;
+  }
+  .hero-grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 17rem) 1fr;
+    gap: var(--space-6);
+    align-items: center;
+  }
+  .lead { font-size: var(--fs-lg); }
+  .cta-row { display: flex; gap: var(--space-3); flex-wrap: wrap; margin-top: var(--space-4); }
+
+  .who-list { list-style: none; padding: 0; display: grid; gap: var(--space-2); max-width: 44rem; }
+  .who-list li {
+    padding: 0.8rem 1.1rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    font-size: var(--fs-sm);
+  }
+  .who-list li::before { content: "◆ "; color: var(--color-copper); font-size: 0.7em; vertical-align: 2px; }
+
+  .helps { background: var(--color-bg-2); border-block: 1px solid var(--color-border); }
+  .helps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+    gap: var(--space-4);
+  }
+  .helps-grid h3 { font-size: var(--fs-lg); }
+  .helps-grid p { margin: 0; font-size: var(--fs-sm); }
+
+  @media (max-width: 760px) {
+    .hero-grid { grid-template-columns: 1fr; }
+  }
+</style>

@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en-GB" data-theme="day" data-flow="paginated">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Reader</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* clean light members chrome — white bar, dark text, gold accent */
+    --bar:#ffffff; --bar-text:#26303a; --accent:#b08d2e; --accent-soft:#C9A84C;
+    --border:#e7e3d8; --muted:#8a8f98;
+    --app-bg:#f4f1ea;
+  }
+  /* only the reading area background follows the chosen book theme */
+  html[data-theme="day"]   { --app-bg:#f4f1ea; }
+  html[data-theme="sepia"] { --app-bg:#efe6d3; }
+  html[data-theme="night"] { --app-bg:#15171c; }
+  *,*::before,*::after{box-sizing:border-box}
+  html,body{height:100%;margin:0}
+  body{background:var(--app-bg);font-family:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;overflow:hidden;-webkit-font-smoothing:antialiased}
+
+  /* top bar */
+  .bar{position:fixed;top:0;left:0;right:0;height:54px;z-index:30;display:flex;align-items:center;gap:.4rem;
+    padding:0 .6rem;background:var(--bar);color:var(--bar-text);border-bottom:1px solid var(--border);box-shadow:0 1px 6px rgba(0,0,0,.05)}
+  .bar .title{flex:1;min-width:0;font-family:'Cinzel',serif;font-size:.95rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:.02em}
+  .ico{appearance:none;border:none;background:transparent;color:var(--bar-text);cursor:pointer;
+    width:40px;height:40px;border-radius:8px;font-size:1.15rem;display:grid;place-items:center;line-height:1}
+  .ico:hover{background:rgba(26,26,46,.06)}
+  .ico.active{color:var(--accent)}
+  .ico.txt{width:auto;padding:0 .55rem;font-weight:600;font-size:.95rem}
+  .sep{width:1px;height:24px;background:var(--border);margin:0 .15rem}
+  a.ico{text-decoration:none}
+
+  /* reading area */
+  #viewer{position:fixed;top:54px;left:0;right:0;bottom:34px;overflow:hidden}
+  /* click/tap nav zones (paginated only) */
+  .nav-zone{position:fixed;top:54px;bottom:34px;width:18%;z-index:20;cursor:pointer;background:transparent;border:none}
+  .nav-zone.left{left:0}.nav-zone.right{right:0}
+  html[data-flow="scrolled"] .nav-zone{display:none}
+  .arrow{position:fixed;top:50%;transform:translateY(-50%);z-index:25;width:44px;height:64px;border:none;cursor:pointer;
+    background:rgba(0,0,0,.04);color:var(--muted);font-size:1.6rem;border-radius:8px;display:grid;place-items:center}
+  html[data-theme="night"] .arrow{background:rgba(255,255,255,.06)}
+  .arrow.left{left:6px}.arrow.right{right:6px}
+  html[data-flow="scrolled"] .arrow{display:none}
+  @media (max-width:680px){ .arrow{display:none} }
+
+  /* progress bar */
+  .progress{position:fixed;left:0;right:0;bottom:0;height:34px;z-index:30;display:flex;align-items:center;gap:.7rem;
+    padding:0 .9rem;background:var(--bar);color:var(--bar-text);border-top:1px solid var(--border);font-size:.78rem}
+  .progress .track{flex:1;height:4px;border-radius:3px;background:rgba(26,26,46,.1);overflow:hidden}
+  .progress .fill{height:100%;width:0;background:var(--accent-soft);transition:width .25s ease}
+  .progress .pct{min-width:3.2em;text-align:right;opacity:.7;font-variant-numeric:tabular-nums}
+  .progress .chap{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;opacity:.6;max-width:45%}
+
+  /* TOC drawer */
+  .drawer{position:fixed;top:0;bottom:0;left:0;width:min(86vw,330px);z-index:50;background:var(--bar);color:var(--bar-text);
+    transform:translateX(-101%);transition:transform .28s ease;display:flex;flex-direction:column;box-shadow:6px 0 26px rgba(0,0,0,.18)}
+  .drawer.open{transform:none}
+  .drawer h2{margin:0;padding:1rem 1.1rem;font-family:'Cinzel',serif;font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);border-bottom:1px solid var(--border)}
+  .toc{flex:1;overflow:auto;padding:.4rem 0}
+  .toc a{display:block;padding:.6rem 1.1rem;color:var(--bar-text);text-decoration:none;font-size:.92rem;border-left:3px solid transparent;opacity:.85}
+  .toc a:hover{background:rgba(26,26,46,.05)}
+  .toc a.lvl1{padding-left:2rem;font-size:.86rem;opacity:.7}
+  .toc a.current{border-left-color:var(--accent-soft);color:var(--accent);opacity:1}
+  .scrim{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:45;opacity:0;visibility:hidden;transition:opacity .28s ease}
+  .scrim.open{opacity:1;visibility:visible}
+
+  /* loading / error */
+  .splash{position:fixed;inset:0;z-index:40;display:grid;place-items:center;background:var(--app-bg);color:var(--muted);text-align:center;padding:24px}
+  .splash.hide{display:none}
+  .spinner{width:34px;height:34px;border:3px solid rgba(0,0,0,.15);border-top-color:var(--accent);border-radius:50%;animation:spin .9s linear infinite;margin:0 auto 1rem}
+  html[data-theme="night"] .spinner{border-color:rgba(255,255,255,.18);border-top-color:var(--accent)}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .splash a{color:var(--accent)}
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <button class="ico" id="btn-toc" title="Contents" aria-label="Contents">☰</button>
+  <span class="title" id="book-title">Reader</span>
+  <button class="ico txt" id="btn-flow" title="Paginated / Scroll">Page</button>
+  <span class="sep"></span>
+  <button class="ico txt" id="btn-smaller" title="Smaller text" aria-label="Smaller text">A−</button>
+  <button class="ico txt" id="btn-bigger" title="Larger text" aria-label="Larger text">A+</button>
+  <span class="sep"></span>
+  <button class="ico" id="btn-theme" title="Day / Sepia / Night" aria-label="Theme">☀</button>
+  <a class="ico" id="btn-back" href="index.html" title="Back to library" aria-label="Back to library">✕</a>
+</header>
+
+<button class="nav-zone left" id="zone-prev" aria-label="Previous page"></button>
+<button class="nav-zone right" id="zone-next" aria-label="Next page"></button>
+<button class="arrow left" id="arrow-prev" aria-label="Previous">‹</button>
+<button class="arrow right" id="arrow-next" aria-label="Next">›</button>
+
+<div id="viewer"></div>
+
+<footer class="progress">
+  <span class="chap" id="chap-label"></span>
+  <div class="track"><div class="fill" id="prog-fill"></div></div>
+  <span class="pct" id="prog-pct">0%</span>
+</footer>
+
+<aside class="drawer" id="drawer" aria-label="Table of contents">
+  <h2>Contents</h2>
+  <nav class="toc" id="toc"></nav>
+</aside>
+<div class="scrim" id="scrim"></div>
+
+<div class="splash" id="splash">
+  <div>
+    <div class="spinner" id="spinner"></div>
+    <div id="splash-msg">Loading book…</div>
+  </div>
+</div>
+
+<script src="vendor/jszip.min.js"></script>
+<script src="vendor/epub.min.js"></script>
+<script>
+(function(){
+  "use strict";
+  var qs = new URLSearchParams(location.search);
+  var bookUrl = qs.get("book");
+  var titleParam = qs.get("title");
+  var splash = document.getElementById("splash");
+  var splashMsg = document.getElementById("splash-msg");
+
+  function fail(msg){
+    document.getElementById("spinner").style.display="none";
+    splashMsg.innerHTML = msg + '<br><br><a href="index.html">← Back to library</a>';
+    splash.classList.remove("hide");
+  }
+  if(!bookUrl){ fail("No book specified."); return; }
+  if(typeof ePub === "undefined"){ fail("Reader failed to load (epub.js missing)."); return; }
+
+  // per-book storage key
+  var key = "epubreader:" + bookUrl;
+  function load(k,d){ try{ var v=localStorage.getItem(key+":"+k); return v===null?d:v; }catch(e){ return d; } }
+  function save(k,v){ try{ localStorage.setItem(key+":"+k, v); }catch(e){} }
+
+  var html = document.documentElement;
+  var THEMES = ["day","sepia","night"];
+  var THEME_ICON = {day:"☀", sepia:"❦", night:"☾"};
+  var theme = load("theme","day");
+  var fontPct = parseInt(load("font","110"),10) || 110;
+  var flow = load("flow","paginated");
+  html.setAttribute("data-theme", theme);
+  html.setAttribute("data-flow", flow);
+  document.getElementById("btn-theme").textContent = THEME_ICON[theme];
+  document.getElementById("btn-flow").textContent = (flow==="paginated"?"Page":"Scroll");
+  if(titleParam) document.getElementById("book-title").textContent = titleParam;
+  if(titleParam) document.title = titleParam + " — Reader";
+
+  var book = ePub(bookUrl);
+  var rendition = book.renderTo("viewer", {
+    width: "100%", height: "100%",
+    flow: (flow==="scrolled" ? "scrolled-doc" : "paginated"),
+    spread: "auto", minSpreadWidth: 900, allowScriptedContent: true
+  });
+
+  // ---- themes (content inside the book iframe) ----
+  rendition.themes.register("day",   { "body": { "background":"#f4f1ea !important", "color":"#26211a !important" }, "a":{ "color":"#7a5d12 !important" } });
+  rendition.themes.register("sepia", { "body": { "background":"#efe6d3 !important", "color":"#3a2f23 !important" }, "a":{ "color":"#7a5d12 !important" } });
+  rendition.themes.register("night", { "body": { "background":"#15171c !important", "color":"#cdd2da !important" }, "a":{ "color":"#d9b85c !important" } });
+  function applyTheme(){ rendition.themes.select(theme); html.setAttribute("data-theme",theme); document.getElementById("btn-theme").textContent=THEME_ICON[theme]; }
+  function applyFont(){ rendition.themes.fontSize(fontPct + "%"); }
+
+  rendition.hooks.content.register(function(contents){
+    applyTheme(); applyFont();
+  });
+
+  // ---- display (restore last position) ----
+  var startCfi = load("cfi", null);
+  rendition.display(startCfi || undefined).then(function(){
+    splash.classList.add("hide");
+  }).catch(function(e){ fail("Couldn't open this book."); });
+
+  applyTheme(); applyFont();
+
+  // ---- TOC ----
+  book.loaded.navigation.then(function(nav){
+    var tocEl = document.getElementById("toc");
+    function add(items, lvl){
+      items.forEach(function(item){
+        var a = document.createElement("a");
+        a.textContent = item.label.trim();
+        a.href = item.href;
+        a.className = lvl ? "lvl1" : "";
+        a.dataset.href = item.href;
+        a.addEventListener("click", function(e){ e.preventDefault(); rendition.display(item.href); closeDrawer(); });
+        tocEl.appendChild(a);
+        if(item.subitems && item.subitems.length) add(item.subitems, 1);
+      });
+    }
+    add(nav.toc, 0);
+  });
+
+  // ---- progress via locations ----
+  var haveLocations = false;
+  book.ready.then(function(){
+    return book.locations.generate(1650);
+  }).then(function(){ haveLocations = true; updateProgress(rendition.currentLocation()); }).catch(function(){});
+
+  function updateProgress(loc){
+    if(!loc || !loc.start) return;
+    save("cfi", loc.start.cfi);
+    var pct = 0;
+    if(haveLocations){ try{ pct = Math.round(book.locations.percentageFromCfi(loc.start.cfi)*100); }catch(e){} }
+    document.getElementById("prog-fill").style.width = pct + "%";
+    document.getElementById("prog-pct").textContent = pct + "%";
+    // current chapter label + TOC highlight
+    var href = (loc.start.href||"");
+    var chap = "";
+    document.querySelectorAll("#toc a").forEach(function(a){
+      var match = a.dataset.href && (a.dataset.href === href || a.dataset.href.split("#")[0] === href.split("#")[0]);
+      a.classList.toggle("current", !!match);
+      if(match) chap = a.textContent;
+    });
+    document.getElementById("chap-label").textContent = chap;
+  }
+  rendition.on("relocated", updateProgress);
+
+  // ---- navigation ----
+  function next(){ rendition.next(); }
+  function prev(){ rendition.prev(); }
+  document.getElementById("zone-next").addEventListener("click", next);
+  document.getElementById("zone-prev").addEventListener("click", prev);
+  document.getElementById("arrow-next").addEventListener("click", next);
+  document.getElementById("arrow-prev").addEventListener("click", prev);
+  document.addEventListener("keyup", function(e){
+    if(e.key==="ArrowRight") next();
+    else if(e.key==="ArrowLeft") prev();
+  });
+  rendition.on("keyup", function(e){ if(e.key==="ArrowRight") next(); else if(e.key==="ArrowLeft") prev(); });
+  // swipe inside the book
+  rendition.on("touchstart", function(e){ window._tx = e.changedTouches[0].screenX; });
+  rendition.on("touchend", function(e){
+    if(flow==="scrolled") return;
+    var dx = e.changedTouches[0].screenX - (window._tx||0);
+    if(dx > 45) prev(); else if(dx < -45) next();
+  });
+
+  // ---- controls ----
+  document.getElementById("btn-bigger").addEventListener("click", function(){ fontPct=Math.min(220,fontPct+10); applyFont(); save("font",fontPct); });
+  document.getElementById("btn-smaller").addEventListener("click", function(){ fontPct=Math.max(70,fontPct-10); applyFont(); save("font",fontPct); });
+  document.getElementById("btn-theme").addEventListener("click", function(){
+    theme = THEMES[(THEMES.indexOf(theme)+1)%THEMES.length]; applyTheme(); save("theme",theme);
+  });
+  document.getElementById("btn-flow").addEventListener("click", function(){
+    flow = (flow==="paginated") ? "scrolled" : "paginated";
+    save("flow", flow); html.setAttribute("data-flow", flow);
+    document.getElementById("btn-flow").textContent = (flow==="paginated"?"Page":"Scroll");
+    var cur = rendition.currentLocation(); var cfi = cur && cur.start ? cur.start.cfi : null;
+    rendition.flow(flow==="scrolled" ? "scrolled-doc" : "paginated");
+    if(cfi) rendition.display(cfi);
+    applyTheme(); applyFont();
+  });
+
+  // ---- drawer ----
+  var drawer=document.getElementById("drawer"), scrim=document.getElementById("scrim");
+  function openDrawer(){ drawer.classList.add("open"); scrim.classList.add("open"); }
+  function closeDrawer(){ drawer.classList.remove("open"); scrim.classList.remove("open"); }
+  document.getElementById("btn-toc").addEventListener("click", function(){ drawer.classList.contains("open")?closeDrawer():openDrawer(); });
+  scrim.addEventListener("click", closeDrawer);
+})();
+</script>
+</body>
+</html>

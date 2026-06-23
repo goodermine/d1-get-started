@@ -1,0 +1,57 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageHeader from "../../components/PageHeader.astro";
+
+const posts = (await getCollection("journal", ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+const fmt = (d: Date) =>
+  d.toLocaleDateString("en-AU", { day: "numeric", month: "long", year: "numeric" });
+---
+
+<BaseLayout
+  title="Rustwood Journal"
+  description="Notes from the forge — voice, tools, performance, and capability."
+>
+  <PageHeader
+    eyebrow="Rustwood Journal"
+    title="Notes from the forge."
+    lead="Voice, tools, performance, and capability — vocal tips, VOX updates, creative process notes, and the occasional behind-the-scenes build."
+  />
+
+  <section class="section">
+    <div class="container">
+      <div class="post-list">
+        {posts.map((post) => (
+          <a href={`/journal/${post.id}/`} class="card post">
+            <div class="post-meta">
+              {post.data.tag && <span class="tag">{post.data.tag}</span>}
+              <span class="muted date">{fmt(post.data.pubDate)}</span>
+            </div>
+            <h2>{post.data.title}</h2>
+            <p class="muted">{post.data.description}</p>
+            <span class="more">Read →</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .post-list { display: grid; gap: var(--space-4); max-width: 50rem; }
+  .post { display: flex; flex-direction: column; }
+  .post h2 { font-size: var(--fs-xl); margin: var(--space-2) 0 var(--space-2); color: var(--color-text); }
+  .post p { margin: 0; font-size: var(--fs-sm); }
+  .post-meta { display: flex; align-items: center; gap: var(--space-3); }
+  .tag {
+    font-size: var(--fs-xs);
+    font-weight: var(--weight-bold);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-copper);
+  }
+  .date { font-size: var(--fs-xs); }
+  .more { margin-top: var(--space-3); color: var(--color-ember); font-weight: var(--weight-bold); font-size: var(--fs-sm); }
+</style>

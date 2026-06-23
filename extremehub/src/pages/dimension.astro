@@ -1,0 +1,573 @@
+---
+// THE DIMENSION — a full-screen WebGL particle journey. One canvas,
+// ~60k particles, zero libraries. Scroll = travel. All audio generated.
+import "../styles/global.css";
+const title = "The Dimension — Aaron's Extreme Hub";
+const description =
+  "A 60,000-particle journey through one canvas. Words become wonder, wonder becomes a universe. Scroll to travel.";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="theme-color" content="#05060a" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+  </head>
+  <body>
+    <canvas id="dim" aria-hidden="true"></canvas>
+
+    <header class="hud">
+      <a href="/" class="hud-back">◄ the hub</a>
+      <div class="hud-right">
+        <button id="dim-rainbow" class="hud-sound" aria-pressed="false">🌈 RAINBOW</button>
+        <button id="dim-sound" class="hud-sound" aria-pressed="false">♪ SOUND OFF</button>
+      </div>
+    </header>
+    <div class="progress" aria-hidden="true"><span id="dim-progress"></span></div>
+
+    <main id="chapters">
+      <section data-ch="0">
+        <p class="kicker">/// the final exhibit ///</p>
+        <h2>THE DIMENSION</h2>
+        <p class="sub">60,000 particles. One canvas. Zero libraries.<br />Scroll to travel.</p>
+        <span class="scroll-cue">▼</span>
+      </section>
+      <section data-ch="1">
+        <h2>Words become wonder.</h2>
+        <p class="sub">Even chaos can spell.</p>
+      </section>
+      <section data-ch="2">
+        <h2>Wonder becomes a universe.</h2>
+        <p class="sub">Order is just noise with intent.</p>
+      </section>
+      <section data-ch="3">
+        <h2>Punch through.</h2>
+        <p class="sub">Keep scrolling. Don't blink.</p>
+      </section>
+      <section data-ch="4">
+        <h2>Find the code of living things.</h2>
+        <p class="sub">Two strands, endlessly climbing.</p>
+      </section>
+      <section data-ch="5">
+        <h2>Tie spacetime in a knot.</h2>
+        <p class="sub">Then pull it tight.</p>
+      </section>
+      <section data-ch="6" class="finale">
+        <h2>Your turn.</h2>
+        <p class="sub">Type a word into the dimension.</p>
+        <form id="dim-form">
+          <input id="dim-word" type="text" maxlength="10" placeholder="YOUR WORD" autocomplete="off" spellcheck="false" />
+          <button class="btn btn-primary" type="submit">MAKE IT REAL</button>
+        </form>
+        <p class="outro">
+          <a href="#top" id="dim-again">↻ run it again</a>
+          <a href="/">◄ back to the hub</a>
+        </p>
+      </section>
+    </main>
+
+    <script>
+      // ============ THE DIMENSION ENGINE ============
+      const canvas = document.getElementById("dim") as HTMLCanvasElement;
+      const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const coarse = matchMedia("(pointer: coarse)").matches;
+      const gl = canvas.getContext("webgl", { antialias: false, alpha: false, powerPreference: "high-performance" });
+
+      const sections = [...document.querySelectorAll<HTMLElement>("#chapters section")];
+      const progressEl = document.getElementById("dim-progress") as HTMLElement;
+
+      if (!gl || reduce) {
+        // Fallback: plain readable page, all chapters visible.
+        document.documentElement.classList.add("dim-static");
+      } else {
+        const N = coarse ? 28000 : 60000;
+        const SEGS = 6; // 7 forms, 6 transitions
+
+        // ---------- tiny mat4 ----------
+        type M = Float32Array;
+        const mat = () => new Float32Array(16);
+        function persp(out: M, fov: number, asp: number, n: number, f: number) {
+          const t = 1 / Math.tan(fov / 2);
+          out.fill(0);
+          out[0] = t / asp; out[5] = t; out[10] = (f + n) / (n - f); out[11] = -1; out[14] = (2 * f * n) / (n - f);
+          return out;
+        }
+        function mul(out: M, a: M, b: M) {
+          const o = new Float32Array(16);
+          for (let c = 0; c < 4; c++)
+            for (let r = 0; r < 4; r++)
+              o[c * 4 + r] = a[r] * b[c * 4] + a[4 + r] * b[c * 4 + 1] + a[8 + r] * b[c * 4 + 2] + a[12 + r] * b[c * 4 + 3];
+          out.set(o); return out;
+        }
+        const ident = (out: M) => { out.fill(0); out[0] = out[5] = out[10] = out[15] = 1; return out; };
+        function rotX(out: M, a: number) { ident(out); const c = Math.cos(a), s = Math.sin(a); out[5] = c; out[6] = s; out[9] = -s; out[10] = c; return out; }
+        function rotY(out: M, a: number) { ident(out); const c = Math.cos(a), s = Math.sin(a); out[0] = c; out[2] = -s; out[8] = s; out[10] = c; return out; }
+        function trans(out: M, x: number, y: number, z: number) { ident(out); out[12] = x; out[13] = y; out[14] = z; return out; }
+
+        // ---------- shaders ----------
+        const vs = `
+          attribute vec3 aA; attribute vec3 aB; attribute float aSeed;
+          uniform mat4 uMVP; uniform float uMix, uTime;
+          uniform mediump float uPulse, uPtScale; /* must match fragment precision to link */
+          varying float vSeed; varying float vFog;
+          void main(){
+            vec3 p = mix(aA, aB, uMix);
+            p += 0.03 * vec3(
+              sin(uTime*0.7 + aSeed*43.0),
+              cos(uTime*0.55 + aSeed*71.0),
+              sin(uTime*0.62 + aSeed*29.0));
+            p *= 1.0 + uPulse * 0.05 * sin(aSeed*40.0 + uTime*9.0);
+            vec4 mv = uMVP * vec4(p, 1.0);
+            gl_Position = mv;
+            float w = max(0.4, mv.w);
+            gl_PointSize = clamp((0.9 + aSeed*1.8) * (92.0 / w) * (1.0 + uPulse*0.45) * uPtScale, 0.8, 9.0);
+            vSeed = aSeed;
+            vFog = clamp(1.4 - w*0.085, 0.04, 1.0);
+          }`;
+        const fs = `
+          precision mediump float;
+          varying float vSeed; varying float vFog;
+          uniform vec3 uC1, uC2, uC3;
+          uniform float uPulse, uHue, uRainbow, uAlpha;
+          vec3 hsv2rgb(vec3 c){
+            vec4 K = vec4(1.0, 2.0/3.0, 1.0/3.0, 3.0);
+            vec3 p = abs(fract(c.xxx + K.xyz) * 6.0 - K.www);
+            return c.z * mix(K.xxx, clamp(p - K.xxx, 0.0, 1.0), c.y);
+          }
+          void main(){
+            float d = length(gl_PointCoord - 0.5);
+            float a = 1.0 - smoothstep(0.05, 0.5, d);
+            vec3 themeCol = mix(uC1, uC2, vSeed);
+            themeCol = mix(themeCol, uC3, smoothstep(0.75, 1.0, vSeed));
+            vec3 rainbowCol = hsv2rgb(vec3(fract(vSeed + uHue), 0.9, 1.0));
+            vec3 col = mix(themeCol, rainbowCol, uRainbow);
+            col *= vFog * (0.85 + uPulse*0.5);
+            a *= uAlpha; /* low for dense words so additive stacking doesn't blow out */
+            gl_FragColor = vec4(col * a, a * vFog);
+          }`;
+        function shader(type: number, src: string) {
+          const s = gl.createShader(type)!;
+          gl.shaderSource(s, src); gl.compileShader(s);
+          if (!gl.getShaderParameter(s, gl.COMPILE_STATUS))
+            console.error("[dimension] shader:", gl.getShaderInfoLog(s));
+          return s;
+        }
+        const prog = gl.createProgram()!;
+        gl.attachShader(prog, shader(gl.VERTEX_SHADER, vs));
+        gl.attachShader(prog, shader(gl.FRAGMENT_SHADER, fs));
+        gl.linkProgram(prog);
+        if (!gl.getProgramParameter(prog, gl.LINK_STATUS))
+          console.error("[dimension] link:", gl.getProgramInfoLog(prog));
+        gl.useProgram(prog);
+
+        gl.enable(gl.BLEND);
+        gl.blendFunc(gl.SRC_ALPHA, gl.ONE); // additive = glow
+        gl.disable(gl.DEPTH_TEST);
+
+        const locA = gl.getAttribLocation(prog, "aA");
+        const locB = gl.getAttribLocation(prog, "aB");
+        const locS = gl.getAttribLocation(prog, "aSeed");
+        const uMVP = gl.getUniformLocation(prog, "uMVP");
+        const uMix = gl.getUniformLocation(prog, "uMix");
+        const uTime = gl.getUniformLocation(prog, "uTime");
+        const uPulse = gl.getUniformLocation(prog, "uPulse");
+        const uC1 = gl.getUniformLocation(prog, "uC1");
+        const uC2 = gl.getUniformLocation(prog, "uC2");
+        const uC3 = gl.getUniformLocation(prog, "uC3");
+        const uHue = gl.getUniformLocation(prog, "uHue");
+        const uRainbow = gl.getUniformLocation(prog, "uRainbow");
+        const uPtScale = gl.getUniformLocation(prog, "uPtScale");
+        const uAlpha = gl.getUniformLocation(prog, "uAlpha");
+        // Words are dense (shrink points so letters read); cosmic forms are
+        // sparse lines (keep points big & glowy). Index matches builders[].
+        const spread = [1.0, 0.46, 1.0, 1.0, 1.0, 1.0, 0.46];
+
+        // theme colours from tokens
+        const css = getComputedStyle(document.documentElement);
+        const rgb = (v: string, f: number[]) => {
+          const m = v.trim().match(/^#?([0-9a-f]{6})$/i);
+          if (!m) return f;
+          const n = parseInt(m[1], 16);
+          return [(n >> 16 & 255) / 255, (n >> 8 & 255) / 255, (n & 255) / 255];
+        };
+        gl.uniform3fv(uC1, rgb(css.getPropertyValue("--cyan"), [0.25, 0.92, 0.83]));
+        gl.uniform3fv(uC2, rgb(css.getPropertyValue("--violet"), [0.55, 0.36, 0.97]));
+        gl.uniform3fv(uC3, rgb(css.getPropertyValue("--magenta"), [1.0, 0.24, 0.78]));
+
+        // ---------- form generators ----------
+        const R = Math.random;
+        function chaos() {
+          const p = new Float32Array(N * 3);
+          for (let i = 0; i < N; i++) {
+            const r = 3.4 * Math.cbrt(R()), th = R() * 6.283, ph = Math.acos(2 * R() - 1);
+            p[i*3] = r * Math.sin(ph) * Math.cos(th);
+            p[i*3+1] = r * Math.sin(ph) * Math.sin(th);
+            p[i*3+2] = r * Math.cos(ph);
+          }
+          return p;
+        }
+        function galaxy() {
+          const p = new Float32Array(N * 3);
+          for (let i = 0; i < N; i++) {
+            const rr = Math.pow(R(), 0.6) * 3.6;
+            const ang = (i % 3) * 2.094 + rr * 1.8 + (R() - 0.5) * 0.45;
+            p[i*3] = Math.cos(ang) * rr + (R() - 0.5) * 0.18;
+            p[i*3+1] = (R() - 0.5) * 0.3 * (1.1 - rr / 3.6);
+            p[i*3+2] = Math.sin(ang) * rr + (R() - 0.5) * 0.18;
+          }
+          return p;
+        }
+        function tunnel() {
+          const p = new Float32Array(N * 3);
+          for (let i = 0; i < N; i++) {
+            const a = R() * 6.283, r = 1.15 + R() * 0.5;
+            p[i*3] = Math.cos(a) * r;
+            p[i*3+1] = Math.sin(a) * r;
+            p[i*3+2] = -11 + R() * 16;
+          }
+          return p;
+        }
+        function helix() {
+          const p = new Float32Array(N * 3);
+          for (let i = 0; i < N; i++) {
+            const t = i / N;
+            if (i % 8 === 7) { // rungs between strands
+              const a = t * 12 * Math.PI, m = R();
+              const x1 = Math.cos(a), z1 = Math.sin(a);
+              p[i*3] = x1 * (1 - 2 * m) * 0.95;
+              p[i*3+1] = (t - 0.5) * 6.2;
+              p[i*3+2] = z1 * (1 - 2 * m) * 0.95;
+            } else {
+              const strand = i % 2, a = t * 12 * Math.PI + strand * Math.PI;
+              p[i*3] = Math.cos(a) * 0.95 + (R() - 0.5) * 0.07;
+              p[i*3+1] = (t - 0.5) * 6.2;
+              p[i*3+2] = Math.sin(a) * 0.95 + (R() - 0.5) * 0.07;
+            }
+          }
+          return p;
+        }
+        function knot() {
+          const p = new Float32Array(N * 3);
+          const P = 2, Q = 3;
+          for (let i = 0; i < N; i++) {
+            const t = (i / N) * 6.283;
+            const r = (2 + Math.cos(Q * t)) * 0.78;
+            const j = 0.13;
+            p[i*3] = r * Math.cos(P * t) + (R() - 0.5) * j;
+            p[i*3+1] = Math.sin(Q * t) * 1.05 + (R() - 0.5) * j;
+            p[i*3+2] = r * Math.sin(P * t) + (R() - 0.5) * j;
+          }
+          return p;
+        }
+        function word(text: string) {
+          const c = document.createElement("canvas");
+          const o = c.getContext("2d")!;
+          const size = Math.min(170, 760 / Math.max(3, text.length));
+          o.font = `700 ${size}px 'Space Grotesk Variable', system-ui, sans-serif`;
+          const w = Math.ceil(o.measureText(text).width) + 24;
+          c.width = w; c.height = Math.ceil(size * 1.3);
+          o.font = `700 ${size}px 'Space Grotesk Variable', system-ui, sans-serif`;
+          o.textBaseline = "middle";
+          o.fillText(text, 12, c.height / 2);
+          const img = o.getImageData(0, 0, c.width, c.height).data;
+          const pts: number[] = [];
+          for (let y = 0; y < c.height; y += 2)
+            for (let x = 0; x < c.width; x += 2)
+              if (img[(y * c.width + x) * 4 + 3] > 128) pts.push(x, y);
+          // Fit the word to the viewport's visible width so it never spills
+          // off the edges on portrait phones / tablets.
+          const halfH = Math.tan(1.05 / 2) * 7.2;
+          const targetW = Math.min(7.6, halfH * (canvas.width / canvas.height) * 2 * 0.9);
+          const k = c.width / targetW;
+          const p = new Float32Array(N * 3);
+          const M = pts.length / 2;
+          for (let i = 0; i < N; i++) {
+            const s = (i % M) * 2;
+            p[i*3] = (pts[s] - c.width / 2) / k + (R() - 0.5) * 0.06;
+            p[i*3+1] = -(pts[s+1] - c.height / 2) / k + (R() - 0.5) * 0.06;
+            p[i*3+2] = (R() - 0.5) * 0.55;
+          }
+          return p;
+        }
+
+        let finaleWord = "EXTREME";
+        const builders = [chaos, () => word("WONDER"), galaxy, tunnel, helix, knot, () => word(finaleWord)];
+        const cache: (Float32Array | null)[] = builders.map(() => null);
+        const form = (i: number) => (cache[i] ||= builders[i]());
+
+        // ---------- buffers ----------
+        const seeds = new Float32Array(N);
+        for (let i = 0; i < N; i++) seeds[i] = R();
+        const mkBuf = () => gl.createBuffer()!;
+        const bufA = mkBuf(), bufB = mkBuf(), bufS = mkBuf();
+        gl.bindBuffer(gl.ARRAY_BUFFER, bufS);
+        gl.bufferData(gl.ARRAY_BUFFER, seeds, gl.STATIC_DRAW);
+        gl.enableVertexAttribArray(locS);
+        gl.vertexAttribPointer(locS, 1, gl.FLOAT, false, 0, 0);
+
+        let curSeg = -1;
+        function setSegment(s: number, overrideB?: Float32Array) {
+          gl.bindBuffer(gl.ARRAY_BUFFER, bufA);
+          gl.bufferData(gl.ARRAY_BUFFER, form(s), gl.DYNAMIC_DRAW);
+          gl.bindBuffer(gl.ARRAY_BUFFER, bufB);
+          gl.bufferData(gl.ARRAY_BUFFER, overrideB || form(s + 1), gl.DYNAMIC_DRAW);
+          curSeg = s;
+        }
+        function bindAttrs() {
+          gl.bindBuffer(gl.ARRAY_BUFFER, bufA);
+          gl.enableVertexAttribArray(locA);
+          gl.vertexAttribPointer(locA, 3, gl.FLOAT, false, 0, 0);
+          gl.bindBuffer(gl.ARRAY_BUFFER, bufB);
+          gl.enableVertexAttribArray(locB);
+          gl.vertexAttribPointer(locB, 3, gl.FLOAT, false, 0, 0);
+        }
+
+        // ---------- camera / interaction ----------
+        let mx = 0, my = 0, pulse = 0, rainbow = 0, rainbowTarget = 0;
+        addEventListener("pointermove", (e) => {
+          mx = (e.clientX / innerWidth - 0.5) * 2;
+          my = (e.clientY / innerHeight - 0.5) * 2;
+        }, { passive: true });
+        addEventListener("pointerdown", () => { pulse = Math.max(pulse, 1.3); }, { passive: true });
+
+        function resize() {
+          const dpr = Math.min(devicePixelRatio || 1, 1.75);
+          canvas.width = Math.floor(innerWidth * dpr);
+          canvas.height = Math.floor(innerHeight * dpr);
+          gl.viewport(0, 0, canvas.width, canvas.height);
+        }
+        resize();
+        addEventListener("resize", () => {
+          resize();
+          // Word forms depend on aspect ratio — rebuild them to re-fit.
+          cache[1] = null; cache[6] = null;
+          if (curSeg >= 0) { setSegment(curSeg); bindAttrs(); }
+        });
+
+        // ---------- audio (generated) ----------
+        const soundBtn = document.getElementById("dim-sound") as HTMLButtonElement;
+        let actx: AudioContext | null = null, soundOn = false, seqTimer = 0, stepIdx = 0;
+        const PENTA = [0, 3, 5, 7, 10, 12, 15];
+        function noteHz(semi: number, base = 220) { return base * Math.pow(2, semi / 12); }
+        function startSound() {
+          actx = new (window.AudioContext || (window as any).webkitAudioContext)();
+          const master = actx.createGain(); master.gain.value = 0.5;
+          const lp = actx.createBiquadFilter(); lp.type = "lowpass"; lp.frequency.value = 1400;
+          const delay = actx.createDelay(1); delay.delayTime.value = 0.31;
+          const fb = actx.createGain(); fb.gain.value = 0.34;
+          delay.connect(fb); fb.connect(delay);
+          lp.connect(delay); delay.connect(master); lp.connect(master);
+          master.connect(actx.destination);
+          const play = (f: number, dur: number, type: OscillatorType, vol: number) => {
+            const o = actx!.createOscillator(), g = actx!.createGain();
+            o.type = type; o.frequency.value = f;
+            g.gain.setValueAtTime(vol, actx!.currentTime);
+            g.gain.exponentialRampToValueAtTime(0.0001, actx!.currentTime + dur);
+            o.connect(g); g.connect(lp); o.start(); o.stop(actx!.currentTime + dur);
+          };
+          let walk = 2;
+          seqTimer = window.setInterval(() => {
+            stepIdx++;
+            if (stepIdx % 4 === 1) { play(noteHz(-12, 110), 0.5, "sawtooth", 0.16); pulse = Math.max(pulse, 1); }
+            walk = Math.max(0, Math.min(PENTA.length - 1, walk + ((Math.random() * 3) | 0) - 1));
+            play(noteHz(PENTA[walk]), 0.42, "triangle", 0.1);
+            if (stepIdx % 8 === 0) play(noteHz(PENTA[(walk + 2) % PENTA.length], 440), 0.8, "sine", 0.05);
+            pulse = Math.max(pulse, 0.4);
+          }, 214);
+        }
+        soundBtn.addEventListener("click", () => {
+          soundOn = !soundOn;
+          soundBtn.setAttribute("aria-pressed", String(soundOn));
+          soundBtn.textContent = soundOn ? "♪ SOUND ON" : "♪ SOUND OFF";
+          if (soundOn && !actx) startSound();
+          else if (!soundOn && actx) { clearInterval(seqTimer); actx.close(); actx = null; }
+        });
+
+        // ---------- rainbow toggle ----------
+        const rbBtn = document.getElementById("dim-rainbow") as HTMLButtonElement;
+        rbBtn.addEventListener("click", () => {
+          rainbowTarget = rainbowTarget > 0.5 ? 0 : 1;
+          rbBtn.setAttribute("aria-pressed", String(rainbowTarget > 0.5));
+          rbBtn.textContent = rainbowTarget > 0.5 ? "🌈 RAINBOW ON" : "🌈 RAINBOW";
+          pulse = Math.max(pulse, 0.9);
+        });
+
+        // ---------- finale word ----------
+        const formEl = document.getElementById("dim-form") as HTMLFormElement;
+        const inputEl = document.getElementById("dim-word") as HTMLInputElement;
+        formEl.addEventListener("submit", (e) => {
+          e.preventDefault();
+          finaleWord = (inputEl.value.trim() || "WONDER").toUpperCase();
+          cache[6] = null;
+          if (curSeg === 5) { setSegment(5); bindAttrs(); }
+          pulse = Math.max(pulse, 1.6);
+        });
+        document.getElementById("dim-again")!.addEventListener("click", (e) => {
+          e.preventDefault();
+          scrollTo({ top: 0, behavior: "smooth" });
+        });
+
+        // ---------- chapter labels ----------
+        let shownCh = -1;
+        function showChapter(i: number) {
+          if (i === shownCh) return;
+          shownCh = i;
+          sections.forEach((s, k) => s.classList.toggle("on", k === i));
+        }
+
+        // ---------- main loop ----------
+        const P = mat(), V = mat(), T1 = mat(), T2 = mat(), T3 = mat(), MVP = mat();
+        const ease = (t: number) => t * t * (3 - 2 * t);
+        setSegment(0);
+        bindAttrs();
+
+        let raf = 0, running = true;
+        function frame(ms: number) {
+          if (!running) return;
+          const time = ms * 0.001;
+          const doc = document.documentElement;
+          const prog = Math.max(0, Math.min(1, scrollY / Math.max(1, doc.scrollHeight - innerHeight)));
+          progressEl.style.width = (prog * 100).toFixed(2) + "%";
+
+          const seg = Math.min(SEGS - 1, Math.floor(prog * SEGS));
+          const local = prog * SEGS - seg;
+          if (seg !== curSeg) { setSegment(seg); bindAttrs(); }
+          showChapter(local > 0.55 ? seg + 1 : seg);
+
+          // camera: pull in tight for the tunnel (seg 2→B is tunnel; seg 3→A is tunnel)
+          let dist = 7.2, travel = 0;
+          if (seg === 2) dist = 7.2 - ease(local) * 5.6;
+          else if (seg === 3) { dist = 1.6 + ease(local) * 5.6; travel = ease(local) * -9; }
+          // While a text form is on screen, damp the camera so the word faces you.
+          const e = ease(local);
+          const textiness = seg === 0 ? e : seg === 1 ? 1 - e : seg === 5 ? e : 0;
+          const rotYv = (time * 0.07 + mx * 0.55 + prog * 2.0) * (1 - textiness)
+            + (mx * 0.12 + Math.sin(time * 0.3) * 0.05) * textiness;
+          const rotXv = (-0.12 + my * 0.3) * (1 - textiness) + my * 0.08 * textiness;
+
+          persp(P, 1.05, canvas.width / canvas.height, 0.05, 60);
+          mul(MVP, P, trans(T1, 0, 0, -dist));
+          mul(MVP, MVP, rotX(T2, rotXv));
+          mul(MVP, MVP, rotY(T3, rotYv));
+          mul(MVP, MVP, trans(T1, 0, 0, travel));
+
+          pulse *= 0.94;
+          rainbow += (rainbowTarget - rainbow) * 0.08;
+          gl.clearColor(0.02, 0.023, 0.04, 1);
+          gl.clear(gl.COLOR_BUFFER_BIT);
+          gl.uniformMatrix4fv(uMVP, false, MVP);
+          gl.uniform1f(uMix, ease(local));
+          gl.uniform1f(uTime, time);
+          gl.uniform1f(uPulse, pulse);
+          gl.uniform1f(uHue, (time * 0.06) % 1.0);
+          gl.uniform1f(uRainbow, rainbow);
+          const vpF = Math.max(0.55, Math.min(1.0, innerWidth / 900));
+          const wf = spread[seg] * (1 - e) + spread[seg + 1] * e; // 0.46 word .. 1 cosmic
+          gl.uniform1f(uPtScale, wf * vpF);
+          const isWord = wf < 0.8;
+          // Words: bright on big screens (low density), dim on small (high density).
+          const vpNorm = (vpF - 0.55) / 0.45; // 0 on phones .. 1 on desktop
+          gl.uniform1f(uAlpha, isWord ? 0.17 + 0.36 * vpNorm : 0.5);
+          gl.drawArrays(gl.POINTS, 0, N);
+          raf = requestAnimationFrame(frame);
+        }
+        raf = requestAnimationFrame(frame);
+        document.addEventListener("visibilitychange", () => {
+          running = !document.hidden;
+          if (running) raf = requestAnimationFrame(frame);
+          else cancelAnimationFrame(raf);
+        });
+        showChapter(0);
+      }
+    </script>
+
+    <style>
+      html { background: #05060a; }
+      body { margin: 0; overflow-x: hidden; }
+      #dim {
+        position: fixed; inset: 0;
+        width: 100%; height: 100%;
+        display: block;
+      }
+      .hud {
+        position: fixed; inset: 14px 16px auto 16px;
+        display: flex; justify-content: space-between; align-items: center;
+        z-index: 10;
+        font-family: var(--font-mono);
+      }
+      .hud-back {
+        color: var(--muted); font-size: var(--fs-sm); letter-spacing: 0.1em;
+        padding: 0.4em 0.9em; border: 1px solid var(--border); border-radius: 999px;
+        background: color-mix(in srgb, var(--bg) 70%, transparent); backdrop-filter: blur(6px);
+      }
+      .hud-back:hover { color: var(--cyan); border-color: var(--cyan); }
+      .hud-sound {
+        font: inherit; font-size: var(--fs-sm); letter-spacing: 0.12em; cursor: pointer;
+        color: var(--muted); background: color-mix(in srgb, var(--bg) 70%, transparent);
+        border: 1px solid var(--border); border-radius: 999px; padding: 0.4em 1em;
+        backdrop-filter: blur(6px);
+      }
+      .hud-right { display: flex; gap: 8px; }
+      .hud-sound[aria-pressed="true"] { color: var(--cyan); border-color: var(--cyan); }
+      .progress {
+        position: fixed; left: 0; right: 0; bottom: 0; height: 3px;
+        background: color-mix(in srgb, var(--border) 60%, transparent); z-index: 10;
+      }
+      .progress span {
+        display: block; height: 100%; width: 0;
+        background: linear-gradient(90deg, var(--cyan), var(--magenta));
+      }
+
+      #chapters section {
+        min-height: 100svh;
+        display: flex; flex-direction: column;
+        align-items: center; justify-content: center;
+        text-align: center; padding: var(--space-4);
+        position: relative; z-index: 5;
+        pointer-events: none;
+        opacity: 0; transform: translateY(26px);
+        transition: opacity 0.7s ease, transform 0.7s ease;
+      }
+      #chapters section.on { opacity: 1; transform: none; }
+      .kicker {
+        font-family: var(--font-mono); letter-spacing: 0.3em;
+        color: var(--cyan); font-size: var(--fs-sm); margin: 0 0 var(--space-3);
+      }
+      #chapters h2 {
+        font-size: var(--fs-3xl); margin: 0 0 var(--space-2);
+        text-shadow: 0 0 36px rgba(0,0,0,0.8);
+      }
+      .sub { color: var(--muted); font-size: var(--fs-lg); margin: 0; text-shadow: 0 0 24px rgba(0,0,0,0.9); }
+      .scroll-cue { margin-top: var(--space-5); color: var(--muted); animation: cue 1.8s ease-in-out infinite; }
+      @keyframes cue { 50% { transform: translateY(9px); opacity: 0.5; } }
+
+      .finale { pointer-events: auto !important; }
+      #dim-form { display: flex; gap: var(--space-2); flex-wrap: wrap; justify-content: center; margin-top: var(--space-4); }
+      #dim-word {
+        font: inherit; font-size: var(--fs-lg); font-weight: 700; letter-spacing: 0.1em;
+        text-transform: uppercase; text-align: center;
+        color: var(--text); background: color-mix(in srgb, var(--bg) 75%, transparent);
+        border: 1px solid var(--border); border-radius: var(--radius-sm);
+        padding: 0.55em 1em; width: min(60vw, 15rem); backdrop-filter: blur(6px);
+      }
+      #dim-word:focus { outline: none; border-color: var(--cyan); }
+      .outro { margin-top: var(--space-5); display: flex; gap: var(--space-4); font-family: var(--font-mono); font-size: var(--fs-sm); }
+
+      /* Static fallback (no WebGL / reduced motion / no JS) */
+      .dim-static #chapters section, html.dim-static #chapters section { opacity: 1; transform: none; }
+      @media (prefers-reduced-motion: reduce) {
+        #chapters section { opacity: 1; transform: none; transition: none; }
+        .scroll-cue { animation: none; }
+      }
+    </style>
+    <noscript>
+      <style>#chapters section { opacity: 1; transform: none; }</style>
+    </noscript>
+  </body>
+</html>

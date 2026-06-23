@@ -1,0 +1,71 @@
+name: Deploy Extreme Hub
+
+# Builds Aaron's Extreme Hub and uploads it to the StartCP host over FTP.
+on:
+  push:
+    branches:
+      - main
+      - claude/new-server-website-build-oxgwlt
+    paths:
+      - "extremehub/**"
+      - ".github/workflows/deploy-extremehub.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-extremehub
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: extremehub
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: extremehub/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build site
+        run: npm run build
+
+      - name: Resolve host to IPv4
+        id: ftp
+        # The host also has an AAAA (IPv6) record, but GitHub runners have no
+        # IPv6 route, so the FTP client dies with ENETUNREACH. Resolve the A
+        # record here and hand the action a literal IPv4 so IPv6 is never tried.
+        working-directory: ${{ github.workspace }}
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+        run: |
+          ipv4="$(getent ahostsv4 "$FTP_SERVER" | awk '{print $1; exit}')"
+          if [ -z "$ipv4" ]; then echo "Could not resolve $FTP_SERVER to IPv4" >&2; exit 1; fi
+          echo "Resolved $FTP_SERVER -> $ipv4"
+          echo "ipv4=$ipv4" >> "$GITHUB_OUTPUT"
+
+      - name: Deploy to host over FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ steps.ftp.outputs.ipv4 }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ${{ secrets.FTP_PROTOCOL || 'ftp' }}
+          port: ${{ secrets.FTP_PORT || '21' }}
+          # Path is relative to the repo root (working-directory does not
+          # apply to action steps, only to run: steps).
+          local-dir: ./extremehub/dist/
+          # Web root on the host; override with the FTP_SERVER_DIR secret.
+          server-dir: ${{ secrets.FTP_SERVER_DIR || './public_html/' }}
+          dangerous-clean-slate: false
+          exclude: |
+            **/.git*
+            **/.git*/**

@@ -1,0 +1,46 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHeader from "../components/PageHeader.astro";
+import BookCard from "../components/BookCard.astro";
+import { magneticSeries, otherWorks } from "../data/books.ts";
+---
+
+<BaseLayout
+  title="Books"
+  description="Books by Aaron Ellis — The Magnetic Series and more: practical psychology for grounded confidence, warmth, and clearer communication."
+>
+  <PageHeader
+    eyebrow="Door 02"
+    title="Books"
+    lead="The Magnetic Series — practical psychology for calm, grounded confidence and the conversations that matter — plus a few other works."
+  />
+
+  <section class="section">
+    <div class="container">
+      <h2>The Magnetic Series</h2>
+      <p class="muted series-intro">Six interconnected books on confidence, warmth, and influence.</p>
+      <div class="book-grid">
+        {magneticSeries.map((book) => <BookCard book={book} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section other-works">
+    <div class="container">
+      <h2>Other works</h2>
+      <div class="book-grid">
+        {otherWorks.map((book) => <BookCard book={book} />)}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .series-intro { margin-top: -0.5rem; margin-bottom: var(--space-5); }
+  .book-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr));
+    gap: var(--space-4);
+  }
+  .other-works { padding-top: 0; }
+</style>

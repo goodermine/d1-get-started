@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SDH Practitioner Training — Member Portal</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* dark brand palette — used by the LOGIN gateway */
+    --bg:        #1A1A2E;
+    --bg-card:   #2D2D44;
+    --bg-card2:  #252540;
+    --gold:      #C9A84C;
+    --gold-dim:  #8a7235;
+    --gold-glow: rgba(201,168,76,0.15);
+    --text:      #F0EDE6;
+    --text-muted:#9E9BB5;
+    --border:    rgba(201,168,76,0.2);
+    --danger:    #e05c5c;
+
+    /* clean light palette — used INSIDE the portal (logged in) */
+    --l-bg:      #f6f4ef;
+    --l-card:    #ffffff;
+    --l-ink:     #222831;
+    --l-muted:   #6f7680;
+    --l-gold:    #b08d2e;       /* readable gold for text */
+    --l-gold-soft:#C9A84C;      /* brand gold for accents */
+    --l-border:  #e7e3d8;
+    --l-shadow:  0 6px 22px rgba(20,24,33,.07);
+    --l-glow:    rgba(201,168,76,0.10);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* ── VIEWS ── */
+  .view { display: none; min-height: 100vh; }
+  .view.active { display: flex; flex-direction: column; }
+
+  /* logged-in views sit on the clean light page */
+  #view-dashboard, #view-lesson { background: var(--l-bg); color: var(--l-ink); }
+
+  /* ══════════════════════════════
+     LOGIN PAGE  (stays dark / branded)
+  ══════════════════════════════ */
+  #view-login {
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .login-bg-lines { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+  .freq-svg { width: 100%; height: 100%; opacity: 0.07; }
+
+  .login-box { position: relative; z-index: 2; width: 100%; max-width: 420px; padding: 20px; }
+  .login-logo { text-align: center; margin-bottom: 36px; }
+  .login-logo .wordmark {
+    font-family: 'Cinzel', serif; font-size: 13px; font-weight: 600; letter-spacing: 0.35em;
+    color: var(--gold); text-transform: uppercase; display: block; margin-bottom: 6px;
+  }
+  .login-logo .title { font-family: 'Cinzel', serif; font-size: 26px; font-weight: 700; color: var(--text); line-height: 1.2; }
+  .login-logo .subtitle {
+    font-size: 12px; font-weight: 400; color: var(--text-muted);
+    letter-spacing: 0.15em; margin-top: 8px; text-transform: uppercase;
+  }
+  .divider-line { width: 48px; height: 1px; background: var(--gold); margin: 16px auto; opacity: 0.6; }
+
+  .login-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 36px 32px; }
+  .field-group { margin-bottom: 20px; }
+  .field-group label {
+    display: block; font-size: 11px; font-weight: 600; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--gold); margin-bottom: 8px;
+  }
+  .field-group input {
+    width: 100%; background: var(--bg); border: 1px solid var(--border); border-radius: 7px;
+    padding: 12px 14px; color: var(--text); font-family: 'Inter', sans-serif; font-size: 14px;
+    outline: none; transition: border-color 0.2s;
+  }
+  .field-group input:focus { border-color: var(--gold); box-shadow: 0 0 0 3px var(--gold-glow); }
+  .field-group input::placeholder { color: var(--text-muted); }
+
+  .error-msg { font-size: 12px; color: var(--danger); margin-top: -12px; margin-bottom: 16px; display: none; }
+  .error-msg.show { display: block; }
+
+  .btn-primary {
+    width: 100%; background: var(--gold); color: #1A1A2E; border: none; border-radius: 7px;
+    padding: 13px; font-family: 'Cinzel', serif; font-size: 13px; font-weight: 700;
+    letter-spacing: 0.1em; cursor: pointer; transition: opacity 0.2s, transform 0.1s;
+  }
+  .btn-primary:hover { opacity: 0.9; }
+  .btn-primary:active { transform: scale(0.99); }
+
+  .login-note { text-align: center; font-size: 12px; color: var(--text-muted); margin-top: 20px; }
+
+  /* ══════════════════════════════
+     PORTAL SHELL (light)
+  ══════════════════════════════ */
+  .portal-header {
+    background: #fff;
+    border-bottom: 1px solid var(--l-border);
+    padding: 0 32px; height: 64px;
+    display: flex; align-items: center; justify-content: space-between; flex-shrink: 0;
+    position: sticky; top: 0; z-index: 10;
+  }
+  .header-brand {
+    font-family: 'Cinzel', serif; font-size: 11px; font-weight: 600;
+    letter-spacing: 0.3em; color: var(--l-gold); text-transform: uppercase;
+  }
+  .header-right { display: flex; align-items: center; gap: 20px; }
+  .header-user { font-size: 13px; color: var(--l-muted); }
+  .header-user span { color: var(--l-ink); font-weight: 500; }
+
+  .btn-logout {
+    background: transparent; border: 1px solid var(--l-border); border-radius: 6px;
+    padding: 6px 14px; color: var(--l-muted); font-size: 12px; font-family: 'Inter', sans-serif;
+    cursor: pointer; transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-logout:hover { border-color: var(--l-gold-soft); color: var(--l-gold); }
+
+  .portal-main { flex: 1; padding: 40px 32px; max-width: 1100px; margin: 0 auto; width: 100%; }
+
+  /* ══════════════════════════════
+     DASHBOARD (light)
+  ══════════════════════════════ */
+  .dash-welcome { margin-bottom: 40px; }
+  .dash-welcome .eyebrow {
+    font-size: 11px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--l-gold); margin-bottom: 8px;
+  }
+  .dash-welcome h1 { font-family: 'Cinzel', serif; font-size: 28px; font-weight: 700; color: var(--l-ink); margin-bottom: 8px; }
+  .dash-welcome p { color: var(--l-muted); font-size: 14px; max-width: 560px; }
+
+  .section-label {
+    font-size: 11px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--l-gold); margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid var(--l-border);
+  }
+
+  .modules-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px; margin-bottom: 48px;
+  }
+
+  .module-card {
+    background: var(--l-card); border: 1px solid var(--l-border); border-radius: 10px;
+    overflow: hidden; cursor: pointer; box-shadow: var(--l-shadow);
+    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+  }
+  .module-card:hover { border-color: var(--l-gold-soft); transform: translateY(-2px); box-shadow: 0 12px 30px rgba(20,24,33,.12); }
+  .module-card.locked { opacity: 0.6; cursor: default; }
+  .module-card.locked:hover { transform: none; border-color: var(--l-border); box-shadow: var(--l-shadow); }
+
+  .module-thumb {
+    height: 130px;
+    background: linear-gradient(135deg, #2D2D44 0%, #1A1A2E 100%);
+    display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;
+  }
+  .module-thumb::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(circle at 30% 60%, rgba(201,168,76,0.18) 0%, transparent 70%);
+  }
+  .module-num { font-family: 'Cinzel', serif; font-size: 48px; font-weight: 700; color: rgba(201,168,76,0.22); line-height: 1; user-select: none; }
+
+  .module-status-badge {
+    position: absolute; top: 10px; right: 10px; font-size: 10px; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 10px; border-radius: 20px;
+  }
+  .badge-available { background: rgba(201,168,76,0.18); color: #f0d488; border: 1px solid rgba(201,168,76,0.4); }
+  .badge-coming { background: rgba(255,255,255,0.08); color: #c7c4d6; border: 1px solid rgba(255,255,255,0.18); }
+  .badge-complete { background: rgba(80,200,120,0.18); color: #9ff0bb; border: 1px solid rgba(80,200,120,0.35); }
+
+  .module-body { padding: 20px; }
+  .module-body .module-label {
+    font-size: 10px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--l-gold); margin-bottom: 6px;
+  }
+  .module-body h3 { font-family: 'Cinzel', serif; font-size: 15px; font-weight: 600; color: var(--l-ink); margin-bottom: 8px; line-height: 1.3; }
+  .module-body p { font-size: 12px; color: var(--l-muted); line-height: 1.5; margin-bottom: 14px; }
+  .module-meta { display: flex; gap: 16px; font-size: 11px; color: var(--l-muted); }
+
+  /* Reading Library card — gold accent */
+  .module-card.library .module-thumb { background: linear-gradient(135deg, #C9A84C 0%, #8a7235 100%); }
+  .module-card.library .module-thumb::before { background: radial-gradient(circle at 30% 60%, rgba(255,255,255,0.25) 0%, transparent 70%); }
+  .module-card.library .module-num { color: rgba(255,255,255,0.85); font-size: 40px; }
+
+  /* ══════════════════════════════
+     LESSON / VIDEO PAGE (light)
+  ══════════════════════════════ */
+  .lesson-back {
+    display: inline-flex; align-items: center; gap: 8px; font-size: 12px; color: var(--l-muted);
+    cursor: pointer; margin-bottom: 28px; transition: color 0.2s; background: none; border: none; font-family: 'Inter', sans-serif;
+  }
+  .lesson-back:hover { color: var(--l-gold); }
+
+  .lesson-layout { display: grid; grid-template-columns: 1fr 320px; gap: 28px; align-items: start; }
+
+  .lesson-eyebrow {
+    font-size: 11px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--l-gold); margin-bottom: 8px;
+  }
+  .lesson-title { font-family: 'Cinzel', serif; font-size: 22px; font-weight: 700; color: var(--l-ink); margin-bottom: 20px; line-height: 1.3; }
+
+  .video-wrapper {
+    position: relative; width: 100%; padding-top: 56.25%; background: #0d0d1a;
+    border-radius: 10px; overflow: hidden; border: 1px solid var(--l-border); margin-bottom: 24px; box-shadow: var(--l-shadow);
+  }
+  .video-wrapper iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
+  .video-overlay-top { position: absolute; top: 0; left: 0; right: 0; height: 60px; z-index: 10; background: transparent; }
+
+  .video-placeholder {
+    position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center;
+    justify-content: center; gap: 12px; background: linear-gradient(135deg, #1a1a2e 0%, #252540 100%);
+  }
+  .video-placeholder .ph-icon {
+    width: 64px; height: 64px; border-radius: 50%; border: 2px solid rgba(201,168,76,0.4);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .video-placeholder .ph-icon svg { opacity: 0.5; }
+  .video-placeholder p { font-size: 13px; color: #c7c4d6; text-align: center; }
+  .video-placeholder .ph-label { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); }
+
+  .lesson-desc { background: var(--l-card); border: 1px solid var(--l-border); border-radius: 8px; padding: 20px; margin-bottom: 16px; box-shadow: var(--l-shadow); }
+  .lesson-desc h4 { font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--l-gold); margin-bottom: 10px; }
+  .lesson-desc p { font-size: 13px; color: var(--l-muted); line-height: 1.6; }
+
+  .sidebar-card { background: var(--l-card); border: 1px solid var(--l-border); border-radius: 10px; overflow: hidden; margin-bottom: 16px; box-shadow: var(--l-shadow); }
+  .sidebar-card-header {
+    padding: 14px 16px; border-bottom: 1px solid var(--l-border); font-size: 11px; font-weight: 600;
+    letter-spacing: 0.15em; text-transform: uppercase; color: var(--l-gold);
+  }
+  .lesson-list { list-style: none; }
+  .lesson-list li {
+    display: flex; align-items: center; gap: 10px; padding: 12px 16px;
+    border-bottom: 1px solid var(--l-border); font-size: 13px; color: var(--l-muted);
+    cursor: pointer; transition: background 0.15s, color 0.15s;
+  }
+  .lesson-list li:last-child { border-bottom: none; }
+  .lesson-list li:hover { background: var(--l-glow); color: var(--l-ink); }
+  .lesson-list li.active { background: var(--l-glow); color: var(--l-ink); }
+  .lesson-list li .ll-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--l-border); flex-shrink: 0; }
+  .lesson-list li.active .ll-dot { background: var(--l-gold-soft); }
+  .lesson-list li.complete .ll-dot { background: #4cae6a; }
+
+  .progress-bar-wrap { padding: 16px; }
+  .progress-label { display: flex; justify-content: space-between; font-size: 11px; color: var(--l-muted); margin-bottom: 8px; }
+  .progress-track { height: 4px; background: rgba(201,168,76,0.15); border-radius: 4px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--l-gold-soft); border-radius: 4px; width: 0%; transition: width 0.4s ease; }
+
+  /* ══════════════════════════════ */
+  @keyframes freq-move { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+  .freq-animate { animation: freq-move 18s linear infinite; }
+
+  @media (max-width: 800px) {
+    .lesson-layout { grid-template-columns: 1fr; }
+    .portal-header { padding: 0 16px; }
+    .portal-main { padding: 24px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════ VIEW: LOGIN ══════════════════════════════ -->
+<div id="view-login" class="view active">
+  <div class="login-bg-lines">
+    <svg class="freq-svg" viewBox="0 0 1400 800" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <g class="freq-animate">
+        <polyline fill="none" stroke="#C9A84C" stroke-width="1.5"
+          points="0,400 40,380 60,340 80,290 100,260 120,290 140,340 160,380 180,400 200,420 220,460 240,510 260,540 280,510 300,460 320,420 340,400 380,395 420,400 460,380 480,330 500,280 520,260 540,280 560,330 580,380 600,400 640,430 660,480 680,530 700,555 720,530 740,480 760,430 780,400 820,390 860,400 900,415 920,370 940,310 960,265 980,310 1000,370 1020,415 1040,400 1060,440 1080,490 1100,530 1120,490 1140,440 1160,400 1200,385 1240,400 1280,380 1300,340 1320,400 1360,400 1400,400"
+          opacity="0.6"/>
+        <polyline fill="none" stroke="#C9A84C" stroke-width="0.8"
+          points="0,500 50,490 80,460 110,420 130,400 150,420 170,460 200,490 230,500 270,510 300,540 330,500 360,460 390,490 420,500 460,485 500,450 530,410 550,395 570,410 590,450 620,485 650,500 680,520 710,550 740,520 770,500 810,480 850,500 890,515 920,480 950,440 970,420 990,440 1010,480 1040,515 1070,500 1110,510 1150,540 1180,510 1210,500 1250,488 1290,500 1330,490 1360,460 1400,500"
+          opacity="0.35"/>
+        <polyline fill="none" stroke="#C9A84C" stroke-width="1.5"
+          points="1400,400 1440,380 1460,340 1480,290 1500,260 1520,290 1540,340 1560,380 1580,400 1600,420 1620,460 1640,510 1660,540 1680,510 1700,460 1720,420 1740,400 1780,395 1820,400 1860,380 1880,330 1900,280 1920,260 1940,280 1960,330 1980,380 2000,400 2040,430 2060,480 2080,530 2100,555 2120,530 2140,480 2160,430 2180,400 2220,390 2260,400 2300,415 2320,370 2340,310 2360,265 2380,310 2400,370 2420,415 2440,400 2460,440 2480,490 2500,530 2520,490 2540,440 2560,400 2600,385 2640,400 2680,380 2700,340 2720,400 2760,400 2800,400"
+          opacity="0.6"/>
+      </g>
+    </svg>
+  </div>
+
+  <div class="login-box">
+    <div class="login-logo">
+      <span class="wordmark">Aaron Ellis · SDH</span>
+      <div class="title">Strategic Dialogue<br>Hypnotherapy</div>
+      <div class="divider-line"></div>
+      <div class="subtitle">Practitioner Training · Member Portal</div>
+    </div>
+
+    <div class="login-card">
+      <p style="text-align:center;color:var(--text-muted);font-size:13px;line-height:1.7;margin-bottom:24px;">
+        You're signed in as a verified member.<br>Welcome to your training portal.
+      </p>
+      <button class="btn-primary" onclick="enterPortal()">Enter Portal</button>
+    </div>
+
+    <p class="login-note">Access is granted to enrolled practitioners only.<br>Contact Aaron to request enrolment.</p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════ VIEW: DASHBOARD ══════════════════════════════ -->
+<div id="view-dashboard" class="view">
+  <header class="portal-header">
+    <div class="header-brand">SDH Practitioner Portal</div>
+    <div class="header-right">
+      <div class="header-user">Signed in as <span id="user-display"></span></div>
+      <button class="btn-logout" onclick="handleLogout()">Sign Out</button>
+    </div>
+  </header>
+
+  <main class="portal-main">
+    <div class="dash-welcome">
+      <div class="eyebrow">Welcome Back</div>
+      <h1 id="dash-greeting">Good to see you.</h1>
+      <p>Your SDH Practitioner Training modules are below. Work through each session in sequence — each one builds on the last.</p>
+    </div>
+
+    <div class="section-label">Training Modules</div>
+    <div class="modules-grid" id="modules-grid"></div>
+
+    <div class="section-label">Reading Library</div>
+    <div class="modules-grid">
+      <a class="module-card library" href="epub-reader/index.html" style="text-decoration:none">
+        <div class="module-thumb">
+          <div class="module-num">📚</div>
+        </div>
+        <div class="module-body">
+          <div class="module-label">Members Reading Room</div>
+          <h3>Open the Reading Library</h3>
+          <p>Read your member books right in the browser — phone, tablet, or computer. The reader remembers your place.</p>
+          <div class="module-meta"><span>Tap to open ›</span></div>
+        </div>
+      </a>
+    </div>
+  </main>
+</div>
+
+<!-- ══════════════════════════════ VIEW: LESSON ══════════════════════════════ -->
+<div id="view-lesson" class="view">
+  <header class="portal-header">
+    <div class="header-brand">SDH Practitioner Portal</div>
+    <div class="header-right">
+      <div class="header-user">Signed in as <span id="user-display-lesson"></span></div>
+      <button class="btn-logout" onclick="handleLogout()">Sign Out</button>
+    </div>
+  </header>
+
+  <main class="portal-main">
+    <button class="lesson-back" onclick="showDashboard()">← Back to Modules</button>
+
+    <div class="lesson-layout">
+      <div class="lesson-main">
+        <div class="lesson-eyebrow" id="lesson-eyebrow"></div>
+        <h2 class="lesson-title" id="lesson-title"></h2>
+
+        <div class="video-wrapper" id="video-wrapper"></div>
+
+        <div class="lesson-desc">
+          <h4>Session Overview</h4>
+          <p id="lesson-desc-text"></p>
+        </div>
+      </div>
+
+      <aside class="lesson-sidebar">
+        <div class="sidebar-card">
+          <div class="sidebar-card-header">Module Progress</div>
+          <div class="progress-bar-wrap">
+            <div class="progress-label">
+              <span id="progress-text">0 of 0 complete</span>
+              <span id="progress-pct">0%</span>
+            </div>
+            <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+          </div>
+        </div>
+
+        <div class="sidebar-card">
+          <div class="sidebar-card-header">Sessions in this Module</div>
+          <ul class="lesson-list" id="lesson-list"></ul>
+        </div>
+      </aside>
+    </div>
+  </main>
+</div>
+
+<script>
+// ══════════════════════════════ COURSE DATA ══════════════════════════════
+const MODULES = [
+  {
+    id: 1,
+    title: 'Foundations of Strategic Dialogue',
+    description: 'The core principles that separate SDH from conventional hypnotherapy — language as leverage.',
+    status: 'available',
+    sessions: [
+      { id: 's1-1', title: 'What Is Strategic Dialogue Hypnotherapy?', desc: 'An introduction to the SDH methodology, its philosophical grounding, and how it differs from traditional directive hypnosis. This session sets the frame for everything that follows.', youtubeId: 'ZzLWAeKanb4', duration: '— mins' },
+      { id: 's1-2', title: 'The Anatomy of a Strategic Conversation', desc: 'Breaking down the structure of a dialogue-led session. We examine pacing, leading, and the moment of receptivity.', youtubeId: null, duration: '— mins' },
+      { id: 's1-3', title: 'Language Patterns — Part One', desc: 'Core linguistic tools: presuppositions, embedded commands, and the Milton Model as a living conversation tool.', youtubeId: null, duration: '— mins' },
+    ]
+  },
+  {
+    id: 2,
+    title: 'The SDH Induction Framework',
+    description: 'How to bring a client into deep receptivity without formal eyes-closed inductions.',
+    status: 'coming',
+    sessions: [
+      { id: 's2-1', title: 'Conversational Induction Techniques', desc: 'Placeholder — content coming soon.', youtubeId: null, duration: '— mins' },
+      { id: 's2-2', title: 'Depth Without Trance', desc: 'Placeholder — content coming soon.', youtubeId: null, duration: '— mins' },
+    ]
+  },
+  {
+    id: 3,
+    title: 'Working with Resistance',
+    description: 'Understanding why clients resist and how to use that resistance as a doorway.',
+    status: 'coming',
+    sessions: [
+      { id: 's3-1', title: 'Reframing Resistance', desc: 'Placeholder — content coming soon.', youtubeId: null, duration: '— mins' },
+      { id: 's3-2', title: 'Paradoxical Approaches', desc: 'Placeholder — content coming soon.', youtubeId: null, duration: '— mins' },
+    ]
+  },
+  {
+    id: 4,
+    title: 'The Therapeutic Arc',
+    description: 'Designing and navigating a complete SDH session from first contact to integration.',
+    status: 'coming',
+    sessions: [ { id: 's4-1', title: 'Session Architecture', desc: 'Placeholder — content coming soon.', youtubeId: null, duration: '— mins' } ]
+  },
+  {
+    id: 5,
+    title: 'Advanced Language & Metaphor',
+    description: 'Constructing bespoke metaphors and stories that bypass the critical faculty.',
+    status: 'coming',
+    sessions: [ { id: 's5-1', title: 'Building a Client-Specific Metaphor', desc: 'Placeholder — content coming soon.', youtubeId: null, duration: '— mins' } ]
+  },
+  {
+    id: 6,
+    title: 'Practitioner Integration & Ethics',
+    description: 'Closing the training: ethical practice, self-care, and taking SDH into your work.',
+    status: 'coming',
+    sessions: [
+      { id: 's6-1', title: 'Ethics in Dialogue-Based Practice', desc: 'Placeholder — content coming soon.', youtubeId: null, duration: '— mins' },
+      { id: 's6-2', title: 'Building Your SDH Practice', desc: 'Placeholder — content coming soon.', youtubeId: null, duration: '— mins' },
+    ]
+  },
+];
+
+// ══════════════════════════════ STATE ══════════════════════════════
+let currentUser = null, currentModule = null, currentSession = null;
+
+// ══════════════════════════════ ENTRY ══════════════════════════════
+// Real access control is handled server-side by HTTP Basic Auth on the
+// /members/ folder (per-member logins). This screen is just a branded splash.
+function enterPortal() {
+  currentUser = { name: 'Member' };
+  showDashboard();
+}
+function handleLogout() {
+  // returns to the splash; to fully sign out, the member closes the browser
+  // (Basic Auth credentials are held by the browser for the session).
+  currentUser = null;
+  showView('view-login');
+}
+
+// ══════════════════════════════ VIEWS ══════════════════════════════
+function showView(id) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0, 0);
+}
+function showDashboard() {
+  document.getElementById('user-display').textContent = currentUser.name;
+  document.getElementById('dash-greeting').textContent = 'Welcome back.';
+  renderModules();
+  showView('view-dashboard');
+}
+function showLesson(moduleId, sessionId) {
+  const mod  = MODULES.find(m => m.id === moduleId);
+  const sess = mod.sessions.find(s => s.id === sessionId);
+  currentModule = mod; currentSession = sess;
+
+  document.getElementById('user-display-lesson').textContent = currentUser.name;
+  document.getElementById('lesson-eyebrow').textContent = `Module ${mod.id} — ${mod.title}`;
+  document.getElementById('lesson-title').textContent   = sess.title;
+  document.getElementById('lesson-desc-text').textContent = sess.desc;
+
+  const wrapper = document.getElementById('video-wrapper');
+  if (sess.youtubeId) {
+    wrapper.innerHTML = `
+      <iframe src="https://www.youtube-nocookie.com/embed/${sess.youtubeId}?rel=0&modestbranding=1&iv_load_policy=3&color=white&playsinline=1"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      <div class="video-overlay-top"></div>`;
+  } else {
+    wrapper.innerHTML = `
+      <div class="video-placeholder">
+        <div class="ph-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+        <p class="ph-label">Video Coming Soon</p>
+        <p>This session recording will be uploaded<br>after the live training.</p>
+      </div>`;
+  }
+
+  const list = document.getElementById('lesson-list');
+  list.innerHTML = mod.sessions.map(s => `
+    <li class="${s.id === sessionId ? 'active' : ''}" onclick="showLesson(${mod.id}, '${s.id}')">
+      <div class="ll-dot"></div><span>${s.title}</span>
+    </li>`).join('');
+
+  const total = mod.sessions.length;
+  const complete = mod.sessions.filter(s => s.youtubeId).length;
+  const pct = total > 0 ? Math.round((complete / total) * 100) : 0;
+  document.getElementById('progress-text').textContent = `${complete} of ${total} uploaded`;
+  document.getElementById('progress-pct').textContent  = `${pct}%`;
+  document.getElementById('progress-fill').style.width  = `${pct}%`;
+
+  showView('view-lesson');
+}
+
+// ══════════════════════════════ RENDER MODULES ══════════════════════════════
+function renderModules() {
+  const grid = document.getElementById('modules-grid');
+  grid.innerHTML = MODULES.map(m => {
+    const isLocked = m.status === 'coming';
+    const badgeClass = { available: 'badge-available', coming: 'badge-coming', complete: 'badge-complete' }[m.status];
+    const badgeText  = { available: 'Available', coming: 'Coming Soon', complete: 'Complete' }[m.status];
+    return `
+      <div class="module-card ${isLocked ? 'locked' : ''}" ${!isLocked ? `onclick="showLesson(${m.id}, '${m.sessions[0].id}')"` : ''}>
+        <div class="module-thumb">
+          <div class="module-num">0${m.id}</div>
+          <div class="module-status-badge ${badgeClass}">${badgeText}</div>
+        </div>
+        <div class="module-body">
+          <div class="module-label">Module ${m.id}</div>
+          <h3>${m.title}</h3>
+          <p>${m.description}</p>
+          <div class="module-meta"><span>📋 ${m.sessions.length} session${m.sessions.length !== 1 ? 's' : ''}</span></div>
+        </div>
+      </div>`;
+  }).join('');
+}
+</script>
+</body>
+</html>

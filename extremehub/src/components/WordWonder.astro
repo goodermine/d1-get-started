@@ -1,0 +1,200 @@
+<div class="wonder-box card">
+  <form id="wonder-form" class="wonder-form">
+    <label class="visually-hidden" for="wonder-input">Type a word</label>
+    <input
+      id="wonder-input"
+      type="text"
+      maxlength="12"
+      placeholder="type a word…"
+      autocomplete="off"
+      spellcheck="false"
+    />
+    <button type="submit" class="btn btn-primary">Make wonder</button>
+  </form>
+  <canvas id="wonder-canvas" aria-label="Your word, rendered as animated particles"></canvas>
+  <div class="wonder-actions">
+    <button id="wonder-download" class="btn btn-ghost" type="button">⬇ Download</button>
+    <button id="wonder-share" class="btn btn-ghost" type="button" hidden>⤴ Share</button>
+  </div>
+  <p class="hint muted">Every particle finds its place. That's the whole philosophy.</p>
+</div>
+
+<script>
+  const canvas = document.getElementById("wonder-canvas") as HTMLCanvasElement;
+  const input = document.getElementById("wonder-input") as HTMLInputElement;
+  const form = document.getElementById("wonder-form") as HTMLFormElement;
+  const ctx = canvas.getContext("2d")!;
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  type P = { x: number; y: number; tx: number; ty: number; vx: number; vy: number; c: string };
+  let parts: P[] = [];
+  let raf = 0;
+  let currentWord = "WONDER";
+  const COLORS = ["#41ead4", "#8b5cf6", "#ff3ec8", "#ffc24e", "#e9edf9"];
+
+  function fit() {
+    const r = canvas.parentElement!.getBoundingClientRect();
+    canvas.width = Math.floor(r.width - 2);
+    canvas.height = Math.min(340, Math.max(220, Math.floor(innerHeight * 0.32)));
+  }
+
+  // Sample the word's pixels from an offscreen canvas → particle targets.
+  function targetsFor(word: string) {
+    const off = document.createElement("canvas");
+    off.width = canvas.width;
+    off.height = canvas.height;
+    const o = off.getContext("2d")!;
+    let size = Math.min(170, (canvas.width / Math.max(3, word.length)) * 1.5);
+    o.font = `700 ${size}px 'Space Grotesk Variable', system-ui, sans-serif`;
+    o.textAlign = "center";
+    o.textBaseline = "middle";
+    o.fillText(word, off.width / 2, off.height / 2);
+    const img = o.getImageData(0, 0, off.width, off.height).data;
+    const pts: { x: number; y: number }[] = [];
+    const gap = canvas.width > 700 ? 4 : 5;
+    for (let y = 0; y < off.height; y += gap)
+      for (let x = 0; x < off.width; x += gap)
+        if (img[(y * off.width + x) * 4 + 3] > 128) pts.push({ x, y });
+    return pts;
+  }
+
+  function ignite(word: string) {
+    currentWord = word;
+    cancelAnimationFrame(raf);
+    fit();
+    const pts = targetsFor(word);
+    if (!pts.length) return;
+    parts = pts.map((t) => ({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      tx: t.x,
+      ty: t.y,
+      vx: 0,
+      vy: 0,
+      c: COLORS[(Math.random() * COLORS.length) | 0],
+    }));
+    if (reduce) {
+      // No animation: draw the settled word immediately.
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (const p of parts) { ctx.fillStyle = p.c; ctx.fillRect(p.tx, p.ty, 2.4, 2.4); }
+      return;
+    }
+    let frames = 0;
+    const step = () => {
+      frames++;
+      ctx.fillStyle = "rgba(6,7,12,0.32)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      let settled = 0;
+      for (const p of parts) {
+        const dx = p.tx - p.x, dy = p.ty - p.y;
+        p.vx = p.vx * 0.86 + dx * 0.025;
+        p.vy = p.vy * 0.86 + dy * 0.025;
+        p.x += p.vx;
+        p.y += p.vy;
+        if (Math.abs(dx) < 0.5 && Math.abs(dy) < 0.5) settled++;
+        ctx.fillStyle = p.c;
+        ctx.fillRect(p.x, p.y, 2.4, 2.4);
+      }
+      if (settled / parts.length > 0.985 || frames > 600) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (const p of parts) { ctx.fillStyle = p.c; ctx.fillRect(p.tx, p.ty, 2.4, 2.4); }
+        return;
+      }
+      raf = requestAnimationFrame(step);
+    };
+    raf = requestAnimationFrame(step);
+  }
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const word = input.value.trim() || "WONDER";
+    ignite(word.toUpperCase());
+  });
+  addEventListener("resize", () => fit());
+
+  // Auto-demo when scrolled into view the first time.
+  fit();
+  new IntersectionObserver(
+    (entries, io) => {
+      if (entries[0].isIntersecting) {
+        ignite("WONDER");
+        io.disconnect();
+      }
+    },
+    { threshold: 0.4 }
+  ).observe(canvas);
+
+  // ---- Share / download your wonder (a branded PNG) ----
+  function composeImage(): Promise<Blob | null> {
+    const out = document.createElement("canvas");
+    out.width = canvas.width;
+    out.height = canvas.height + 64;
+    const o = out.getContext("2d")!;
+    o.fillStyle = "#06070c";
+    o.fillRect(0, 0, out.width, out.height);
+    o.drawImage(canvas, 0, 0);
+    o.fillStyle = "#41ead4";
+    o.font = "700 22px 'Space Grotesk Variable', system-ui, sans-serif";
+    o.textAlign = "left";
+    o.fillText("AARON'S EXTREME HUB", 20, canvas.height + 28);
+    o.fillStyle = "#8d95ad";
+    o.font = "400 16px 'Space Grotesk Variable', system-ui, sans-serif";
+    o.fillText("where words become wonder", 20, canvas.height + 50);
+    return new Promise((res) => out.toBlob(res, "image/png"));
+  }
+  const dlBtn = document.getElementById("wonder-download") as HTMLButtonElement;
+  const shBtn = document.getElementById("wonder-share") as HTMLButtonElement;
+  dlBtn?.addEventListener("click", async () => {
+    const blob = await composeImage();
+    if (!blob) return;
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = `wonder-${currentWord.toLowerCase()}.png`;
+    a.click();
+    URL.revokeObjectURL(a.href);
+  });
+  if (navigator.canShare && navigator.canShare({ files: [new File([], "x.png")] })) {
+    shBtn.hidden = false;
+    shBtn.addEventListener("click", async () => {
+      const blob = await composeImage();
+      if (!blob) return;
+      const file = new File([blob], `wonder-${currentWord.toLowerCase()}.png`, { type: "image/png" });
+      try {
+        await navigator.share({ files: [file], title: "Aaron's Extreme Hub", text: `${currentWord} — made wonder.` });
+      } catch {}
+    });
+  }
+</script>
+
+<style>
+  .wonder-box { padding: var(--space-4); }
+  .wonder-form {
+    display: flex;
+    gap: var(--space-2);
+    flex-wrap: wrap;
+    margin-bottom: var(--space-3);
+  }
+  #wonder-input {
+    flex: 1 1 14rem;
+    font: inherit;
+    font-size: var(--fs-lg);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--text);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 0.6em 1em;
+    text-transform: uppercase;
+  }
+  #wonder-input:focus { outline: none; border-color: var(--cyan); }
+  #wonder-canvas {
+    width: 100%;
+    border-radius: var(--radius-sm);
+    background: var(--bg);
+    border: 1px solid var(--border);
+  }
+  .wonder-actions { display: flex; gap: var(--space-2); justify-content: center; margin-top: var(--space-3); }
+  .wonder-actions .btn { padding: 0.6em 1.1em; }
+  .hint { font-size: var(--fs-sm); margin: var(--space-3) 0 0; text-align: center; }
+</style>

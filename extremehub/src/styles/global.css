@@ -1,0 +1,166 @@
+/* ==========================================================
+   AARON'S EXTREME HUB — design tokens + base styles.
+   Neon arcade on deep space. One file rules the look.
+   ========================================================== */
+@import "@fontsource-variable/space-grotesk";
+
+:root {
+  --bg:      #06070c;
+  --bg-2:    #0a0c14;
+  --surface: #0e111d;
+  --border:  #1d2235;
+  --text:    #e9edf9;
+  --muted:   #8d95ad;
+
+  --cyan:    #41ead4;
+  --magenta: #ff3ec8;
+  --violet:  #8b5cf6;
+  --amber:   #ffc24e;
+
+  --font-display: "Space Grotesk Variable", system-ui, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
+
+  --fs-sm: 0.9rem;
+  --fs-base: 1rem;
+  --fs-lg: 1.2rem;
+  --fs-xl: clamp(1.4rem, 1rem + 1.6vw, 2.2rem);
+  --fs-2xl: clamp(2rem, 1.2rem + 3.2vw, 3.6rem);
+  --fs-3xl: clamp(2.6rem, 1.2rem + 6vw, 6rem);
+
+  --space-2: 0.5rem;
+  --space-3: 1rem;
+  --space-4: 1.5rem;
+  --space-5: 2.5rem;
+  --space-6: 4rem;
+  --space-7: 6.5rem;
+  --radius: 16px;
+  --radius-sm: 10px;
+  --maxw: 70rem;
+  --transition: 200ms ease;
+}
+
+/* Alternate neon palettes — swapping the three accent tokens re-skins the
+   entire site (buttons, shader, game, trail) from one place. */
+[data-theme="ember"] {
+  --cyan: #ffc24e; --violet: #ff6a3d; --magenta: #ff3e6e;
+}
+[data-theme="vapor"] {
+  --cyan: #59e0ff; --violet: #b16cff; --magenta: #ff6ad5;
+}
+[data-theme="matrix"] {
+  --cyan: #36f08a; --violet: #1fb86b; --magenta: #b6ff4e;
+}
+
+* , *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-display);
+  font-size: var(--fs-base);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 {
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin: 0 0 var(--space-3);
+}
+h1 { font-size: var(--fs-3xl); }
+h2 { font-size: var(--fs-2xl); }
+h3 { font-size: var(--fs-xl); }
+
+p { margin: 0 0 var(--space-3); }
+a { color: var(--cyan); text-decoration: none; transition: color var(--transition); }
+a:hover { color: var(--magenta); }
+img { max-width: 100%; height: auto; display: block; }
+
+.container {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: var(--space-4);
+}
+.section { padding-block: var(--space-7); position: relative; }
+
+.eyebrow {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  margin-bottom: var(--space-3);
+}
+.muted { color: var(--muted); }
+
+/* Neon gradient text */
+.neon {
+  background: linear-gradient(92deg, var(--cyan), var(--violet) 55%, var(--magenta));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  font: inherit;
+  font-weight: 700;
+  font-size: var(--fs-sm);
+  letter-spacing: 0.04em;
+  padding: 0.85em 1.7em;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all var(--transition);
+  white-space: nowrap;
+}
+.btn-primary {
+  background: linear-gradient(92deg, var(--cyan), var(--violet));
+  color: #04060a;
+  box-shadow: 0 0 28px color-mix(in srgb, var(--cyan) 35%, transparent);
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 40px color-mix(in srgb, var(--cyan) 50%, transparent); }
+.btn-ghost {
+  background: transparent;
+  border-color: var(--border);
+  color: var(--text);
+}
+.btn-ghost:hover { border-color: var(--cyan); color: var(--cyan); }
+
+/* Cards */
+.card {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--surface) 92%, var(--violet)), var(--surface));
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: var(--space-5);
+  transition: border-color var(--transition), transform var(--transition);
+}
+.card:hover { border-color: color-mix(in srgb, var(--cyan) 50%, var(--border)); transform: translateY(-3px); }
+
+/* Reveal on scroll (JS-gated; never hides content without JS) */
+html.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+html.js [data-reveal].in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  html.js [data-reveal] { opacity: 1; transform: none; transition: none; }
+}
+
+:focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; }
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}

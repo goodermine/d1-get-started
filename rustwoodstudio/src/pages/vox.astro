@@ -1,0 +1,106 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHeader from "../components/PageHeader.astro";
+import VoxPanel from "../components/VoxPanel.astro";
+import EmailCapture from "../components/EmailCapture.astro";
+import { site } from "../data/site.ts";
+
+// Honest scope only — VOX's positioning deliberately avoids overclaiming.
+const areas = [
+  { h: "Vocal energy", p: "How much consistent energy you're putting through a take." },
+  { h: "Peak level & clipping safety", p: "Whether your recording level is healthy or hitting the ceiling." },
+  { h: "Broad dynamics", p: "The range between your quietest and loudest moments." },
+  { h: "Phrase-level consistency", p: "Which phrases hold together and which drift or fade." },
+  { h: "Approximate pitch centre", p: "Where your take roughly sits — a reference point, not a verdict." },
+  { h: "Pitch tracking confidence", p: "How cleanly the analysis could read your recording." },
+];
+const flow = [
+  { n: "01", h: "Upload", p: "Record a take or upload an existing one." },
+  { n: "02", h: "Analyse", p: "VOX reviews the recording and produces practical metrics." },
+  { n: "03", h: "Improve", p: "Get coaching-style guidance on what to practise next." },
+];
+---
+
+<BaseLayout
+  title="VOX Tools"
+  description="VOX — a practical vocal feedback tool. Upload or record a take, review useful vocal metrics, and get coaching-style guidance on what to practise next."
+>
+  <PageHeader
+    eyebrow="The Tool"
+    title="VOX — review your voice with clearer evidence."
+    lead="A practical vocal feedback tool designed to help singers review their recordings with clearer evidence. Upload or record a take, review useful vocal metrics, and get coaching-style guidance on what to practise next."
+  />
+
+  <section class="section">
+    <div class="container">
+      <VoxPanel />
+      <div class="vox-cta">
+        <a href={site.appUrl} class="btn btn-primary">Open VOX</a>
+        <span class="muted note">Private tool access may require login.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section flow-s">
+    <div class="container">
+      <h2>Upload. Analyse. Improve.</h2>
+      <div class="flow">
+        {flow.map((f) => (
+          <div class="card step">
+            <span class="step-n">{f.n}</span>
+            <h3>{f.h}</h3>
+            <p class="muted">{f.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>Current analysis areas</h2>
+      <div class="areas">
+        {areas.map((a) => (
+          <div class="card area">
+            <h3>{a.h}</h3>
+            <p class="muted">{a.p}</p>
+          </div>
+        ))}
+      </div>
+      <div class="honest card">
+        <h3>What VOX doesn't claim</h3>
+        <p class="muted">
+          VOX gives you evidence and direction — it doesn't diagnose breath
+          support, measure your true vocal range, detect strain, or hand down
+          final judgements on tuning and timing. Metrics inform your practice;
+          they don't replace your ears or a coach.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <EmailCapture />
+</BaseLayout>
+
+<style>
+  .vox-cta { display: flex; gap: var(--space-3); align-items: center; flex-wrap: wrap; margin-top: var(--space-4); }
+  .note { font-size: var(--fs-xs); }
+  .flow-s { background: var(--color-bg-2); border-block: 1px solid var(--color-border); }
+  .flow, .areas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+    gap: var(--space-4);
+    margin-top: var(--space-4);
+  }
+  .step-n {
+    font-family: var(--font-heading);
+    font-size: var(--fs-xl);
+    color: var(--color-copper);
+    display: block;
+    margin-bottom: var(--space-2);
+  }
+  .flow h3, .areas h3 { font-size: var(--fs-lg); }
+  .flow p, .areas p { margin: 0; font-size: var(--fs-sm); }
+  .honest { margin-top: var(--space-4); border-style: dashed; border-color: color-mix(in srgb, var(--color-copper) 45%, var(--color-border)); }
+  .honest p { margin: 0; }
+</style>

@@ -1,0 +1,63 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+const {
+  title = "Aaron's Extreme Hub — where words become wonder",
+  description = "Aaron's Extreme Hub: where words become wonder, and wonder becomes implemented. Interactive art, a playable arcade, and proof that extreme can still be lightweight.",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/icon-192.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="theme-color" content="#06070c" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+  </head>
+  <body>
+    <a href="#main" class="visually-hidden">Skip to content</a>
+    <main id="main">
+      <slot />
+    </main>
+
+    <script is:inline>
+      (function () {
+        document.documentElement.classList.add("js");
+        var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+        var targets = document.querySelectorAll("[data-reveal]");
+        if (reduce || !("IntersectionObserver" in window)) {
+          targets.forEach(function (el) { el.classList.add("in"); });
+          return;
+        }
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+          });
+        }, { threshold: 0.1, rootMargin: "0px 0px -5% 0px" });
+        targets.forEach(function (el) {
+          if (el.getBoundingClientRect().top < innerHeight * 0.92) el.classList.add("in");
+          else io.observe(el);
+        });
+      })();
+
+      // Register the service worker for offline / installability.
+      if ("serviceWorker" in navigator) {
+        addEventListener("load", function () {
+          navigator.serviceWorker.register("/sw.js").catch(function () {});
+        });
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,42 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHeader from "../components/PageHeader.astro";
+import { site } from "../data/site.ts";
+---
+
+<BaseLayout title="Terms" description="Rustwood Studio terms of use.">
+  <PageHeader eyebrow="Legal" title="Terms" />
+  <section class="section">
+    <div class="container prose">
+      <ul>
+        <li>
+          <strong>Content:</strong> everything on this site — words, designs,
+          recordings, tools — belongs to Rustwood Studio / Aaron Ellis unless
+          stated otherwise.
+        </li>
+        <li>
+          <strong>Educational use:</strong> books, articles, and VOX feedback
+          are educational resources, not medical or clinical advice. If singing
+          causes pain, see a professional.
+        </li>
+        <li>
+          <strong>VOX:</strong> analysis metrics are practical guidance to
+          inform practice — they are not diagnostic and carry no guarantees of
+          outcome.
+        </li>
+        <li>
+          <strong>Services:</strong> coaching and custom song work are scoped
+          and agreed per engagement before any work begins.
+        </li>
+      </ul>
+      <p class="muted">
+        Questions? <a href={`mailto:${site.email}`}>{site.email}</a>
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .prose { max-width: var(--maxw-prose); }
+  .prose li { margin-bottom: var(--space-2); }
+</style>

@@ -1,0 +1,103 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHeader from "../components/PageHeader.astro";
+import { site } from "../data/site.ts";
+
+// "Live" dashboard numbers are now static data (no backend). Edit here.
+const metrics = [
+  { label: "REST performance", value: "98%" },
+  { label: "CSS scope", value: "100%" },
+  { label: "Mobile score", value: "96%" },
+  { label: "Plugins required", value: "0" },
+];
+const capabilities = [
+  { h: "Visual system", p: "Coherent UI and design language.", done: true },
+  { h: "Motion layer", p: "Tasteful, purposeful animation.", done: true },
+  { h: "Conversion flow", p: "CTAs that lead somewhere.", done: true },
+  { h: "Responsive layout", p: "Mobile-first, everywhere.", done: true },
+  { h: "Media integration", p: "Images, audio, embeds.", done: true },
+  { h: "WordPress delivery", p: "Ships into your stack.", done: true },
+];
+const flow = [
+  { n: "1", h: "Prompt", p: "One brief, hard constraints." },
+  { n: "2", h: "Plan", p: "The agent maps the build." },
+  { n: "3", h: "Build", p: "Pages assembled to spec." },
+  { n: "4", h: "Publish", p: "Delivered, ready to ship." },
+];
+---
+
+<BaseLayout
+  title="Extreme Build"
+  description="Extreme Build — one brief, hard constraints, and an AI agent that plans, builds, and publishes a page to spec."
+>
+  <PageHeader
+    eyebrow="Door 01 · AI Builds"
+    title="Extreme Build"
+    lead="One brief, hard constraints, and an AI agent that plans, builds, and ships a page — fast, scoped, and clean."
+  />
+
+  <section class="section">
+    <div class="container">
+      <div class="metrics">
+        {metrics.map((m) => (
+          <div class="metric card">
+            <span class="metric-value">{m.value}</span>
+            <span class="muted metric-label">{m.label}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>Capabilities</h2>
+      <div class="grid-cap">
+        {capabilities.map((c) => (
+          <div class="card cap">
+            <span class="dot" data-done={c.done}></span>
+            <div><h3>{c.h}</h3><p class="muted">{c.p}</p></div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>How a build flows</h2>
+      <div class="grid-flow">
+        {flow.map((f) => (
+          <div class="card step"><span class="step-n">{f.n}</span><h3>{f.h}</h3><p class="muted">{f.p}</p></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container narrow cta-block card">
+      <span class="eyebrow">Apply</span>
+      <h2>Want a build?</h2>
+      <p class="muted">Tell me what you need and I'll see if it's a fit for the waitlist.</p>
+      <a href={`mailto:${site.email}?subject=Extreme%20Build%20waitlist`} class="btn btn-primary">Join the waitlist</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .narrow { max-width: var(--maxw-prose); }
+  .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr)); gap: var(--space-4); }
+  .metric { text-align: center; }
+  .metric-value { display: block; font-family: var(--font-heading); font-size: var(--fs-2xl); color: var(--color-accent); }
+  .metric-label { font-size: var(--fs-sm); }
+  .grid-cap { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr)); gap: var(--space-4); }
+  .cap { display: flex; gap: var(--space-3); align-items: flex-start; }
+  .cap h3 { font-size: var(--fs-lg); margin: 0 0 0.2rem; }
+  .cap p { margin: 0; font-size: var(--fs-sm); }
+  .dot { flex: none; width: 12px; height: 12px; border-radius: 999px; margin-top: 6px; background: var(--color-border); }
+  .dot[data-done="true"] { background: var(--color-accent); box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-accent) 22%, transparent); }
+  .grid-flow { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr)); gap: var(--space-4); }
+  .step-n { display: inline-grid; place-items: center; width: 34px; height: 34px; border-radius: 8px; background: var(--color-surface-2); color: var(--color-accent); font-weight: 700; margin-bottom: var(--space-2); }
+  .cta-block { text-align: center; }
+  .cta-block .btn { margin-top: var(--space-3); }
+</style>

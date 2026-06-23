@@ -1,0 +1,55 @@
+/* ============================================================
+   RUSTWOOD DESIGN TOKENS — single source of truth for the look.
+   Dark premium forge: warm near-black, copper/ember highlights.
+   Change a value here and it updates across the whole site.
+   ============================================================ */
+:root {
+  /* --- Forge palette --- */
+  --color-bg:        #0e0c0a;   /* warm near-black */
+  --color-bg-2:      #131008;   /* deep section alt */
+  --color-surface:   #181410;   /* cards / panels */
+  --color-surface-2: #221b15;   /* raised / hover */
+  --color-border:    #2e2620;   /* hairlines */
+  --color-text:      #ede7df;   /* warm off-white */
+  --color-muted:     #a89d90;   /* secondary text */
+  --color-copper:    #c87a3b;   /* primary accent */
+  --color-ember:     #e6a35e;   /* lighter copper / glow */
+  --color-on-copper: #16100a;   /* text on copper buttons */
+
+  /* Light SaaS panel (VOX sections) */
+  --panel-bg:     #f5f1ec;
+  --panel-text:   #221c16;
+  --panel-muted:  #6d6258;
+  --panel-border: #ddd4c9;
+
+  /* --- Typography --- */
+  --font-heading: "Fraunces Variable", Georgia, serif;
+  --font-body: "Inter Variable", system-ui, -apple-system, sans-serif;
+  --weight-bold: 600;
+
+  --fs-xs:  0.78rem;
+  --fs-sm:  0.9rem;
+  --fs-base: 1rem;
+  --fs-lg:  1.15rem;
+  --fs-xl:  clamp(1.35rem, 1.1rem + 1.1vw, 1.9rem);
+  --fs-2xl: clamp(1.9rem, 1.3rem + 2.4vw, 3rem);
+  --fs-3xl: clamp(2.5rem, 1.5rem + 4.5vw, 4.8rem);
+
+  /* --- Layout --- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 1rem;
+  --space-4: 1.5rem;
+  --space-5: 2.5rem;
+  --space-6: 4rem;
+  --space-7: 6.5rem;
+  --radius: 16px;
+  --radius-sm: 9px;
+  --maxw: 71rem;
+  --maxw-prose: 44rem;
+
+  /* --- Effects --- */
+  --shadow: 0 14px 50px rgba(0, 0, 0, 0.5);
+  --glow: 0 0 80px color-mix(in srgb, var(--color-copper) 22%, transparent);
+  --transition: 200ms ease;
+}

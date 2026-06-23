@@ -1,0 +1,75 @@
+---
+import { nav } from "../data/nav.ts";
+import { site } from "../data/site.ts";
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <span class="mark" aria-hidden="true">R</span>
+      <div>
+        <strong>{site.name}</strong>
+        <p class="muted who">{site.person}</p>
+        <p class="muted pillars">{site.pillars}</p>
+      </div>
+    </div>
+
+    <nav class="footer-nav" aria-label="Footer">
+      {nav.map((item) => <a href={item.href}>{item.label}</a>)}
+      <a href="/contact/">Contact</a>
+      <a href={site.appUrl}>Client Login</a>
+    </nav>
+  </div>
+  <div class="container footer-base">
+    <span class="muted">© {year} {site.name}. All rights reserved.</span>
+    <span class="legal">
+      <a href={`mailto:${site.email}`} class="muted">{site.email}</a>
+      <a href="/privacy/" class="muted">Privacy</a>
+      <a href="/terms/" class="muted">Terms</a>
+    </span>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--color-border);
+    background: var(--color-bg-2);
+    margin-top: var(--space-7);
+    padding-block: var(--space-6) var(--space-4);
+  }
+  .footer-inner {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-5);
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .footer-brand { display: flex; gap: 0.9rem; align-items: flex-start; max-width: 22rem; }
+  .footer-brand strong { font-family: var(--font-heading); font-size: var(--fs-lg); }
+  .who { margin: 0.15rem 0 0; font-size: var(--fs-sm); }
+  .pillars { margin: 0.15rem 0 0; font-size: var(--fs-xs); letter-spacing: 0.08em; }
+  .mark {
+    display: grid; place-items: center;
+    width: 44px; height: 44px; border-radius: 11px;
+    font-family: var(--font-heading); font-weight: 600; font-size: 1.5rem;
+    color: var(--color-on-copper);
+    background: linear-gradient(135deg, var(--color-ember), var(--color-copper));
+    flex: none;
+  }
+  .footer-nav {
+    display: flex; flex-wrap: wrap; gap: 0.6rem 1.4rem;
+    max-width: 32rem; justify-content: flex-end;
+  }
+  .footer-nav a { color: var(--color-muted); font-size: var(--fs-sm); }
+  .footer-nav a:hover { color: var(--color-ember); }
+  .footer-base {
+    display: flex; flex-wrap: wrap; gap: var(--space-3);
+    justify-content: space-between;
+    margin-top: var(--space-5);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--color-border);
+    font-size: var(--fs-xs);
+  }
+  .legal { display: inline-flex; gap: var(--space-3); flex-wrap: wrap; }
+</style>

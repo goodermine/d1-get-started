@@ -1,0 +1,77 @@
+---
+// Easter egg: the Konami code (↑↑↓↓←→←→ B A) triggers a neon confetti burst,
+// a toast, and flips the site into the secret "matrix" theme.
+---
+<div id="egg-toast" class="egg-toast" role="status" aria-live="polite" hidden>✦ EXTREME MODE UNLOCKED ✦</div>
+
+<script>
+  const SEQ = ["ArrowUp","ArrowUp","ArrowDown","ArrowDown","ArrowLeft","ArrowRight","ArrowLeft","ArrowRight","b","a"];
+  let idx = 0;
+  const toast = document.getElementById("egg-toast")!;
+
+  function confetti() {
+    const c = document.createElement("canvas");
+    c.style.cssText = "position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:9998";
+    document.body.appendChild(c);
+    const ctx = c.getContext("2d")!;
+    const resize = () => { c.width = innerWidth; c.height = innerHeight; };
+    resize();
+    const COLORS = ["#41ead4","#8b5cf6","#ff3ec8","#ffc24e","#e9edf9"];
+    const N = Math.min(220, Math.floor(innerWidth / 6));
+    const ps = Array.from({ length: N }, () => ({
+      x: Math.random() * innerWidth, y: -20 - Math.random() * innerHeight * 0.5,
+      vx: (Math.random() - 0.5) * 4, vy: 3 + Math.random() * 5,
+      s: 4 + Math.random() * 5, c: COLORS[(Math.random() * COLORS.length) | 0], r: Math.random() * 6.28,
+    }));
+    let t = 0;
+    const tick = () => {
+      t++; ctx.clearRect(0, 0, c.width, c.height);
+      for (const p of ps) {
+        p.x += p.vx; p.y += p.vy; p.vy += 0.06; p.r += 0.1;
+        ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.r);
+        ctx.fillStyle = p.c; ctx.fillRect(-p.s / 2, -p.s / 2, p.s, p.s); ctx.restore();
+      }
+      if (t < 200) requestAnimationFrame(tick); else c.remove();
+    };
+    requestAnimationFrame(tick);
+  }
+
+  function trigger() {
+    document.documentElement.setAttribute("data-theme", "matrix");
+    localStorage.setItem("eh-theme", "matrix");
+    document.querySelectorAll(".swatch").forEach((b) => {
+      const el = b as HTMLElement;
+      el.classList.toggle("active", el.dataset.themeId === "matrix");
+    });
+    if (!matchMedia("(prefers-reduced-motion: reduce)").matches) confetti();
+    toast.hidden = false; toast.classList.add("show");
+    setTimeout(() => { toast.classList.remove("show"); setTimeout(() => (toast.hidden = true), 400); }, 2600);
+  }
+
+  addEventListener("keydown", (e) => {
+    const k = e.key.length === 1 ? e.key.toLowerCase() : e.key;
+    idx = k === SEQ[idx] ? idx + 1 : (k === SEQ[0] ? 1 : 0);
+    if (idx === SEQ.length) { idx = 0; trigger(); }
+  });
+</script>
+
+<style>
+  .egg-toast {
+    position: fixed;
+    left: 50%; top: 22px;
+    transform: translateX(-50%) translateY(-20px);
+    z-index: 9999;
+    font-family: var(--font-mono);
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    font-size: var(--fs-sm);
+    color: #06070c;
+    background: linear-gradient(92deg, var(--cyan), var(--magenta));
+    padding: 0.7em 1.4em;
+    border-radius: 999px;
+    box-shadow: 0 0 40px color-mix(in srgb, var(--cyan) 50%, transparent);
+    opacity: 0;
+    transition: opacity 0.35s ease, transform 0.35s ease;
+  }
+  .egg-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+</style>
