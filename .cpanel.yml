@@ -17,8 +17,8 @@
 
 deployment:
   tasks:
-    # ↓↓↓ SET THIS to your real document root (no trailing slash) ↓↓↓
-    - export DOCROOT=/home/REPLACE_ME/public_html
+    # Document root for aaronellis.au (StartCP → Manage Domains)
+    - export DOCROOT=/home/sites/42a/f/fbedbfeca1/public_html
 
     # --- Members area (the portal + EPUB library/reader) ---
     - /bin/mkdir -p "$DOCROOT/members/epub-reader"
