@@ -1,21 +1,21 @@
 ---
-# cPanel / StartCP "Git Version Control" deployment.
-#
-# Runs on "Deploy HEAD Commit". Copies ONLY the members website files into
-# the live document root; the rest of the repo stays in the private repo path
-# and is never served. Absolute paths are used on every line so the deploy
-# does not depend on a shell variable persisting between steps.
-#
+# cPanel / StartCP "Git Version Control" deployment — DIAGNOSTIC build.
+# The echo/ls lines print into the deploy log so we can see exactly what runs.
 # Document root for aaronellis.au = /home/sites/42a/f/fbedbfeca1/public_html
-#
-# NOTE: these copy steps never touch an existing .htaccess / .htpasswd in
-# /members/, so Directory Privacy (per-member logins) survives future deploys.
 
 deployment:
   tasks:
+    - /bin/echo "=== DEPLOY START — working dir: ==="
+    - /bin/pwd
+    - /bin/echo "=== repo contents (should list sdhportal.html + epub-reader): ==="
+    - /bin/ls -la
+    - /bin/echo "=== creating members folder ==="
     - /bin/mkdir -p /home/sites/42a/f/fbedbfeca1/public_html/members/epub-reader
     - /bin/cp -f  sdhportal.html         /home/sites/42a/f/fbedbfeca1/public_html/members/index.html
     - /bin/cp -Rf epub-reader/vendor     /home/sites/42a/f/fbedbfeca1/public_html/members/epub-reader/
     - /bin/cp -Rf epub-reader/books      /home/sites/42a/f/fbedbfeca1/public_html/members/epub-reader/
     - /bin/cp -f  epub-reader/index.html  /home/sites/42a/f/fbedbfeca1/public_html/members/epub-reader/index.html
     - /bin/cp -f  epub-reader/reader.html /home/sites/42a/f/fbedbfeca1/public_html/members/epub-reader/reader.html
+    - /bin/echo "=== members folder AFTER copy: ==="
+    - /bin/ls -la /home/sites/42a/f/fbedbfeca1/public_html/members
+    - /bin/echo "=== DEPLOY DONE ==="
