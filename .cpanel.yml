@@ -1,33 +1,21 @@
 ---
 # cPanel / StartCP "Git Version Control" deployment.
 #
-# This runs when you click "Deploy HEAD Commit" in the Git Version Control
-# UI (after pulling the latest commit). It copies ONLY the website files into
-# your live document root — the rest of the repo (source, config, .git) stays
-# in the private repository path and is never served.
+# Runs on "Deploy HEAD Commit". Copies ONLY the members website files into
+# the live document root; the rest of the repo stays in the private repo path
+# and is never served. Absolute paths are used on every line so the deploy
+# does not depend on a shell variable persisting between steps.
 #
-# ── BEFORE FIRST DEPLOY ──
-# 1. Replace the DOCROOT value below with your real document root for
-#    aaronellis.au (find it under "Manage Domains" → Document Root).
-#    It will look something like /home/sites/42a/f/fbedbfeca1/public_html
-# 2. After the first deploy, set up Directory Privacy on the /members/
-#    folder (per-member logins). The copy steps below do NOT touch an
-#    existing .htaccess / .htpasswd in /members/, so your password
-#    protection survives every future deploy.
+# Document root for aaronellis.au = /home/sites/42a/f/fbedbfeca1/public_html
+#
+# NOTE: these copy steps never touch an existing .htaccess / .htpasswd in
+# /members/, so Directory Privacy (per-member logins) survives future deploys.
 
 deployment:
   tasks:
-    # Document root for aaronellis.au (StartCP → Manage Domains)
-    - export DOCROOT=/home/sites/42a/f/fbedbfeca1/public_html
-
-    # --- Members area (the portal + EPUB library/reader) ---
-    - /bin/mkdir -p "$DOCROOT/members/epub-reader"
-    - /bin/cp -f  sdhportal.html        "$DOCROOT/members/index.html"
-    - /bin/cp -Rf epub-reader/vendor    "$DOCROOT/members/epub-reader/"
-    - /bin/cp -Rf epub-reader/books     "$DOCROOT/members/epub-reader/"
-    - /bin/cp -f  epub-reader/index.html  "$DOCROOT/members/epub-reader/index.html"
-    - /bin/cp -f  epub-reader/reader.html "$DOCROOT/members/epub-reader/reader.html"
-
-    # --- Public marketing pages (optional — uncomment to also deploy) ---
-    # - /bin/cp -f  sdh/index.html       "$DOCROOT/training.html"
-    # - /bin/cp -f  magnetic/index.html  "$DOCROOT/magnetic.html"
+    - /bin/mkdir -p /home/sites/42a/f/fbedbfeca1/public_html/members/epub-reader
+    - /bin/cp -f  sdhportal.html         /home/sites/42a/f/fbedbfeca1/public_html/members/index.html
+    - /bin/cp -Rf epub-reader/vendor     /home/sites/42a/f/fbedbfeca1/public_html/members/epub-reader/
+    - /bin/cp -Rf epub-reader/books      /home/sites/42a/f/fbedbfeca1/public_html/members/epub-reader/
+    - /bin/cp -f  epub-reader/index.html  /home/sites/42a/f/fbedbfeca1/public_html/members/epub-reader/index.html
+    - /bin/cp -f  epub-reader/reader.html /home/sites/42a/f/fbedbfeca1/public_html/members/epub-reader/reader.html
